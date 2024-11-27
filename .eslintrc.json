@@ -2,17 +2,23 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": [
+    "prettier"
+  ],
   "rules": {
-    "prettier/prettier": ["error", {
-      "trailingComma": "es5",
-      "semi": false,
-      "singleQuote": true,
-      "endOfLine": "auto",
-      "printWidth": 100,
-      "arrowParens": "avoid"
-    }]
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "semi": false,
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "printWidth": 100,
+        "arrowParens": "avoid"
+      }
+    ]
   }
 }
