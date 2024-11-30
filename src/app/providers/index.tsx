@@ -1,3 +1,4 @@
+'use client'
 import { ReduxProvider } from '@/app/providers/ReduxProvider'
 import type { ReactNode } from 'react'
 
