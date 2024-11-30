@@ -6,7 +6,7 @@ import React from 'react'
 
 export const SignInForm = () => {
   const { handleSubmit, control } = useSignInForm()
-  const [signIn, { data }] = useSignInMutation()
+  const [signIn] = useSignInMutation()
 
   const onSubmit = (data: LoginFormSchema) => {
     console.log(data)

@@ -1,3 +1,4 @@
+'use client'
 import { emailSchema, PasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
