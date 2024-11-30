@@ -11,7 +11,7 @@ export const ControlledCheckbox = <T extends FieldValues>({
   defaultValue,
   rules,
   shouldUnregister,
-  ...checkboxProps
+  // ...checkboxProps
 }: Props<T>) => {
   const {
     field: { value, onChange, onBlur },
