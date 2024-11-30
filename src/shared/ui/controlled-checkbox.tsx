@@ -1,3 +1,4 @@
+import { Checkbox } from '@wandrehappen/ui-kit'
 import type { ComponentPropsWithoutRef } from 'react'
 import { type FieldValues, useController, type UseControllerProps } from 'react-hook-form'
 
@@ -16,13 +17,5 @@ export const ControlledCheckbox = <T extends FieldValues>({
     field: { value, onChange, onBlur },
   } = useController({ control, name, defaultValue, rules, shouldUnregister })
 
-  return (
-    <input
-      {...checkboxProps}
-      type="checkbox"
-      checked={Boolean(value)}
-      onChange={onChange}
-      onBlur={onBlur}
-    />
-  )
+  return <Checkbox checked={value} onChange={onChange} onBlur={onBlur} />
 }

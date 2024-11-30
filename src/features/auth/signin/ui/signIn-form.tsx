@@ -2,7 +2,6 @@
 import { useSignInMutation } from '@/entities/auth/api'
 import { type LoginFormSchema, useSignInForm } from '@/features/auth/signin'
 import { ControlledTextField } from '@/shared/ui'
-import { DevTool } from '@hookform/devtools'
 import React from 'react'
 
 export const SignInForm = () => {
@@ -31,7 +30,7 @@ export const SignInForm = () => {
       <span>password</span>
       <ControlledTextField control={control} name="password" />
       <button type="submit">Submit</button>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </form>
   )
 }

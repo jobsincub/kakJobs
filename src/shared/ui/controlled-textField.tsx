@@ -1,3 +1,4 @@
+import { Input } from '@wandrehappen/ui-kit'
 import type { ComponentPropsWithoutRef } from 'react'
 import { type FieldValues, useController, type UseControllerProps } from 'react-hook-form'
 
@@ -19,7 +20,13 @@ export const ControlledTextField = <T extends FieldValues>({
 
   return (
     <>
-      <input {...checkboxProps} type="text" value={value} onChange={onChange} onBlur={onBlur} />
+      <Input
+        error={error?.message}
+        {...checkboxProps}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
       {error && <span>{error.message}</span>}
     </>
   )
