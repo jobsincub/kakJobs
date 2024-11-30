@@ -15,10 +15,10 @@ export default async function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </StoreProvider>
+    <html lang="en">
+      <body>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
+    </html>
   )
 }
