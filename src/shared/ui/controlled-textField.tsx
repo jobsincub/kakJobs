@@ -13,8 +13,14 @@ export const ControlledTextField = <T extends FieldValues>({
   ...checkboxProps
 }: Props<T>) => {
   const {
-    field: { value, onChange },
+    field: { value, onChange, onBlur },
+    fieldState: { error },
   } = useController({ control, name, defaultValue, rules, shouldUnregister })
 
-  return <input {...checkboxProps} type="text" checked={value} onChange={onChange} />
+  return (
+    <>
+      <input {...checkboxProps} type="text" value={value} onChange={onChange} onBlur={onBlur} />
+      {error && <span>{error.message}</span>}
+    </>
+  )
 }
