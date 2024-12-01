@@ -12,6 +12,13 @@ export const authApi = createApi({
         body,
       }),
     }),
+    passwordRecovery: builder.mutation<AuthResponse, { email: string; recaptcha_token: string }>({
+      query: body => ({
+        url: '/password-recovery',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
