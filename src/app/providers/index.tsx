@@ -1,7 +1,7 @@
 'use client'
-import { ReduxProvider } from '@/app/providers/ReduxProvider'
+import { StoreProvider } from '@/app/providers/StoreProvider'
 import type { ReactNode } from 'react'
 
 export const Providers = ({ children }: { children: ReactNode }) => (
-  <ReduxProvider>{children}</ReduxProvider>
+  <StoreProvider>{children}</StoreProvider>
 )
