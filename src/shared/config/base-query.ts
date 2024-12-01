@@ -4,8 +4,10 @@ import type { AppRootStateType } from './store'
 export const createBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({
     baseUrl,
-    credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
+      headers.set('Content-Type', 'application/json')
+      headers.set('Accept', 'application/json')
+
       const token = (getState() as AppRootStateType).auth.accessToken
 
       if (token) {
