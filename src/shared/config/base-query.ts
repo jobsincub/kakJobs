@@ -1,5 +1,5 @@
+import type { RootState } from '@/shared/config/store'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
-import type { AppRootStateType } from './store'
 
 export const createBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({

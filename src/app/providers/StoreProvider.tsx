@@ -1,9 +1,9 @@
 'use client'
-
-import { store } from '@/shared/config/store'
+import { makeStore } from '@/shared/config'
 import { type ReactNode } from 'react'
 import { Provider } from 'react-redux'
 
-export const ReduxProvider = ({ children }: { children: ReactNode }) => {
+export const StoreProvider = ({ children }: { children: ReactNode }) => {
+  const store = makeStore()
   return <Provider store={store}>{children}</Provider>
 }

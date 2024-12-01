@@ -1,4 +1,4 @@
-import { Providers } from '@/app/providers'
+import { StoreProvider } from '@/app/providers/StoreProvider'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   )
