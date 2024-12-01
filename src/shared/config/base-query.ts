@@ -8,7 +8,7 @@ export const createBaseQuery = (baseUrl: string) =>
       headers.set('Content-Type', 'application/json')
       headers.set('Accept', 'application/json')
 
-      const token = (getState() as AppRootStateType).auth.accessToken
+      const token = (getState() as RootState).auth.accessToken
 
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
