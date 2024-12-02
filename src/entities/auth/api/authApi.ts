@@ -12,10 +12,21 @@ export const authApi = createApi({
         body,
       }),
     }),
+    verifyEmail: builder.mutation<VerificationData, string>({
+      query: verificationData => ({
+        url: `/verify-email`,
+        method: 'POST',
+        body: verificationData,
+      }),
+    }),
   }),
 })
 
 export const { useSignInMutation } = authApi
+
+type VerificationData = {
+  code: string
+}
 
 type ApiResponse<T> = {
   data: T
