@@ -1,9 +1,7 @@
-import { Input } from '@wandrehappen/ui-kit'
-import type { ComponentPropsWithoutRef } from 'react'
+import { Input, type InputProps } from '@wandrehappen/ui-kit'
 import { type FieldValues, useController, type UseControllerProps } from 'react-hook-form'
 
-type Props<T extends FieldValues> = UseControllerProps<T> &
-  Omit<ComponentPropsWithoutRef<'input'>, 'onChange'>
+type Props<T extends FieldValues> = UseControllerProps<T> & Omit<InputProps, 'onChange'>
 
 export const ControlledTextField = <T extends FieldValues>({
   control,
