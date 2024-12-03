@@ -1,3 +1,5 @@
+import { VerifyEmailPage } from '@/pages/auth/verify-email/verifyEmailPage'
+
 export default function EmailConfirmPage() {
-  return <div>Email has been confirmed </div>
+  return <VerifyEmailPage />
 }
