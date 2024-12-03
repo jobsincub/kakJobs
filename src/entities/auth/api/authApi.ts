@@ -1,3 +1,4 @@
+import { setAccessToken } from '@/entities/auth/model'
 import { createBaseQuery } from '@/shared/config/base-query'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
@@ -5,12 +6,23 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: createBaseQuery('https://picassonova.online/api/v1/auth'),
   endpoints: builder => ({
-    signIn: builder.mutation<AuthResponse, { email: string; password: string }>({
+    signIn: builder.mutation<
+      ApiResponse<{ accessToken: string }>,
+      { email: string; password: string }
+    >({
       query: body => ({
         url: '/sign-in',
         method: 'POST',
         body,
       }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled
+          dispatch(setAccessToken(data.data))
+        } catch (error) {
+          console.error(error)
+        }
+      },
     }),
   }),
 })
@@ -27,11 +39,3 @@ type Extension = {
   message: string
   field: string | null
 }
-
-type SuccessResponse = {
-  accessToken: string
-}
-
-type ErrorResponseData = null
-
-type AuthResponse = ApiResponse<SuccessResponse> | ApiResponse<ErrorResponseData>
