@@ -12,10 +12,16 @@ export const authApi = createApi({
         body,
       }),
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+      }),
+    }),
   }),
 })
 
-export const { useSignInMutation } = authApi
+export const { useSignInMutation, useLogoutMutation } = authApi
 
 type ApiResponse<T> = {
   data: T
