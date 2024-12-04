@@ -15,8 +15,8 @@ export const authSlice = createSlice({
     setAccessToken: (state, action: PayloadAction<{ accessToken: string }>) => {
       state.accessToken = action.payload.accessToken
     },
-    logout: () => initialState,
+    loggedOut: () => initialState,
   },
 })
 
-export const { setAccessToken, logout } = authSlice.actions
+export const { setAccessToken, loggedOut } = authSlice.actions
