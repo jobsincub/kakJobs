@@ -1,5 +1,5 @@
 import { setAccessToken } from '@/entities/auth/model'
-import { createBaseQuery } from '@/shared/config/base-query'
+import { createBaseQuery } from '@/shared/config'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
