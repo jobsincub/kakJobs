@@ -1,4 +1,4 @@
-import { inter } from '@/app/fonts/fonts'
+import { inter } from '@/app/fonts'
 import { StoreProvider } from '@/app/providers/StoreProvider'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
