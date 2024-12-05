@@ -1,3 +1,4 @@
+import { inter } from '@/app/fonts'
 import { StoreProvider } from '@/app/providers/StoreProvider'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
