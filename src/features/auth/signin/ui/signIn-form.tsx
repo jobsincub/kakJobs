@@ -1,5 +1,3 @@
-'use client'
-import { useSignInMutation } from '@/entities/auth/api'
 import { type LoginFormSchema, useSignInForm } from '@/features/auth/signin'
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
@@ -7,13 +5,15 @@ import Link from 'next/link'
 import React from 'react'
 import s from './signIn-form.module.scss'
 
-export const SignInForm = () => {
-  const { handleSubmit, control } = useSignInForm()
-  const [signIn] = useSignInMutation()
+type Props = {
+  onSubmit: (data: LoginFormSchema) => void
+  error: string
+}
 
-  const onSubmit = (data: LoginFormSchema) => {
-    console.log(data)
-    signIn(data)
+export const SignInForm = ({ onSubmit, error }: Props) => {
+  const { handleSubmit, control } = useSignInForm()
+  const formSubmit = (data: LoginFormSchema) => {
+    onSubmit(data)
   }
 
   return (
@@ -21,7 +21,7 @@ export const SignInForm = () => {
       <Typography color={'light-100'} variant={'h1'}>
         Sign In
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+      <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
         <ControlledTextField control={control} name="email" label={'email'} className={s.input} />
         <ControlledTextField
           control={control}
@@ -29,19 +29,22 @@ export const SignInForm = () => {
           label={'password'}
           className={s.input}
           type={'password'}
+          error={error}
         />
         <div className={s.contentContainer}>
-          <Link href={'/auth/forgot-password'} className={s.link}>
-            <Typography className={s.forgotPassword}>Forgot Password</Typography>
-          </Link>
-
-          <Button className={s.submit}>
-            <Typography color={'light-100'} variant={'h3'}>
-              Sign In
-            </Typography>
-          </Button>
+          <Typography color={'light-900'} asChild className={s.link}>
+            <Link href={'/auth/forgot-password'}>Forgot Password</Link>
+          </Typography>
+          <Typography asChild color={'light-100'} variant={'h3'} align={'center'}>
+            <Button className={s.submit}>Sign In</Button>
+          </Typography>
         </div>
-        <Typography>Don’t have an account?</Typography>
+        <Typography asChild color={'danger-100'}>
+          <a href={'/'}>Don’t have an account?</a>
+        </Typography>
+        <Typography asChild color={'danger-100'} variant={'h3'}>
+          <Link href={'/auth/signup'}>Sign Up</Link>
+        </Typography>
         {/* <DevTool control={control} /> */}
       </form>
     </div>
