@@ -18,7 +18,7 @@ export const SignInForm = () => {
 
   return (
     <div className={s.pageContainer}>
-      <Typography color={'light'} variant={'h1'}>
+      <Typography color={'light-100'} variant={'h1'}>
         Sign In
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -36,7 +36,7 @@ export const SignInForm = () => {
           </Link>
 
           <Button className={s.submit}>
-            <Typography color={'light'} variant={'h3'}>
+            <Typography color={'light-100'} variant={'h3'}>
               Sign In
             </Typography>
           </Button>
