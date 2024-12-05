@@ -13,10 +13,9 @@ const ResendVerificationEmailPage = () => {
     resendVerificationEmail(data)
   }
   return (
-    <div>
+    <>
       <ResendVerificationForm onSubmit={onSubmit} />
-      <image />
-    </div>
+    </>
   )
 }
 
