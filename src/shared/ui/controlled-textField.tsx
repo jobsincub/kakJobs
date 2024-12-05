@@ -9,23 +9,24 @@ export const ControlledTextField = <T extends FieldValues>({
   defaultValue,
   rules,
   shouldUnregister,
+  error: customError,
   ...checkboxProps
 }: Props<T>) => {
   const {
     field: { value, onChange, onBlur },
     fieldState: { error },
   } = useController({ control, name, defaultValue, rules, shouldUnregister })
+  const finalError = error?.message ?? customError
 
   return (
     <>
       <Input
-        error={error?.message}
+        error={finalError}
         {...checkboxProps}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
       />
-      {error && <span>{error.message}</span>}
     </>
   )
 }
