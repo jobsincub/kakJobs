@@ -10,7 +10,7 @@ export const VerifyEmailPage = () => {
   const searchParams = useSearchParams()
   const code = searchParams && searchParams.get('code')
 
-  const [verifyEmail, { data, error, isLoading }] = useVerifyEmailMutation()
+  const [verifyEmail] = useVerifyEmailMutation()
 
   useEffect(() => {
     if (code) {
@@ -21,9 +21,6 @@ export const VerifyEmailPage = () => {
     <div>
       <Typography variant={'h1'}>Verify email</Typography>
       <p>Code: {code}</p>
-      {isLoading && <p>Loading...</p>}
-      {data && <p>Verification successful!</p>}
-      {error && <p>Error: some error</p>}
     </div>
   )
 }
