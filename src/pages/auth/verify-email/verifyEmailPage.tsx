@@ -5,6 +5,9 @@ import { useSearchParams } from 'next/navigation'
 import { useVerifyEmailMutation } from '@/entities/auth/api'
 import { useEffect } from 'react'
 import { Typography } from '@wandrehappen/ui-kit'
+import Image from 'next/image'
+import verificationImg from './../../assets/images/bro.png'
+import s from './verify-email.module.scss'
 
 export const VerifyEmailPage = () => {
   const searchParams = useSearchParams()
@@ -18,9 +21,13 @@ export const VerifyEmailPage = () => {
     }
   }, [code, verifyEmail])
   return (
-    <div>
-      <Typography variant={'h1'}>Verify email</Typography>
-      <p>Code: {code}</p>
+    <div className={s.container}>
+      <Typography variant={'h1'}>Congratulations!</Typography>
+      <Typography variant={'regular16'}>Your email has been confirmed</Typography>
+      <div className={s.btnContainer}>
+        <button style={{ color: 'white', backgroundColor: 'pink' }}>Sign In</button>
+      </div>
+      <Image src={verificationImg} alt={'verification-img'} />
     </div>
   )
 }
