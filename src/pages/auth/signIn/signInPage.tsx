@@ -2,6 +2,7 @@
 import { useSignInMutation } from '@/entities/auth/api'
 import { type LoginFormSchema, SignInForm } from '@/features/auth/signin'
 import { Button, Typography } from '@wandrehappen/ui-kit'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import s from './signInPage.module.scss'
@@ -32,7 +33,9 @@ const SignInPage = () => {
       <Typography asChild color={'light-100'} variant={'regular16'} className={s.text}>
         <p>Don’t have an account?</p>
       </Typography>
-      <Button variant={'link'}>Sign Up</Button>
+      <Button asChild variant={'link'}>
+        <Link href={'/auth/signup'}>Sign Up</Link>
+      </Button>
     </div>
   )
 }
