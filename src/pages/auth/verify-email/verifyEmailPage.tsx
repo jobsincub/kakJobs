@@ -4,6 +4,7 @@ import * as React from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useVerifyEmailMutation } from '@/entities/auth/api'
 import { useEffect } from 'react'
+import { Typography } from '@wandrehappen/ui-kit'
 
 export const VerifyEmailPage = () => {
   const searchParams = useSearchParams()
@@ -16,14 +17,9 @@ export const VerifyEmailPage = () => {
       verifyEmail(JSON.stringify({ code }))
     }
   }, [code, verifyEmail])
-
-  console.log(`Code: ${code}`)
-  console.log(`Data: ${data}`)
-  console.log(`Error: ${error}`)
-
   return (
     <div>
-      <h1>Verify email</h1>
+      <Typography variant={'h1'}>Verify email</Typography>
       <p>Code: {code}</p>
       {isLoading && <p>Loading...</p>}
       {data && <p>Verification successful!</p>}
