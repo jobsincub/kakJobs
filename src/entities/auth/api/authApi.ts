@@ -1,4 +1,4 @@
-import { setAccessToken } from '@/entities/auth/model'
+import { loggedOut, setAccessToken } from '@/entities/auth/model'
 import { createBaseQuery } from '@/shared/config'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
@@ -29,6 +29,14 @@ export const authApi = createApi({
         url: '/logout',
         method: 'POST',
       }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled
+          dispatch(loggedOut())
+        } catch (error) {
+          console.error('Logout failed:', error)
+        }
+      },
     }),
   }),
 })
