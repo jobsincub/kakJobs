@@ -22,11 +22,13 @@ export const LogoutConfirmation = () => {
 
   return (
     <div>
-      <Button onClick={() => setIsModalOpen(true)}>Log out</Button>
+      <Button variant={'secondary'} onClick={() => setIsModalOpen(true)}>
+        Log out
+      </Button>
 
       <LogoutModal
         isOpen={isModalOpen}
-        email={'hardcode@gmail.com'}
+        email={'Epam@epam.com'}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleLogout}
       />
