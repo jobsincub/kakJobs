@@ -8,6 +8,11 @@ export const ru: LocaleType = {
         noAccountText: 'У вас нет аккаунта?',
         signUpLinkText: 'Регистрация',
       },
+      verifyEmail: {
+        title: 'Поздравляем!',
+        confirmText: 'Ваш электронный адрес успешно подтвержден',
+        singInLinkText: 'Войти',
+      },
     },
   },
   features: {

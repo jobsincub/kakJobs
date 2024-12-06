@@ -9,11 +9,13 @@ import Image from 'next/image'
 import verificationImg from './bro.png'
 import s from './verify-email.module.scss'
 import Link from 'next/link'
+import { useTranslation } from '@/shared/config/i18n'
 
 export const VerifyEmailPage = () => {
   const searchParams = useSearchParams()
   const code = searchParams && searchParams.get('code')
-
+  const { t } = useTranslation()
+  const text = t.pages.auth.verifyEmail
   const [verifyEmail] = useVerifyEmailMutation()
 
   useEffect(() => {
@@ -23,11 +25,13 @@ export const VerifyEmailPage = () => {
   }, [code, verifyEmail])
   return (
     <div className={s.container}>
-      <Typography variant={'h1'}>Congratulations!</Typography>
-      <Typography variant={'regular16'}>Your email has been confirmed</Typography>
+      <Typography variant={'h1'}>{text.title}</Typography>
+      <Typography variant={'regular16'}>{text.confirmText}</Typography>
       <div className={s.btnContainer}>
-        <Button asChild variant={'link'}>
-          <Link href={'/auth/signin'}>Sign In</Link>
+        <Button asChild variant={'primary'}>
+          <Link href={'/auth/signin'} className={s.link}>
+            {text.singInLinkText}
+          </Link>
         </Button>
       </div>
       <Image src={verificationImg} alt={'verification-img'} />
