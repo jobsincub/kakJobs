@@ -1,5 +1,6 @@
 import { inter } from '@/app/fonts'
 import { StoreProvider } from '@/app/providers/StoreProvider'
+import { LanguageSwitcher } from '@/features/languageSwitcher'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <LanguageSwitcher />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   )
