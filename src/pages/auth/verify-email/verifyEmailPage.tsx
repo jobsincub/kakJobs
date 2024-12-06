@@ -6,7 +6,7 @@ import { useVerifyEmailMutation } from '@/entities/auth/api'
 import { useEffect } from 'react'
 import { Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
-import verificationImg from './../../assets/images/bro.png'
+import verificationImg from './bro.png'
 import s from './verify-email.module.scss'
 
 export const VerifyEmailPage = () => {
