@@ -1,0 +1,22 @@
+.icon {
+  position: relative;
+  //min-width: 140px;
+}
+
+.icon::before {
+  position: absolute;
+  content: " ";
+  background-image: url('./arrow-back.png'); /* Обновите путь к изображению */
+  width: 24px; /* Задайте размеры фоновому изображению */
+  height: 24px;
+  background-size: contain;
+  padding-right:50px;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.icon span {
+  padding-right:36px;
+}
