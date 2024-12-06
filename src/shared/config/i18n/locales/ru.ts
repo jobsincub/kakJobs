@@ -1,10 +1,23 @@
 import type { LocaleType } from '@/shared/config/i18n'
 
 export const ru: LocaleType = {
-  signInPage: {
-    title: 'Войти',
-    forgotPasswordLink: 'Забыл пароль',
-    noAccountText: 'У вас нет аккаунта?',
-    signUpLinkText: 'Регистрация',
+  pages: {
+    auth: {
+      signInPage: {
+        title: 'Войти',
+        noAccountText: 'У вас нет аккаунта?',
+        signUpLinkText: 'Регистрация',
+      },
+    },
+  },
+  features: {
+    auth: {
+      signinForm: {
+        forgotPasswordLink: 'Забыл пароль',
+      },
+    },
+  },
+  shared: {
+    validations: {},
   },
 }

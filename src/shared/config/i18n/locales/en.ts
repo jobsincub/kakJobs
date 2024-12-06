@@ -1,9 +1,22 @@
 export const en = {
-  signInPage: {
-    title: 'Sign In',
-    forgotPasswordLink: 'Forgot Password',
-    noAccountText: 'Don’t have an account?',
-    signUpLinkText: 'Sign Up',
+  pages: {
+    auth: {
+      signInPage: {
+        title: 'Sign In',
+        noAccountText: 'Don’t have an account?',
+        signUpLinkText: 'Sign Up',
+      },
+    },
+  },
+  features: {
+    auth: {
+      signinForm: {
+        forgotPasswordLink: 'Forgot Password',
+      },
+    },
+  },
+  shared: {
+    validations: {},
   },
 }
 export type LocaleType = typeof en
