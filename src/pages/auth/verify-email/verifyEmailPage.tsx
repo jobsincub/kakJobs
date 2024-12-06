@@ -4,10 +4,11 @@ import * as React from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useVerifyEmailMutation } from '@/entities/auth/api'
 import { useEffect } from 'react'
-import { Typography } from '@wandrehappen/ui-kit'
+import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import verificationImg from './bro.png'
 import s from './verify-email.module.scss'
+import Link from 'next/link'
 
 export const VerifyEmailPage = () => {
   const searchParams = useSearchParams()
@@ -17,7 +18,7 @@ export const VerifyEmailPage = () => {
 
   useEffect(() => {
     if (code) {
-      verifyEmail(JSON.stringify({ code }))
+      verifyEmail({ code: code })
     }
   }, [code, verifyEmail])
   return (
@@ -25,7 +26,9 @@ export const VerifyEmailPage = () => {
       <Typography variant={'h1'}>Congratulations!</Typography>
       <Typography variant={'regular16'}>Your email has been confirmed</Typography>
       <div className={s.btnContainer}>
-        <button style={{ color: 'white', backgroundColor: 'pink' }}>Sign In</button>
+        <Button asChild variant={'link'}>
+          <Link href={'/auth/signin'}>Sign In</Link>
+        </Button>
       </div>
       <Image src={verificationImg} alt={'verification-img'} />
     </div>

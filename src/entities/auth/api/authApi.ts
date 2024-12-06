@@ -24,7 +24,7 @@ export const authApi = createApi({
         }
       },
     }),
-    verifyEmail: builder.mutation<string, string>({
+    verifyEmail: builder.mutation<ApiResponse<void>, VerificationData>({
       query: verificationData => ({
         url: `/verify-email`,
         method: 'POST',
@@ -36,9 +36,9 @@ export const authApi = createApi({
 
 export const { useSignInMutation, useVerifyEmailMutation } = authApi
 
-// type VerificationData = {
-//   code: string
-// }
+type VerificationData = {
+  code: string
+}
 
 type ApiResponse<T> = {
   data: T
