@@ -17,36 +17,29 @@ export const SignInForm = ({ onSubmit, error }: Props) => {
   }
 
   return (
-    <div className={s.pageContainer}>
-      <Typography color={'light-100'} variant={'h1'}>
-        Sign In
-      </Typography>
-      <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
-        <ControlledTextField control={control} name="email" label={'email'} className={s.input} />
+    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+      <div className={s.inputsWrapper}>
         <ControlledTextField
+          placeholder={'Epam@epam.com'}
+          control={control}
+          name="email"
+          label={'email'}
+          autoComplete={'email'}
+        />
+        <ControlledTextField
+          placeholder={'**********'}
           control={control}
           name="password"
           label={'password'}
-          className={s.input}
           type={'password'}
           error={error}
+          autoComplete={'current-password'}
         />
-        <div className={s.contentContainer}>
-          <Typography color={'light-900'} asChild className={s.link}>
-            <Link href={'/auth/forgot-password'}>Forgot Password</Link>
-          </Typography>
-          <Typography asChild color={'light-100'} variant={'h3'} align={'center'}>
-            <Button className={s.submit}>Sign In</Button>
-          </Typography>
-        </div>
-        <Typography asChild color={'danger-100'}>
-          <a href={'/'}>Don’t have an account?</a>
-        </Typography>
-        <Typography asChild color={'danger-100'} variant={'h3'}>
-          <Link href={'/auth/signup'}>Sign Up</Link>
-        </Typography>
-        {/* <DevTool control={control} /> */}
-      </form>
-    </div>
+      </div>
+      <Typography asChild color={'light-900'} className={s.forgotPassword}>
+        <Link href={'/auth/forgot-password'}>Forgot Password</Link>
+      </Typography>
+      <Button fullWidth>Sign in</Button>
+    </form>
   )
 }
