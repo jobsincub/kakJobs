@@ -1,3 +1,4 @@
+import { appSlice } from '@/entities/app/model'
 import { authApi } from '@/entities/auth/api'
 import { authSlice } from '@/entities/auth/model/authSlice'
 import { configureStore } from '@reduxjs/toolkit'
@@ -8,6 +9,7 @@ export const makeStore = () => {
     reducer: {
       [authSlice.reducerPath]: authSlice.reducer,
       [authApi.reducerPath]: authApi.reducer,
+      [appSlice.reducerPath]: appSlice.reducer,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware),
   })
