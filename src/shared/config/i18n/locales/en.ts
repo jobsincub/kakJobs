@@ -10,8 +10,9 @@ export const en = {
   },
   features: {
     auth: {
-      signinForm: {
+      signInForm: {
         forgotPasswordLink: 'Forgot Password',
+        signInButtonText: 'Sign Up',
       },
     },
   },
