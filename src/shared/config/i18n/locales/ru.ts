@@ -17,8 +17,9 @@ export const ru: LocaleType = {
   },
   features: {
     auth: {
-      signinForm: {
+      signInForm: {
         forgotPasswordLink: 'Забыл пароль',
+        signInButtonText: 'Войти',
       },
     },
   },
