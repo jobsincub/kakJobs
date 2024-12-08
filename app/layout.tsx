@@ -1,5 +1,10 @@
+import { inter } from '@/app/fonts'
+import { Providers } from '@/app/providers'
+import { LanguageSwitcher } from '@/features/languageSwitcher'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
+import '@wandrehappen/ui-kit/dist/style.css'
+import { type ReactNode } from 'react'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -9,11 +14,16 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>
+        <Providers>
+          <LanguageSwitcher />
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
