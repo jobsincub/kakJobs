@@ -24,7 +24,7 @@ export const authApi = createApi({
         }
       },
     }),
-    resendVerificationEmail: builder.mutation<ApiResponse<void>, ResendRegistrationArgs>({
+    resendVerificationEmail: builder.mutation<ApiResponse<null>, ResendRegistrationArgs>({
       query: params => ({
         body: params,
         method: 'POST',
