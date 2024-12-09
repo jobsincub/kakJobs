@@ -1,10 +1,10 @@
 import { inter } from '@/app/fonts'
-import { StoreProvider } from '@/app/providers/StoreProvider'
+import { Providers } from '@/app/providers'
 import { LanguageSwitcher } from '@/features/languageSwitcher'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,10 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StoreProvider>
+        <Providers>
           <LanguageSwitcher />
           {children}
-        </StoreProvider>
+        </Providers>
       </body>
     </html>
   )
