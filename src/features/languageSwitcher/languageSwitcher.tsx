@@ -1,17 +1,23 @@
 'use client'
-import { changeLocal, type Local } from '@/entities/app/model'
-import { useCurrentLocal } from '@/shared/config/i18n'
-import { Select } from '@wandrehappen/ui-kit'
-import { useDispatch } from 'react-redux'
+import { changeLocal, initializeLocal, type Local } from '@/entities/app/model'
+import { useCurrentLocal } from '@/shared/config'
+import { useAppDispatch } from '@/shared/lib'
+import { RuFlag, Select, UkFlag } from '@wandrehappen/ui-kit'
+import { useEffect } from 'react'
 import s from './languageSwitcher.module.scss'
 
+const options = [
+  { name: 'English', value: 'en', icon: <UkFlag /> },
+  { name: 'Русский', value: 'ru', icon: <RuFlag /> },
+]
+
 export const LanguageSwitcher = () => {
-  const dispatch = useDispatch()
   const { currentLocal } = useCurrentLocal()
-  const options = [
-    { name: 'English', value: 'en' },
-    { name: 'Русский', value: 'ru' },
-  ]
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(initializeLocal())
+  }, [dispatch])
 
   const onValueChange = (local: Local) => {
     dispatch(changeLocal({ local }))
@@ -19,8 +25,8 @@ export const LanguageSwitcher = () => {
 
   return (
     <Select
+      value={currentLocal}
       className={s.select}
-      defaultValue={currentLocal}
       onValueChange={onValueChange}
       options={options}
     ></Select>
