@@ -1,0 +1,20 @@
+@use '@styles/vars' as vars;
+
+.header {
+  position: fixed;
+  z-index: vars.$header-z-index;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  padding: 12px 0 11px;
+
+  background-color: var(--color-dark-700);
+  border-bottom: 1px solid var(--color-dark-300);
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
