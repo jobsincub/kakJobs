@@ -6,6 +6,11 @@ export const en = {
         noAccountText: 'Don’t have an account?',
         signUpLinkText: 'Sign Up',
       },
+      verifyEmail: {
+        title: 'Congratulations!',
+        confirmText: 'Your email has been confirmed',
+        singInLinkText: 'Sign In',
+      },
     },
   },
   features: {
