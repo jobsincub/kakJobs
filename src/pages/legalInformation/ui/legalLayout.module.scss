@@ -1,10 +1,26 @@
 .button {
-  display:flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  width:150px;
+
+  min-width: 180px;
+
+  gap: 20px;
+  margin: 24px 0 0 64px;
+
 }
-//
-//.button img {
-//  padding-right:12px;
-//}
+
+
+.textContainer {
+  margin:23px;
+  gap:20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+  text-align: center;
+  max-width: 950px;
+}
