@@ -28,7 +28,7 @@ export const VerifyEmailPage = () => {
       <Typography variant={'h1'}>{text.title}</Typography>
       <Typography variant={'regular16'}>{text.confirmText}</Typography>
       <div className={s.btnContainer}>
-        <Button asChild variant={'primary'}>
+        <Button asChild variant={'primary'} className={s.button}>
           <Link href={'/auth/signin'} className={s.link}>
             {text.singInLinkText}
           </Link>
