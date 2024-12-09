@@ -1,1 +1,1 @@
-export * from './base-query'
+export * from './baseQueryWithReauth'
