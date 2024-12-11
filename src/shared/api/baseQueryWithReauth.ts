@@ -1,11 +1,11 @@
-import type { RootState } from '@/shared/config'
+import { BACKEND_BASE_URL, RootState } from '@/shared/config'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { setAccessToken } from '@/entities/auth/model'
 import { Mutex } from 'async-mutex'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://picassonova.online/api/v1/',
+  baseUrl: BACKEND_BASE_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     headers.set('Content-Type', 'application/json')
