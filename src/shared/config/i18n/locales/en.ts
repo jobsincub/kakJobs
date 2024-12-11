@@ -4,7 +4,7 @@ export const en = {
       signInPage: {
         title: 'Sign In',
         noAccountText: 'Don’t have an account?',
-        signUpLinkText: 'Sign Up',
+        signUpLinkText: 'Sign in',
       },
     },
   },
