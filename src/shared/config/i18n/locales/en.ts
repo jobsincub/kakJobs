@@ -12,7 +12,7 @@ export const en = {
     auth: {
       signInForm: {
         forgotPasswordLink: 'Forgot Password',
-        signInButtonText: 'Sign Up',
+        signInButtonText: 'Sign In',
       },
     },
   },
