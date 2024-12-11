@@ -1,0 +1,5 @@
+@use '@styles/vars' as vars;
+
+.rootLayout {
+  padding-top: vars.$header-height;
+}
