@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { userNameSchema } from '@/features/auth/signup/lib/userNameSchema'
 import { confirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
+import { agreeTermsSchema } from '@/shared/lib/validations/agreeTermsSchema'
 
 const signUpSchema = z
   .object({})
@@ -12,6 +13,11 @@ const signUpSchema = z
   .merge(emailSchema)
   .merge(passwordSchema)
   .merge(confirmPasswordSchema)
+  .merge(agreeTermsSchema)
+  .refine(data => data.password === data.confirmPassword, {
+    message: 'The passwords must match',
+    path: ['confirmPassword'],
+  })
 
 export type RegisterFormSchema = z.infer<typeof signUpSchema>
 
@@ -22,7 +28,12 @@ export const useSignUpForm = () => {
     formState: { errors },
   } = useForm<RegisterFormSchema>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: { username: '', email: '', password: '', confirmPassword: '' },
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
     mode: 'onTouched',
   })
   return { control, handleSubmit, errors }

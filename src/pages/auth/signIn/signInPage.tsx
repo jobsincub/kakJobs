@@ -23,6 +23,7 @@ const SignInPage = () => {
 
   const onSubmit = (data: LoginFormSchema) => {
     signIn(data)
+    console.log(data)
   }
 
   useEffect(() => {
