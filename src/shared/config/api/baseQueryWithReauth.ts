@@ -49,7 +49,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          // api.dispatch(loggedOut()) uncomment after merge logout
+          //TODO api.dispatch(loggedOut()) uncomment after merge logout
         }
       } finally {
         // release must be called once the mutex should be released again.
