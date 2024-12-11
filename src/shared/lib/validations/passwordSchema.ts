@@ -1,5 +1,14 @@
 import { z } from 'zod'
 
-export const PasswordSchema = z.object({
-  password: z.string().min(3, 'Password must be at least 3 characters').default(''),
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[ !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]).{6,30}$/
+
+export const passwordSchema = z.object({
+  password: z
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .regex(
+      passwordRegex,
+      'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~'
+    )
+    .default(''),
 })

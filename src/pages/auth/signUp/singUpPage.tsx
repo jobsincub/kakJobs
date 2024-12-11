@@ -6,6 +6,7 @@ import { useTranslation } from '@/shared/config'
 import { LoginFormSchema } from '@/features/auth/signin'
 import { Typography } from '@wandrehappen/ui-kit'
 import s from './singUpPage.module.scss'
+import { SignUpForm } from '@/features/auth/signup/ui'
 
 export const SingUpPage = () => {
   const [signUp, { isSuccess, isError }] = useSignUpMutation()
@@ -23,6 +24,10 @@ export const SingUpPage = () => {
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>Sign Up</h1>
       </Typography>
+      <SignUpForm
+        error={isError ? 'The email or password are incorrect. Try again please' : ''}
+        onSubmit={onSubmit}
+      />
     </div>
   )
 }
