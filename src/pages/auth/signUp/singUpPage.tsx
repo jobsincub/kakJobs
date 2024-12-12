@@ -1,23 +1,19 @@
 'use client'
 
 import { useSignUpMutation } from '@/entities/auth/api'
-import { useRouter } from 'next/navigation'
-import { useTranslation } from '@/shared/config'
-import { LoginFormSchema } from '@/features/auth/signin'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import s from './singUpPage.module.scss'
 import { SignUpForm } from '@/features/auth/signup/ui'
 import Link from 'next/link'
 import React from 'react'
+import { RegisterFormSchema } from '@/features/auth/signup/lib/useSignUpForm'
 
 export const SingUpPage = () => {
-  const [signUp, { isSuccess, isError }] = useSignUpMutation()
+  const [signUp, { isError }] = useSignUpMutation()
 
-  const router = useRouter()
+  // const { t } = useTranslation()
 
-  const { t } = useTranslation()
-
-  const onSubmit = (data: LoginFormSchema) => {
+  const onSubmit = (data: RegisterFormSchema) => {
     signUp(data)
   }
 

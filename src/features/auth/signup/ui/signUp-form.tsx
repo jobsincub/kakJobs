@@ -1,7 +1,11 @@
 import s from '@/features/auth/signin/ui/signIn-form.module.scss'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui'
 import React from 'react'
-import { RegisterFormSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
+import {
+  InputSchema,
+  RegisterFormSchema,
+  useSignUpForm,
+} from '@/features/auth/signup/lib/useSignUpForm'
 import { Button } from '@wandrehappen/ui-kit'
 
 type Props = {
@@ -10,12 +14,13 @@ type Props = {
 }
 
 export const SignUpForm = ({ onSubmit, error }: Props) => {
-  const { handleSubmit, control } = useSignUpForm()
+  const { handleSubmit, control, watch } = useSignUpForm()
+  const agreeTerms = watch('agreeTerms')
 
-  const formSubmit = (data: RegisterFormSchema) => {
+  console.log(agreeTerms)
+
+  const formSubmit = (data: InputSchema) => {
     console.log(data)
-    console.log('HELLO')
-    // onSubmit(data)
   }
 
   return (
@@ -55,7 +60,7 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
         />
         <ControlledCheckbox name={'agreeTerms'} control={control} />
       </div>
-      <Button fullWidth type={'submit'}>
+      <Button fullWidth disabled={!agreeTerms}>
         Sign Up
       </Button>
     </form>

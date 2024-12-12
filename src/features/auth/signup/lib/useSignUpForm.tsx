@@ -18,24 +18,25 @@ const signUpSchema = z
     message: 'The passwords must match',
     path: ['confirmPassword'],
   })
+  .transform(({ username, email, password }) => ({
+    username,
+    email,
+    password,
+  }))
 
-export type RegisterFormSchema = z.infer<typeof signUpSchema>
+export type InputSchema = z.input<typeof signUpSchema>
+
+export type RegisterFormSchema = z.output<typeof signUpSchema>
 
 export const useSignUpForm = () => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<RegisterFormSchema>({
+    watch,
+  } = useForm<InputSchema>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      username: 'asdsadasdas',
-      email: 'Hello@Mail.ru',
-      password: '123456Aa$',
-      confirmPassword: '123456Aa$',
-      agreeTerms: true,
-    },
     mode: 'onTouched',
   })
-  return { control, handleSubmit, errors }
+  return { control, handleSubmit, errors, watch }
 }
