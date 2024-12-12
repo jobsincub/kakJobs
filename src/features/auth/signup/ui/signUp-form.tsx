@@ -1,20 +1,20 @@
-import { type LoginFormSchema } from '@/features/auth/signin'
 import s from '@/features/auth/signin/ui/signIn-form.module.scss'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui'
 import React from 'react'
-import { useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
+import { RegisterFormSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
 import { Button } from '@wandrehappen/ui-kit'
 
 type Props = {
-  onSubmit: (data: LoginFormSchema) => void
+  onSubmit: (data: RegisterFormSchema) => void
   error: string
 }
 
 export const SignUpForm = ({ onSubmit, error }: Props) => {
   const { handleSubmit, control } = useSignUpForm()
 
-  const formSubmit = (data: LoginFormSchema) => {
+  const formSubmit = (data: RegisterFormSchema) => {
     console.log(data)
+    console.log('HELLO')
     // onSubmit(data)
   }
 
@@ -55,7 +55,9 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
         />
         <ControlledCheckbox name={'agreeTerms'} control={control} />
       </div>
-      <Button fullWidth>Sign Up</Button>
+      <Button fullWidth type={'submit'}>
+        Sign Up
+      </Button>
     </form>
   )
 }

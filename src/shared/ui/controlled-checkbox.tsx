@@ -3,7 +3,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { type FieldValues, useController, type UseControllerProps } from 'react-hook-form'
 
 type Props<T extends FieldValues> = UseControllerProps<T> &
-  Omit<ComponentPropsWithoutRef<'input'>, 'onChange'>
+  Omit<ComponentPropsWithoutRef<'button'>, 'onChange'>
 
 export const ControlledCheckbox = <T extends FieldValues>({
   control,
@@ -14,8 +14,8 @@ export const ControlledCheckbox = <T extends FieldValues>({
   ...checkboxProps
 }: Props<T>) => {
   const {
-    field: { value, onChange, onBlur },
+    field: { value, onChange },
   } = useController({ control, name, defaultValue, rules, shouldUnregister })
 
-  return <Checkbox checked={value} onChange={onChange} onBlur={onBlur} {...checkboxProps} />
+  return <Checkbox checked={value} onChange={onChange} {...checkboxProps} />
 }

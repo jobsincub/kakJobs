@@ -12,8 +12,8 @@ const signUpSchema = z
   .merge(userNameSchema)
   .merge(emailSchema)
   .merge(passwordSchema)
-  .merge(confirmPasswordSchema)
   .merge(agreeTermsSchema)
+  .merge(confirmPasswordSchema)
   .refine(data => data.password === data.confirmPassword, {
     message: 'The passwords must match',
     path: ['confirmPassword'],
@@ -29,10 +29,11 @@ export const useSignUpForm = () => {
   } = useForm<RegisterFormSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      username: 'asdsadasdas',
+      email: 'Hello@Mail.ru',
+      password: '123456Aa$',
+      confirmPassword: '123456Aa$',
+      agreeTerms: true,
     },
     mode: 'onTouched',
   })
