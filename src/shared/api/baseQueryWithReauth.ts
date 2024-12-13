@@ -4,6 +4,17 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { setAccessToken } from '@/entities/auth/model'
 import { Mutex } from 'async-mutex'
 
+type ApiResponse<T> = {
+  data: T
+  code: number
+  extensions: Extension[]
+}
+
+type Extension = {
+  message: string
+  field: string | null
+}
+
 const baseQuery = fetchBaseQuery({
   baseUrl: BACKEND_BASE_URL,
   credentials: 'include',
@@ -45,7 +56,9 @@ export const baseQueryWithReauth: BaseQueryFn<
           extraOptions
         )
         if (refreshResult.data) {
-          api.dispatch(setAccessToken(refreshResult.data as { accessToken: string }))
+          api.dispatch(
+            setAccessToken((refreshResult.data as ApiResponse<{ accessToken: string }>).data)
+          )
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
