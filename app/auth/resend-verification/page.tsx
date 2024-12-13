@@ -1,3 +1,5 @@
-export default function ResendVerificationPage() {
-  return <div>Resend email</div>
+import ResendVerificationEmailPage from '@/pages/auth/resendVerification/resendVerificationPage'
+
+export default function ResendVerification() {
+  return <ResendVerificationEmailPage />
 }

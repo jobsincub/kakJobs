@@ -1,17 +1,19 @@
+import { setAccessToken } from '@/entities/auth/model'
+import { baseQueryWithReauth } from '@/shared/api'
 import { loggedOut, setAccessToken } from '@/entities/auth/model'
 import { createBaseQuery } from '@/shared/config'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: createBaseQuery('https://picassonova.online/api/v1/auth'),
+  baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
     signIn: builder.mutation<
       ApiResponse<{ accessToken: string }>,
       { email: string; password: string }
     >({
       query: body => ({
-        url: '/sign-in',
+        url: 'auth/sign-in',
         method: 'POST',
         body,
       }),
@@ -38,10 +40,18 @@ export const authApi = createApi({
         }
       },
     }),
+    resendVerificationEmail: builder.mutation<ApiResponse<void>, ResendRegistrationArgs>({
+      query: params => ({
+        body: params,
+        method: 'POST',
+        url: 'auth/resend-verification-email',
+      }),
+    }),
   }),
 })
 
 export const { useSignInMutation, useLogoutMutation } = authApi
+export const { useSignInMutation, useResendVerificationEmailMutation } = authApi
 
 type ApiResponse<T> = {
   data: T
@@ -52,4 +62,8 @@ type ApiResponse<T> = {
 type Extension = {
   message: string
   field: string | null
+}
+
+type ResendRegistrationArgs = {
+  email: string
 }

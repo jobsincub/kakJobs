@@ -1,46 +1,16 @@
-.pageContainer {
-	display: flex;
-	flex-direction: column;
-	gap: 74px;
-	align-items: center;
-
-	width: 100%;
-	max-width: 378px;
-	height: 504px;
-	padding: 24px;
-
-	background-color: var(--color-dark-500);
-	border: 1px solid var(--color-dark-300);
-	border-radius: 2px;
-}
-
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
 	width: 100%;
 }
 
-.input {
-	width: 100%;
-	color: var(--color-light-900);
-}
-
-.contentContainer {
+.inputsWrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
-	align-items: flex-end;
-
-	width: 100%;
-	margin-top: 12px;
 }
 
-.link {
-	text-decoration: none;
+.forgotPassword {
+	margin: 36px 0 24px;
+	text-align: end;
 }
-
-.submit {
-	width: 100%;
-}
-
