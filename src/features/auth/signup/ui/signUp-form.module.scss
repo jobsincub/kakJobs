@@ -3,3 +3,8 @@
   flex-direction: column;
   width: 100%;
 }
+
+.link {
+  color: var(--color-primary-300);
+  text-decoration: underline var(--color-primary-300);
+}
