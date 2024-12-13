@@ -21,6 +21,10 @@ export const LogoutConfirmation = () => {
   const [logout, { isSuccess }] = useLogoutMutation()
   const router = useRouter()
 
+  const logoutHandler = () => {
+    logout()
+  }
+
   useEffect(() => {
     if (isSuccess) {
       router.push('/auth/signin')
@@ -47,7 +51,7 @@ export const LogoutConfirmation = () => {
             </DialogDescription>
             <DialogFooter>
               <DialogClose>
-                <Button variant={'tertiary'} onClick={() => logout()}>
+                <Button variant={'tertiary'} onClick={logoutHandler}>
                   Yes
                 </Button>
               </DialogClose>
