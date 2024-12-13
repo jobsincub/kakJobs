@@ -32,36 +32,34 @@ export const LogoutConfirmation = () => {
   }, [isSuccess, router])
 
   return (
-    <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant={'icon'} className={s.logoutButton}>
-            <Logout />
-            Log Out
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Log Out</DialogTitle>
-          </DialogHeader>
-          <DialogBody className={s.dialogBody}>
-            <DialogDescription className={s.dialogDescription}>
-              Are you really want to log out of your account{' '}
-              <span className={s.account}>“Epam@epam.com”</span>?
-            </DialogDescription>
-            <DialogFooter>
-              <DialogClose>
-                <Button variant={'tertiary'} onClick={logoutHandler}>
-                  Yes
-                </Button>
-              </DialogClose>
-              <DialogClose>
-                <Button>No</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogBody>
-        </DialogContent>
-      </Dialog>
-    </>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant={'icon'} className={s.logoutButton}>
+          <Logout />
+          Log Out
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Log Out</DialogTitle>
+        </DialogHeader>
+        <DialogBody className={s.dialogBody}>
+          <DialogDescription className={s.dialogDescription}>
+            Are you really want to log out of your account{' '}
+            <span className={s.account}>“Epam@epam.com”</span>?
+          </DialogDescription>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant={'tertiary'} onClick={logoutHandler}>
+                Yes
+              </Button>
+            </DialogClose>
+            <DialogClose>
+              <Button>No</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogBody>
+      </DialogContent>
+    </Dialog>
   )
 }
