@@ -1,37 +1,63 @@
 'use client'
-import React, { useState } from 'react'
-import { LogoutModal } from './LogoutModal'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLogoutMutation } from '@/entities/auth/api'
-import { Button } from '@wandrehappen/ui-kit'
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@wandrehappen/ui-kit'
+import s from './logout-confirmation.module.scss'
+import { Logout } from '@wandrehappen/ui-kit'
 
 export const LogoutConfirmation = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [logout] = useLogoutMutation()
+  const [logout, { isSuccess }] = useLogoutMutation()
   const router = useRouter()
 
-  const handleLogout = async () => {
-    try {
-      await logout()
-      setIsModalOpen(false)
+  useEffect(() => {
+    if (isSuccess) {
       router.push('/auth/signin')
-    } catch (error) {
-      console.error('Failed to logout:', error)
     }
-  }
+  }, [isSuccess, router])
 
   return (
-    <div>
-      <Button variant={'secondary'} onClick={() => setIsModalOpen(true)}>
-        Log out
-      </Button>
-
-      <LogoutModal
-        isOpen={isModalOpen}
-        email={'Epam@epam.com'}
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={handleLogout}
-      />
-    </div>
+    <>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant={'icon'} className={s.logoutButton}>
+            <Logout />
+            Log Out
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Log Out</DialogTitle>
+          </DialogHeader>
+          <DialogBody className={s.dialogBody}>
+            <DialogDescription className={s.dialogDescription}>
+              Are you really want to log out of your account{' '}
+              <span className={s.account}>“Epam@epam.com”</span>?
+            </DialogDescription>
+            <DialogFooter>
+              <DialogClose>
+                <Button variant={'tertiary'} onClick={() => logout()}>
+                  Yes
+                </Button>
+              </DialogClose>
+              <DialogClose>
+                <Button>No</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogBody>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
