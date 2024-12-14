@@ -16,9 +16,18 @@ export const ru: LocaleType = {
         forgotPasswordLink: 'Забыл пароль',
         signInButtonText: 'Войти',
       },
+      logOut: {
+        buttonText: 'Выйти',
+        titleText: 'Выход',
+        confirmationText: 'Вы действительно хотите выйти из своей учетной записи',
+      },
     },
   },
   shared: {
     validations: {},
+    dialogs: {
+      yes: 'Да',
+      no: 'Нет',
+    },
   },
 }

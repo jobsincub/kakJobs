@@ -16,10 +16,20 @@ import {
 } from '@wandrehappen/ui-kit'
 import s from './logout-confirmation.module.scss'
 import { Logout } from '@wandrehappen/ui-kit'
+import { useTranslation } from '@/shared/config'
 
 export const LogoutConfirmation = () => {
   const [logout, { isSuccess }] = useLogoutMutation()
   const router = useRouter()
+
+  const {
+    t: {
+      features: {
+        auth: { logOut },
+      },
+      shared: { dialogs },
+    },
+  } = useTranslation()
 
   const logoutHandler = () => {
     logout()
@@ -36,26 +46,25 @@ export const LogoutConfirmation = () => {
       <DialogTrigger asChild>
         <Button variant={'icon'} className={s.logoutButton}>
           <Logout />
-          Log Out
+          {logOut.buttonText}
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Log Out</DialogTitle>
+          <DialogTitle>{logOut.titleText}</DialogTitle>
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <DialogDescription className={s.dialogDescription}>
-            Are you really want to log out of your account{' '}
-            <span className={s.account}>“Epam@epam.com”</span>?
+            {logOut.confirmationText} <span className={s.account}>“Epam@epam.com”</span>?
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
               <Button variant={'tertiary'} onClick={logoutHandler}>
-                Yes
+                {dialogs.yes}
               </Button>
             </DialogClose>
             <DialogClose>
-              <Button>No</Button>
+              <Button>{dialogs.no}</Button>
             </DialogClose>
           </DialogFooter>
         </DialogBody>

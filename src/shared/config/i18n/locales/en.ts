@@ -14,10 +14,19 @@ export const en = {
         forgotPasswordLink: 'Forgot Password',
         signInButtonText: 'Sign In',
       },
+      logOut: {
+        buttonText: 'Log Out',
+        titleText: 'Log Out',
+        confirmationText: 'Are you really want to log out of your account',
+      },
     },
   },
   shared: {
     validations: {},
+    dialogs: {
+      yes: 'Yes',
+      no: 'No',
+    },
   },
 }
 export type LocaleType = typeof en
