@@ -18,11 +18,15 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
   const { handleSubmit, control, watch } = useSignUpForm()
   const agreeTerms = watch('agreeTerms')
 
-  console.log(agreeTerms)
+  // console.log(agreeTerms)
 
-  const formSubmit = (data: InputSchema) => {
-    console.log(data)
+  const formSubmit = (data: RegisterFormSchema) => {
+    onSubmit(data)
   }
+
+  // const onSubmit = handleSubmit((data: RegisterFormSchema) => {
+  //   console.log('Submitting data:', data); // Итоговые данные без agreeTerms и confirmPassword
+  // });
 
   return (
     <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
