@@ -1,3 +1,4 @@
+import { ReCaptchaProvider } from '@/app/providers/ReCaptchaProvider'
 import { StoreProvider } from '@/app/providers/StoreProvider'
 import { UserProvider } from '@/app/providers/UserProvider'
 import { type ReactNode } from 'react'
@@ -5,7 +6,9 @@ import { type ReactNode } from 'react'
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <StoreProvider>
-      <UserProvider>{children}</UserProvider>
+      <ReCaptchaProvider>
+        <UserProvider>{children}</UserProvider>
+      </ReCaptchaProvider>
     </StoreProvider>
   )
 }
