@@ -15,7 +15,7 @@ import s from './EmailSentDialog.module.scss'
 
 type Props = ComponentPropsWithoutRef<typeof Dialog>
 
-export const EmailSentDialog = ({ open, onOpenChange, ...rest }: Props) => {
+export const EmailSentDialog = (props: Props) => {
   const {
     t: {
       features: {
@@ -26,7 +26,7 @@ export const EmailSentDialog = ({ open, onOpenChange, ...rest }: Props) => {
   } = useTranslation()
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange} {...rest}>
+    <Dialog {...props}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{emailSent.titleText}</DialogTitle>
