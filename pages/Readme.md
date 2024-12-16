@@ -1,0 +1,1 @@
+This folder is required for the Next App Router to work.
