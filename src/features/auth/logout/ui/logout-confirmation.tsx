@@ -21,6 +21,7 @@ import { useTranslation } from '@/shared/config'
 import { Trans } from '@/shared/config/i18n/ui/Trans'
 
 export const LogoutConfirmation = () => {
+  const email = 'Epam@epam.com' // Todo: change to email from store
   const [logout, { isSuccess }] = useLogoutMutation()
   const router = useRouter()
 
@@ -46,10 +47,12 @@ export const LogoutConfirmation = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'icon'} className={s.logoutButton}>
-          <Logout />
-          {logOut.buttonText}
-        </Button>
+        <Typography asChild variant={'bold14'}>
+          <Button variant={'link'}>
+            <Logout />
+            {logOut.buttonText}
+          </Button>
+        </Typography>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -60,15 +63,13 @@ export const LogoutConfirmation = () => {
             <Trans
               text={logOut.confirmationText}
               tags={{
-                email: () => (
-                  // <Typography asChild variant={'bold16'}>
-                  // <span className={s.account}>“Epam@epam.com”</span>
-                  <b>“Epam@epam.com”</b>
-                  // </Typography>
+                1: () => (
+                  <Typography asChild variant={'bold16'}>
+                    <span>{`“${email}”`}</span>
+                  </Typography>
                 ),
               }}
             />
-            {/*{logOut.confirmationText} <span className={s.account}>“Epam@epam.com”</span>*/}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>

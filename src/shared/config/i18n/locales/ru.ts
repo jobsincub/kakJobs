@@ -26,7 +26,7 @@ export const ru: LocaleType = {
         buttonText: 'Выйти',
         titleText: 'Выход',
         confirmationText:
-          'Вы действительно хотите выйти из своей учетной записи <email>email</email>?',
+          'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
       },
     },
   },

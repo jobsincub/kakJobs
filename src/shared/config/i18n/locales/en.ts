@@ -23,7 +23,7 @@ export const en = {
       logOut: {
         buttonText: 'Log Out',
         titleText: 'Log Out',
-        confirmationText: 'Are you really want to log out of your account <email>email</email>?',
+        confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
       },
     },
   },
