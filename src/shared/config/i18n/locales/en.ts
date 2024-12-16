@@ -14,6 +14,12 @@ export const en = {
         forgotPasswordLink: 'Forgot Password',
         signInButtonText: 'Sign In',
       },
+      emailSent: {
+        titleText: 'Email sent',
+        notificationText(email: string) {
+          return `We have sent a link to confirm your email to ${email}`
+        },
+      },
       logOut: {
         buttonText: 'Log Out',
         titleText: 'Log Out',
@@ -23,6 +29,9 @@ export const en = {
   },
   shared: {
     validations: {},
+    dialogs: {
+      ok: 'OK',
+    },
     dialogs: {
       yes: 'Yes',
       no: 'No',

@@ -16,6 +16,12 @@ export const ru: LocaleType = {
         forgotPasswordLink: 'Забыл пароль',
         signInButtonText: 'Войти',
       },
+      emailSent: {
+        titleText: 'Отправление письма',
+        notificationText(email: string) {
+          return `Мы отправили ссылку для подтверждения вашей электронной почты на адрес ${email}`
+        },
+      },
       logOut: {
         buttonText: 'Выйти',
         titleText: 'Выход',
@@ -25,6 +31,9 @@ export const ru: LocaleType = {
   },
   shared: {
     validations: {},
+    dialogs: {
+      ok: 'ОК',
+    },
     dialogs: {
       yes: 'Да',
       no: 'Нет',
