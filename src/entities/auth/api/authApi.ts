@@ -35,7 +35,7 @@ export const authApi = createApi({
       query: params => ({
         body: params,
         method: 'POST',
-        url: '/api/v1/auth/sign-up',
+        url: '/sign-up',
       }),
     }),
   }),

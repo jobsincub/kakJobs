@@ -1,10 +1,17 @@
 .form {
   display: flex;
   flex-direction: column;
+  gap:30px;
   width: 100%;
 }
 
 .link {
   color: var(--color-primary-300);
   text-decoration: underline var(--color-primary-300);
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1em + 2%);
 }

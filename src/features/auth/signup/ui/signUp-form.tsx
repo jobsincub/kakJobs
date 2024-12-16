@@ -1,11 +1,7 @@
 import s from '@/features/auth/signup/ui/signUp-form.module.scss'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui'
 import React from 'react'
-import {
-  InputSchema,
-  RegisterFormSchema,
-  useSignUpForm,
-} from '@/features/auth/signup/lib/useSignUpForm'
+import { RegisterFormSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 
@@ -18,21 +14,16 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
   const { handleSubmit, control, watch } = useSignUpForm()
   const agreeTerms = watch('agreeTerms')
 
-  // console.log(agreeTerms)
-
   const formSubmit = (data: RegisterFormSchema) => {
+    console.log(data)
     onSubmit(data)
   }
-
-  // const onSubmit = handleSubmit((data: RegisterFormSchema) => {
-  //   console.log('Submitting data:', data); // Итоговые данные без agreeTerms и confirmPassword
-  // });
 
   return (
     <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
       <div className={s.inputsWrapper}>
         <ControlledTextField
-          name={'username'}
+          name={'userName'}
           placeholder={'Username'}
           control={control}
           label={'username'}

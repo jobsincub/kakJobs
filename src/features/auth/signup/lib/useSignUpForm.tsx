@@ -18,8 +18,8 @@ const signUpSchema = z
     message: 'The passwords must match',
     path: ['confirmPassword'],
   })
-  .transform(({ username, email, password }) => ({
-    username,
+  .transform(({ userName, email, password }) => ({
+    userName,
     email,
     password,
   }))
@@ -34,9 +34,9 @@ export const useSignUpForm = () => {
     control,
     formState: { errors },
     watch,
-  } = useForm<InputSchema>({
+  } = useForm<InputSchema, undefined, RegisterFormSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: 'onTouched',
+    mode: 'onSubmit',
   })
   return { control, handleSubmit, errors, watch }
 }
