@@ -9,15 +9,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@wandrehappen/ui-kit'
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useEffect, useState } from 'react'
 import { useTranslation } from '@/shared/config'
 import s from './EmailSentDialog.module.scss'
 
-type Props = ComponentPropsWithoutRef<typeof Dialog> & {
+type Props = Omit<ComponentPropsWithoutRef<typeof Dialog>, 'open' | 'onOpenChange'> & {
   email: string
+  isOpen: boolean
 }
 
-export const EmailSentDialog = ({ email, ...rest }: Props) => {
+export const EmailSentDialog = ({ email, isOpen, ...rest }: Props) => {
+  const [open, setOpen] = useState(false)
   const {
     t: {
       features: {
@@ -27,8 +29,14 @@ export const EmailSentDialog = ({ email, ...rest }: Props) => {
     },
   } = useTranslation()
 
+  useEffect(() => {
+    if (isOpen) {
+      setOpen(true)
+    }
+  }, [isOpen])
+
   return (
-    <Dialog {...rest}>
+    <Dialog open={open} onOpenChange={setOpen} {...rest}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{emailSent.titleText}</DialogTitle>
