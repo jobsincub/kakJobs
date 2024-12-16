@@ -13,9 +13,11 @@ import { ComponentPropsWithoutRef } from 'react'
 import { useTranslation } from '@/shared/config'
 import s from './EmailSentDialog.module.scss'
 
-type Props = ComponentPropsWithoutRef<typeof Dialog>
+type Props = ComponentPropsWithoutRef<typeof Dialog> & {
+  email: string
+}
 
-export const EmailSentDialog = (props: Props) => {
+export const EmailSentDialog = ({ email, ...rest }: Props) => {
   const {
     t: {
       features: {
@@ -26,14 +28,14 @@ export const EmailSentDialog = (props: Props) => {
   } = useTranslation()
 
   return (
-    <Dialog {...props}>
+    <Dialog {...rest}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{emailSent.titleText}</DialogTitle>
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <DialogDescription className={s.dialogDescription}>
-            {emailSent.notificationText('epam@epam.com')}
+            {emailSent.notificationText(email)}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
