@@ -16,7 +16,9 @@ export const en = {
       },
       emailSent: {
         titleText: 'Email sent',
-        notificationText: 'We have sent a link to confirm your email to',
+        notificationText(email: string) {
+          return `We have sent a link to confirm your email to ${email}`
+        },
       },
     },
   },

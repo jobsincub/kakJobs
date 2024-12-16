@@ -18,7 +18,9 @@ export const ru: LocaleType = {
       },
       emailSent: {
         titleText: 'Отправление письма',
-        notificationText: 'Мы отправили ссылку для подтверждения вашей электронной почты на адрес',
+        notificationText(email: string) {
+          return `Мы отправили ссылку для подтверждения вашей электронной почты на адрес ${email}`
+        },
       },
     },
   },

@@ -33,7 +33,7 @@ export const EmailSentDialog = (props: Props) => {
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <DialogDescription className={s.dialogDescription}>
-            {emailSent.notificationText} epam@epam.com?
+            {emailSent.notificationText('epam@epam.com')}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
