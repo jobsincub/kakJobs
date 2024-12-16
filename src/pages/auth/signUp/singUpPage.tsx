@@ -22,10 +22,7 @@ export const SingUpPage = () => {
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>Sign Up</h1>
       </Typography>
-      <SignUpForm
-        error={isError ? 'The email or password are incorrect. Try again please' : ''}
-        onSubmit={onSubmit}
-      />
+      <SignUpForm error={isError ? 'User already exists' : ''} onSubmit={onSubmit} />
       <Typography asChild color={'light-100'} variant={'regular16'} className={s.text}>
         <p>Do you have an account?</p>
       </Typography>

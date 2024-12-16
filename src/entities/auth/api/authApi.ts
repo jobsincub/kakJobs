@@ -59,7 +59,7 @@ type ResendRegistrationArgs = {
 }
 
 type SignUpArgs = {
-  username: string
+  userName: string
   email: string
   password: string
 }

@@ -26,6 +26,7 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           name={'userName'}
           placeholder={'Username'}
           control={control}
+          error={error}
           label={'username'}
           autoComplete={'username'}
         />
@@ -42,7 +43,6 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           name="password"
           label={'password'}
           type={'password'}
-          error={error}
           autoComplete={'current-password'}
         />
         <ControlledTextField
@@ -51,7 +51,6 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           name="confirmPassword"
           label={'confirmPassword'}
           type={'password'}
-          error={error}
           autoComplete={'current-password'}
         />
         <div style={{ display: 'flex' }}>
