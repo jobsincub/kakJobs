@@ -23,7 +23,7 @@ export const en = {
       logOut: {
         buttonText: 'Log Out',
         titleText: 'Log Out',
-        confirmationText: 'Are you really want to log out of your account',
+        confirmationText: 'Are you really want to log out of your account <email>email</email>?',
       },
     },
   },
@@ -31,8 +31,6 @@ export const en = {
     validations: {},
     dialogs: {
       ok: 'OK',
-    },
-    dialogs: {
       yes: 'Yes',
       no: 'No',
     },

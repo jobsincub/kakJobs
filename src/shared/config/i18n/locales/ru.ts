@@ -25,7 +25,8 @@ export const ru: LocaleType = {
       logOut: {
         buttonText: 'Выйти',
         titleText: 'Выход',
-        confirmationText: 'Вы действительно хотите выйти из своей учетной записи',
+        confirmationText:
+          'Вы действительно хотите выйти из своей учетной записи <email>email</email>?',
       },
     },
   },
@@ -33,8 +34,6 @@ export const ru: LocaleType = {
     validations: {},
     dialogs: {
       ok: 'ОК',
-    },
-    dialogs: {
       yes: 'Да',
       no: 'Нет',
     },

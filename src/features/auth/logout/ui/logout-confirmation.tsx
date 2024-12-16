@@ -13,10 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Typography,
 } from '@wandrehappen/ui-kit'
 import s from './logout-confirmation.module.scss'
 import { Logout } from '@wandrehappen/ui-kit'
 import { useTranslation } from '@/shared/config'
+import { Trans } from '@/shared/config/i18n/ui/Trans'
 
 export const LogoutConfirmation = () => {
   const [logout, { isSuccess }] = useLogoutMutation()
@@ -55,7 +57,18 @@ export const LogoutConfirmation = () => {
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <DialogDescription className={s.dialogDescription}>
-            {logOut.confirmationText} <span className={s.account}>“Epam@epam.com”</span>?
+            <Trans
+              text={logOut.confirmationText}
+              tags={{
+                email: () => (
+                  // <Typography asChild variant={'bold16'}>
+                  // <span className={s.account}>“Epam@epam.com”</span>
+                  <b>“Epam@epam.com”</b>
+                  // </Typography>
+                ),
+              }}
+            />
+            {/*{logOut.confirmationText} <span className={s.account}>“Epam@epam.com”</span>*/}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
