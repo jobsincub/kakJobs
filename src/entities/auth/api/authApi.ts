@@ -55,7 +55,12 @@ export const authApi = createApi({
   }),
 })
 
-export const { useSignInMutation, useLogoutMutation, useResendVerificationEmailMutation, useSignUpMutation } = authApi
+export const {
+  useSignInMutation,
+  useLogoutMutation,
+  useResendVerificationEmailMutation,
+  useSignUpMutation,
+} = authApi
 
 type ApiResponse<T> = {
   data: T
