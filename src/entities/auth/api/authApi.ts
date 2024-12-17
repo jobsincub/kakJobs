@@ -31,10 +31,21 @@ export const authApi = createApi({
         url: 'auth/resend-verification-email',
       }),
     }),
+    createNewPassword: builder.mutation<ApiResponse<void>, CreateNewPasswordArgs>({
+      query: params => ({
+        body: params,
+        method: 'POST',
+        url: 'auth/new-password',
+      }),
+    }),
   }),
 })
 
-export const { useSignInMutation, useResendVerificationEmailMutation } = authApi
+export const {
+  useSignInMutation,
+  useResendVerificationEmailMutation,
+  useCreateNewPasswordMutation,
+} = authApi
 
 type ApiResponse<T> = {
   data: T
@@ -49,4 +60,8 @@ type Extension = {
 
 type ResendRegistrationArgs = {
   email: string
+}
+type CreateNewPasswordArgs = {
+  newPassword: string
+  recoveryCode: string
 }
