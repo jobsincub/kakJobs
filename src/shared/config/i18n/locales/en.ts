@@ -14,10 +14,26 @@ export const en = {
         forgotPasswordLink: 'Forgot Password',
         signInButtonText: 'Sign In',
       },
+      emailSent: {
+        titleText: 'Email sent',
+        notificationText(email: string) {
+          return `We have sent a link to confirm your email to ${email}`
+        },
+      },
+      logOut: {
+        buttonText: 'Log Out',
+        titleText: 'Log Out',
+        confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
+      },
     },
   },
   shared: {
     validations: {},
+    dialogs: {
+      ok: 'OK',
+      yes: 'Yes',
+      no: 'No',
+    },
   },
 }
 export type LocaleType = typeof en
