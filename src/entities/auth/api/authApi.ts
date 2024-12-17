@@ -1,17 +1,17 @@
-import { setAccessToken } from '@/entities/auth/model'
-import { createBaseQuery } from '@/shared/config'
+import { baseQueryWithReauth } from '@/shared/api'
+import { loggedOut, setAccessToken } from '@/entities/auth/model'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: createBaseQuery('https://picassonova.online/api/v1/auth'),
+  baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
     signIn: builder.mutation<
       ApiResponse<{ accessToken: string }>,
       { email: string; password: string }
     >({
       query: body => ({
-        url: '/sign-in',
+        url: 'auth/sign-in',
         method: 'POST',
         body,
       }),
@@ -24,11 +24,25 @@ export const authApi = createApi({
         }
       },
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: 'auth/logout',
+        method: 'POST',
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled
+          dispatch(loggedOut())
+        } catch (error) {
+          console.error('Logout failed:', error)
+        }
+      },
+    }),
     resendVerificationEmail: builder.mutation<ApiResponse<void>, ResendRegistrationArgs>({
       query: params => ({
         body: params,
         method: 'POST',
-        url: '/resend-verification-email',
+        url: 'auth/resend-verification-email',
       }),
     }),
     signUp: builder.mutation<ApiResponse<void>, SignUpArgs>({
@@ -41,7 +55,7 @@ export const authApi = createApi({
   }),
 })
 
-export const { useSignInMutation, useResendVerificationEmailMutation, useSignUpMutation } = authApi
+export const { useSignInMutation, useLogoutMutation, useResendVerificationEmailMutation, useSignUpMutation } = authApi
 
 type ApiResponse<T> = {
   data: T
