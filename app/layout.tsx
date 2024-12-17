@@ -1,10 +1,10 @@
 import { inter } from '@/app/fonts'
 import { Providers } from '@/app/providers'
+import { Header } from '@/widgets/header/ui'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
 import type { ReactNode } from 'react'
-import { Header } from '@/widgets/header/ui'
 import s from './layout.module.scss'
 
 export const metadata: Metadata = {
