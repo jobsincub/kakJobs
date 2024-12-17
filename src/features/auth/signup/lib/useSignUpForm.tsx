@@ -36,7 +36,13 @@ export const useSignUpForm = () => {
     watch,
   } = useForm<InputSchema, undefined, RegisterFormSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: 'onSubmit',
+    defaultValues: {
+      userName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    mode: 'onTouched',
   })
   return { control, handleSubmit, errors, watch }
 }

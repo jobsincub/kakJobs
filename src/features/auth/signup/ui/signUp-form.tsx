@@ -11,11 +11,13 @@ type Props = {
 }
 
 export const SignUpForm = ({ onSubmit, error }: Props) => {
-  const { handleSubmit, control, watch } = useSignUpForm()
-  const agreeTerms = watch('agreeTerms')
+  const { handleSubmit, control, watch, errors } = useSignUpForm()
+  const values = watch()
+
+  const isFormValid =
+    Object.values(values).every(value => value) && Object.keys(errors).length === 0
 
   const formSubmit = (data: RegisterFormSchema) => {
-    console.log(data)
     onSubmit(data)
   }
 
@@ -72,7 +74,7 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           />
         </div>
       </div>
-      <Button fullWidth disabled={!agreeTerms}>
+      <Button fullWidth disabled={!isFormValid}>
         Sign Up
       </Button>
     </form>

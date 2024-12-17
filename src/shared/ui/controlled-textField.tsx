@@ -18,6 +18,8 @@ export const ControlledTextField = <T extends FieldValues>({
   } = useController({ control, name, defaultValue, rules, shouldUnregister })
   const finalError = error?.message ?? customError
 
+  console.log(finalError)
+
   return (
     <>
       <Input
