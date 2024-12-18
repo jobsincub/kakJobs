@@ -29,21 +29,21 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           placeholder={'Username'}
           control={control}
           error={error}
-          label={'username'}
+          label={'Username'}
           autoComplete={'username'}
         />
         <ControlledTextField
           placeholder={'Epam@epam.com'}
           control={control}
           name="email"
-          label={'email'}
+          label={'Email'}
           autoComplete={'email'}
         />
         <ControlledTextField
           placeholder={'**********'}
           control={control}
           name="password"
-          label={'password'}
+          label={'Password'}
           type={'password'}
           autoComplete={'current-password'}
         />
@@ -51,28 +51,27 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           placeholder={'**********'}
           control={control}
           name="confirmPassword"
-          label={'confirmPassword'}
+          label={'Password confirmation'}
           type={'password'}
           autoComplete={'current-password'}
         />
-        <div style={{ display: 'flex' }}>
-          <ControlledCheckbox
-            name={'agreeTerms'}
-            control={control}
-            label={
-              <Typography variant={'small'}>
-                I agree to the{' '}
-                <Link className={s.link} href="/legal/terms-of-service">
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
-                <Link className={s.link} href="/legal/privacy-policy">
-                  Privacy Policy
-                </Link>
-              </Typography>
-            }
-          />
-        </div>
+        <ControlledCheckbox
+          name={'agreeTerms'}
+          control={control}
+          className={s.checkBox}
+          label={
+            <Typography variant={'small'}>
+              I agree to the{' '}
+              <Link className={s.link} href="/legal/terms-of-service">
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link className={s.link} href="/legal/privacy-policy">
+                Privacy Policy
+              </Link>
+            </Typography>
+          }
+        />
       </div>
       <Button fullWidth disabled={!isFormValid}>
         Sign Up

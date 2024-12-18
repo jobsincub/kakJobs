@@ -1,7 +1,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap:30px;
   width: 100%;
 }
 
@@ -13,5 +12,9 @@
 .inputsWrapper {
   display: flex;
   flex-direction: column;
-  gap: calc(1em + 2%);
+  gap: 24px;
+}
+
+.checkBox {
+  margin-bottom:24px;
 }
