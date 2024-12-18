@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.link {
+  color: var(--color-primary-300);
+  text-decoration: underline var(--color-primary-300);
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.checkBox {
+  margin-bottom:24px;
+}
