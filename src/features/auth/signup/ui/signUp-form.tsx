@@ -4,6 +4,7 @@ import React from 'react'
 import { RegisterFormSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
+import { useTranslation } from '@/shared/config'
 
 type Props = {
   onSubmit: (data: RegisterFormSchema) => void
@@ -20,6 +21,14 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
   const formSubmit = (data: RegisterFormSchema) => {
     onSubmit(data)
   }
+
+  const {
+    t: {
+      features: {
+        auth: { signUpForm },
+      },
+    },
+  } = useTranslation()
 
   return (
     <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
@@ -61,20 +70,20 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           className={s.checkBox}
           label={
             <Typography variant={'small'}>
-              I agree to the{' '}
+              {signUpForm.agreeStart}{' '}
               <Link className={s.link} href="/legal/terms-of-service">
-                Terms of Service
+                {signUpForm.terms}
               </Link>{' '}
-              and{' '}
+              {signUpForm.agreeMid}{' '}
               <Link className={s.link} href="/legal/privacy-policy">
-                Privacy Policy
+                {signUpForm.privacy}
               </Link>
             </Typography>
           }
         />
       </div>
       <Button fullWidth disabled={!isFormValid}>
-        Sign Up
+        {signUpForm.signUpLinkText}
       </Button>
     </form>
   )

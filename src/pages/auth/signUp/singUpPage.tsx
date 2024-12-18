@@ -8,12 +8,19 @@ import Link from 'next/link'
 import React from 'react'
 import { RegisterFormSchema } from '@/features/auth/signup/lib/useSignUpForm'
 import { EmailSentDialog } from '@/shared/ui'
+import { useTranslation } from '@/shared/config'
 
 export const SingUpPage = () => {
   const [signUp, { isError, originalArgs, isSuccess }] = useSignUpMutation()
   const email = originalArgs?.email || ''
 
-  // const { t } = useTranslation()
+  const {
+    t: {
+      pages: {
+        auth: { signUpPage },
+      },
+    },
+  } = useTranslation()
 
   const onSubmit = (data: RegisterFormSchema) => {
     signUp(data)
@@ -23,15 +30,15 @@ export const SingUpPage = () => {
     <div className={s.pageContainer}>
       <EmailSentDialog email={email} isOpen={isSuccess} />
       <Typography asChild color={'light-100'} variant={'h1'}>
-        <h1>Sign Up</h1>
+        <h1>{signUpPage.title}</h1>
       </Typography>
       <SignUpForm error={isError ? 'User already exists' : ''} onSubmit={onSubmit} />
       <div className={s.textWrapper}>
         <Typography asChild color={'light-100'} variant={'regular16'} className={s.text}>
-          <p>Do you have an account?</p>
+          <p>{signUpPage.isHaveAccount}</p>
         </Typography>
         <Button asChild variant={'link'}>
-          <Link href={'/auth/signin'}>Sign in</Link>
+          <Link href={'/auth/signin'}>{signUpPage.signInLinkText}</Link>
         </Button>
       </div>
     </div>

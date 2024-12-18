@@ -6,6 +6,11 @@ export const en = {
         noAccountText: 'Don’t have an account?',
         signUpLinkText: 'Sign Up',
       },
+      signUpPage: {
+        title: 'Sign Up',
+        isHaveAccount: 'Do you have an account?',
+        signInLinkText: 'Sign In',
+      },
     },
   },
   features: {
@@ -13,6 +18,13 @@ export const en = {
       signInForm: {
         forgotPasswordLink: 'Forgot Password',
         signInButtonText: 'Sign In',
+      },
+      signUpForm: {
+        agreeStart: 'I agree to the',
+        agreeMid: 'and',
+        terms: 'Terms of Service',
+        privacy: 'Privacy Policy',
+        signUpLinkText: 'Sign Up',
       },
       emailSent: {
         titleText: 'Email sent',

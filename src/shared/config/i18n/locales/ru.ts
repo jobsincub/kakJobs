@@ -8,6 +8,11 @@ export const ru: LocaleType = {
         noAccountText: 'У вас нет аккаунта?',
         signUpLinkText: 'Регистрация',
       },
+      signUpPage: {
+        title: 'Регистрация',
+        isHaveAccount: 'Уже есть аккаунт?',
+        signInLinkText: 'Войти',
+      },
     },
   },
   features: {
@@ -15,6 +20,13 @@ export const ru: LocaleType = {
       signInForm: {
         forgotPasswordLink: 'Забыл пароль',
         signInButtonText: 'Войти',
+      },
+      signUpForm: {
+        agreeStart: 'Я согласен с ',
+        agreeMid: 'и',
+        terms: 'правилами сервиса',
+        privacy: 'политикой конфиденциальности',
+        signUpLinkText: 'Регистрация',
       },
       emailSent: {
         titleText: 'Отправление письма',
