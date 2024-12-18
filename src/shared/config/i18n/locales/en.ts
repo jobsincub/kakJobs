@@ -40,7 +40,23 @@ export const en = {
     },
   },
   shared: {
-    validations: {},
+    validations: {
+      usernameSchema: {
+        minValue: 'Minimum number of characters 6',
+        maxValue: 'Maximum number of characters 30',
+      },
+      emailSchema: {
+        emailValidation: 'The email must match the format\n example@example.com',
+      },
+      passwordSchema: {
+        minValue: 'Password must be at least 6 characters',
+        regexText:
+          'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      },
+      confirmPassSchema: {
+        confirmPass: 'The passwords must match',
+      },
+    },
     dialogs: {
       ok: 'OK',
       yes: 'Yes',

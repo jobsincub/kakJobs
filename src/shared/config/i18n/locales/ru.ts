@@ -43,7 +43,23 @@ export const ru: LocaleType = {
     },
   },
   shared: {
-    validations: {},
+    validations: {
+      usernameSchema: {
+        minValue: 'Логин пользователя должен быть не менее 6 символов',
+        maxValue: 'Логин пользователя должен быть не более 30 символов',
+      },
+      emailSchema: {
+        emailValidation: 'Электронный адрес должен соответствовать\n example@example.com',
+      },
+      passwordSchema: {
+        minValue: 'Пароль должен быть не менее 6 символов',
+        regexText:
+          'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      },
+      confirmPassSchema: {
+        confirmPass: 'Пароли должны совпадать',
+      },
+    },
     dialogs: {
       ok: 'ОК',
       yes: 'Да',
