@@ -1,5 +1,18 @@
 @use '@styles/vars' as vars;
 
+.body {
+  min-width: 360px;
+}
+
 .rootLayout {
   padding-top: vars.$header-height;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  max-width: vars.$container-max-width;
+  margin: 0 auto;
+  padding: 0 vars.$container-padding-x;
 }
