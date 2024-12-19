@@ -20,15 +20,13 @@ export const UseSignInPage = () => {
     t: {
       pages: {
         auth: {
-          signInPage: { errors, ...page },
+          signInPage: { errorMessages, ...page },
         },
       },
     },
   } = useTranslation()
 
-  const statusMessages = { 400: errors['400'], 401: errors['401'] }
-
-  const customError = getError({ statusMessages, error })
+  const customError = getError({ errorMessages, error })
 
   const onSubmit = (data: LoginFormSchema) => {
     signIn(data)

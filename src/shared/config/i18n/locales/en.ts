@@ -5,7 +5,7 @@ export const en = {
         title: 'Sign In',
         noAccountText: 'Don’t have an account?',
         signUpLinkText: 'Sign Up',
-        errors: {
+        errorMessages: {
           400: 'The email or password are incorrect. Try again please',
           401: 'The provided data is invalid.',
         },

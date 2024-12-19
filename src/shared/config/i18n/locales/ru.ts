@@ -7,7 +7,7 @@ export const ru: LocaleType = {
         title: 'Войти',
         noAccountText: 'У вас нет аккаунта?',
         signUpLinkText: 'Регистрация',
-        errors: {
+        errorMessages: {
           400: 'Email или пароль неверны. Пожалуйста, попробуйте снова.',
           401: 'Предоставленные данные недействительны.',
         },
