@@ -10,12 +10,12 @@ export const getStatusCode = (error: unknown) => {
 
 type StatusMessages = Record<number, string>
 
-type GetErrors = {
+type GetError = {
   errorMessages: StatusMessages
   error: unknown
 }
 
-export const getError = ({ errorMessages, error }: GetErrors) => {
+export const getError = ({ errorMessages, error }: GetError) => {
   const statusCode = getStatusCode(error)
   if (statusCode) {
     return errorMessages[statusCode]
