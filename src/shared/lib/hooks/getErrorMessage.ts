@@ -1,4 +1,4 @@
-const getStatus = (error: unknown) => {
+export const getStatusCode = (error: unknown) => {
   if (typeof error === 'object' && error !== null) {
     if ('data' in error && typeof error.data === 'object' && error.data !== null) {
       if ('code' in error.data && typeof error.data.code === 'number') {
@@ -16,7 +16,7 @@ type GetErrors = {
 }
 
 export const getError = ({ errorMessages, error }: GetErrors) => {
-  const statusCode = getStatus(error)
+  const statusCode = getStatusCode(error)
   if (statusCode) {
     return errorMessages[statusCode]
   }
