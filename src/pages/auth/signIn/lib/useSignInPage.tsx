@@ -1,7 +1,7 @@
 import { useSignInMutation } from '@/entities/auth/api'
 import type { LoginFormSchema } from '@/features/auth/signin'
 import { useTranslation } from '@/shared/config'
-import { getError } from '@/shared/lib/hooks'
+import { getErrorMessage } from '@/shared/lib/hooks'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -26,7 +26,7 @@ export const UseSignInPage = () => {
     },
   } = useTranslation()
 
-  const customError = getError({ errorMessages, error })
+  const customError = getErrorMessage({ errorMessages, error })
 
   const onSubmit = (data: LoginFormSchema) => {
     signIn(data)
