@@ -28,7 +28,14 @@ export const en = {
     },
   },
   shared: {
-    validations: {},
+    validations: {
+      emailSchema: {
+        email: 'You entered an invalid email.',
+      },
+      passwordSchema: {
+        minLength: 'Password must be at least 3 characters',
+      },
+    },
     dialogs: {
       ok: 'OK',
       yes: 'Yes',

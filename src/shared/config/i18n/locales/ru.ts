@@ -1,4 +1,4 @@
-import type { LocaleType } from '@/shared/config/i18n'
+import type { LocaleType } from './en'
 
 export const ru: LocaleType = {
   pages: {
@@ -31,7 +31,14 @@ export const ru: LocaleType = {
     },
   },
   shared: {
-    validations: {},
+    validations: {
+      emailSchema: {
+        email: 'Вы ввели не почту',
+      },
+      passwordSchema: {
+        minLength: 'Пароль должен содержать не менее 3 символов.',
+      },
+    },
     dialogs: {
       ok: 'ОК',
       yes: 'Да',

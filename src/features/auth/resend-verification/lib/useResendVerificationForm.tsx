@@ -1,10 +1,11 @@
-import { emailSchema } from '@/shared/lib'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { useEmailSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
-export type ResendVerificationEmailField = z.infer<typeof emailSchema>
+export type ResendVerificationEmailField = { email: string }
+
 export const useResendVerificationForm = () => {
+  const { emailSchema } = useEmailSchema()
   const { handleSubmit, control } = useForm<ResendVerificationEmailField>({
     defaultValues: {
       email: '',
