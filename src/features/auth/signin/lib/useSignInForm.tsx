@@ -1,14 +1,20 @@
 'use client'
-import { emailSchema, passwordSchema } from '@/shared/lib'
+import { useEmailSchema, usePasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const signInSchema = z.object({}).merge(emailSchema).merge(passwordSchema)
-
-export type LoginFormSchema = z.infer<typeof signInSchema>
+export type LoginFormSchema = {
+  email: string
+  password: string
+}
 
 export const useSignInForm = () => {
+  const { emailSchema } = useEmailSchema()
+  const { passwordSchema } = usePasswordSchema()
+
+  const signInSchema = z.object({}).merge(emailSchema).merge(passwordSchema)
+
   const {
     handleSubmit,
     control,

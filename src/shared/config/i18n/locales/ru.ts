@@ -1,4 +1,4 @@
-import type { LocaleType } from '@/shared/config/i18n'
+import type { LocaleType } from './en'
 
 export const ru: LocaleType = {
   pages: {
@@ -7,6 +7,10 @@ export const ru: LocaleType = {
         title: 'Войти',
         noAccountText: 'У вас нет аккаунта?',
         signUpLinkText: 'Регистрация',
+        errorMessages: {
+          400: 'Email или пароль неверны. Пожалуйста, попробуйте снова.',
+          401: 'Предоставленные данные недействительны.',
+        },
       },
       signUpPage: {
         title: 'Регистрация',
@@ -48,10 +52,10 @@ export const ru: LocaleType = {
         minValue: 'Логин пользователя должен быть не менее 6 символов',
         maxValue: 'Логин пользователя должен быть не более 30 символов',
       },
-      emailSchema: {
+      emailValidateSchema: {
         emailValidation: 'Электронный адрес должен соответствовать\n example@example.com',
       },
-      passwordSchema: {
+      passwordValidateSchema: {
         minValue: 'Пароль должен быть не менее 6 символов',
         regexText:
           'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
@@ -64,6 +68,12 @@ export const ru: LocaleType = {
       },
       comparePassError: {
         passError: 'Пароли должны совпадать',
+      },
+      emailSchema: {
+        email: 'Вы ввели не почту',
+      },
+      passwordSchema: {
+        minLength: 'Пароль должен содержать не менее 3 символов.',
       },
     },
     dialogs: {

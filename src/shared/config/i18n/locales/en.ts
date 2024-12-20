@@ -5,6 +5,10 @@ export const en = {
         title: 'Sign In',
         noAccountText: 'Don’t have an account?',
         signUpLinkText: 'Sign Up',
+        errorMessages: {
+          400: 'The email or password are incorrect. Try again please',
+          401: 'The provided data is invalid.',
+        },
       },
       signUpPage: {
         title: 'Sign Up',
@@ -46,9 +50,15 @@ export const en = {
         maxValue: 'Maximum number of characters 30',
       },
       emailSchema: {
+        email: 'You entered an invalid email.',
+      },
+      emailValidateSchema: {
         emailValidation: 'The email must match the format\n example@example.com',
       },
       passwordSchema: {
+        minLength: 'Password must be at least 3 characters',
+      },
+      passwordValidateSchema: {
         minValue: 'Password must be at least 6 characters',
         regexText:
           'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',

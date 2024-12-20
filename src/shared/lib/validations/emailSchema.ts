@@ -1,7 +1,7 @@
-import { z } from 'zod'
 import { useTranslation } from '@/shared/config'
+import { z } from 'zod'
 
-export const useUserEmailSchema = () => {
+export const useEmailSchema = () => {
   const {
     t: {
       shared: {
@@ -11,7 +11,7 @@ export const useUserEmailSchema = () => {
   } = useTranslation()
 
   const emailSchema = z.object({
-    email: z.string().email(schema.emailValidation).default(''),
+    email: z.string().email(schema.email).default(''),
   })
 
   return {
