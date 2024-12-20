@@ -1,5 +1,6 @@
 'use client'
 import { SignInForm } from '@/features/auth/signin'
+import Page from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import React from 'react'
@@ -10,7 +11,7 @@ const SignInPage = () => {
   const { page, onSubmit, customError } = UseSignInPage()
 
   return (
-    <div className={s.pageContainer}>
+    <Page mt={36} className={s.pageContainer}>
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>{page.title}</h1>
       </Typography>
@@ -21,7 +22,7 @@ const SignInPage = () => {
       <Button asChild variant={'link'}>
         <Link href={'/auth/signup'}>{page.signUpLinkText}</Link>
       </Button>
-    </div>
+    </Page>
   )
 }
 
