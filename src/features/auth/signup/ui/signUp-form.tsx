@@ -1,14 +1,14 @@
 import s from '@/features/auth/signup/ui/signUp-form.module.scss'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui'
 import React from 'react'
-import { RegisterFormSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
+import { OutputSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import { useTranslation } from '@/shared/config'
 import { routes } from '@/shared/router/routes'
 
 type Props = {
-  onSubmit: (data: RegisterFormSchema) => void
+  onSubmit: (data: OutputSchema) => void
   error: string
 }
 
@@ -19,7 +19,7 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
   const isFormValid =
     Object.values(values).every(value => value) && Object.keys(errors).length === 0
 
-  const formSubmit = (data: RegisterFormSchema) => {
+  const formSubmit = (data: OutputSchema) => {
     onSubmit(data)
   }
 

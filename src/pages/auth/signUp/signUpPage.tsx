@@ -6,7 +6,7 @@ import s from './signUpPage.module.scss'
 import { SignUpForm } from '@/features/auth/signup/ui'
 import Link from 'next/link'
 import React from 'react'
-import { RegisterFormSchema } from '@/features/auth/signup/lib/useSignUpForm'
+import { OutputSchema } from '@/features/auth/signup/lib/useSignUpForm'
 import { EmailSentDialog } from '@/shared/ui'
 import { useTranslation } from '@/shared/config'
 import { routes } from '@/shared/router/routes'
@@ -23,7 +23,7 @@ export const SignUpPage = () => {
     },
   } = useTranslation()
 
-  const onSubmit = (data: RegisterFormSchema) => {
+  const onSubmit = (data: OutputSchema) => {
     signUp(data)
   }
 
