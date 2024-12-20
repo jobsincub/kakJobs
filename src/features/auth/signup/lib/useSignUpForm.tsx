@@ -3,7 +3,7 @@ import { emailSchema, passwordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { userNameSchema } from '@/features/auth/signup/lib/userNameSchema'
+import { userNameSchema } from '@/shared/lib/validations/userNameSchema'
 import { confirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
 import { agreeTermsSchema } from '@/shared/lib/validations/agreeTermsSchema'
 

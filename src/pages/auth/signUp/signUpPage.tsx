@@ -2,15 +2,16 @@
 
 import { useSignUpMutation } from '@/entities/auth/api'
 import { Button, Typography } from '@wandrehappen/ui-kit'
-import s from './singUpPage.module.scss'
+import s from './signUpPage.module.scss'
 import { SignUpForm } from '@/features/auth/signup/ui'
 import Link from 'next/link'
 import React from 'react'
 import { RegisterFormSchema } from '@/features/auth/signup/lib/useSignUpForm'
 import { EmailSentDialog } from '@/shared/ui'
 import { useTranslation } from '@/shared/config'
+import { routes } from '@/shared/router/routes'
 
-export const SingUpPage = () => {
+export const SignUpPage = () => {
   const [signUp, { isError, originalArgs, isSuccess }] = useSignUpMutation()
   const email = originalArgs?.email || ''
 
@@ -38,7 +39,7 @@ export const SingUpPage = () => {
           <p>{signUpPage.isHaveAccount}</p>
         </Typography>
         <Button asChild variant={'link'}>
-          <Link href={'/auth/signin'}>{signUpPage.signInLinkText}</Link>
+          <Link href={routes.signIn}>{signUpPage.signInLinkText}</Link>
         </Button>
       </div>
     </div>

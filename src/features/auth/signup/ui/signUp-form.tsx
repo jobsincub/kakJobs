@@ -5,6 +5,7 @@ import { RegisterFormSchema, useSignUpForm } from '@/features/auth/signup/lib/us
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import { useTranslation } from '@/shared/config'
+import { routes } from '@/shared/router/routes'
 
 type Props = {
   onSubmit: (data: RegisterFormSchema) => void
@@ -71,11 +72,11 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           label={
             <Typography variant={'small'}>
               {signUpForm.agreeStart}{' '}
-              <Link className={s.link} href="/legal/terms-of-service">
+              <Link className={s.link} href={routes.legal.termsOfService}>
                 {signUpForm.terms}
               </Link>{' '}
               {signUpForm.agreeMid}{' '}
-              <Link className={s.link} href="/legal/privacy-policy">
+              <Link className={s.link} href={routes.legal.privacyPolicy}>
                 {signUpForm.privacy}
               </Link>
             </Typography>
