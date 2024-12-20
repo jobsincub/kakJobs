@@ -59,6 +59,12 @@ export const ru: LocaleType = {
       confirmPassSchema: {
         confirmPass: 'Пароли должны совпадать',
       },
+      agreeTermsSchema: {
+        agreeMsg: 'Принять соглашение',
+      },
+      comparePassError: {
+        passError: 'Пароли должны совпадать',
+      },
     },
     dialogs: {
       ok: 'ОК',

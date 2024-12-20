@@ -56,6 +56,12 @@ export const en = {
       confirmPassSchema: {
         confirmPass: 'The passwords must match',
       },
+      agreeTermsSchema: {
+        agreeMsg: 'Agree Terms',
+      },
+      comparePassError: {
+        passError: 'The passwords must match',
+      },
     },
     dialogs: {
       ok: 'OK',

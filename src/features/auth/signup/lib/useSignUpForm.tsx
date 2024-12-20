@@ -1,40 +1,65 @@
 'use client'
-import { emailSchema, passwordSchema } from '@/shared/lib'
+import { usePasswordSchema, useUserEmailSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { userNameSchema } from '@/shared/lib/validations/userNameSchema'
-import { confirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
-import { agreeTermsSchema } from '@/shared/lib/validations/agreeTermsSchema'
+import { useUserNameSchema } from '@/shared/lib/validations/userNameSchema'
+import { useConfirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
+import { useAgreeTermsSchema } from '@/shared/lib/validations/agreeTermsSchema'
+import { useTranslation } from '@/shared/config'
 
-const signUpSchema = z
-  .object({})
-  .merge(userNameSchema)
-  .merge(emailSchema)
-  .merge(passwordSchema)
-  .merge(agreeTermsSchema)
-  .merge(confirmPasswordSchema)
-  .refine(data => data.password === data.confirmPassword, {
-    message: 'The passwords must match',
-    path: ['confirmPassword'],
-  })
-  .transform(({ userName, email, password }) => ({
-    userName,
-    email,
-    password,
-  }))
+type InputSchema = {
+  userName: string
+  email: string
+  password: string
+  confirmPassword: string
+  agreeTerms: boolean
+}
 
-export type InputSchema = z.input<typeof signUpSchema>
-
-export type RegisterFormSchema = z.output<typeof signUpSchema>
+export type OutputSchema = {
+  userName: string
+  email: string
+  password: string
+}
 
 export const useSignUpForm = () => {
+  const { userNameSchema } = useUserNameSchema()
+  const { emailSchema } = useUserEmailSchema()
+  const { passwordSchema } = usePasswordSchema()
+  const { agreeTermsSchema } = useAgreeTermsSchema()
+  const { confirmPasswordSchema } = useConfirmPasswordSchema()
+
+  const {
+    t: {
+      shared: {
+        validations: { comparePassError: schema },
+      },
+    },
+  } = useTranslation()
+
+  const signUpSchema = z
+    .object({})
+    .merge(userNameSchema)
+    .merge(emailSchema)
+    .merge(passwordSchema)
+    .merge(agreeTermsSchema)
+    .merge(confirmPasswordSchema)
+    .refine(data => data.password === data.confirmPassword, {
+      message: schema.passError,
+      path: ['confirmPassword'],
+    })
+    .transform(({ userName, email, password }) => ({
+      userName,
+      email,
+      password,
+    }))
+
   const {
     handleSubmit,
     control,
     formState: { errors },
     watch,
-  } = useForm<InputSchema, undefined, RegisterFormSchema>({
+  } = useForm<InputSchema, undefined, OutputSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       userName: '',
