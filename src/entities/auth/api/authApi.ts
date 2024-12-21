@@ -1,17 +1,17 @@
-import { setAccessToken } from '@/entities/auth/model'
-import { createBaseQuery } from '@/shared/config'
+import { baseQueryWithReauth } from '@/shared/api'
+import { loggedOut, setAccessToken } from '@/entities/auth/model'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: createBaseQuery('https://picassonova.online/api/v1/auth'),
+  baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
     signIn: builder.mutation<
       ApiResponse<{ accessToken: string }>,
       { email: string; password: string }
     >({
       query: body => ({
-        url: '/sign-in',
+        url: 'auth/sign-in',
         method: 'POST',
         body,
       }),
@@ -24,21 +24,31 @@ export const authApi = createApi({
         }
       },
     }),
-    verifyEmail: builder.mutation<ApiResponse<void>, VerificationData>({
-      query: verificationData => ({
-        url: `/verify-email`,
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: 'auth/logout',
         method: 'POST',
-        body: verificationData,
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled
+          dispatch(loggedOut())
+        } catch (error) {
+          console.error('Logout failed:', error)
+        }
+      },
+    }),
+    resendVerificationEmail: builder.mutation<ApiResponse<void>, ResendRegistrationArgs>({
+      query: params => ({
+        body: params,
+        method: 'POST',
+        url: 'auth/resend-verification-email',
       }),
     }),
   }),
 })
 
-export const { useSignInMutation, useVerifyEmailMutation } = authApi
-
-type VerificationData = {
-  code: string
-}
+export const { useSignInMutation, useLogoutMutation, useResendVerificationEmailMutation } = authApi
 
 type ApiResponse<T> = {
   data: T
@@ -49,4 +59,8 @@ type ApiResponse<T> = {
 type Extension = {
   message: string
   field: string | null
+}
+
+type ResendRegistrationArgs = {
+  email: string
 }
