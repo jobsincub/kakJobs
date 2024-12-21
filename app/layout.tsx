@@ -6,6 +6,7 @@ import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
 import type { ReactNode } from 'react'
 import s from './layout.module.scss'
+import { clsx } from 'clsx'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,10 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={clsx(inter.className, s.body)}>
         <Providers>
           <Header />
-          <main className={s.rootLayout}>{children}</main>
+          <main className={s.rootLayout}>
+            <div className={s.container}>{children}</div>
+          </main>
         </Providers>
       </body>
     </html>
