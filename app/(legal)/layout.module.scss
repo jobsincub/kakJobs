@@ -1,18 +1,13 @@
-@use '@styles/vars' as vars;
-
 .layout {
   width: 100%;
-  min-width: 360px;
-  max-width: 1160px;
-  margin: 0 auto;
   padding-top: 24px;
 }
 
 .button {
-  margin-bottom: 24px;
+  color: white;
 }
 
-.content {
+.container {
   display: flex;
   justify-content: center;
 }

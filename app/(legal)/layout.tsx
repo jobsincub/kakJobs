@@ -7,15 +7,12 @@ import s from './layout.module.scss'
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className={s.layout}>
-      <Button variant={'icon'} asChild gap={12} className={s.button}>
-        <span>
-          <Arrow />
-          <Link href={'/auth/signin'} style={{ color: 'white' }}>
-            Back to Sign Up
-          </Link>
-        </span>
+      <Button variant={'link'} gap={12} className={s.button} asChild>
+        <Link href={'/auth/signin'}>
+          <Arrow /> Back to Sign Up
+        </Link>
       </Button>
-      <div className={s.content}>{children}</div>
+      <div className={s.container}>{children}</div>
     </div>
   )
 }

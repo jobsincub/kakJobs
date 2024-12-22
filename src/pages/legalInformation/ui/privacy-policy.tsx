@@ -3,7 +3,7 @@ import React from 'react'
 
 export function PrivacyPolicyPage() {
   return (
-    <Content title={'Terms of Service'}>
+    <Content title={'Privacy Policy'}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet
