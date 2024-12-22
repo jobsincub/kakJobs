@@ -45,7 +45,7 @@ export const authApi = createApi({
         url: 'auth/resend-verification-email',
       }),
     }),
-    verifyEmail: builder.mutation<ApiResponse<void>, VerificationData>({
+    verifyEmail: builder.mutation<ApiResponse<void>, { code: string }>({
       query: verificationData => ({
         url: `auth/email-confirm`,
         method: 'POST',
@@ -75,8 +75,4 @@ type Extension = {
 
 type ResendRegistrationArgs = {
   email: string
-}
-
-type VerificationData = {
-  code: string
 }

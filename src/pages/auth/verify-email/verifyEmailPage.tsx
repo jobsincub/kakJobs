@@ -18,11 +18,10 @@ export const VerifyEmailPage = () => {
   const text = t.pages.auth.verifyEmail
   const [verifyEmail, { isError, isSuccess }] = useVerifyEmailMutation()
   const router = useRouter()
-  console.log(router)
 
   useEffect(() => {
     if (code) {
-      verifyEmail({ code: code })
+      verifyEmail({ code })
     }
   }, [code, verifyEmail])
 
