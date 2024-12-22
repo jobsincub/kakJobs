@@ -6,12 +6,13 @@ import s from './resendVerificationPage.module.scss'
 import { ResendVerificationForm } from '@/features/auth/resend-verification'
 import { EmailSentDialog } from '@/shared/ui'
 import { useResendVerificationPage } from '../lib/useResendVerificationPage'
+import Page from '@/widgets/page'
 
 const ResendVerificationEmailPage = () => {
   const { onResend, email, isSuccess } = useResendVerificationPage()
 
   return (
-    <div className={s.container}>
+    <Page mt={36} className={s.container}>
       <EmailSentDialog email={email} isOpen={isSuccess} />
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>Email verification link expired</h1>
@@ -23,7 +24,7 @@ const ResendVerificationEmailPage = () => {
       </Typography>
       <ResendVerificationForm onSubmit={onResend} />
       <Image src={rafiki} alt={'verification'} />
-    </div>
+    </Page>
   )
 }
 

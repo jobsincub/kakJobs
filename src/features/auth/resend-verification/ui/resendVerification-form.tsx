@@ -12,22 +12,17 @@ type Props = {
 export const ResendVerificationForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit } = useResendVerificationForm()
 
-  const formSubmit = (data: ResendVerificationEmailField) => {
-    onSubmit(data)
-  }
   return (
-    <div className={s.form}>
-      <form onSubmit={handleSubmit(formSubmit)}>
-        <ControlledTextField
-          control={control}
-          name="email"
-          label={'Email'}
-          placeholder={'Epam@epam.com'}
-        />
-        <Button fullWidth className={s.button}>
-          Resend verification link
-        </Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <ControlledTextField
+        control={control}
+        name="email"
+        label={'Email'}
+        placeholder={'Epam@epam.com'}
+      />
+      <Button fullWidth className={s.button}>
+        Resend verification link
+      </Button>
+    </form>
   )
 }

@@ -1,15 +1,14 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
-
+  align-items: center;
+  
   width: 100%;
   max-width: 473px;
-
 }
 
 .text {
-  text-align: center;
   max-width: 294px;
+  text-align: center;
 }
