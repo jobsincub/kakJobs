@@ -1,4 +1,3 @@
-import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import {
   ResendVerificationEmailField,
@@ -7,6 +6,7 @@ import {
 import Image from 'next/image'
 import s from './resendVerification-form.module.scss'
 import rafiki from './assets/rafiki.png'
+import { ControlledReCaptcha, ControlledTextField } from '@/shared/ui'
 type Props = {
   onSubmit: (data: ResendVerificationEmailField) => void
 }
@@ -27,6 +27,7 @@ export const ResendVerificationForm = ({ onSubmit }: Props) => {
           Looks like the verification link has expired. Not to worry, we can send the link again
         </Typography>
         <form onSubmit={handleSubmit(formSubmit)}>
+          <ControlledReCaptcha control={control} name={'capture'} />
           <ControlledTextField
             control={control}
             name="email"

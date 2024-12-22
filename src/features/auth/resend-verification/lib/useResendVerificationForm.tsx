@@ -5,9 +5,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 export type ResendVerificationEmailField = z.infer<typeof emailSchema>
 export const useResendVerificationForm = () => {
-  const { handleSubmit, control } = useForm<ResendVerificationEmailField>({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       email: '',
+      capture: '',
     },
     mode: 'onBlur',
     resolver: zodResolver(emailSchema),
