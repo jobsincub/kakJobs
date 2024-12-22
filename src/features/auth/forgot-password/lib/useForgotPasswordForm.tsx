@@ -1,14 +1,20 @@
 'use client'
-import { emailSchema } from '@/shared/lib'
+import { recaptchaSchema, useEmailSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const forgotPasswordSchema = z.object({}).merge(emailSchema)
-
-export type ForgotPasswordFormSchema = z.infer<typeof forgotPasswordSchema>
+export type ForgotPasswordFormSchema = {
+  email: string
+  recaptchaToken: string
+}
 
 export const useForgotPasswordForm = () => {
+  const { emailSchema } = useEmailSchema()
+  //const { recaptchaSchema } = usePasswordSchema()
+
+  const forgotPasswordSchema = z.object({}).merge(emailSchema).merge(recaptchaSchema)
+
   const {
     handleSubmit,
     control,

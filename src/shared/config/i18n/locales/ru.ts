@@ -12,6 +12,14 @@ export const ru: LocaleType = {
           401: 'Предоставленные данные недействительны.',
         },
       },
+      forgotPasswordPage: {
+        title: 'Забыл пароль',
+        signInLinkText: 'Войти',
+        errorMessages: {
+          400: 'Пользователь с такой почтой не зарегистрирован',
+          403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
+        },
+      },
     },
   },
   features: {
@@ -31,6 +39,14 @@ export const ru: LocaleType = {
         titleText: 'Выход',
         confirmationText:
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
+      },
+      forgotPasswordForm: {
+        emailLabel: 'электронная почта',
+        enterYourEmailText: 'Введите Вашу электронную почту и мы отправим Вм дальнейшие инструкции',
+        sentLinkText: 'Ссылка отправлена на почту.',
+        sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,
+        sendLinkAgainButtonText: 'Отправить ссылку повторно',
+        sendLinkButtonText: 'Отправить ссылку',
       },
     },
   },

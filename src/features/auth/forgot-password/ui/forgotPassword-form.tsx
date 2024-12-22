@@ -1,37 +1,64 @@
 'use client'
-//import { useSignInMutation } from '@/entities/auth/api'
-import {
-  type ForgotPasswordFormSchema,
-  useForgotPasswordForm,
-} from '@/features/auth/forgot-password'
-import { ControlledTextField } from '@/shared/ui'
+
+import { ForgotPasswordFormSchema, useForgotPasswordForm } from '@/features/auth/forgot-password'
+import { ControlledReCaptcha, ControlledTextField } from '@/shared/ui'
 import React from 'react'
+import s from '@/features/auth/forgot-password/ui/forgotPassword-form.module.scss'
+import { Button, Typography } from '@wandrehappen/ui-kit'
+import { useTranslation } from '@/shared/config'
 
-export const FogotPassworForm = () => {
+type Props = {
+  onSubmit: (data: ForgotPasswordFormSchema) => void
+  error?: string
+  isSuccess: boolean
+}
+
+export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
   const { handleSubmit, control } = useForgotPasswordForm()
-  //const [passwordRecovery] = useSignInMutation()
 
-  const onSubmit = (data: ForgotPasswordFormSchema) => {
-    console.log(data)
-    //passwordRecovery(data)
+  const formSubmit = (data: ForgotPasswordFormSchema) => {
+    if (data.recaptchaToken) {
+      onSubmit(data)
+    }
   }
 
+  const {
+    t: {
+      features: {
+        auth: { forgotPasswordForm },
+      },
+    },
+  } = useTranslation()
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        width: '358px',
-        height: '528px',
-        border: '1px solid green',
-      }}
-    >
-      <span>email</span>
-      <ControlledTextField control={control} name="email" />
-      <button type="submit">Submit</button>
-      {/* <DevTool control={control} /> */}
+    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+      <ControlledTextField
+        placeholder={'Epam@epam.com'}
+        control={control}
+        name="email"
+        label={forgotPasswordForm.emailLabel}
+        error={error}
+        autoComplete={'email'}
+      />
+
+      <div className={s.textWrapper}>
+        <Typography color={'light-900'} variant={'small'}>
+          {forgotPasswordForm.enterYourEmailText}
+        </Typography>
+        {isSuccess && (
+          <Typography color={'light-100'} variant={'small'}>
+            {forgotPasswordForm.sentLinkText}
+            <br />
+            {forgotPasswordForm.sendLinkAgainText}
+          </Typography>
+        )}
+      </div>
+      <Button fullWidth>
+        {isSuccess
+          ? forgotPasswordForm.sendLinkAgainButtonText
+          : forgotPasswordForm.sendLinkButtonText}
+      </Button>
+      <ControlledReCaptcha control={control} name={'recaptchaToken'} />
     </form>
   )
 }
