@@ -8,7 +8,7 @@ import s from './signIn-form.module.scss'
 
 type Props = {
   onSubmit: (data: LoginFormSchema) => void
-  error: string
+  error?: string
 }
 
 export const SignInForm = ({ onSubmit, error }: Props) => {
