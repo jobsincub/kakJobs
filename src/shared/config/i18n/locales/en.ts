@@ -30,6 +30,13 @@ export const en = {
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
       },
     },
+    post: {
+      delete: {
+        buttonText: 'Delete Post',
+        titleText: 'Delete Post',
+        confirmationText: 'Are you sure you want to delete this post?',
+      },
+    },
   },
   shared: {
     validations: {

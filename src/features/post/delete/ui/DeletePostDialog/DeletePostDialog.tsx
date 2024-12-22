@@ -14,32 +14,35 @@ import {
   DialogClose,
 } from '@wandrehappen/ui-kit'
 import s from './DeletePostDialog.module.scss'
+import { useDeletePostDialog } from '@/features/post/delete/model/useDeletePostDialog'
 
 export const DeletePostDialog = () => {
+  const { dialogs, deletePost } = useDeletePostDialog()
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Typography asChild variant={'regular14'}>
           <Button variant={'link'}>
             <TrashOutline />
-            Delete Post
+            {deletePost.buttonText}
           </Button>
         </Typography>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Post</DialogTitle>
+          <DialogTitle>{deletePost.titleText}</DialogTitle>
         </DialogHeader>
         <DialogBody className={s.body}>
           <DialogDescription className={s.description}>
-            Are you sure you want to delete this post?
+            {deletePost.confirmationText}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
-              <Button variant={'tertiary'}>Yes</Button>
+              <Button variant={'tertiary'}>{dialogs.yes}</Button>
             </DialogClose>
             <DialogClose>
-              <Button>No</Button>
+              <Button>{dialogs.no}</Button>
             </DialogClose>
           </DialogFooter>
         </DialogBody>

@@ -33,6 +33,13 @@ export const ru: LocaleType = {
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
       },
     },
+    post: {
+      delete: {
+        buttonText: 'Удалить пост',
+        titleText: 'Удаление поста',
+        confirmationText: 'Вы уверены, что хотите удалить этот пост?',
+      },
+    },
   },
   shared: {
     validations: {
