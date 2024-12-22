@@ -3,21 +3,16 @@ import { Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import rafiki from './assets/rafiki.png'
 import s from './resendVerificationPage.module.scss'
-import { useResendVerificationEmailMutation } from '@/entities/auth/api'
-import {
-  ResendVerificationEmailField,
-  ResendVerificationForm,
-} from '@/features/auth/resend-verification'
+import { ResendVerificationForm } from '@/features/auth/resend-verification'
+import { EmailSentDialog } from '@/shared/ui'
+import { useResendVerificationPage } from '../lib/useResendVerificationPage'
 
 const ResendVerificationEmailPage = () => {
-  const [resendVerificationEmail] = useResendVerificationEmailMutation()
-
-  const onResend = (data: ResendVerificationEmailField) => {
-    resendVerificationEmail(data)
-  }
+  const { onResend, email, isSuccess } = useResendVerificationPage()
 
   return (
     <div className={s.container}>
+      <EmailSentDialog email={email} isOpen={isSuccess} />
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>Email verification link expired</h1>
       </Typography>

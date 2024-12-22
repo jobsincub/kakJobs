@@ -38,7 +38,7 @@ export const authApi = createApi({
         }
       },
     }),
-    resendVerificationEmail: builder.mutation<void, ResendRegistrationArgs>({
+    resendVerificationEmail: builder.mutation<void, { email: string }>({
       query: params => ({
         body: params,
         method: 'POST',
@@ -59,8 +59,4 @@ type ApiResponse<T> = {
 type Extension = {
   message: string
   field: string | null
-}
-
-type ResendRegistrationArgs = {
-  email: string
 }
