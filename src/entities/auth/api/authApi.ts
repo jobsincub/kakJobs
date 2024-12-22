@@ -1,5 +1,5 @@
-import { baseQueryWithReauth } from '@/shared/api'
 import { loggedOut, setAccessToken } from '@/entities/auth/model'
+import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -47,7 +47,7 @@ export const authApi = createApi({
     }),
     verifyEmail: builder.mutation<ApiResponse<void>, { code: string }>({
       query: verificationData => ({
-        url: `auth/email-confirm`,
+        url: `auth/verify-email`,
         method: 'POST',
         body: verificationData,
       }),
