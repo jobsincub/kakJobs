@@ -1,4 +1,5 @@
 // z-index
 $header-z-index: 50;
-$header-container-max-width: 1190px; // 1160 + left/right padding 15px
+$container-padding-x: 15px;
+$container-max-width: calc(1160px + $container-padding-x * 2); // 1160 content width
 $header-height: 60px;

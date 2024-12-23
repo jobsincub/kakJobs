@@ -1,5 +1,5 @@
-import { setAccessToken } from '@/entities/auth/model'
 import { baseQueryWithReauth } from '@/shared/api'
+import { loggedOut, setAccessToken } from '@/entities/auth/model'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -24,6 +24,20 @@ export const authApi = createApi({
         }
       },
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: 'auth/logout',
+        method: 'POST',
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled
+          dispatch(loggedOut())
+        } catch (error) {
+          console.error('Logout failed:', error)
+        }
+      },
+    }),
     resendVerificationEmail: builder.mutation<ApiResponse<void>, ResendRegistrationArgs>({
       query: params => ({
         body: params,
@@ -43,6 +57,7 @@ export const authApi = createApi({
 
 export const {
   useSignInMutation,
+  useLogoutMutation,
   useResendVerificationEmailMutation,
   useCreateNewPasswordMutation,
 } = authApi
