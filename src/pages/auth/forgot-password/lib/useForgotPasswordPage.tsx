@@ -17,8 +17,6 @@ export const UseForgotPasswordPage = () => {
     },
   } = useTranslation()
 
-  console.log(error)
-
   const customError = getErrorMessage({ errorMessages, error })
 
   const onSubmit = (data: ForgotPasswordFormSchema) => {
