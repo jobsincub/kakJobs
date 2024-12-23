@@ -14,7 +14,7 @@ import {
   DialogClose,
 } from '@wandrehappen/ui-kit'
 import s from './DeletePostDialog.module.scss'
-import { useDeletePostDialog } from '@/features/post/delete/model/useDeletePostDialog'
+import { useDeletePostDialog } from '@/features/post/delete/lib/useDeletePostDialog'
 
 export const DeletePostDialog = () => {
   const { dialogs, deletePost } = useDeletePostDialog()
