@@ -1,1 +1,1 @@
-export { DeletePostDialog } from './delete'
+export { DeletePostDialog } from './delete/ui/DeletePostDialog'
