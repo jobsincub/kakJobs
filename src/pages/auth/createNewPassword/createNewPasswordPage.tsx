@@ -8,8 +8,6 @@ const CreateNewPasswordPage = () => {
   const [createNewPassword] = useCreateNewPasswordMutation()
 
   const searchParams = useSearchParams()
-  console.log('Recovery Code:', searchParams?.get('code'))
-  console.log('Search Params:', searchParams)
   const recoveryCode = searchParams?.get('code') ?? null
   const onSubmit = async (data: NewPasswordFields) => {
     if (!recoveryCode) {

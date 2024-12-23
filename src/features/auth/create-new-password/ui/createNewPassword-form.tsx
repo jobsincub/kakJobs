@@ -12,24 +12,22 @@ export const CreateNewPasswordForm = ({ onSubmit, recoveryCode }: Props) => {
     onSubmit(data, recoveryCode)
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit(formSubmit)}>
-        <ControlledTextField
-          control={control}
-          label={'New password'}
-          name={'newPassword'}
-          type={'password'}
-          placeholder={'Enter new password'}
-        />
-        <ControlledTextField
-          control={control}
-          label={'Password confirmation'}
-          name={'passwordConfirmation'}
-          type={'password'}
-          placeholder={'Confirm new password'}
-        />
-        <Button>Create new password</Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(formSubmit)}>
+      <ControlledTextField
+        control={control}
+        label={'New password'}
+        name={'newPassword'}
+        type={'password'}
+        placeholder={'Enter new password'}
+      />
+      <ControlledTextField
+        control={control}
+        label={'Password confirmation'}
+        name={'passwordConfirmation'}
+        type={'password'}
+        placeholder={'Confirm new password'}
+      />
+      <Button>Create new password</Button>
+    </form>
   )
 }
