@@ -23,7 +23,7 @@ const ResendVerificationEmailPage = () => {
         </p>
       </Typography>
       <ResendVerificationForm onSubmit={onResend} />
-      <Image src={rafiki} alt={'verification'} />
+      <Image src={rafiki} alt={'verification'} className={s.img} />
     </Page>
   )
 }

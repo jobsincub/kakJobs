@@ -13,7 +13,7 @@ export const ResendVerificationForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit } = useResendVerificationForm()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <ControlledTextField
         control={control}
         name="email"
