@@ -41,7 +41,6 @@ export const ru: LocaleType = {
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
       },
       forgotPasswordForm: {
-        emailLabel: 'электронная почта',
         enterYourEmailText: 'Введите Вашу электронную почту и мы отправим Вм дальнейшие инструкции',
         sentLinkText: 'Ссылка отправлена на почту.',
         sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,

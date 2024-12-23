@@ -38,7 +38,6 @@ export const en = {
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
       },
       forgotPasswordForm: {
-        emailLabel: 'email',
         enterYourEmailText: 'Enter your email address and we will send you further instructions',
         sentLinkText: 'The link has been sent by email.',
         sendLinkAgainText: 'If you don’t receive an email send link again',

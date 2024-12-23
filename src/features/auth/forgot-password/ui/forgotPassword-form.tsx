@@ -30,7 +30,7 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
         placeholder={'Epam@epam.com'}
         control={control}
         name="email"
-        label={forgotPasswordForm.emailLabel}
+        label={'email'}
         error={error}
         autoComplete={'email'}
       />
