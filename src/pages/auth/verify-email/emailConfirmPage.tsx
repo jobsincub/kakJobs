@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 import verificationImg from './bro.png'
 import s from './verify-email.module.scss'
 
-export const VerifyEmailPage = () => {
+export const EmailConfirmPage = () => {
   const searchParams = useSearchParams()
   const code = searchParams?.get('code')
   const {
