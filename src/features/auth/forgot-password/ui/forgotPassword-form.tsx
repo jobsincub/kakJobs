@@ -3,9 +3,8 @@
 import { ForgotPasswordFormSchema, useForgotPasswordForm } from '@/features/auth/forgot-password'
 import { ControlledReCaptcha, ControlledTextField } from '@/shared/ui'
 import React from 'react'
-import s from '@/features/auth/forgot-password/ui/forgotPassword-form.module.scss'
+import s from './forgotPassword-form.module.scss'
 import { Button, Typography } from '@wandrehappen/ui-kit'
-import { useTranslation } from '@/shared/config'
 
 type Props = {
   onSubmit: (data: ForgotPasswordFormSchema) => void
@@ -14,15 +13,7 @@ type Props = {
 }
 
 export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
-  const { handleSubmit, control } = useForgotPasswordForm()
-
-  const {
-    t: {
-      features: {
-        auth: { forgotPasswordForm },
-      },
-    },
-  } = useTranslation()
+  const { forgotPasswordForm, handleSubmit, control, isValid } = useForgotPasswordForm()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -47,7 +38,7 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
           </Typography>
         )}
       </div>
-      <Button fullWidth>
+      <Button fullWidth disabled={!isValid}>
         {isSuccess
           ? forgotPasswordForm.sendLinkAgainButtonText
           : forgotPasswordForm.sendLinkButtonText}

@@ -3,6 +3,7 @@ import { recaptchaSchema, useEmailSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useTranslation } from '@/shared/config'
 
 export type ForgotPasswordFormSchema = {
   email: string
@@ -16,13 +17,22 @@ export const useForgotPasswordForm = () => {
   const forgotPasswordSchema = z.object({}).merge(emailSchema).merge(recaptchaSchema)
 
   const {
+    t: {
+      features: {
+        auth: { forgotPasswordForm },
+      },
+    },
+  } = useTranslation()
+
+  const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { isValid },
   } = useForm<ForgotPasswordFormSchema>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: { email: '' },
     mode: 'onBlur',
   })
-  return { control, handleSubmit, errors }
+
+  return { forgotPasswordForm, control, handleSubmit, isValid }
 }
