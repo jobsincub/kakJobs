@@ -9,7 +9,7 @@ import { routes } from '@/shared/router/routes'
 
 type Props = {
   onSubmit: (data: OutputSchema) => void
-  error: string
+  error?: string
 }
 
 export const SignUpForm = ({ onSubmit, error }: Props) => {

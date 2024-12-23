@@ -16,6 +16,9 @@ export const ru: LocaleType = {
         title: 'Регистрация',
         isHaveAccount: 'Уже есть аккаунт?',
         signInLinkText: 'Войти',
+        errorMessages: {
+          400: 'Пользователь уже существует или данные недействительны',
+        },
       },
     },
   },

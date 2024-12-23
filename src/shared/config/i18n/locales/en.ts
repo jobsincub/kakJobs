@@ -14,6 +14,9 @@ export const en = {
         title: 'Sign Up',
         isHaveAccount: 'Do you have an account?',
         signInLinkText: 'Sign In',
+        errorMessages: {
+          400: 'The user already exists or the provided data is invalid',
+        },
       },
     },
   },
