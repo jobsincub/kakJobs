@@ -16,12 +16,6 @@ type Props = {
 export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
   const { handleSubmit, control } = useForgotPasswordForm()
 
-  const formSubmit = (data: ForgotPasswordFormSchema) => {
-    if (data.recaptchaToken) {
-      onSubmit(data)
-    }
-  }
-
   const {
     t: {
       features: {
@@ -31,7 +25,7 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
   } = useTranslation()
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <ControlledTextField
         placeholder={'Epam@epam.com'}
         control={control}

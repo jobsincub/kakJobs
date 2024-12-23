@@ -22,7 +22,9 @@ export const UseForgotPasswordPage = () => {
   const customError = getErrorMessage({ errorMessages, error })
 
   const onSubmit = (data: ForgotPasswordFormSchema) => {
-    passwordRecovery(data)
+    if (data.recaptchaToken) {
+      passwordRecovery(data)
+    }
   }
 
   return { page, customError, originalArgs, isSuccess, onSubmit }
