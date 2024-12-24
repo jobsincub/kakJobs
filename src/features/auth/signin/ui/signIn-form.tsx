@@ -14,10 +14,6 @@ type Props = {
 export const SignInForm = ({ onSubmit, error }: Props) => {
   const { handleSubmit, control } = useSignInForm()
 
-  const formSubmit = (data: LoginFormSchema) => {
-    onSubmit(data)
-  }
-
   const {
     t: {
       features: {
@@ -27,7 +23,7 @@ export const SignInForm = ({ onSubmit, error }: Props) => {
   } = useTranslation()
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <div className={s.inputsWrapper}>
         <ControlledTextField
           placeholder={'Epam@epam.com'}
