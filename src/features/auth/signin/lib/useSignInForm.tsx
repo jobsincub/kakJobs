@@ -1,4 +1,5 @@
 'use client'
+import { useTranslation } from '@/shared/config'
 import { useEmailSchema, usePasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -24,5 +25,14 @@ export const useSignInForm = () => {
     defaultValues: { email: '', password: '' },
     mode: 'onTouched',
   })
-  return { control, handleSubmit, errors }
+
+  const {
+    t: {
+      features: {
+        auth: { signInForm },
+      },
+    },
+  } = useTranslation()
+
+  return { control, handleSubmit, errors, signInForm }
 }
