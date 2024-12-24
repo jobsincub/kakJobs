@@ -1,19 +1,16 @@
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
-import { NewPasswordFields, useCreateNewPassword } from '../lib'
+import { NewPasswordFields, useCreateNewPasswordForm } from '../lib'
 import s from './createNewPassword-form.module.scss'
 
 type Props = {
-  onSubmit: (data: NewPasswordFields, recoveryCode: string | null) => void
-  recoveryCode: string | null
+  onSubmit: (data: NewPasswordFields) => void
 }
-export const CreateNewPasswordForm = ({ onSubmit, recoveryCode }: Props) => {
-  const { handleSubmit, control } = useCreateNewPassword()
-  const formSubmit = (data: NewPasswordFields) => {
-    onSubmit(data, recoveryCode)
-  }
+export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
+  const { handleSubmit, control, isValid } = useCreateNewPasswordForm()
+
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <ControlledTextField
         control={control}
         label={'New password'}
@@ -31,7 +28,7 @@ export const CreateNewPasswordForm = ({ onSubmit, recoveryCode }: Props) => {
       <Typography asChild color={'light-900'} className={s.text} variant={'regular16'}>
         <p>Your password must be between 6 and 20 characters</p>
       </Typography>
-      <Button className={s.btn}>Create new password</Button>
+      <Button disabled={!isValid}>Create new password</Button>
     </form>
   )
 }

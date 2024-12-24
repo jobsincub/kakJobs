@@ -1,6 +1,7 @@
 import { useCreateNewPasswordMutation } from '@/entities/auth/api'
 import { NewPasswordFields } from '@/features/auth/create-new-password'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { useEffect } from 'react'
 
 export const useCreateNewPasswordPage = () => {
@@ -15,15 +16,14 @@ export const useCreateNewPasswordPage = () => {
   }, [isSuccess, router])
 
   const searchParams = useSearchParams()
-  const recoveryCode = searchParams?.get('code') ?? null
+  const recoveryCode = searchParams?.get('code')
 
   const onSubmit = (data: NewPasswordFields) => {
     if (!recoveryCode) {
-      return 'Recovery code is missing!'
+      notFound()
     }
     createNewPassword({ newPassword: data.newPassword, recoveryCode })
   }
-  {
-    return { onSubmit, recoveryCode }
-  }
+
+  return { onSubmit, recoveryCode }
 }

@@ -1,4 +1,4 @@
-import { usePasswordSchema } from '@/shared/lib'
+// import { usePasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -7,14 +7,13 @@ export type NewPasswordFields = {
   newPassword: string
   passwordConfirmation: string
 }
-export const useCreateNewPassword = () => {
-  const { passwordSchema } = usePasswordSchema()
+export const useCreateNewPasswordForm = () => {
   const newPasswordSchema = z
     .object({
+      newPassword: z.string().min(6).default(''),
       passwordConfirmation: z.string(),
     })
-    .merge(passwordSchema)
-    .refine(data => data.password === data.passwordConfirmation, {
+    .refine(data => data.newPassword === data.passwordConfirmation, {
       message: 'The passwords must match',
       path: ['passwordConfirmation'],
     })
@@ -22,14 +21,14 @@ export const useCreateNewPassword = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { isValid },
   } = useForm<NewPasswordFields>({
     defaultValues: {
       newPassword: '',
       passwordConfirmation: '',
     },
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(newPasswordSchema),
   })
-  return { handleSubmit, control, errors }
+  return { handleSubmit, control, isValid }
 }
