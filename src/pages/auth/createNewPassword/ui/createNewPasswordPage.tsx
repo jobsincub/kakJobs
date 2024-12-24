@@ -10,7 +10,7 @@ const CreateNewPasswordPage = () => {
 
   return (
     <Page mt={36} className={s.pageContainer}>
-      <Typography asChild color={'light-100'} variant={'h1'} className={s.text}>
+      <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>Create New Password</h1>
       </Typography>
       <CreateNewPasswordForm onSubmit={onSubmit} recoveryCode={recoveryCode} />
