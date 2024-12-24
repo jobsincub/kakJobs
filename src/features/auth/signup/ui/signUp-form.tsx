@@ -4,7 +4,6 @@ import React from 'react'
 import { OutputSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
-import { useTranslation } from '@/shared/config'
 import { routes } from '@/shared/router/routes'
 
 type Props = {
@@ -13,26 +12,10 @@ type Props = {
 }
 
 export const SignUpForm = ({ onSubmit, error }: Props) => {
-  const { handleSubmit, control, watch, errors } = useSignUpForm()
-  const values = watch()
-
-  const isFormValid =
-    Object.values(values).every(value => value) && Object.keys(errors).length === 0
-
-  const formSubmit = (data: OutputSchema) => {
-    onSubmit(data)
-  }
-
-  const {
-    t: {
-      features: {
-        auth: { signUpForm },
-      },
-    },
-  } = useTranslation()
+  const { handleSubmit, control, isValid, signUpForm } = useSignUpForm()
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <div className={s.inputsWrapper}>
         <ControlledTextField
           name={'userName'}
@@ -83,7 +66,7 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           }
         />
       </div>
-      <Button fullWidth disabled={!isFormValid}>
+      <Button fullWidth disabled={!isValid}>
         {signUpForm.signUpLinkText}
       </Button>
     </form>

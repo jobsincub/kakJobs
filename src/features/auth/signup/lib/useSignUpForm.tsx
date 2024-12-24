@@ -3,9 +3,9 @@ import { useEmailSchema, usePasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { useUserNameSchema } from '@/shared/lib/validations/userNameSchema'
+import { useUserNameSchema } from '@/features/auth/signup/lib/userNameSchema'
 import { useConfirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
-import { useAgreeTermsSchema } from '@/shared/lib/validations/agreeTermsSchema'
+import { useAgreeTermsSchema } from '@/features/auth/signup/lib/agreeTermsSchema'
 import { useTranslation } from '@/shared/config'
 
 type InputSchema = {
@@ -57,8 +57,7 @@ export const useSignUpForm = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
-    watch,
+    formState: { isValid },
   } = useForm<InputSchema, undefined, OutputSchema>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -69,5 +68,14 @@ export const useSignUpForm = () => {
     },
     mode: 'onTouched',
   })
-  return { control, handleSubmit, errors, watch }
+
+  const {
+    t: {
+      features: {
+        auth: { signUpForm },
+      },
+    },
+  } = useTranslation()
+
+  return { control, handleSubmit, isValid, signUpForm }
 }

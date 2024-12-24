@@ -11,9 +11,14 @@ export const useAgreeTermsSchema = () => {
   } = useTranslation()
 
   const agreeTermsSchema = z.object({
-    agreeTerms: z.boolean({
-      message: schema.agreeMsg,
-    }),
+    agreeTerms: z
+      .boolean({
+        required_error: 'Checkbox is required',
+        message: schema.agreeMsg,
+      })
+      .refine(val => val, {
+        message: 'Checkbox is required',
+      }),
   })
 
   return {

@@ -45,7 +45,7 @@ export const authApi = createApi({
         url: 'auth/resend-verification-email',
       }),
     }),
-    signUp: builder.mutation<ApiResponse<void>, SignUpArgs>({
+    signUp: builder.mutation<void, SignUpArgs>({
       query: params => ({
         body: params,
         method: 'POST',
