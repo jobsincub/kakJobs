@@ -7,13 +7,17 @@ export const usePasswordSchema = () => {
   const {
     t: {
       shared: {
-        validations: { passwordValidateSchema: schema },
+        validations: { passwordSchema: schema },
       },
     },
   } = useTranslation()
 
   const passwordSchema = z.object({
-    password: z.string().min(6, schema.minValue).regex(passwordRegex, schema.regexText).default(''),
+    password: z
+      .string()
+      .min(6, schema.minLength)
+      .regex(passwordRegex, schema.regexText)
+      .default(''),
   })
 
   return {

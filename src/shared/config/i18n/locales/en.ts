@@ -61,10 +61,7 @@ export const en = {
         emailValidation: 'The email must match the format\n example@example.com',
       },
       passwordSchema: {
-        minLength: 'Password must be at least 3 characters',
-      },
-      passwordValidateSchema: {
-        minValue: 'Password must be at least 6 characters',
+        minLength: 'Password must be at least 6 characters',
         regexText:
           'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
       },

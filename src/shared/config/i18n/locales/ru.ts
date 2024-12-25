@@ -60,11 +60,6 @@ export const ru: LocaleType = {
       emailValidateSchema: {
         emailValidation: 'Электронный адрес должен соответствовать\n example@example.com',
       },
-      passwordValidateSchema: {
-        minValue: 'Пароль должен быть не менее 6 символов',
-        regexText:
-          'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      },
       comparePassError: {
         passError: 'Пароли должны совпадать',
       },
@@ -73,6 +68,8 @@ export const ru: LocaleType = {
       },
       passwordSchema: {
         minLength: 'Пароль должен содержать не менее 3 символов.',
+        regexText:
+          'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
       },
     },
     dialogs: {
