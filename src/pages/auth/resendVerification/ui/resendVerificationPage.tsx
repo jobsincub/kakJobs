@@ -9,20 +9,18 @@ import { useResendVerificationPage } from '../lib/useResendVerificationPage'
 import Page from '@/widgets/page'
 
 const ResendVerificationEmailPage = () => {
-  const { onResend, email, isSuccess } = useResendVerificationPage()
+  const { isSuccess, onResend, email, customError, page } = useResendVerificationPage()
 
   return (
     <Page mt={36} className={s.container}>
       <EmailSentDialog email={email} isOpen={isSuccess} />
       <Typography asChild color={'light-100'} variant={'h1'}>
-        <h1>Email verification link expired</h1>
+        <h1>{page.title}</h1>
       </Typography>
       <Typography asChild color={'light-100'} variant={'regular16'} className={s.text}>
-        <p>
-          Looks like the verification link has expired. Not to worry, we can send the link again
-        </p>
+        <p>{page.text}</p>
       </Typography>
-      <ResendVerificationForm onSubmit={onResend} />
+      <ResendVerificationForm onSubmit={onResend} error={customError} />
       <Image src={rafiki} alt={'verification'} className={s.img} />
     </Page>
   )

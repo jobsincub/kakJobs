@@ -12,6 +12,13 @@ export const ru: LocaleType = {
           401: 'Предоставленные данные недействительны.',
         },
       },
+      resendVerificationPage: {
+        title: 'Ссылка для подтверждения электронной почты устарела',
+        text: 'Похоже, что ссылка для подтверждения истекла. Не переживайте, мы можем отправить ссылку снова.',
+        errorMessages: {
+          400: 'Электронная почта неверна. Пожалуйста, попробуйте снова.',
+        },
+      },
     },
   },
   features: {
@@ -31,6 +38,9 @@ export const ru: LocaleType = {
         titleText: 'Выход',
         confirmationText:
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
+      },
+      resendVerificationForm: {
+        resendVerificationButtonText: 'Отправить ссылку для подтверждения',
       },
     },
   },

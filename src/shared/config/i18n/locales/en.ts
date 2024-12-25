@@ -10,6 +10,13 @@ export const en = {
           401: 'The provided data is invalid.',
         },
       },
+      resendVerificationPage: {
+        title: 'Email verification link expired',
+        text: 'Looks like the verification link has expired. Not to worry, we can send the link again',
+        errorMessages: {
+          400: 'The email is incorrect. Try again please',
+        },
+      },
     },
   },
   features: {
@@ -28,6 +35,9 @@ export const en = {
         buttonText: 'Log Out',
         titleText: 'Log Out',
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
+      },
+      resendVerificationForm: {
+        resendVerificationButtonText: 'Resend verification link',
       },
     },
   },

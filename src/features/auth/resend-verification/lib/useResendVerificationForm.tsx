@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/config'
 import { useEmailSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -13,5 +14,12 @@ export const useResendVerificationForm = () => {
     mode: 'onBlur',
     resolver: zodResolver(emailSchema),
   })
-  return { control, handleSubmit }
+  const {
+    t: {
+      features: {
+        auth: { resendVerificationForm },
+      },
+    },
+  } = useTranslation()
+  return { control, handleSubmit, resendVerificationForm }
 }

@@ -8,9 +8,10 @@ import s from './resendVerification-form.module.scss'
 
 type Props = {
   onSubmit: (data: ResendVerificationEmailField) => void
+  error?: string
 }
-export const ResendVerificationForm = ({ onSubmit }: Props) => {
-  const { control, handleSubmit } = useResendVerificationForm()
+export const ResendVerificationForm = ({ onSubmit, error }: Props) => {
+  const { control, handleSubmit, resendVerificationForm } = useResendVerificationForm()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -19,9 +20,10 @@ export const ResendVerificationForm = ({ onSubmit }: Props) => {
         name="email"
         label={'Email'}
         placeholder={'Epam@epam.com'}
+        error={error}
       />
       <Button fullWidth className={s.button}>
-        Resend verification link
+        {resendVerificationForm.resendVerificationButtonText}
       </Button>
     </form>
   )
