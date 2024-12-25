@@ -14,7 +14,10 @@ export const ru: LocaleType = {
       },
       createNewPasswordPage: {
         title: 'Создание нового пароля',
-        errorMessages: 'Пароли должны совпадать',
+        passwordErrorMessages: 'Пароли должны совпадать',
+        errorMessages: {
+          400: 'Предоставленные данные недействительны.',
+        },
       },
     },
   },

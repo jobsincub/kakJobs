@@ -7,7 +7,7 @@ import { useCreateNewPasswordPage } from '../lib/useCreateNewPasswordPage'
 import { notFound } from 'next/navigation'
 
 const CreateNewPasswordPage = () => {
-  const { onSubmit, page, recoveryCode } = useCreateNewPasswordPage()
+  const { onSubmit, page, recoveryCode, customError } = useCreateNewPasswordPage()
 
   if (!recoveryCode) {
     notFound()
@@ -18,7 +18,7 @@ const CreateNewPasswordPage = () => {
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>{page.title}</h1>
       </Typography>
-      <CreateNewPasswordForm onSubmit={onSubmit} />
+      <CreateNewPasswordForm onSubmit={onSubmit} error={customError} />
     </Page>
   )
 }

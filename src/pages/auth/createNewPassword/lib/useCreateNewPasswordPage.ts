@@ -1,6 +1,7 @@
 import { useCreateNewPasswordMutation } from '@/entities/auth/api'
 import { NewPasswordFields } from '@/features/auth/create-new-password'
 import { useTranslation } from '@/shared/config'
+import { getErrorMessage } from '@/shared/lib/hooks'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { useEffect } from 'react'
@@ -8,7 +9,7 @@ import { useEffect } from 'react'
 export const useCreateNewPasswordPage = () => {
   const router = useRouter()
 
-  const [createNewPassword, { isSuccess }] = useCreateNewPasswordMutation()
+  const [createNewPassword, { isSuccess, error }] = useCreateNewPasswordMutation()
 
   useEffect(() => {
     if (isSuccess) {
@@ -20,11 +21,13 @@ export const useCreateNewPasswordPage = () => {
     t: {
       pages: {
         auth: {
-          createNewPasswordPage: { ...page },
+          createNewPasswordPage: { errorMessages, ...page },
         },
       },
     },
   } = useTranslation()
+
+  const customError = getErrorMessage({ errorMessages, error })
 
   const searchParams = useSearchParams()
   const recoveryCode = searchParams?.get('code')
@@ -35,5 +38,5 @@ export const useCreateNewPasswordPage = () => {
     }
   }
 
-  return { onSubmit, page, recoveryCode }
+  return { onSubmit, page, recoveryCode, customError }
 }

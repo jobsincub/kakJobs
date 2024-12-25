@@ -12,7 +12,10 @@ export const en = {
       },
       createNewPasswordPage: {
         title: 'Create New Password',
-        errorMessages: 'The passwords must match',
+        passwordErrorMessages: 'The passwords must match',
+        errorMessages: {
+          400: 'The provided data is invalid.',
+        },
       },
     },
   },

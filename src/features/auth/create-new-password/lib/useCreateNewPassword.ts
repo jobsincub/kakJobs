@@ -18,7 +18,7 @@ export const useCreateNewPasswordForm = () => {
     t: {
       pages: {
         auth: {
-          createNewPasswordPage: { errorMessages },
+          createNewPasswordPage: { passwordErrorMessages },
         },
       },
       features: {
@@ -33,7 +33,7 @@ export const useCreateNewPasswordForm = () => {
     })
     .merge(passwordSchema)
     .refine(data => data.password === data.passwordConfirmation, {
-      message: errorMessages,
+      message: passwordErrorMessages,
       path: ['passwordConfirmation'],
     })
     .transform(({ password, ...rest }) => ({ ...rest, newPassword: password }))

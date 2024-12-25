@@ -5,8 +5,9 @@ import s from './createNewPassword-form.module.scss'
 
 type Props = {
   onSubmit: (data: NewPasswordFields) => void
+  error?: string
 }
-export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
+export const CreateNewPasswordForm = ({ onSubmit, error }: Props) => {
   const { handleSubmit, control, isValid, createNewPasswordForm } = useCreateNewPasswordForm()
 
   return (
@@ -17,6 +18,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
         name={'password'}
         type={'password'}
         placeholder={'**********'}
+        error={error}
       />
       <ControlledTextField
         control={control}
