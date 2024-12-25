@@ -4,6 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+export type PasswordFields = {
+  password: string
+  passwordConfirmation: string
+}
 export type NewPasswordFields = {
   newPassword: string
   passwordConfirmation: string
@@ -17,6 +21,9 @@ export const useCreateNewPasswordForm = () => {
           createNewPasswordPage: { errorMessages },
         },
       },
+      features: {
+        auth: { createNewPasswordForm },
+      },
     },
   } = useTranslation()
 
@@ -25,23 +32,24 @@ export const useCreateNewPasswordForm = () => {
       passwordConfirmation: z.string(),
     })
     .merge(passwordSchema)
-    .transform(({ password, ...rest }) => ({ ...rest, newPassword: password }))
-    .refine(data => data.newPassword === data.passwordConfirmation, {
+    .refine(data => data.password === data.passwordConfirmation, {
       message: errorMessages,
       path: ['passwordConfirmation'],
     })
+    .transform(({ password, ...rest }) => ({ ...rest, newPassword: password }))
 
   const {
     handleSubmit,
     control,
     formState: { isValid },
-  } = useForm<NewPasswordFields>({
+  } = useForm<PasswordFields, undefined, NewPasswordFields>({
     defaultValues: {
-      newPassword: '',
+      password: '',
       passwordConfirmation: '',
     },
     mode: 'onBlur',
     resolver: zodResolver(newPasswordSchema),
   })
-  return { handleSubmit, control, isValid }
+
+  return { handleSubmit, control, isValid, createNewPasswordForm }
 }

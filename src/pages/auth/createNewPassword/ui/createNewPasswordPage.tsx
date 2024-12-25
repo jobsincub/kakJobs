@@ -4,9 +4,14 @@ import Page from '@/widgets/page'
 import s from './createNewPasswordPage.module.scss'
 import { Typography } from '@wandrehappen/ui-kit'
 import { useCreateNewPasswordPage } from '../lib/useCreateNewPasswordPage'
+import { notFound } from 'next/navigation'
 
 const CreateNewPasswordPage = () => {
-  const { onSubmit, page } = useCreateNewPasswordPage()
+  const { onSubmit, page, recoveryCode } = useCreateNewPasswordPage()
+
+  if (!recoveryCode) {
+    notFound()
+  }
 
   return (
     <Page mt={36} className={s.pageContainer}>

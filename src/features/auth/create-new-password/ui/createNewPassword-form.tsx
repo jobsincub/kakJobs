@@ -2,28 +2,19 @@ import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import { NewPasswordFields, useCreateNewPasswordForm } from '../lib'
 import s from './createNewPassword-form.module.scss'
-import { useTranslation } from '@/shared/config'
 
 type Props = {
   onSubmit: (data: NewPasswordFields) => void
 }
 export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
-  const { handleSubmit, control, isValid } = useCreateNewPasswordForm()
-
-  const {
-    t: {
-      features: {
-        auth: { createNewPasswordForm },
-      },
-    },
-  } = useTranslation()
+  const { handleSubmit, control, isValid, createNewPasswordForm } = useCreateNewPasswordForm()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <ControlledTextField
         control={control}
         label={'New password'}
-        name={'newPassword'}
+        name={'password'}
         type={'password'}
         placeholder={'**********'}
       />

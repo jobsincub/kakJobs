@@ -2,7 +2,7 @@ import { useCreateNewPasswordMutation } from '@/entities/auth/api'
 import { NewPasswordFields } from '@/features/auth/create-new-password'
 import { useTranslation } from '@/shared/config'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { notFound } from 'next/navigation'
+
 import { useEffect } from 'react'
 
 export const useCreateNewPasswordPage = () => {
@@ -30,11 +30,10 @@ export const useCreateNewPasswordPage = () => {
   const recoveryCode = searchParams?.get('code')
 
   const onSubmit = (data: NewPasswordFields) => {
-    if (!recoveryCode) {
-      notFound()
+    if (recoveryCode) {
+      createNewPassword({ newPassword: data.newPassword, recoveryCode })
     }
-    createNewPassword({ newPassword: data.newPassword, recoveryCode })
   }
 
-  return { onSubmit, page }
+  return { onSubmit, page, recoveryCode }
 }
