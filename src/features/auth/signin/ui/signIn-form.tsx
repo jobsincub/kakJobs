@@ -1,5 +1,4 @@
 import { type LoginFormSchema, useSignInForm } from '@/features/auth/signin'
-import { useTranslation } from '@/shared/config'
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
@@ -12,22 +11,10 @@ type Props = {
 }
 
 export const SignInForm = ({ onSubmit, error }: Props) => {
-  const { handleSubmit, control } = useSignInForm()
-
-  const formSubmit = (data: LoginFormSchema) => {
-    onSubmit(data)
-  }
-
-  const {
-    t: {
-      features: {
-        auth: { signInForm },
-      },
-    },
-  } = useTranslation()
+  const { handleSubmit, control, signInForm } = useSignInForm()
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <div className={s.inputsWrapper}>
         <ControlledTextField
           placeholder={'Epam@epam.com'}
