@@ -10,6 +10,10 @@ export const en = {
           401: 'The provided data is invalid.',
         },
       },
+      createNewPasswordPage: {
+        title: 'Create New Password',
+        errorMessages: 'The passwords must match',
+      },
     },
   },
   features: {
@@ -28,6 +32,10 @@ export const en = {
         buttonText: 'Log Out',
         titleText: 'Log Out',
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
+      },
+      createNewPasswordForm: {
+        passwordLengthText: 'Your password must be between 6 and 20 characters',
+        createNewPasswordButtonText: 'Create new password',
       },
     },
   },

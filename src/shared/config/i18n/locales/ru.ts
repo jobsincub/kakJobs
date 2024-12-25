@@ -12,6 +12,10 @@ export const ru: LocaleType = {
           401: 'Предоставленные данные недействительны.',
         },
       },
+      createNewPasswordPage: {
+        title: 'Создание нового пароля',
+        errorMessages: 'Пароли должны совпадать',
+      },
     },
   },
   features: {
@@ -31,6 +35,10 @@ export const ru: LocaleType = {
         titleText: 'Выход',
         confirmationText:
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
+      },
+      createNewPasswordForm: {
+        passwordLengthText: 'Пароль должен содержать от 6 до 20 символов',
+        createNewPasswordButtonText: 'Создать новый пароль',
       },
     },
   },

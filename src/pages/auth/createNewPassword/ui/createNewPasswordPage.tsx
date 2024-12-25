@@ -6,12 +6,12 @@ import { Typography } from '@wandrehappen/ui-kit'
 import { useCreateNewPasswordPage } from '../lib/useCreateNewPasswordPage'
 
 const CreateNewPasswordPage = () => {
-  const { onSubmit } = useCreateNewPasswordPage()
+  const { onSubmit, page } = useCreateNewPasswordPage()
 
   return (
     <Page mt={36} className={s.pageContainer}>
       <Typography asChild color={'light-100'} variant={'h1'}>
-        <h1>Create New Password</h1>
+        <h1>{page.title}</h1>
       </Typography>
       <CreateNewPasswordForm onSubmit={onSubmit} />
     </Page>

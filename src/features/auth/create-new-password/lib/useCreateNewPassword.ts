@@ -1,4 +1,5 @@
-// import { usePasswordSchema } from '@/shared/lib'
+import { useTranslation } from '@/shared/config'
+import { usePasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -8,13 +9,25 @@ export type NewPasswordFields = {
   passwordConfirmation: string
 }
 export const useCreateNewPasswordForm = () => {
+  const { passwordSchema } = usePasswordSchema()
+  const {
+    t: {
+      pages: {
+        auth: {
+          createNewPasswordPage: { errorMessages },
+        },
+      },
+    },
+  } = useTranslation()
+
   const newPasswordSchema = z
     .object({
-      newPassword: z.string().min(6).default(''),
       passwordConfirmation: z.string(),
     })
+    .merge(passwordSchema)
+    .transform(({ password, ...rest }) => ({ ...rest, newPassword: password }))
     .refine(data => data.newPassword === data.passwordConfirmation, {
-      message: 'The passwords must match',
+      message: errorMessages,
       path: ['passwordConfirmation'],
     })
 

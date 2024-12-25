@@ -2,12 +2,21 @@ import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import { NewPasswordFields, useCreateNewPasswordForm } from '../lib'
 import s from './createNewPassword-form.module.scss'
+import { useTranslation } from '@/shared/config'
 
 type Props = {
   onSubmit: (data: NewPasswordFields) => void
 }
 export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
   const { handleSubmit, control, isValid } = useCreateNewPasswordForm()
+
+  const {
+    t: {
+      features: {
+        auth: { createNewPasswordForm },
+      },
+    },
+  } = useTranslation()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -26,9 +35,9 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
         placeholder={'**********'}
       />
       <Typography asChild color={'light-900'} className={s.text} variant={'regular16'}>
-        <p>Your password must be between 6 and 20 characters</p>
+        <p>{createNewPasswordForm.passwordLengthText}</p>
       </Typography>
-      <Button disabled={!isValid}>Create new password</Button>
+      <Button disabled={!isValid}>{createNewPasswordForm.createNewPasswordButtonText}</Button>
     </form>
   )
 }
