@@ -65,6 +65,7 @@ export const useSignUpForm = () => {
       email: '',
       password: '',
       confirmPassword: '',
+      agreeTerms: false,
     },
     mode: 'onTouched',
   })

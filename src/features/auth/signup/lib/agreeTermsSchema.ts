@@ -4,8 +4,8 @@ import { useTranslation } from '@/shared/config'
 export const useAgreeTermsSchema = () => {
   const {
     t: {
-      shared: {
-        validations: { agreeTermsSchema: schema },
+      features: {
+        auth: { signUpForm: schema },
       },
     },
   } = useTranslation()
@@ -14,7 +14,7 @@ export const useAgreeTermsSchema = () => {
     agreeTerms: z
       .boolean({
         required_error: 'Checkbox is required',
-        message: schema.agreeMsg,
+        message: schema.agreeTermsSchema.agreeMsg,
       })
       .refine(val => val, {
         message: 'Checkbox is required',

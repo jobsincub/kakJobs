@@ -27,11 +27,17 @@ export const en = {
         signInButtonText: 'Sign In',
       },
       signUpForm: {
-        agreeStart: 'I agree to the',
-        agreeMid: 'and',
+        checkBoxText: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
         terms: 'Terms of Service',
         privacy: 'Privacy Policy',
         signUpLinkText: 'Sign Up',
+        usernameSchema: {
+          minValue: 'Minimum number of characters 6',
+          maxValue: 'Maximum number of characters 30',
+        },
+        agreeTermsSchema: {
+          agreeMsg: 'Agree Terms',
+        },
       },
       emailSent: {
         titleText: 'Email sent',
@@ -48,10 +54,6 @@ export const en = {
   },
   shared: {
     validations: {
-      usernameSchema: {
-        minValue: 'Minimum number of characters 6',
-        maxValue: 'Maximum number of characters 30',
-      },
       emailSchema: {
         email: 'You entered an invalid email.',
       },
@@ -65,12 +67,6 @@ export const en = {
         minValue: 'Password must be at least 6 characters',
         regexText:
           'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      },
-      confirmPassSchema: {
-        confirmPass: 'The passwords must match',
-      },
-      agreeTermsSchema: {
-        agreeMsg: 'Agree Terms',
       },
       comparePassError: {
         passError: 'The passwords must match',

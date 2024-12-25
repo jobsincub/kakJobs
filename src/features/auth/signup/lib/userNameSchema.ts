@@ -4,14 +4,17 @@ import { useTranslation } from '@/shared/config'
 export const useUserNameSchema = () => {
   const {
     t: {
-      shared: {
-        validations: { usernameSchema: schema },
+      features: {
+        auth: { signUpForm: schema },
       },
     },
   } = useTranslation()
 
   const userNameSchema = z.object({
-    userName: z.string().min(6, schema.minValue).max(30, schema.maxValue),
+    userName: z
+      .string()
+      .min(6, schema.usernameSchema.minValue)
+      .max(30, schema.usernameSchema.maxValue),
   })
 
   return {

@@ -5,6 +5,7 @@ import { OutputSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignU
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import { routes } from '@/shared/router/routes'
+import { Trans } from '@/shared/config'
 
 type Props = {
   onSubmit: (data: OutputSchema) => void
@@ -54,14 +55,21 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
           className={s.checkBox}
           label={
             <Typography variant={'small'}>
-              {signUpForm.agreeStart}{' '}
-              <Link className={s.link} href={routes.legal.termsOfService}>
-                {signUpForm.terms}
-              </Link>{' '}
-              {signUpForm.agreeMid}{' '}
-              <Link className={s.link} href={routes.legal.privacyPolicy}>
-                {signUpForm.privacy}
-              </Link>
+              <Trans
+                text={signUpForm.checkBoxText}
+                tags={{
+                  1: () => (
+                    <Link className={s.link} href={routes.legal.termsOfService}>
+                      {signUpForm.terms}
+                    </Link>
+                  ),
+                  2: () => (
+                    <Link className={s.link} href={routes.legal.privacyPolicy}>
+                      {signUpForm.privacy}
+                    </Link>
+                  ),
+                }}
+              />
             </Typography>
           }
         />

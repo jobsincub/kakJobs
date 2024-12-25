@@ -29,11 +29,17 @@ export const ru: LocaleType = {
         signInButtonText: 'Войти',
       },
       signUpForm: {
-        agreeStart: 'Я согласен с ',
-        agreeMid: 'и',
+        checkBoxText: 'Я согласен с <1>правилами сервиса</1> и <2>политикой конфиденциальности</2>',
         terms: 'правилами сервиса',
         privacy: 'политикой конфиденциальности',
         signUpLinkText: 'Регистрация',
+        usernameSchema: {
+          minValue: 'Логин пользователя должен быть не менее 6 символов',
+          maxValue: 'Логин пользователя должен быть не более 30 символов',
+        },
+        agreeTermsSchema: {
+          agreeMsg: 'Принять соглашение',
+        },
       },
       emailSent: {
         titleText: 'Отправление письма',
@@ -51,10 +57,6 @@ export const ru: LocaleType = {
   },
   shared: {
     validations: {
-      usernameSchema: {
-        minValue: 'Логин пользователя должен быть не менее 6 символов',
-        maxValue: 'Логин пользователя должен быть не более 30 символов',
-      },
       emailValidateSchema: {
         emailValidation: 'Электронный адрес должен соответствовать\n example@example.com',
       },
@@ -62,12 +64,6 @@ export const ru: LocaleType = {
         minValue: 'Пароль должен быть не менее 6 символов',
         regexText:
           'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      },
-      confirmPassSchema: {
-        confirmPass: 'Пароли должны совпадать',
-      },
-      agreeTermsSchema: {
-        agreeMsg: 'Принять соглашение',
       },
       comparePassError: {
         passError: 'Пароли должны совпадать',
