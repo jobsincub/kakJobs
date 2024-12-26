@@ -4,7 +4,7 @@ import s from './Header.module.scss'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { clsx } from 'clsx'
 import { Logo } from './logo'
-import { LogoutDialog } from '@/features/auth/logout'
+import { LogoutDialog } from '@/features/auth'
 
 type Props = ComponentPropsWithoutRef<'header'>
 
