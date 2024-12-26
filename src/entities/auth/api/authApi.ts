@@ -1,5 +1,5 @@
-import { baseQueryWithReauth } from '@/shared/api'
 import { loggedOut, setAccessToken } from '@/entities/auth/model'
+import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -45,6 +45,16 @@ export const authApi = createApi({
         url: 'auth/resend-verification-email',
       }),
     }),
+    createNewPassword: builder.mutation<
+      ApiResponse<void>,
+      { newPassword: string; recoveryCode: string }
+    >({
+      query: params => ({
+        body: params,
+        method: 'POST',
+        url: 'auth/new-password',
+      }),
+    }),
     passwordRecovery: builder.mutation<
       ApiResponse<{ accessToken: string }>,
       { email: string; recaptchaToken: string }
@@ -62,6 +72,7 @@ export const {
   useSignInMutation,
   useLogoutMutation,
   useResendVerificationEmailMutation,
+  useCreateNewPasswordMutation,
   usePasswordRecoveryMutation,
 } = authApi
 

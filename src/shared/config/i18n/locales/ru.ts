@@ -20,6 +20,13 @@ export const ru: LocaleType = {
           403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
         },
       },
+      createNewPasswordPage: {
+        title: 'Создание нового пароля',
+        passwordErrorMessages: 'Пароли должны совпадать',
+        errorMessages: {
+          400: 'Предоставленные данные недействительны.',
+        },
+      },
     },
     legal: {
       layout: {
@@ -50,6 +57,10 @@ export const ru: LocaleType = {
         titleText: 'Выход',
         confirmationText:
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
+      },
+      createNewPasswordForm: {
+        passwordLengthText: 'Пароль должен содержать от 6 до 20 символов',
+        createNewPasswordButtonText: 'Создать новый пароль',
       },
       forgotPasswordForm: {
         enterYourEmailText: 'Введите Вашу электронную почту и мы отправим Вм дальнейшие инструкции',

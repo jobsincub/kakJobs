@@ -18,6 +18,13 @@ export const en = {
           403: 'Failed to validate reCAPTCHA. Please try again later',
         },
       },
+      createNewPasswordPage: {
+        title: 'Create New Password',
+        passwordErrorMessages: 'The passwords must match',
+        errorMessages: {
+          400: 'The provided data is invalid.',
+        },
+      },
     },
     legal: {
       layout: {
@@ -54,6 +61,10 @@ export const en = {
         sendLinkAgainText: 'If you don’t receive an email send link again',
         sendLinkAgainButtonText: 'Send Link Again',
         sendLinkButtonText: 'Send Link',
+      },
+      createNewPasswordForm: {
+        passwordLengthText: 'Your password must be between 6 and 20 characters',
+        createNewPasswordButtonText: 'Create new password',
       },
     },
   },

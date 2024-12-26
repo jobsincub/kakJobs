@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  
 }
+
 .contentContainer {
   display: flex;
   flex-direction: column;
@@ -14,6 +13,7 @@
   width: 100%;
   max-width: 473px;
 }
+
 .button {
   display: block;
   flex-direction: column;
@@ -26,4 +26,3 @@
 
   max-width: 295px;
 }
-
