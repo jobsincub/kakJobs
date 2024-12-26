@@ -18,6 +18,13 @@ export const en = {
           403: 'Failed to validate reCAPTCHA. Please try again later',
         },
       },
+      createNewPasswordPage: {
+        title: 'Create New Password',
+        passwordErrorMessages: 'The passwords must match',
+        errorMessages: {
+          400: 'The provided data is invalid.',
+        },
+      },
     },
     legal: {
       layout: {
@@ -28,13 +35,6 @@ export const en = {
       },
       termsService: {
         headText: 'Правила пользования сервисом',
-      },
-      createNewPasswordPage: {
-        title: 'Create New Password',
-        passwordErrorMessages: 'The passwords must match',
-        errorMessages: {
-          400: 'The provided data is invalid.',
-        },
       },
     },
   },

@@ -20,6 +20,13 @@ export const ru: LocaleType = {
           403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
         },
       },
+      createNewPasswordPage: {
+        title: 'Создание нового пароля',
+        passwordErrorMessages: 'Пароли должны совпадать',
+        errorMessages: {
+          400: 'Предоставленные данные недействительны.',
+        },
+      },
     },
     legal: {
       layout: {
@@ -30,13 +37,6 @@ export const ru: LocaleType = {
       },
       termsService: {
         headText: 'Правила пользования сервисом',
-      },
-      createNewPasswordPage: {
-        title: 'Создание нового пароля',
-        passwordErrorMessages: 'Пароли должны совпадать',
-        errorMessages: {
-          400: 'Предоставленные данные недействительны.',
-        },
       },
     },
   },

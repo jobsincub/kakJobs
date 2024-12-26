@@ -1,5 +1,5 @@
-import { baseQueryWithReauth } from '@/shared/api'
 import { loggedOut, setAccessToken } from '@/entities/auth/model'
+import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -73,7 +73,7 @@ export const {
   useLogoutMutation,
   useResendVerificationEmailMutation,
   useCreateNewPasswordMutation,
-  usePasswordRecoveryMutation
+  usePasswordRecoveryMutation,
 } = authApi
 
 type ApiResponse<T> = {

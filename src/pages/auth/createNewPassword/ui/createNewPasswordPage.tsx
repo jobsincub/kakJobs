@@ -1,12 +1,12 @@
 'use client'
 import { CreateNewPasswordForm } from '@/features/auth/create-new-password/ui'
 import Page from '@/widgets/page'
-import s from './createNewPasswordPage.module.scss'
 import { Typography } from '@wandrehappen/ui-kit'
-import { useCreateNewPasswordPage } from '../lib/useCreateNewPasswordPage'
 import { notFound } from 'next/navigation'
+import { useCreateNewPasswordPage } from '../lib/useCreateNewPasswordPage'
+import s from './createNewPasswordPage.module.scss'
 
-const CreateNewPasswordPage = () => {
+export const CreateNewPasswordPage = () => {
   const { onSubmit, page, recoveryCode, customError } = useCreateNewPasswordPage()
 
   if (!recoveryCode) {
@@ -22,5 +22,3 @@ const CreateNewPasswordPage = () => {
     </Page>
   )
 }
-
-export default CreateNewPasswordPage

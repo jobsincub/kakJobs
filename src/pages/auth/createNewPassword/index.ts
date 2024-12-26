@@ -1,1 +1,1 @@
-export { default } from './ui/createNewPasswordPage'
+export { default as CreateNewPasswordPage } from './ui/createNewPasswordPage.async'
