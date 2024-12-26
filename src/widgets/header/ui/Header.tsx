@@ -4,7 +4,7 @@ import s from './Header.module.scss'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { clsx } from 'clsx'
 import { Logo } from './logo'
-import { LogoutConfirmation } from '@/features/auth/logout'
+import { LogoutDialog } from '@/features/auth'
 
 type Props = ComponentPropsWithoutRef<'header'>
 
@@ -12,7 +12,7 @@ export const Header = forwardRef<ElementRef<'header'>, Props>(({ className, ...r
   <header className={clsx(s.header, className)} ref={ref} {...rest}>
     <div className={s.headerContainer}>
       <Logo />
-      <LogoutConfirmation />
+      <LogoutDialog />
       <LanguageSwitcher />
     </div>
   </header>

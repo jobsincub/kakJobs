@@ -10,6 +10,14 @@ export const en = {
           401: 'The provided data is invalid.',
         },
       },
+      forgotPasswordPage: {
+        title: 'Forgot Password',
+        signInLinkText: 'Back to Sign In',
+        errorMessages: {
+          400: "User with this email doesn't exist",
+          403: 'Failed to validate reCAPTCHA. Please try again later',
+        },
+      },
     },
     legal: {
       layout: {
@@ -35,10 +43,17 @@ export const en = {
           return `We have sent a link to confirm your email to ${email}`
         },
       },
-      logOut: {
+      logOutDialog: {
         buttonText: 'Log Out',
         titleText: 'Log Out',
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
+      },
+      forgotPasswordForm: {
+        enterYourEmailText: 'Enter your email address and we will send you further instructions',
+        sentLinkText: 'The link has been sent by email.',
+        sendLinkAgainText: 'If you don’t receive an email send link again',
+        sendLinkAgainButtonText: 'Send Link Again',
+        sendLinkButtonText: 'Send Link',
       },
     },
   },
