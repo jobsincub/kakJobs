@@ -1,7 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useLogoutMutation } from '@/entities/auth/api'
+import React from 'react'
 import {
   Button,
   Dialog,
@@ -13,37 +11,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Logout,
   Typography,
 } from '@wandrehappen/ui-kit'
 import s from './LogoutDialog.module.scss'
-import { Logout } from '@wandrehappen/ui-kit'
-import { useTranslation } from '@/shared/config'
 import { Trans } from '@/shared/config/i18n/ui/Trans'
-import { routes } from '@/shared/router/routes'
+import { useLogoutDialog } from '@/features/auth/logout/lib/useLogoutDialog'
 
 export const LogoutDialog = () => {
-  const email = 'Epam@epam.com' // Todo: change to email from store
-  const [logout, { isSuccess }] = useLogoutMutation()
-  const router = useRouter()
-
-  const {
-    t: {
-      features: {
-        auth: { logOut },
-      },
-      shared: { dialogs },
-    },
-  } = useTranslation()
+  const { logout, logOut, email, dialogs } = useLogoutDialog()
 
   const logoutHandler = () => {
     logout()
   }
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push(routes.signin)
-    }
-  }, [isSuccess, router])
 
   return (
     <Dialog>
