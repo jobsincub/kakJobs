@@ -1,4 +1,4 @@
-import { EmailConfirmPage } from '@/pages/auth/verify-email/emailConfirmPage'
+import { EmailConfirmPage } from '@/pages/auth/verify-email'
 
 export default function EmailConfirm() {
   return <EmailConfirmPage />
