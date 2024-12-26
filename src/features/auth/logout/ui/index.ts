@@ -1,1 +1,1 @@
-export * from './logout-confirmation'
+export * from './LogoutDialog'
