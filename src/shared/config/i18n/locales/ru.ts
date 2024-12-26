@@ -12,6 +12,25 @@ export const ru: LocaleType = {
           401: 'Предоставленные данные недействительны.',
         },
       },
+      forgotPasswordPage: {
+        title: 'Забыл пароль',
+        signInLinkText: 'Войти',
+        errorMessages: {
+          400: 'Пользователь с такой почтой не зарегистрирован',
+          403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
+        },
+      },
+    },
+    legal: {
+      layout: {
+        btnText: 'Регистрация',
+      },
+      privacyPolicy: {
+        headText: 'Политика конфиденциальности',
+      },
+      termsService: {
+        headText: 'Правила пользования сервисом',
+      },
       createNewPasswordPage: {
         title: 'Создание нового пароля',
         passwordErrorMessages: 'Пароли должны совпадать',
@@ -33,7 +52,7 @@ export const ru: LocaleType = {
           return `Мы отправили ссылку для подтверждения вашей электронной почты на адрес ${email}`
         },
       },
-      logOut: {
+      logOutDialog: {
         buttonText: 'Выйти',
         titleText: 'Выход',
         confirmationText:
@@ -42,6 +61,13 @@ export const ru: LocaleType = {
       createNewPasswordForm: {
         passwordLengthText: 'Пароль должен содержать от 6 до 20 символов',
         createNewPasswordButtonText: 'Создать новый пароль',
+      },
+      forgotPasswordForm: {
+        enterYourEmailText: 'Введите Вашу электронную почту и мы отправим Вм дальнейшие инструкции',
+        sentLinkText: 'Ссылка отправлена на почту.',
+        sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,
+        sendLinkAgainButtonText: 'Отправить ссылку повторно',
+        sendLinkButtonText: 'Отправить ссылку',
       },
     },
   },
