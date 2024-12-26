@@ -12,7 +12,7 @@ export const useLogoutDialog = () => {
   const {
     t: {
       features: {
-        auth: { logOut },
+        auth: { logOutDialog },
       },
       shared: { dialogs },
     },
@@ -27,7 +27,7 @@ export const useLogoutDialog = () => {
   return {
     email,
     logout,
-    logOut,
+    logOutDialog,
     dialogs,
   }
 }
