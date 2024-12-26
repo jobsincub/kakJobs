@@ -3,9 +3,9 @@ import { useEmailSchema, usePasswordSchema } from '@/shared/lib'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { useUserNameSchema } from '@/features/auth/signup/lib/userNameSchema'
+import { useUserNameSchema } from '@/features/auth/signup/model/userNameSchema'
 import { useConfirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
-import { useAgreeTermsSchema } from '@/features/auth/signup/lib/agreeTermsSchema'
+import { useAgreeTermsSchema } from '@/features/auth/signup/model/agreeTermsSchema'
 import { useTranslation } from '@/shared/config'
 
 type InputSchema = {
