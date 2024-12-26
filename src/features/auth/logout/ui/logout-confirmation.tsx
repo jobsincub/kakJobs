@@ -19,6 +19,7 @@ import s from './logout-confirmation.module.scss'
 import { Logout } from '@wandrehappen/ui-kit'
 import { useTranslation } from '@/shared/config'
 import { Trans } from '@/shared/config/i18n/ui/Trans'
+import { routes } from '@/shared/router/routes'
 
 export const LogoutConfirmation = () => {
   const email = 'Epam@epam.com' // Todo: change to email from store
@@ -40,7 +41,7 @@ export const LogoutConfirmation = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/auth/signin')
+      router.push(routes.signin)
     }
   }, [isSuccess, router])
 
