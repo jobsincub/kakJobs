@@ -1,7 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useLogoutMutation } from '@/entities/auth/api'
+import React from 'react'
 import {
   Button,
   Dialog,
@@ -13,36 +11,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Logout,
   Typography,
 } from '@wandrehappen/ui-kit'
-import s from './logout-confirmation.module.scss'
-import { Logout } from '@wandrehappen/ui-kit'
-import { useTranslation } from '@/shared/config'
+import s from './LogoutDialog.module.scss'
 import { Trans } from '@/shared/config/i18n/ui/Trans'
+import { useLogoutDialog } from '@/features/auth/logout/lib/useLogoutDialog'
 
-export const LogoutConfirmation = () => {
-  const email = 'Epam@epam.com' // Todo: change to email from store
-  const [logout, { isSuccess }] = useLogoutMutation()
-  const router = useRouter()
-
-  const {
-    t: {
-      features: {
-        auth: { logOut },
-      },
-      shared: { dialogs },
-    },
-  } = useTranslation()
+export const LogoutDialog = () => {
+  const { logout, logOutDialog, email, dialogs } = useLogoutDialog()
 
   const logoutHandler = () => {
     logout()
   }
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push('/auth/signin')
-    }
-  }, [isSuccess, router])
 
   return (
     <Dialog>
@@ -50,18 +31,18 @@ export const LogoutConfirmation = () => {
         <Typography asChild variant={'bold14'}>
           <Button variant={'link'}>
             <Logout />
-            {logOut.buttonText}
+            {logOutDialog.buttonText}
           </Button>
         </Typography>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{logOut.titleText}</DialogTitle>
+          <DialogTitle>{logOutDialog.titleText}</DialogTitle>
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <DialogDescription className={s.dialogDescription}>
             <Trans
-              text={logOut.confirmationText}
+              text={logOutDialog.confirmationText}
               tags={{
                 1: () => (
                   <Typography asChild variant={'bold16'}>

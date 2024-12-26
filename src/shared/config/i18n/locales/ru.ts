@@ -34,7 +34,7 @@ export const ru: LocaleType = {
           return `Мы отправили ссылку для подтверждения вашей электронной почты на адрес ${email}`
         },
       },
-      logOut: {
+      logOutDialog: {
         buttonText: 'Выйти',
         titleText: 'Выход',
         confirmationText:

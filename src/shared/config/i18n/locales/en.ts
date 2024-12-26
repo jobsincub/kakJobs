@@ -32,7 +32,7 @@ export const en = {
           return `We have sent a link to confirm your email to ${email}`
         },
       },
-      logOut: {
+      logOutDialog: {
         buttonText: 'Log Out',
         titleText: 'Log Out',
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
