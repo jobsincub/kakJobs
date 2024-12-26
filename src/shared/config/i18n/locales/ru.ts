@@ -3,6 +3,11 @@ import type { LocaleType } from './en'
 export const ru: LocaleType = {
   pages: {
     auth: {
+      verifyEmail: {
+        title: 'Поздравляем!',
+        confirmText: 'Ваш электронный адрес успешно подтвержден',
+        singInLinkText: 'Войти',
+      },
       signInPage: {
         title: 'Войти',
         noAccountText: 'У вас нет аккаунта?',

@@ -1,6 +1,11 @@
 export const en = {
   pages: {
     auth: {
+      verifyEmail: {
+        title: 'Congratulations!',
+        confirmText: 'Your email has been confirmed',
+        singInLinkText: 'Sign In',
+      },
       signInPage: {
         title: 'Sign In',
         noAccountText: 'Don’t have an account?',

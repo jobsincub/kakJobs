@@ -65,6 +65,13 @@ export const authApi = createApi({
         body,
       }),
     }),
+    verifyEmail: builder.mutation<ApiResponse<void>, { code: string }>({
+      query: verificationData => ({
+        url: `auth/verify-email`,
+        method: 'POST',
+        body: verificationData,
+      }),
+    }),
   }),
 })
 
@@ -74,6 +81,7 @@ export const {
   useResendVerificationEmailMutation,
   useCreateNewPasswordMutation,
   usePasswordRecoveryMutation,
+  useVerifyEmailMutation,
 } = authApi
 
 type ApiResponse<T> = {
