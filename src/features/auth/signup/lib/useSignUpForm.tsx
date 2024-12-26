@@ -44,10 +44,6 @@ export const useSignUpForm = () => {
     .merge(passwordSchema)
     .merge(agreeTermsSchema)
     .merge(confirmPasswordSchema)
-    .refine(data => data.password === data.confirmPassword, {
-      message: schema.passError,
-      path: ['confirmPassword'],
-    })
     .transform(({ userName, email, password }) => ({
       userName,
       email,
