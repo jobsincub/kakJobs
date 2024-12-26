@@ -19,6 +19,17 @@ export const en = {
         },
       },
     },
+    legal: {
+      layout: {
+        btnText: 'Back to Sign Up',
+      },
+      privacyPolicy: {
+        headText: 'Политика конфиденциальности',
+      },
+      termsService: {
+        headText: 'Правила пользования сервисом',
+      },
+    },
   },
   features: {
     auth: {
