@@ -1,9 +1,18 @@
 import { Content } from '@/pages/legalInformation/ui/content'
 import React from 'react'
+import { useTranslation } from '@/shared/config'
 
 export function PrivacyPolicyPage() {
+  const {
+    t: {
+      pages: {
+        legal: { privacyPolicy },
+      },
+    },
+  } = useTranslation()
+
   return (
-    <Content title={'Privacy Policy'}>
+    <Content title={privacyPolicy.headText}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet

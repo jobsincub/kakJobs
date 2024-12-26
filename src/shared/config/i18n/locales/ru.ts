@@ -13,6 +13,17 @@ export const ru: LocaleType = {
         },
       },
     },
+    legal: {
+      layout: {
+        btnText: 'Регистрация',
+      },
+      privacyPolicy: {
+        headText: 'Политика конфиденциальности',
+      },
+      termsService: {
+        headText: 'Правила пользования сервисом',
+      },
+    },
   },
   features: {
     auth: {

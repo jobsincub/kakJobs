@@ -1,9 +1,18 @@
 import { Content } from '@/pages/legalInformation/ui/content'
 import React from 'react'
+import { useTranslation } from '@/shared/config'
 
 export function TermsOfServicePage() {
+  const {
+    t: {
+      pages: {
+        legal: { termsService },
+      },
+    },
+  } = useTranslation()
+
   return (
-    <Content title={'Terms of Service'}>
+    <Content title={termsService.headText}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet
