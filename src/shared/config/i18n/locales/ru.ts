@@ -3,6 +3,13 @@ import type { LocaleType } from './en'
 export const ru: LocaleType = {
   pages: {
     auth: {
+      resendVerificationPage: {
+        title: 'Ссылка для подтверждения электронной почты устарела',
+        text: 'Похоже, что ссылка для подтверждения истекла. Не переживайте, мы можем отправить ссылку снова.',
+        errorMessages: {
+          400: 'Электронная почта неверна. Пожалуйста, попробуйте снова.',
+        },
+      },
       verifyEmail: {
         title: 'Поздравляем!',
         confirmText: 'Ваш электронный адрес успешно подтвержден',
@@ -66,6 +73,9 @@ export const ru: LocaleType = {
       createNewPasswordForm: {
         passwordLengthText: 'Пароль должен содержать от 6 до 20 символов',
         createNewPasswordButtonText: 'Создать новый пароль',
+      },
+      resendVerificationForm: {
+        resendVerificationButtonText: 'Отправить ссылку для подтверждения',
       },
       forgotPasswordForm: {
         enterYourEmailText: 'Введите Вашу электронную почту и мы отправим Вм дальнейшие инструкции',

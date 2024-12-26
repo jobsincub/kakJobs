@@ -1,6 +1,13 @@
 export const en = {
   pages: {
     auth: {
+      resendVerificationPage: {
+        title: 'Email verification link expired',
+        text: 'Looks like the verification link has expired. Not to worry, we can send the link again',
+        errorMessages: {
+          400: 'The email is incorrect. Try again please',
+        },
+      },
       verifyEmail: {
         title: 'Congratulations!',
         confirmText: 'Your email has been confirmed',
@@ -59,6 +66,9 @@ export const en = {
         buttonText: 'Log Out',
         titleText: 'Log Out',
         confirmationText: 'Are you really want to log out of your account <1>Epam@epam.com</1>?',
+      },
+      resendVerificationForm: {
+        resendVerificationButtonText: 'Resend verification link',
       },
       forgotPasswordForm: {
         enterYourEmailText: 'Enter your email address and we will send you further instructions',
