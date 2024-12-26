@@ -1,1 +1,1 @@
-export { default as EmailConfirmPage } from './ui/EmailConfirmPage.async'
+export { default as EmailConfirmPage } from './ui/emailConfirmPage.async'
