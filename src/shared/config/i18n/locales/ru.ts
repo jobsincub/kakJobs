@@ -3,6 +3,18 @@ import type { LocaleType } from './en'
 export const ru: LocaleType = {
   pages: {
     auth: {
+      resendVerificationPage: {
+        title: 'Ссылка для подтверждения электронной почты устарела',
+        text: 'Похоже, что ссылка для подтверждения истекла. Не переживайте, мы можем отправить ссылку снова.',
+        errorMessages: {
+          400: 'Электронная почта неверна. Пожалуйста, попробуйте снова.',
+        },
+      },
+      verifyEmail: {
+        title: 'Поздравляем!',
+        confirmText: 'Ваш электронный адрес успешно подтвержден',
+        singInLinkText: 'Войти',
+      },
       signInPage: {
         title: 'Войти',
         noAccountText: 'У вас нет аккаунта?',
@@ -19,6 +31,32 @@ export const ru: LocaleType = {
         errorMessages: {
           400: 'Пользователь уже существует или данные недействительны',
         },
+      },
+      forgotPasswordPage: {
+        title: 'Забыл пароль',
+        signInLinkText: 'Войти',
+        errorMessages: {
+          400: 'Пользователь с такой почтой не зарегистрирован',
+          403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
+        },
+      },
+      createNewPasswordPage: {
+        title: 'Создание нового пароля',
+        passwordErrorMessages: 'Пароли должны совпадать',
+        errorMessages: {
+          400: 'Предоставленные данные недействительны.',
+        },
+      },
+    },
+    legal: {
+      layout: {
+        btnText: 'Регистрация',
+      },
+      privacyPolicy: {
+        headText: 'Политика конфиденциальности',
+      },
+      termsService: {
+        headText: 'Правила пользования сервисом',
       },
     },
   },
@@ -47,11 +85,25 @@ export const ru: LocaleType = {
           return `Мы отправили ссылку для подтверждения вашей электронной почты на адрес ${email}`
         },
       },
-      logOut: {
+      logOutDialog: {
         buttonText: 'Выйти',
         titleText: 'Выход',
         confirmationText:
           'Вы действительно хотите выйти из своей учетной записи <1>Epam@epam.com</1>?',
+      },
+      createNewPasswordForm: {
+        passwordLengthText: 'Пароль должен содержать от 6 до 20 символов',
+        createNewPasswordButtonText: 'Создать новый пароль',
+      },
+      resendVerificationForm: {
+        resendVerificationButtonText: 'Отправить ссылку для подтверждения',
+      },
+      forgotPasswordForm: {
+        enterYourEmailText: 'Введите Вашу электронную почту и мы отправим Вм дальнейшие инструкции',
+        sentLinkText: 'Ссылка отправлена на почту.',
+        sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,
+        sendLinkAgainButtonText: 'Отправить ссылку повторно',
+        sendLinkButtonText: 'Отправить ссылку',
       },
     },
   },

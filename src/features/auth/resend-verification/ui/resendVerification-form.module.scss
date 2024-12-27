@@ -1,29 +1,13 @@
-.container {
+.form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  
-}
-.contentContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  gap: 24px;
 
   width: 100%;
-  max-width: 473px;
+  max-width: 229px;
+
 }
+
 .button {
-  display: block;
-  flex-direction: column;
-  width: 230px;
-  margin: 24px 0 36px;
+  padding: 6px 24px;
 }
-
-.text {
-  text-align: center;
-
-  max-width: 295px;
-}
-

@@ -1,5 +1,5 @@
-import { baseQueryWithReauth } from '@/shared/api'
 import { loggedOut, setAccessToken } from '@/entities/auth/model'
+import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -38,18 +38,45 @@ export const authApi = createApi({
         }
       },
     }),
-    resendVerificationEmail: builder.mutation<ApiResponse<void>, ResendRegistrationArgs>({
+    resendVerificationEmail: builder.mutation<void, { email: string }>({
       query: params => ({
         body: params,
         method: 'POST',
         url: 'auth/resend-verification-email',
       }),
     }),
-    signUp: builder.mutation<void, SignUpArgs>({
+    signUp: builder.mutation<void, { userName: string; email: string; password: string }>({
       query: params => ({
         body: params,
         method: 'POST',
         url: 'auth/sign-up',
+      }),
+    }),
+    createNewPassword: builder.mutation<
+      ApiResponse<void>,
+      { newPassword: string; recoveryCode: string }
+    >({
+      query: params => ({
+        body: params,
+        method: 'POST',
+        url: 'auth/new-password',
+      }),
+    }),
+    passwordRecovery: builder.mutation<
+      ApiResponse<{ accessToken: string }>,
+      { email: string; recaptchaToken: string }
+    >({
+      query: body => ({
+        url: 'auth/password-recovery',
+        method: 'POST',
+        body,
+      }),
+    }),
+    verifyEmail: builder.mutation<ApiResponse<void>, { code: string }>({
+      query: verificationData => ({
+        url: `auth/verify-email`,
+        method: 'POST',
+        body: verificationData,
       }),
     }),
   }),
@@ -57,9 +84,12 @@ export const authApi = createApi({
 
 export const {
   useSignInMutation,
+  useSignUpMutation,
   useLogoutMutation,
   useResendVerificationEmailMutation,
-  useSignUpMutation,
+  useCreateNewPasswordMutation,
+  usePasswordRecoveryMutation,
+  useVerifyEmailMutation,
 } = authApi
 
 type ApiResponse<T> = {
@@ -71,14 +101,4 @@ type ApiResponse<T> = {
 type Extension = {
   message: string
   field: string | null
-}
-
-type ResendRegistrationArgs = {
-  email: string
-}
-
-type SignUpArgs = {
-  userName: string
-  email: string
-  password: string
 }
