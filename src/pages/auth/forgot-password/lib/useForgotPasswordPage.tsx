@@ -1,11 +1,12 @@
 'use client'
-import { ForgotPasswordFormSchema } from '@/features/auth/forgot-password'
 import { usePasswordRecoveryMutation } from '@/entities/auth/api'
+import { ForgotPasswordFormSchema } from '@/features/auth/forgot-password'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 
 export const UseForgotPasswordPage = () => {
   const [passwordRecovery, { isSuccess, originalArgs, error }] = usePasswordRecoveryMutation()
+  const email = originalArgs?.email
 
   const {
     t: {
@@ -25,5 +26,5 @@ export const UseForgotPasswordPage = () => {
     }
   }
 
-  return { page, customError, originalArgs, isSuccess, onSubmit }
+  return { page, customError, email, isSuccess, onSubmit }
 }

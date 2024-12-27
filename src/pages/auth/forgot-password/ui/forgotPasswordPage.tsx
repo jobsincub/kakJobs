@@ -10,9 +10,7 @@ import { UseForgotPasswordPage } from '../lib/useForgotPasswordPage'
 import s from './forgotPasswordPage.module.scss'
 
 const ForgotPasswordPage = () => {
-  const { page, onSubmit, customError, originalArgs, isSuccess } = UseForgotPasswordPage()
-
-  const email = originalArgs?.email || ''
+  const { page, onSubmit, customError, email, isSuccess } = UseForgotPasswordPage()
 
   return (
     <Page mt={36} as={AuthFormWrapper}>
