@@ -1,6 +1,6 @@
 'use client'
 import { usePasswordRecoveryMutation } from '@/entities/auth/api'
-import { ForgotPasswordFormSchema } from '@/features/auth/forgot-password'
+import type { ForgotPasswordFormSchema } from '@/features/auth/forgotPassword'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 

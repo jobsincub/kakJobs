@@ -1,5 +1,6 @@
 'use client'
 
+import { ROUTES } from '@/shared/router/routes'
 import Page from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
@@ -25,7 +26,7 @@ export const EmailConfirmPage = () => {
       <Typography variant={'h1'}>{page.title}</Typography>
       <Typography variant={'regular16'}>{page.confirmText}</Typography>
       <Button asChild variant={'primary'} className={s.button}>
-        <Link href={'/auth/signin'} className={s.link}>
+        <Link href={ROUTES.AUTH.SIGN_IN} className={s.link}>
           {page.singInLinkText}
         </Link>
       </Button>

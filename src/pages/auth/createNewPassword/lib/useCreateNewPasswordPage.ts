@@ -1,7 +1,8 @@
 import { useCreateNewPasswordMutation } from '@/entities/auth/api'
-import { NewPasswordFields } from '@/features/auth/create-new-password'
+import type { NewPasswordFields } from '@/features/auth/createNewPassword'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
+import { ROUTES } from '@/shared/router/routes'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { useEffect } from 'react'
@@ -13,7 +14,7 @@ export const useCreateNewPasswordPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/auth/signin')
+      router.push(ROUTES.AUTH.SIGN_IN)
     }
   }, [isSuccess, router])
 

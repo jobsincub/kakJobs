@@ -1,5 +1,5 @@
 import { useSignInMutation } from '@/entities/auth/api'
-import type { LoginFormSchema } from '@/features/auth/signin'
+import type { LoginFormSchema } from '@/features/auth/signIn'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 import { useRouter } from 'next/navigation'
@@ -12,7 +12,7 @@ export const UseSignInPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/auth/signup')
+      // router.push('/auth/signup')
     }
   }, [isSuccess, router])
 

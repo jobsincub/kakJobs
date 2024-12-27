@@ -1,5 +1,6 @@
 import { useVerifyEmailMutation } from '@/entities/auth/api'
 import { useTranslation } from '@/shared/config'
+import { ROUTES } from '@/shared/router/routes'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -27,7 +28,7 @@ export const UseEmailConfirmPage = () => {
 
   useEffect(() => {
     if (isError) {
-      router.push('/auth/resend-verification')
+      router.push(ROUTES.AUTH.RESEND_VERIFICATION)
     }
   }, [isError, router])
 

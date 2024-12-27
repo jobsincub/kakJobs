@@ -1,6 +1,5 @@
-// @flow
 import { useSignUpMutation } from '@/entities/auth/api'
-import { OutputSchema } from '@/features/auth/signup/lib/useSignUpForm'
+import { OutputSchema } from '@/features/auth/signUp/lib/useSignUpForm'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 

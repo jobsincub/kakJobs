@@ -1,8 +1,8 @@
 'use client'
 
-import { SignUpForm } from '@/features/auth/signup/ui'
+import { SignUpForm } from '@/features/auth/signUp/ui'
 import { UseSignUpPage } from '@/pages/auth/signUp/lib/useSignUpPage'
-import { routes } from '@/shared/router/routes'
+import { ROUTES } from '@/shared/router/routes'
 import { EmailSentDialog } from '@/shared/ui'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
@@ -26,7 +26,7 @@ export const SignUpPage = () => {
           <p>{page.isHaveAccount}</p>
         </Typography>
         <Button asChild variant={'link'}>
-          <Link href={routes.signIn}>{page.signInLinkText}</Link>
+          <Link href={ROUTES.AUTH.SIGN_IN}>{page.signInLinkText}</Link>
         </Button>
       </div>
     </Page>

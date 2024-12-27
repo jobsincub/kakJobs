@@ -4,11 +4,6 @@
   width: 100%;
 }
 
-.link {
-  color: var(--color-primary-300);
-  text-decoration: underline var(--color-primary-300);
-}
-
 .inputsWrapper {
   display: flex;
   flex-direction: column;
@@ -16,5 +11,5 @@
 }
 
 .checkBox {
-  margin-bottom:24px;
+  margin-bottom: 24px;
 }

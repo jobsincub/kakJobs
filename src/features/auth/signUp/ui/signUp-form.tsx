@@ -1,11 +1,11 @@
+import { OutputSchema, useSignUpForm } from '@/features/auth/signUp/lib/useSignUpForm'
 import s from '@/features/auth/signup/ui/signUp-form.module.scss'
+import { Trans } from '@/shared/config'
+import { ROUTES } from '@/shared/router/routes'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui'
-import React from 'react'
-import { OutputSchema, useSignUpForm } from '@/features/auth/signup/lib/useSignUpForm'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
-import { routes } from '@/shared/router/routes'
-import { Trans } from '@/shared/config'
+import React from 'react'
 
 type Props = {
   onSubmit: (data: OutputSchema) => void
@@ -59,14 +59,14 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
                 text={signUpForm.checkBoxText}
                 tags={{
                   1: () => (
-                    <Link className={s.link} href={routes.legal.termsOfService}>
-                      {signUpForm.terms}
-                    </Link>
+                    <Typography variant={'small-link'} asChild>
+                      <Link href={ROUTES.LEGAL.TERMS_OF_SERVICE}>{signUpForm.terms}</Link>
+                    </Typography>
                   ),
                   2: () => (
-                    <Link className={s.link} href={routes.legal.privacyPolicy}>
-                      {signUpForm.privacy}
-                    </Link>
+                    <Typography variant={'small-link'} asChild>
+                      <Link href={ROUTES.LEGAL.PRIVACY_POLICY}>{signUpForm.privacy}</Link>
+                    </Typography>
                   ),
                 }}
               />

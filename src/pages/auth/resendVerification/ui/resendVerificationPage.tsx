@@ -1,12 +1,12 @@
 'use client'
+import { ResendVerificationForm } from '@/features/auth/resendVerification'
+import { EmailSentDialog } from '@/shared/ui'
+import Page from '@/widgets/page'
 import { Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
+import { useResendVerificationPage } from '../lib/useResendVerificationPage'
 import rafiki from './assets/rafiki.png'
 import s from './resendVerificationPage.module.scss'
-import { ResendVerificationForm } from '@/features/auth/resend-verification'
-import { EmailSentDialog } from '@/shared/ui'
-import { useResendVerificationPage } from '../lib/useResendVerificationPage'
-import Page from '@/widgets/page'
 
 const ResendVerificationEmailPage = () => {
   const { isSuccess, onResend, email, customError, page } = useResendVerificationPage()

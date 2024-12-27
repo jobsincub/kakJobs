@@ -1,7 +1,8 @@
 import { useResendVerificationEmailMutation } from '@/entities/auth/api'
-import { ResendVerificationEmailField } from '@/features/auth/resend-verification'
+import { ResendVerificationEmailField } from '@/features/auth/resendVerification'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
+import { ROUTES } from '@/shared/router/routes'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -14,7 +15,7 @@ export const useResendVerificationPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/auth/signin')
+      router.push(ROUTES.AUTH.SIGN_IN)
     }
   }, [isSuccess, router])
 

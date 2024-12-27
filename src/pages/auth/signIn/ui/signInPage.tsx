@@ -1,5 +1,6 @@
 'use client'
-import { SignInForm } from '@/features/auth/signin'
+import { SignInForm } from '@/features/auth/signIn'
+import { ROUTES } from '@/shared/router/routes'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
@@ -21,7 +22,7 @@ const SignInPage = () => {
         <p>{page.noAccountText}</p>
       </Typography>
       <Button asChild variant={'link'}>
-        <Link href={'/auth/signup'}>{page.signUpLinkText}</Link>
+        <Link href={ROUTES.AUTH.SIGN_UP}>{page.signUpLinkText}</Link>
       </Button>
     </Page>
   )

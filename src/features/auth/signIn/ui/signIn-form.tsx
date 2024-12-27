@@ -1,4 +1,5 @@
-import { type LoginFormSchema, useSignInForm } from '@/features/auth/signin'
+import { type LoginFormSchema, useSignInForm } from '@/features/auth/signIn'
+import { ROUTES } from '@/shared/router/routes'
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
@@ -34,7 +35,7 @@ export const SignInForm = ({ onSubmit, error }: Props) => {
         />
       </div>
       <Typography asChild color={'light-900'} className={s.forgotPassword}>
-        <Link href={'/auth/forgot-password'}>{signInForm.forgotPasswordLink}</Link>
+        <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>{signInForm.forgotPasswordLink}</Link>
       </Typography>
       <Button disabled={!isValid} fullWidth>
         {signInForm.signInButtonText}

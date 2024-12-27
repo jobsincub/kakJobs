@@ -1,5 +1,6 @@
 'use client'
-import { ForgotPasswordForm } from '@/features/auth/forgot-password'
+import { ForgotPasswordForm } from '@/features/auth/forgotPassword'
+import { ROUTES } from '@/shared/router/routes'
 import { EmailSentDialog } from '@/shared/ui'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
@@ -20,7 +21,7 @@ const ForgotPasswordPage = () => {
       </Typography>
       <ForgotPasswordForm onSubmit={onSubmit} error={customError} isSuccess={isSuccess} />
       <Button asChild variant={'link'}>
-        <Link href={'/auth/signin'} color={'light-100'} className={s.signIn}>
+        <Link href={ROUTES.AUTH.SIGN_IN} color={'light-100'} className={s.signIn}>
           {page.signInLinkText}
         </Link>
       </Button>
