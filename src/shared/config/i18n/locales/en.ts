@@ -22,6 +22,14 @@ export const en = {
           401: 'The provided data is invalid.',
         },
       },
+      signUpPage: {
+        title: 'Sign Up',
+        isHaveAccount: 'Do you have an account?',
+        signInLinkText: 'Sign In',
+        errorMessages: {
+          400: 'The user already exists or the provided data is invalid',
+        },
+      },
       forgotPasswordPage: {
         title: 'Forgot Password',
         signInLinkText: 'Back to Sign In',
@@ -56,6 +64,19 @@ export const en = {
         forgotPasswordLink: 'Forgot Password',
         signInButtonText: 'Sign In',
       },
+      signUpForm: {
+        checkBoxText: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
+        terms: 'Terms of Service',
+        privacy: 'Privacy Policy',
+        signUpLinkText: 'Sign Up',
+        usernameSchema: {
+          minValue: 'Minimum number of characters 6',
+          maxValue: 'Maximum number of characters 30',
+        },
+        agreeTermsSchema: {
+          agreeMsg: 'Agree Terms',
+        },
+      },
       emailSent: {
         titleText: 'Email sent',
         notificationText(email: string) {
@@ -88,8 +109,16 @@ export const en = {
       emailSchema: {
         email: 'You entered an invalid email.',
       },
+      emailValidateSchema: {
+        emailValidation: 'The email must match the format\n example@example.com',
+      },
       passwordSchema: {
-        minLength: 'Password must be at least 3 characters',
+        minLength: 'Password must be at least 6 characters',
+        regexText:
+          'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      },
+      comparePassError: {
+        passError: 'The passwords must match',
       },
     },
     dialogs: {

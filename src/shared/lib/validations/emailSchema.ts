@@ -5,13 +5,13 @@ export const useEmailSchema = () => {
   const {
     t: {
       shared: {
-        validations: { emailSchema: schema },
+        validations: { emailValidateSchema: schema },
       },
     },
   } = useTranslation()
 
   const emailSchema = z.object({
-    email: z.string().email(schema.email).default(''),
+    email: z.string().email(schema.emailValidation).default(''),
   })
 
   return {
