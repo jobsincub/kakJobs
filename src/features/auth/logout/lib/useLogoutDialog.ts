@@ -1,8 +1,8 @@
 import { useLogoutMutation } from '@/entities/auth/api'
-import { useRouter } from 'next/navigation'
 import { useTranslation } from '@/shared/config'
-import { useEffect } from 'react'
 import { routes } from '@/shared/router/routes'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export const useLogoutDialog = () => {
   const email = 'Epam@epam.com' // Todo: change to email from store
@@ -20,7 +20,7 @@ export const useLogoutDialog = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push(routes.signin)
+      router.push(routes.signIn)
     }
   }, [isSuccess, router])
 
