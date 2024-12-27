@@ -1,6 +1,6 @@
 import { useLogoutMutation } from '@/entities/auth/api'
 import { useTranslation } from '@/shared/config'
-import { routes } from '@/shared/router/routes'
+import { ROUTES } from '@/shared/router/routes'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -20,7 +20,7 @@ export const useLogoutDialog = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push(routes.signIn)
+      router.push(ROUTES.AUTH.SIGN_IN)
     }
   }, [isSuccess, router])
 

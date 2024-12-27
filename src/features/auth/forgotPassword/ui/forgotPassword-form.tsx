@@ -1,10 +1,10 @@
 'use client'
 
-import { ForgotPasswordFormSchema, useForgotPasswordForm } from '@/features/auth/forgot-password'
+import { ForgotPasswordFormSchema, useForgotPasswordForm } from '@/features/auth/forgotPassword'
 import { ControlledReCaptcha, ControlledTextField } from '@/shared/ui'
+import { Button, Typography } from '@wandrehappen/ui-kit'
 import React from 'react'
 import s from './forgotPassword-form.module.scss'
-import { Button, Typography } from '@wandrehappen/ui-kit'
 
 type Props = {
   onSubmit: (data: ForgotPasswordFormSchema) => void
