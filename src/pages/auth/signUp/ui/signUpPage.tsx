@@ -1,20 +1,21 @@
 'use client'
 
-import { Button, Typography } from '@wandrehappen/ui-kit'
-import s from './signUpPage.module.scss'
 import { SignUpForm } from '@/features/auth/signup/ui'
+import { UseSignUpPage } from '@/pages/auth/signUp/lib/useSignUpPage'
+import { routes } from '@/shared/router/routes'
+import { EmailSentDialog } from '@/shared/ui'
+import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
+import Page from '@/widgets/page'
+import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import React from 'react'
-import { EmailSentDialog } from '@/shared/ui'
-import { routes } from '@/shared/router/routes'
-import Page from '@/widgets/page'
-import { UseSignUpPage } from '@/pages/auth/signUp/lib/useSignUpPage'
+import s from './signUpPage.module.scss'
 
 export const SignUpPage = () => {
   const { page, customError, isSuccess, email, onSubmit } = UseSignUpPage()
 
   return (
-    <Page mt={24} className={s.pageContainer}>
+    <Page mt={24} as={AuthFormWrapper}>
       <EmailSentDialog email={email} isOpen={isSuccess} />
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>{page.title}</h1>
