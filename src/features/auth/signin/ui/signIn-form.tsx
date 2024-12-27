@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const SignInForm = ({ onSubmit, error }: Props) => {
-  const { handleSubmit, control, signInForm } = useSignInForm()
+  const { handleSubmit, control, signInForm, isValid } = useSignInForm()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -36,7 +36,9 @@ export const SignInForm = ({ onSubmit, error }: Props) => {
       <Typography asChild color={'light-900'} className={s.forgotPassword}>
         <Link href={'/auth/forgot-password'}>{signInForm.forgotPasswordLink}</Link>
       </Typography>
-      <Button fullWidth>{signInForm.signInButtonText}</Button>
+      <Button disabled={!isValid} fullWidth>
+        {signInForm.signInButtonText}
+      </Button>
     </form>
   )
 }

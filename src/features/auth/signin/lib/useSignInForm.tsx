@@ -19,7 +19,7 @@ export const useSignInForm = () => {
   const {
     handleSubmit,
     control,
-    formState: {},
+    formState: { isValid },
   } = useForm<LoginFormSchema>({
     resolver: zodResolver(signInSchema),
     defaultValues: { email: '', password: '' },
@@ -34,5 +34,5 @@ export const useSignInForm = () => {
     },
   } = useTranslation()
 
-  return { control, handleSubmit, signInForm }
+  return { control, handleSubmit, signInForm, isValid }
 }
