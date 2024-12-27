@@ -10,7 +10,7 @@ export const useResendVerificationPage = () => {
     useResendVerificationEmailMutation()
   const router = useRouter()
 
-  const email = originalArgs?.email || ''
+  const email = originalArgs?.email
 
   useEffect(() => {
     if (isSuccess) {

@@ -1,12 +1,12 @@
 // @flow
 import { useSignUpMutation } from '@/entities/auth/api'
-import { useTranslation } from '@/shared/config'
 import { OutputSchema } from '@/features/auth/signup/lib/useSignUpForm'
+import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 
 export const UseSignUpPage = () => {
   const [signUp, { originalArgs, isSuccess, error }] = useSignUpMutation()
-  const email = originalArgs?.email || ''
+  const email = originalArgs?.email
 
   const {
     t: {

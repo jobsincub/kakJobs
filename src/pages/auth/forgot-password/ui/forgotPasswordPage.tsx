@@ -1,17 +1,15 @@
 'use client'
 import { ForgotPasswordForm } from '@/features/auth/forgot-password'
-import React from 'react'
-import { Typography, Button } from '@wandrehappen/ui-kit'
-import Link from 'next/link'
-import s from './forgotPasswordPage.module.scss'
 import { EmailSentDialog } from '@/shared/ui'
-import { UseForgotPasswordPage } from '../lib/useForgotPasswordPage'
 import Page from '@/widgets/page'
+import { Button, Typography } from '@wandrehappen/ui-kit'
+import Link from 'next/link'
+import React from 'react'
+import { UseForgotPasswordPage } from '../lib/useForgotPasswordPage'
+import s from './forgotPasswordPage.module.scss'
 
 const ForgotPasswordPage = () => {
-  const { page, onSubmit, customError, originalArgs, isSuccess } = UseForgotPasswordPage()
-
-  const email = originalArgs?.email || ''
+  const { page, onSubmit, customError, email, isSuccess } = UseForgotPasswordPage()
 
   return (
     <Page mt={36} className={s.pageContainer}>
