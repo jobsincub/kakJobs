@@ -1,2 +1,2 @@
-export * from './ui'
-export * from './lib'
+export { ResendVerificationForm } from './ui/resendVerification-form'
+export type { ResendVerificationEmailField } from './lib/useResendVerificationForm'

@@ -1,4 +1,4 @@
-import ResendVerificationEmailPage from '@/pages/auth/resendVerification/ui/resendVerificationPage'
+import ResendVerificationEmailPage from '@/pages/auth/resendVerification'
 
 export default function ResendVerification() {
   return <ResendVerificationEmailPage />

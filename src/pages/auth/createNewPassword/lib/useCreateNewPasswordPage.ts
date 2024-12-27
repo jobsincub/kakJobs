@@ -1,5 +1,6 @@
-import { useCreateNewPasswordMutation } from '@/entities/auth/api'
+import { useCreateNewPasswordMutation } from '@/entities/auth'
 import type { NewPasswordFields } from '@/features/auth/createNewPassword'
+
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 import { ROUTES } from '@/shared/router/routes'

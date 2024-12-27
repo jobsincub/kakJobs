@@ -1,6 +1,6 @@
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
-import { NewPasswordFields, useCreateNewPasswordForm } from '../lib'
+import { NewPasswordFields, useCreateNewPasswordForm } from '../lib/useCreateNewPassword'
 import s from './createNewPassword-form.module.scss'
 
 type Props = {

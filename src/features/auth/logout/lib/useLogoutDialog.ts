@@ -1,4 +1,4 @@
-import { useLogoutMutation } from '@/entities/auth/api'
+import { useLogoutMutation } from '@/entities/auth'
 import { useTranslation } from '@/shared/config'
 import { ROUTES } from '@/shared/router/routes'
 import { useRouter } from 'next/navigation'

@@ -1,12 +1,12 @@
 'use client'
-import { useAgreeTermsSchema } from '@/features/auth/signUp/model/agreeTermsSchema'
-import { useUserNameSchema } from '@/features/auth/signUp/model/userNameSchema'
 import { useTranslation } from '@/shared/config'
 import { useEmailSchema, usePasswordSchema } from '@/shared/lib'
 import { useConfirmPasswordSchema } from '@/shared/lib/validations/confirmPasswordSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useAgreeTermsSchema } from '../model/agreeTermsSchema'
+import { useUserNameSchema } from '../model/userNameSchema'
 
 type InputSchema = {
   userName: string

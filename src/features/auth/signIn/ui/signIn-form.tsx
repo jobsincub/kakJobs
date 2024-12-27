@@ -1,9 +1,9 @@
-import { type LoginFormSchema, useSignInForm } from '@/features/auth/signIn'
 import { ROUTES } from '@/shared/router/routes'
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import React from 'react'
+import { type LoginFormSchema, useSignInForm } from '../lib/useSignInForm'
 import s from './signIn-form.module.scss'
 
 type Props = {

@@ -1,5 +1,5 @@
-import { appSlice } from '@/entities/app/model'
-import { authApi } from '@/entities/auth/api'
+import { appSlice } from '@/entities/app'
+import { authApi } from '@/entities/auth'
 import { authSlice } from '@/entities/auth/model/authSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'

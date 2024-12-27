@@ -1,10 +1,10 @@
 'use client'
+import { LogoutDialog } from '@/features/auth/logout'
 import { LanguageSwitcher } from '@/features/languageSwitcher'
-import s from './Header.module.scss'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { clsx } from 'clsx'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import s from './Header.module.scss'
 import { Logo } from './logo'
-import { LogoutDialog } from '@/features/auth'
 
 type Props = ComponentPropsWithoutRef<'header'>
 

@@ -1,12 +1,12 @@
 import { inter } from '@/app/fonts'
 import { Providers } from '@/app/providers'
-import { Header } from '@/widgets/header/ui'
+import { Header } from '@/widgets/header'
+import { clsx } from 'clsx'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
 import type { ReactNode } from 'react'
 import s from './layout.module.scss'
-import { clsx } from 'clsx'
 
 export const metadata: Metadata = {
   title: 'Create Next App',

@@ -1,4 +1,4 @@
-import { selectLocal } from '@/entities/app/model'
+import { selectLocal } from '@/entities/app'
 import { useSelector } from 'react-redux'
 
 export const useCurrentLocal = () => {

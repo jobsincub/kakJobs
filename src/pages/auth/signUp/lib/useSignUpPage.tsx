@@ -1,5 +1,5 @@
-import { useSignUpMutation } from '@/entities/auth/api'
-import { OutputSchema } from '@/features/auth/signUp/lib/useSignUpForm'
+import { useSignUpMutation } from '@/entities/auth'
+import { OutputSchema } from '@/features/auth/signUp'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 

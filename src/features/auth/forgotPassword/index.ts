@@ -1,4 +1,2 @@
-export * from './ui'
-export * from './lib'
-// export * from './api'
-// export * from './model'
+export { ForgotPasswordForm } from './ui/forgotPassword-form'
+export type { ForgotPasswordFormSchema } from './lib/useForgotPasswordForm'

@@ -1,6 +1,6 @@
 'use client'
 
-import { TermsOfServicePage } from '@/pages/legalInformation/ui/terms-of-service'
+import { TermsOfServicePage } from '@/pages/legalInformation'
 
 export default function TermsOfService() {
   return <TermsOfServicePage />

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import { Trans } from '@/shared/config/i18n/ui/Trans'
 import {
   Button,
   Dialog,
@@ -14,9 +14,9 @@ import {
   Logout,
   Typography,
 } from '@wandrehappen/ui-kit'
+import React from 'react'
+import { useLogoutDialog } from '../../lib/useLogoutDialog'
 import s from './LogoutDialog.module.scss'
-import { Trans } from '@/shared/config/i18n/ui/Trans'
-import { useLogoutDialog } from '@/features/auth/logout/lib/useLogoutDialog'
 
 export const LogoutDialog = () => {
   const { logout, logOutDialog, email, dialogs } = useLogoutDialog()

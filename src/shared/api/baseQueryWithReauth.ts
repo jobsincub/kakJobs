@@ -1,7 +1,7 @@
+import { setAccessToken } from '@/entities/auth'
 import { BACKEND_BASE_URL, RootState } from '@/shared/config'
-import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { setAccessToken } from '@/entities/auth/model'
+import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
 type ApiResponse<T> = {

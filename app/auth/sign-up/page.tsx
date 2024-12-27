@@ -1,4 +1,4 @@
-import { SignUpPage } from '@/pages/auth/signUp/ui/signUpPage'
+import SignUpPage from '@/pages/auth/signUp'
 
 export default function SignUp() {
   return <SignUpPage />

@@ -1,9 +1,7 @@
-'use client'
-
-import { ForgotPasswordFormSchema, useForgotPasswordForm } from '@/features/auth/forgotPassword'
 import { ControlledReCaptcha, ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import React from 'react'
+import { ForgotPasswordFormSchema, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
 import s from './forgotPassword-form.module.scss'
 
 type Props = {

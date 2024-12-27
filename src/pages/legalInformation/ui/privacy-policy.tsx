@@ -1,6 +1,6 @@
-import { Content } from '@/pages/legalInformation/ui/content'
-import React from 'react'
 import { useTranslation } from '@/shared/config'
+import React from 'react'
+import { Content } from './content'
 
 export function PrivacyPolicyPage() {
   const {

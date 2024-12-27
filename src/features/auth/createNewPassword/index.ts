@@ -1,2 +1,2 @@
-export * from './ui'
-export * from './lib'
+export { CreateNewPasswordForm } from './ui/createNewPassword-form'
+export type { NewPasswordFields } from './lib/useCreateNewPassword'
