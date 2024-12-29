@@ -1,5 +1,5 @@
 import { OutputSchema, useSignUpForm } from '@/features/auth/signUp/lib/useSignUpForm'
-import s from '@/features/auth/signup/ui/signUp-form.module.scss'
+import s from './signUp-form.module.scss'
 import { Trans } from '@/shared/config'
 import { ROUTES } from '@/shared/router/routes'
 import { ControlledCheckbox, ControlledTextField } from '@/shared/ui'
