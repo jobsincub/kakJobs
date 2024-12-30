@@ -45,8 +45,8 @@ export const en = {
         sendLinkButtonText: 'Send Link',
       },
     },
-    post: {
-      delete: {
+    posts: {
+      deletePostDialog: {
         buttonText: 'Delete Post',
         titleText: 'Delete Post',
         confirmationText: 'Are you sure you want to delete this post?',

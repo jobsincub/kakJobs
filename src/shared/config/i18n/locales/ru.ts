@@ -48,8 +48,8 @@ export const ru: LocaleType = {
         sendLinkButtonText: 'Отправить ссылку',
       },
     },
-    post: {
-      delete: {
+    posts: {
+      deletePostDialog: {
         buttonText: 'Удалить пост',
         titleText: 'Удаление поста',
         confirmationText: 'Вы уверены, что хотите удалить этот пост?',

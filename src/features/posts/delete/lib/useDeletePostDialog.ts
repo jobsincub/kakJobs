@@ -4,11 +4,11 @@ export const useDeletePostDialog = () => {
   const {
     t: {
       features: {
-        post: { delete: deletePost },
+        posts: { deletePostDialog },
       },
       shared: { dialogs },
     },
   } = useTranslation()
 
-  return { deletePost, dialogs }
+  return { deletePostDialog, dialogs }
 }

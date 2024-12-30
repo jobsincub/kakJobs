@@ -17,7 +17,7 @@ import s from './DeletePostDialog.module.scss'
 import { useDeletePostDialog } from '../../lib/useDeletePostDialog'
 
 export const DeletePostDialog = () => {
-  const { dialogs, deletePost } = useDeletePostDialog()
+  const { dialogs, deletePostDialog } = useDeletePostDialog()
 
   return (
     <Dialog>
@@ -25,17 +25,17 @@ export const DeletePostDialog = () => {
         <Typography asChild variant={'regular14'}>
           <Button variant={'link'}>
             <TrashOutline />
-            {deletePost.buttonText}
+            {deletePostDialog.buttonText}
           </Button>
         </Typography>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{deletePost.titleText}</DialogTitle>
+          <DialogTitle>{deletePostDialog.titleText}</DialogTitle>
         </DialogHeader>
         <DialogBody className={s.body}>
           <DialogDescription className={s.description}>
-            {deletePost.confirmationText}
+            {deletePostDialog.confirmationText}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
