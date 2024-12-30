@@ -1,12 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from '@/shared/api'
 
-export const postApi = createApi({
+export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Posts'],
   endpoints: builder => ({
-    // TODO: заменить тип успешного запроса, если будет отличаться
     deletePost: builder.mutation<void, string>({
       query(id) {
         return {
@@ -19,4 +18,4 @@ export const postApi = createApi({
   }),
 })
 
-export const { useDeletePostMutation } = postApi
+export const { useDeletePostMutation } = postsApi
