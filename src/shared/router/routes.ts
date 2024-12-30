@@ -12,4 +12,5 @@ export const ROUTES = {
     FORGOT_PASSWORD: '/auth/forgot-password',
     RESEND_VERIFICATION: '/auth/resend-verification',
   },
+  PROFILE: '/profile',
 }

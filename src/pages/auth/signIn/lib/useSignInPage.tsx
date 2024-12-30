@@ -2,6 +2,7 @@ import { useSignInMutation } from '@/entities/user'
 import type { LoginFormSchema } from '@/features/auth/signIn'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
+import { ROUTES } from '@/shared/router/routes'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -12,7 +13,7 @@ export const UseSignInPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      // router.push('/auth/signup')
+      router.push(ROUTES.PROFILE)
     }
   }, [isSuccess, router])
 
