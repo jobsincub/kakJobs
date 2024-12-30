@@ -1,4 +1,4 @@
-import { useCreateNewPasswordMutation } from '@/entities/auth'
+import { useCreateNewPasswordMutation } from '@/entities/user'
 import type { NewPasswordFields } from '@/features/auth/createNewPassword'
 
 import { useTranslation } from '@/shared/config'
