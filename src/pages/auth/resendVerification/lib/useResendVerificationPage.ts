@@ -1,4 +1,4 @@
-import { useResendVerificationEmailMutation } from '@/entities/auth'
+import { useResendVerificationEmailMutation } from '@/entities/user'
 import { ResendVerificationEmailField } from '@/features/auth/resendVerification'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'

@@ -1,4 +1,4 @@
-import { loggedOut, setAccessToken } from '@/entities/auth'
+import { loggedOut, setAccessToken } from '@/entities/user'
 import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
 

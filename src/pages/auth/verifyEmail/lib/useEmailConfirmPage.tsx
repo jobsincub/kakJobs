@@ -1,4 +1,4 @@
-import { useVerifyEmailMutation } from '@/entities/auth'
+import { useVerifyEmailMutation } from '@/entities/user'
 import { useTranslation } from '@/shared/config'
 import { ROUTES } from '@/shared/router/routes'
 import { useRouter, useSearchParams } from 'next/navigation'

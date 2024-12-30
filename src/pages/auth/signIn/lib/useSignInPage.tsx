@@ -1,4 +1,4 @@
-import { useSignInMutation } from '@/entities/auth'
+import { useSignInMutation } from '@/entities/user'
 import type { LoginFormSchema } from '@/features/auth/signIn'
 import { useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
