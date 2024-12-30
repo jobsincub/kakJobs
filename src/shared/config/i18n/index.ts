@@ -1,2 +1,6 @@
-export * from './locales'
-export * from './lib'
+export { Trans } from './ui/Trans'
+export { useTranslation } from './lib/useTranslation'
+export { useCurrentLocal } from './lib/useCurrentLocal'
+export { createPluralize } from './lib/createPluralize'
+export { en } from './locales/en'
+export { ru } from './locales/ru'

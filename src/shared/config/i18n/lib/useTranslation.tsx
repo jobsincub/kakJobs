@@ -1,4 +1,6 @@
-import { en, ru, useCurrentLocal } from '@/shared/config/i18n'
+import { useCurrentLocal } from '@/shared/config'
+import { en } from '../locales/en'
+import { ru } from '../locales/ru'
 
 /**
  * Custom hook to get the translation object based on the current locale.

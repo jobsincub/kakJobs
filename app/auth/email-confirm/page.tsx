@@ -1,3 +1,5 @@
-export default function EmailConfirmPage() {
-  return <div>Email has been confirmed </div>
+import { EmailConfirmPage } from '@/pages/auth/verifyEmail'
+
+export default function EmailConfirm() {
+  return <EmailConfirmPage />
 }
