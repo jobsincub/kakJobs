@@ -51,10 +51,10 @@ export const en = {
         btnText: 'Back to Sign Up',
       },
       privacyPolicy: {
-        headText: 'Политика конфиденциальности',
+        headText: 'Privacy Policy',
       },
       termsService: {
-        headText: 'Правила пользования сервисом',
+        headText: 'Terms of Service',
       },
     },
   },
