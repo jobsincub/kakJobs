@@ -1,5 +1,6 @@
 import { loggedOut, setAccessToken } from '@/entities/user'
 import { baseQueryWithReauth } from '@/shared/api'
+
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
