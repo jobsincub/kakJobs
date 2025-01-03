@@ -23,7 +23,7 @@ export const postSlice = createSlice({
       state.currentStep -= 1
     },
     setImage(state, action: PayloadAction<File>) {
-      state.image = [action.payload, ...state.image]
+      state.image.unshift(action.payload)
       state.currentStep = 1
     },
     setDescription(state, action: PayloadAction<string>) {

@@ -1,3 +1,4 @@
+'use client'
 import { AddPhoto } from '@/features/post/createPost'
 import { Button, Dialog, DialogTrigger } from '@wandrehappen/ui-kit'
 import React from 'react'
