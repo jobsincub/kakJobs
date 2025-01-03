@@ -2,6 +2,7 @@
 import { changeLocal, initializeLocal, type Local } from '@/entities/app'
 import { useCurrentLocal } from '@/shared/config'
 import { useAppDispatch } from '@/shared/lib'
+
 import { RuFlag, Select, UkFlag } from '@wandrehappen/ui-kit'
 import { useEffect } from 'react'
 import s from './languageSwitcher.module.scss'
