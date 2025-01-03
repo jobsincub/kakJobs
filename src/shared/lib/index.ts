@@ -1,5 +1,4 @@
 export { useEmailSchema } from './validations/emailSchema'
 export { usePasswordSchema } from './validations/passwordSchema'
 export { recaptchaSchema } from './validations/recaptchaSchema'
-export { createAppAsyncThunk } from './hooks/createAppAsyncThunk'
-export { useAppDispatch } from './hooks/useAppDispatch'
+export { createAppAsyncThunk, useAppDispatch } from './store/redux'
