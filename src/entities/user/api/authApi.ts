@@ -1,6 +1,6 @@
+import { loggedOut, setAccessToken } from '@/entities/user'
 import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { loggedOut, setAccessToken } from '../model/authSlice'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
