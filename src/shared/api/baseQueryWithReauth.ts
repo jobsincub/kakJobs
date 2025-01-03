@@ -1,5 +1,5 @@
 import { setAccessToken } from '@/entities/user'
-import { BACKEND_BASE_URL, RootState } from '@/shared/config'
+import { BACKEND_BASE_URL } from '@/shared/config'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
