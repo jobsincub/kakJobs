@@ -1,11 +1,18 @@
-import { loggedOut, setAccessToken } from '@/entities/user'
 import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
+import { loggedOut, setAccessToken } from '../model/authSlice'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['user'],
   endpoints: builder => ({
+    me: builder.query<{ email: string; userName: string; userId: string }, void>({
+      query: () => ({
+        url: 'auth/me',
+      }),
+      providesTags: ['user'],
+    }),
     signIn: builder.mutation<
       ApiResponse<{ accessToken: string }>,
       { email: string; password: string }
@@ -18,11 +25,13 @@ export const authApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
+
           dispatch(setAccessToken(data.data))
         } catch (error) {
           console.error(error)
         }
       },
+      invalidatesTags: ['user'],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
@@ -90,6 +99,7 @@ export const {
   useCreateNewPasswordMutation,
   usePasswordRecoveryMutation,
   useVerifyEmailMutation,
+  useMeQuery,
 } = authApi
 
 type ApiResponse<T> = {
