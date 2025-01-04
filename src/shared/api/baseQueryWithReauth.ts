@@ -30,6 +30,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock()
   let result = await baseQuery(args, api, extraOptions)
+
   if (result.error && result.error.status === 401) {
     // checking whether the mutex is locked
     if (!mutex.isLocked()) {
@@ -49,6 +50,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           //   setAccessToken((refreshResult.data as ApiResponse<{ accessToken: string }>).data)
           // )
           const accessToken = (refreshResult.data as ApiResponse<{ accessToken: string }>).data
+            .accessToken
           api.dispatch({
             payload: { accessToken },
             type: 'auth/setAccessToken',
