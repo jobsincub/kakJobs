@@ -1,19 +1,7 @@
-import { setAccessToken } from '@/entities/user'
 import { BACKEND_BASE_URL } from '@/shared/config'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-
-type ApiResponse<T> = {
-  data: T
-  code: number
-  extensions: Extension[]
-}
-
-type Extension = {
-  message: string
-  field: string | null
-}
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BACKEND_BASE_URL,
@@ -55,14 +43,21 @@ export const baseQueryWithReauth: BaseQueryFn<
           api,
           extraOptions
         )
+
         if (refreshResult.data) {
-          api.dispatch(
-            setAccessToken((refreshResult.data as ApiResponse<{ accessToken: string }>).data)
-          )
+          // api.dispatch(
+          //   setAccessToken((refreshResult.data as ApiResponse<{ accessToken: string }>).data)
+          // )
+          const accessToken = (refreshResult.data as ApiResponse<{ accessToken: string }>).data
+          api.dispatch({
+            payload: { accessToken },
+            type: 'auth/setAccessToken',
+          })
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
           //TODO api.dispatch(loggedOut()) uncomment after merge logout
+          api.dispatch({ payload: undefined, type: 'auth/loggedOut' })
         }
       } finally {
         // release must be called once the mutex should be released again.

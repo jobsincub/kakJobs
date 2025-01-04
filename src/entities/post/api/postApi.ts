@@ -17,17 +17,6 @@ export const postApi = createApi({
 
 export const { useCreatePostMutation } = postApi
 
-type ApiResponse<T> = {
-  data: T
-  code: number
-  extensions: Extension[]
-}
-
-type Extension = {
-  message: string
-  field: string | null
-}
-
 type PostImage = {
   id: string
   imageUrl: string

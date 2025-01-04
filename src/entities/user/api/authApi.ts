@@ -102,14 +102,3 @@ export const {
   useVerifyEmailMutation,
   useMeQuery,
 } = authApi
-
-type ApiResponse<T> = {
-  data: T
-  code: number
-  extensions: Extension[]
-}
-
-type Extension = {
-  message: string
-  field: string | null
-}

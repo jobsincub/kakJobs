@@ -47,4 +47,3 @@ export const authSlice = createSlice({
 
 export const { setAccessToken, loggedOut } = authSlice.actions
 export const { selectIsLoggedIn } = authSlice.selectors
-export default authSlice.reducer
