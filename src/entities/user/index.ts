@@ -10,4 +10,4 @@ export {
   authApi,
 } from './api/authApi'
 
-export { authSlice, setAccessToken, loggedOut, selectIsLoggedIn } from './model/authSlice'
+export { authSlice, selectIsLoggedIn } from './model/authSlice'

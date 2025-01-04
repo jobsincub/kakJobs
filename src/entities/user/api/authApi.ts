@@ -1,5 +1,5 @@
-import { loggedOut, setAccessToken } from '@/entities/user'
 import { baseQueryWithReauth } from '@/shared/api'
+
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -22,15 +22,6 @@ export const authApi = createApi({
         method: 'POST',
         body,
       }),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled
-
-          dispatch(setAccessToken(data.data))
-        } catch (error) {
-          console.error(error)
-        }
-      },
       invalidatesTags: ['user'],
     }),
     logout: builder.mutation<void, void>({
@@ -38,14 +29,6 @@ export const authApi = createApi({
         url: 'auth/logout',
         method: 'POST',
       }),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
-        try {
-          await queryFulfilled
-          dispatch(loggedOut())
-        } catch (error) {
-          console.error('Logout failed:', error)
-        }
-      },
     }),
     resendVerificationEmail: builder.mutation<void, { email: string }>({
       query: params => ({
@@ -101,14 +84,3 @@ export const {
   useVerifyEmailMutation,
   useMeQuery,
 } = authApi
-
-type ApiResponse<T> = {
-  data: T
-  code: number
-  extensions: Extension[]
-}
-
-type Extension = {
-  message: string
-  field: string | null
-}
