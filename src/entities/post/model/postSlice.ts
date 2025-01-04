@@ -1,14 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
+
+interface PostFile {
+  id: string
+  file: File
+}
 
 interface PostState {
   currentStep: number
-  image: File[]
+  photos: PostFile[]
   description: string | null
 }
 
 const initialState: PostState = {
   currentStep: 0,
-  image: [],
+  photos: [],
   description: null,
 }
 
@@ -22,9 +27,15 @@ export const postSlice = createSlice({
     previousStep(state) {
       state.currentStep -= 1
     },
-    setImage(state, action: PayloadAction<File>) {
-      state.image.unshift(action.payload)
+    setPhoto(state, action: PayloadAction<File>) {
+      state.photos.unshift({
+        id: nanoid(),
+        file: action.payload,
+      })
       state.currentStep = 1
+    },
+    removePhoto(state, action: PayloadAction<string>) {
+      state.photos = state.photos.filter(photo => photo.id !== action.payload)
     },
     setDescription(state, action: PayloadAction<string>) {
       state.description = action.payload
@@ -35,4 +46,5 @@ export const postSlice = createSlice({
   },
 })
 
-export const { nextStep, previousStep, setImage, setDescription, reset } = postSlice.actions
+export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto } =
+  postSlice.actions

@@ -1,4 +1,5 @@
-import { createSlice, isAnyOf, type PayloadAction } from '@reduxjs/toolkit'
+import { refreshToken } from '@/shared/api/baseQueryWithReauth'
+import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { authApi } from '../api/authApi'
 
 type UserData = {
@@ -22,14 +23,19 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setAccessToken: (state, action: PayloadAction<{ accessToken: string }>) => {
-      state.accessToken = action.payload.accessToken
-    },
-    loggedOut: () => initialState,
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
+      .addMatcher(
+        isAnyOf(authApi.endpoints.signIn.matchFulfilled, refreshToken.fulfilled),
+        (state, { payload }) => {
+          state.accessToken = payload.data.accessToken
+        }
+      )
+      .addMatcher(
+        isAnyOf(authApi.endpoints.logout.matchFulfilled, refreshToken.rejected),
+        () => initialState
+      )
       .addMatcher(
         isAnyOf(authApi.endpoints.signIn.matchFulfilled, authApi.endpoints.me.matchFulfilled),
         state => {
@@ -46,5 +52,4 @@ export const authSlice = createSlice({
   },
 })
 
-export const { setAccessToken, loggedOut } = authSlice.actions
 export const { selectIsLoggedIn, selectUserName } = authSlice.selectors

@@ -5,5 +5,6 @@ export {
   previousStep,
   reset,
   setDescription,
-  setImage,
+  setPhoto,
+  removePhoto,
 } from './model/postSlice'
