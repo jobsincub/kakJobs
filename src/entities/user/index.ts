@@ -6,7 +6,8 @@ export {
   useResendVerificationEmailMutation,
   useVerifyEmailMutation,
   useSignInMutation,
+  useMeQuery,
   authApi,
 } from './api/authApi'
 
-export { authSlice, setAccessToken, loggedOut } from './model/authSlice'
+export { authSlice, selectIsLoggedIn } from './model/authSlice'

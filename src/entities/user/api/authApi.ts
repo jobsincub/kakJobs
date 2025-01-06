@@ -1,11 +1,18 @@
-import { loggedOut, setAccessToken } from '@/entities/user'
 import { baseQueryWithReauth } from '@/shared/api'
+
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['user'],
   endpoints: builder => ({
+    me: builder.query<{ email: string; userName: string; userId: string }, void>({
+      query: () => ({
+        url: 'auth/me',
+      }),
+      providesTags: ['user'],
+    }),
     signIn: builder.mutation<
       ApiResponse<{ accessToken: string }>,
       { email: string; password: string }
@@ -15,28 +22,13 @@ export const authApi = createApi({
         method: 'POST',
         body,
       }),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled
-          dispatch(setAccessToken(data.data))
-        } catch (error) {
-          console.error(error)
-        }
-      },
+      invalidatesTags: ['user'],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
         url: 'auth/logout',
         method: 'POST',
       }),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
-        try {
-          await queryFulfilled
-          dispatch(loggedOut())
-        } catch (error) {
-          console.error('Logout failed:', error)
-        }
-      },
     }),
     resendVerificationEmail: builder.mutation<void, { email: string }>({
       query: params => ({
@@ -90,15 +82,5 @@ export const {
   useCreateNewPasswordMutation,
   usePasswordRecoveryMutation,
   useVerifyEmailMutation,
+  useMeQuery,
 } = authApi
-
-type ApiResponse<T> = {
-  data: T
-  code: number
-  extensions: Extension[]
-}
-
-type Extension = {
-  message: string
-  field: string | null
-}

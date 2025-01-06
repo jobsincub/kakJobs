@@ -1,5 +1,7 @@
 import { appSlice } from '@/entities/app'
+import { postApi } from '@/entities/post'
 import { authApi, authSlice } from '@/entities/user'
+import { postSlice } from '@/widgets/createPost'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
@@ -9,14 +11,11 @@ export const makeStore = () => {
       [authSlice.reducerPath]: authSlice.reducer,
       [authApi.reducerPath]: authApi.reducer,
       [appSlice.reducerPath]: appSlice.reducer,
+      [postApi.reducerPath]: postApi.reducer,
+      [postSlice.reducerPath]: postSlice.reducer,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware),
   })
 }
 
 setupListeners(makeStore().dispatch)
-
-export type AppStore = ReturnType<typeof makeStore>
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
