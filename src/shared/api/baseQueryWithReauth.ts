@@ -46,6 +46,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         await api.dispatch(refreshToken({ api, extraOptions })).unwrap()
 
         result = await baseQuery(args, api, extraOptions)
+      } catch {
       } finally {
         // release must be called once the mutex should be released again.
         release()
@@ -86,7 +87,7 @@ export const refreshToken = createAsyncThunk<RefreshTokenResponse, RefreshTokenA
 
       return { data: { accessToken } }
     } else {
-      return rejectWithValue(null)
+      return rejectWithValue('11222')
     }
   }
 )
