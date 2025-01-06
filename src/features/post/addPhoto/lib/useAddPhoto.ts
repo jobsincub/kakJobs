@@ -1,5 +1,5 @@
-import { setImage } from '@/entities/post'
 import { useAppDispatch } from '@/shared/lib'
+import { setPhoto } from '@/widgets/createPost'
 import { ChangeEvent, DragEvent, useRef, useState } from 'react'
 import { z } from 'zod'
 
@@ -16,19 +16,28 @@ const fileSchema = z.object({
 
 export const useAddPhoto = () => {
   const dispatch = useAppDispatch()
+
   const [dragOver, setDragOver] = useState(false)
+
   const [error, setError] = useState<string | null>(null)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const fileUploadCallback = (file: File) => {
     const result = fileSchema.safeParse(file)
-    if (result.success) {
-      dispatch(setImage(file))
-      setError(null)
-    } else {
-      setError(result.error.errors[0].message)
+    if (!result.success) {
+      setError(result.error.errors[0]?.message || 'Invalid file')
+      return
     }
+    dispatch(setPhoto(file))
+    setError(null)
+
+    // fileToBase64(file)
+    //   .then(base64Image => {
+    //   })
+    //   .catch(() => {
+    //     setError('Failed to convert file to Base64')
+    //   })
   }
 
   const updateImageHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,11 +62,11 @@ export const useAddPhoto = () => {
 
   const fileDropHandler = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault()
-    if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-      fileUploadCallback(event.dataTransfer.files[0])
-    }
+    const file = event.dataTransfer.files?.[0]
+    if (file) fileUploadCallback(file)
     setDragOver(false)
   }
+
   return {
     dragOverHandler,
     dragLeaveHandler,

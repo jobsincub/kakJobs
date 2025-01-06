@@ -2,7 +2,7 @@
 import {
   Button,
   DialogBody,
-  DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   ImageOutline,
@@ -26,11 +26,15 @@ export const AddPhoto = () => {
   } = useAddPhoto()
 
   return (
-    <DialogContent className={s.content}>
+    <>
       <DialogHeader>
         <DialogTitle>Add Photo</DialogTitle>
       </DialogHeader>
       <DialogBody className={s.body}>
+        <DialogDescription style={{ display: 'none' }}>
+          This dialog allows you to add a photo by dragging and dropping a file or selecting one
+          from your computer.
+        </DialogDescription>
         <div
           className={`${s.card} ${dragOver ? s.dragOver : ''}`}
           onDragOver={dragOverHandler}
@@ -53,6 +57,6 @@ export const AddPhoto = () => {
           />
         </div>
       </DialogBody>
-    </DialogContent>
+    </>
   )
 }

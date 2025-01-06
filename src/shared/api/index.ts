@@ -1,1 +1,1 @@
-export { baseQueryWithReauth } from './baseQueryWithReauth'
+export { baseQueryWithReauth, refreshToken } from './baseQueryWithReauth'
