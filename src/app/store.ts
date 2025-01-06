@@ -1,6 +1,7 @@
 import { appSlice } from '@/entities/app'
-import { postApi, postSlice } from '@/entities/post'
+import { postApi } from '@/entities/post'
 import { authApi, authSlice } from '@/entities/user'
+import { postSlice } from '@/widgets/createPost'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 

@@ -1,4 +1,4 @@
-import { refreshToken } from '@/shared/api/baseQueryWithReauth'
+import { refreshToken } from '@/shared/api'
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { authApi } from '../api/authApi'
 

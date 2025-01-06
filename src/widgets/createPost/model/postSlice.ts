@@ -12,7 +12,7 @@ interface PostState {
 }
 
 const initialState: PostState = {
-  currentStep: 0,
+  currentStep: 1,
   photos: [],
   description: null,
 }
@@ -32,7 +32,7 @@ export const postSlice = createSlice({
         id: nanoid(),
         file: action.payload,
       })
-      state.currentStep = 1
+      state.currentStep = 2
     },
     removePhoto(state, action: PayloadAction<string>) {
       state.photos = state.photos.filter(photo => photo.id !== action.payload)
@@ -44,7 +44,12 @@ export const postSlice = createSlice({
       return initialState
     },
   },
+  selectors: {
+    selectStep: state => state.currentStep,
+    selectPhotos: state => state.photos,
+  },
 })
 
 export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto } =
   postSlice.actions
+export const { selectStep, selectPhotos } = postSlice.selectors
