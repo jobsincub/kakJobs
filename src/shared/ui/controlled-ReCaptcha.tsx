@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { GoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { useEffect } from 'react'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { type FieldValues, useController, type UseControllerProps } from 'react-hook-form'
 
 type Props<T extends FieldValues> = UseControllerProps<T>
@@ -13,21 +13,20 @@ export const ControlledReCaptcha = <T extends FieldValues>({
 }: Props<T>) => {
   const {
     field: { onChange },
-    fieldState: { error },
+    formState: { isSubmitting },
   } = useController({ control, name, defaultValue, rules, shouldUnregister })
 
-  const onVerify = useCallback(
-    (token: string) => {
-      console.log(token)
-      onChange(token)
-    },
-    [onChange]
-  )
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
-  return (
-    <div>
-      <GoogleReCaptcha onVerify={onVerify} />
-      {error && <span style={{ color: 'red' }}>{error.message}</span>}
-    </div>
-  )
+  useEffect(() => {
+    ;(async () => {
+      if (executeRecaptcha) {
+        const token = await executeRecaptcha()
+        console.log(token)
+        onChange(token) // Send token to backend or handle verification here
+      }
+    })()
+  }, [executeRecaptcha, onChange, isSubmitting])
+
+  return null
 }
