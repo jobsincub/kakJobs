@@ -6,7 +6,7 @@ interface PostFile {
 }
 
 interface PostState {
-  currentStep: number
+  currentStep: OrderStatus
   photos: PostFile[]
   description: string | null
 }
@@ -15,6 +15,13 @@ const initialState: PostState = {
   currentStep: 1,
   photos: [],
   description: null,
+}
+
+export enum OrderStatus {
+  addPhoto = 1,
+  Cropping = 2,
+  Filters = 3,
+  Publications = 4,
 }
 
 export const postSlice = createSlice({

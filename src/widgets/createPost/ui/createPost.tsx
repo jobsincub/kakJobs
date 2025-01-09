@@ -4,7 +4,7 @@ import { CropPhoto } from '@/features/post/cropPhoto'
 import { Button, Dialog, DialogContent, DialogTrigger } from '@wandrehappen/ui-kit'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectStep } from '../model/postSlice'
+import { OrderStatus, selectStep } from '../model/postSlice'
 import s from './createPost.module.scss'
 
 export const CreatePost = () => {
@@ -14,13 +14,12 @@ export const CreatePost = () => {
 
   const renderContentByStep = () => {
     switch (step) {
-      case 1:
+      case OrderStatus['addPhoto']:
         return <AddPhoto />
-      case 2:
+      case OrderStatus['Cropping']:
         return <CropPhoto />
-      case 3:
+      case OrderStatus['Filters']:
       // return <ReviewPost />
-      // Добавьте другие случаи по мере необходимости
       default:
         return null
     }
