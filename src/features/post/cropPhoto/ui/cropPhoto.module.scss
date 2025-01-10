@@ -1,9 +1,5 @@
 
 .iconWrapper {
-  position: absolute;
-  bottom: 11px;
-  left: 11px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,10 +13,8 @@
 }
 
 .iconContainer {
-  position: absolute; /* Абсолютное позиционирование */
-  bottom: 10px; /* Отступ от нижнего края */
-  left: 50%; /* Центрируем по горизонтали */
-  transform: translateX(-50%); /* Убираем смещение от центра */
+  position: absolute;
+  bottom: 15px;
 
   display: flex;
   gap: 10px;

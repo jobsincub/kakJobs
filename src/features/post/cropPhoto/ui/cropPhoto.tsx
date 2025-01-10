@@ -34,11 +34,13 @@ export const CropPhoto = () => {
             style={{ width: '100%', height: 'auto' }}
           />
           <div className={s.iconContainer}>
-            <div className={s.iconWrapper}>
-              <Expand />
-            </div>
-            <div className={s.iconWrapper}>
-              <MaximizeOutline />
+            <div style={{ display: 'flex', gap: '15px' }}>
+              <div className={s.iconWrapper}>
+                <Expand />
+              </div>
+              <div className={s.iconWrapper}>
+                <MaximizeOutline />
+              </div>
             </div>
             <div className={s.iconWrapper}>
               <ImageOutline />
