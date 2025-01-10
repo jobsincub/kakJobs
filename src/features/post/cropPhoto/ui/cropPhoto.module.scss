@@ -1,0 +1,28 @@
+
+.iconWrapper {
+  position: absolute;
+  bottom: 11px;
+  left: 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  opacity: 0.8;
+  background-color: var(--color-dark-500);
+  border-radius: 2px;
+}
+
+.iconContainer {
+  position: absolute; /* Абсолютное позиционирование */
+  bottom: 10px; /* Отступ от нижнего края */
+  left: 50%; /* Центрируем по горизонтали */
+  transform: translateX(-50%); /* Убираем смещение от центра */
+
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
