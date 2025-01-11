@@ -18,7 +18,7 @@ export const PublishDialogContent = () => {
   const userName = useSelector(selectUserName)
 
   return (
-    <DialogContent>
+    <DialogContent className={s.dialogContent}>
       <DialogHeader isCloseIconVisible={false}>
         <Button className={s.backIconBtn} variant={'link'}>
           <ArrowIos />
