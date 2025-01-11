@@ -2,6 +2,7 @@
 import {
   Button,
   DialogBody,
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -26,7 +27,7 @@ export const AddPhoto = () => {
   } = useAddPhoto()
 
   return (
-    <>
+    <DialogContent className={s.content}>
       <DialogHeader>
         <DialogTitle>Add Photo</DialogTitle>
       </DialogHeader>
@@ -53,10 +54,10 @@ export const AddPhoto = () => {
             type={'file'}
             accept={'image/png, image/jpeg'}
             onChange={updateImageHandler}
-            style={{ display: 'none' }}
+            className={s.hiddenInput}
           />
         </div>
       </DialogBody>
-    </>
+    </DialogContent>
   )
 }

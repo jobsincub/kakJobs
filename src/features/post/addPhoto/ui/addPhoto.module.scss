@@ -1,3 +1,9 @@
+.content {
+  width: 100%;
+  max-width: 492px;
+  height: 564px;
+}
+
 .body {
   display: flex;
   flex-direction: column;
@@ -35,4 +41,17 @@
   flex-direction: column;
   gap: 24px;
   margin-top: 55px;
+}
+
+.hiddenInput {
+  overflow: hidden;
+
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+
+  line-height: 0;
+
+  opacity: 0;
 }

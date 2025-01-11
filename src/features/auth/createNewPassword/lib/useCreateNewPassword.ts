@@ -8,10 +8,11 @@ export type PasswordFields = {
   password: string
   passwordConfirmation: string
 }
+
 export type NewPasswordFields = {
   newPassword: string
-  passwordConfirmation: string
 }
+
 export const useCreateNewPasswordForm = () => {
   const { passwordSchema } = usePasswordSchema()
   const {
