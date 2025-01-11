@@ -4,6 +4,7 @@ import {
   ArrowIos,
   Button,
   DialogBody,
+  DialogContent,
   DialogHeader,
   DialogTitle,
   Textarea,
@@ -17,7 +18,7 @@ export const PublishDialogContent = () => {
   const userName = useSelector(selectUserName)
 
   return (
-    <>
+    <DialogContent>
       <DialogHeader isCloseIconVisible={false}>
         <Button className={s.backIconBtn} variant={'link'}>
           <ArrowIos />
@@ -42,6 +43,6 @@ export const PublishDialogContent = () => {
           </div>
         </form>
       </DialogBody>
-    </>
+    </DialogContent>
   )
 }
