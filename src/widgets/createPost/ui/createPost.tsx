@@ -22,9 +22,7 @@ export const CreatePost = () => {
         return <CropPhoto />
       case OrderStatus.Filters:
         return <Filters />
-      case OrderStatus['Filters']:
-      // return <ReviewPost />
-      case OrderStatus['Publications']:
+      case OrderStatus.Publications:
         return <PublishDialogContent />
       default:
         return null
