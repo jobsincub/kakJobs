@@ -6,6 +6,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { OrderStatus, selectStep } from '../model/postSlice'
 import s from './createPost.module.scss'
+import { PublishDialogContent } from '@/features/post/publish'
 
 export const CreatePost = () => {
   // const [crop, setCrop] = useState<Crop>()
@@ -20,6 +21,8 @@ export const CreatePost = () => {
         return <CropPhoto />
       case OrderStatus['Filters']:
       // return <ReviewPost />
+      case OrderStatus['Publications']:
+        return <PublishDialogContent />
       default:
         return null
     }
