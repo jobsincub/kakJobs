@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 
 export const Filters = () => {
   const photos = useSelector(selectPhotos)
-  const currentImage = photos[0].file
+  const currentImage = photos[0].imageUrl
   console.log(currentImage)
   return (
     <DialogContent>

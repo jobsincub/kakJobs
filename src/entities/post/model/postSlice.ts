@@ -2,7 +2,7 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
 interface PostFile {
   id: string
-  file: string
+  imageUrl: string
 }
 
 interface PostState {
@@ -37,10 +37,10 @@ export const postSlice = createSlice({
     setPhoto(state, action: PayloadAction<string>) {
       state.photos.unshift({
         id: nanoid(),
-        file: action.payload,
+        imageUrl: action.payload,
       })
       // TODO change to OrderStatus.Cropping
-      state.currentStep = OrderStatus.Cropping
+      state.currentStep = OrderStatus.Filters
     },
     removePhoto(state, action: PayloadAction<string>) {
       state.photos = state.photos.filter(photo => photo.id !== action.payload)
