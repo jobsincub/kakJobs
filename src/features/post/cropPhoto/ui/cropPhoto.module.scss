@@ -29,7 +29,36 @@
   left: 0;
 
   min-width: 125px;
-  padding:12px;
+  padding: 12px;
 
   background-color: var(--color-dark-500);
+}
+
+.cropContainer {
+  position: absolute;
+  top: -130px;
+  left: 0;
+
+  min-width: 156px;
+  padding: 10px;
+
+  opacity: 0.8;
+  background-color: var(--color-dark-500);
+  border-radius: 2px;
+
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list li:active {
+  color: red;
 }
