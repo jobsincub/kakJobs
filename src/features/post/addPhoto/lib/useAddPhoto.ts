@@ -1,5 +1,5 @@
+import { setPhoto } from '@/entities/post'
 import { useAppDispatch } from '@/shared/lib'
-import { setPhoto } from '@/widgets/createPost'
 import { ChangeEvent, DragEvent, useRef, useState } from 'react'
 import { z } from 'zod'
 
@@ -26,18 +26,11 @@ export const useAddPhoto = () => {
   const fileUploadCallback = (file: File) => {
     const result = fileSchema.safeParse(file)
     if (!result.success) {
-      setError(result.error.errors[0]?.message || 'Invalid file')
+      setError(result.error.errors[0].message)
       return
     }
-    dispatch(setPhoto(file))
+    dispatch(setPhoto(URL.createObjectURL(file)))
     setError(null)
-
-    // fileToBase64(file)
-    //   .then(base64Image => {
-    //   })
-    //   .catch(() => {
-    //     setError('Failed to convert file to Base64')
-    //   })
   }
 
   const updateImageHandler = (event: ChangeEvent<HTMLInputElement>) => {

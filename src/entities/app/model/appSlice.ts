@@ -1,4 +1,4 @@
-import { createAppAsyncThunk } from '@/shared/lib'
+import { createAppAsyncThunk } from '@/shared/lib/store/redux'
 import { createSlice, isFulfilled, type PayloadAction } from '@reduxjs/toolkit'
 
 export type Local = 'en' | 'ru'

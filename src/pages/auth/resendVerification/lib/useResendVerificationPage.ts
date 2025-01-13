@@ -1,23 +1,26 @@
 import { useResendVerificationEmailMutation } from '@/entities/user'
 import { ResendVerificationEmailField } from '@/features/auth/resendVerification'
 import { useTranslation } from '@/shared/config'
-import { getErrorMessage } from '@/shared/lib/hooks'
+import { getErrorMessage, getStatusCode } from '@/shared/lib/hooks'
 import { ROUTES } from '@/shared/router/routes'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 export const useResendVerificationPage = () => {
   const [resendVerificationEmail, { isSuccess, originalArgs, error }] =
     useResendVerificationEmailMutation()
   const router = useRouter()
-
-  const email = originalArgs?.email
+  const searchParams = useSearchParams()
+  const queryEmail = searchParams?.get('email')
+  const formEmail = originalArgs?.email
 
   useEffect(() => {
     if (isSuccess) {
       router.push(ROUTES.AUTH.SIGN_IN)
     }
   }, [isSuccess, router])
+
+  const isAlreadyActivated = getStatusCode(error) === 409
 
   const {
     t: {
@@ -31,9 +34,24 @@ export const useResendVerificationPage = () => {
 
   const customError = getErrorMessage({ errorMessages, error })
 
-  const onResend = (data: ResendVerificationEmailField) => {
+  const onResendForm = (data: ResendVerificationEmailField) => {
     resendVerificationEmail(data)
   }
 
-  return { isSuccess, onResend, email, customError, page }
+  const onResendQuery = () => {
+    if (queryEmail) {
+      resendVerificationEmail({ email: queryEmail })
+    }
+  }
+
+  return {
+    isSuccess,
+    onResendForm,
+    formEmail,
+    customError,
+    page,
+    queryEmail,
+    onResendQuery,
+    isAlreadyActivated,
+  }
 }

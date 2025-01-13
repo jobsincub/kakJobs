@@ -1,4 +1,4 @@
-import { selectPhotos } from '@/widgets/createPost'
+import { selectPhotos } from '@/entities/post'
 import {
   DialogBody,
   DialogHeader,
@@ -13,9 +13,6 @@ import { useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
 
 export const CropPhoto = () => {
-  // const [crop, setCrop] = useState<Crop>({
-  //   // aspect: 1,
-  // })
   const photos = useSelector(selectPhotos)
 
   return (
@@ -24,10 +21,11 @@ export const CropPhoto = () => {
         <DialogTitle>Cropping</DialogTitle>
       </DialogHeader>
       <DialogBody>
+        <Image src={photos[0].file} alt={'1'} width={300} height={300}></Image>
         {/*<ReactCrop crop={crop} onChange={c => setCrop(c)}>*/}
         <div style={{ maxWidth: '100%', position: 'relative' }}>
           <Image
-            src={URL.createObjectURL(photos[0].file)}
+            src={photos[0].file}
             alt={'1'}
             width={100}
             height={100}

@@ -7,10 +7,13 @@ export const en = {
         errorMessages: {
           400: 'The email is incorrect. Try again please',
         },
+        alreadyActivated: 'Account is already activated',
+        singInLinkText: 'Sign In',
       },
       verifyEmail: {
         title: 'Congratulations!',
         confirmText: 'Your email has been confirmed',
+        alreadyActivated: 'Account is already activated',
         singInLinkText: 'Sign In',
       },
       signInPage: {
