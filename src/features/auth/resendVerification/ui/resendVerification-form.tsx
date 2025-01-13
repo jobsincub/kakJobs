@@ -1,9 +1,9 @@
 import { ControlledTextField } from '@/shared/ui'
-import { Button } from '@wandrehappen/ui-kit'
 import {
   ResendVerificationEmailField,
   useResendVerificationForm,
 } from '../lib/useResendVerificationForm'
+import { ResendButton } from './ResendButton'
 import s from './resendVerification-form.module.scss'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   error?: string
 }
 export const ResendVerificationForm = ({ onSubmit, error }: Props) => {
-  const { control, handleSubmit, resendVerificationForm } = useResendVerificationForm()
+  const { control, handleSubmit } = useResendVerificationForm()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -22,9 +22,7 @@ export const ResendVerificationForm = ({ onSubmit, error }: Props) => {
         placeholder={'Epam@epam.com'}
         error={error}
       />
-      <Button fullWidth className={s.button}>
-        {resendVerificationForm.resendVerificationButtonText}
-      </Button>
+      <ResendButton className={s.button} />
     </form>
   )
 }
