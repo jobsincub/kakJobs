@@ -8,19 +8,20 @@ import {
   MaximizeFill,
   MaximizeOutline,
 } from '@wandrehappen/ui-kit'
-import React, { ChangeEvent, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
-import ReactCrop, { Crop, PixelCrop } from 'react-image-crop'
+import Cropper, { Point } from 'react-easy-crop'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
   const [zoomActive, setZoomActive] = useState(false)
   const [isOpenCrop, setIsOpenCrop] = useState(false)
-  const [scale, setScale] = useState(1)
-  const [crop, setCrop] = useState<Crop>()
-  const [aspect, setAspect] = useState<number | undefined>(16 / 9)
-  const [completedCrop, setCompletedCrop] = useState<PixelCrop>()
+
+  console.log(photos)
+  const [zoom, setZoom] = useState(1)
+  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
+  const [aspect, setAspect] = useState<number>()
 
   const onZoomClickHandler = () => {
     setZoomActive(!zoomActive)
@@ -30,9 +31,6 @@ export const CropPhoto = () => {
     setIsOpenCrop(!isOpenCrop)
   }
 
-  const handleScale = (e: ChangeEvent<HTMLInputElement>) => {
-    setScale(+e.currentTarget.value)
-  }
   return (
     <>
       <DialogHeader>
@@ -40,34 +38,30 @@ export const CropPhoto = () => {
       </DialogHeader>
       <DialogBody>
         {/*<Image src={photos[0].file} alt={'1'} width={300} height={300}></Image>*/}
-        <div style={{ maxWidth: '100%', position: 'relative' }}>
-          <ReactCrop crop={crop} onChange={c => setCrop(c)} onComplete={c => setCompletedCrop(c)}>
-            {/*<Image*/}
-            {/*  src={photos[0].file}*/}
-            {/*  alt={'1'}*/}
-            {/*  width={100}*/}
-            {/*  height={100}*/}
-            {/*  style={{ width: '100%', height: 'auto', transform: `scale(${scale})` }}*/}
-            {/*  onLoad={onImageLoad}*/}
-            {/*/>*/}
-            <img src={photos[0].file} alt={'Crop me'} />
-          </ReactCrop>
+        <div style={{ minWidth: '500px', minHeight: '500px', position: 'relative' }}>
+          <Cropper
+            crop={crop}
+            aspect={aspect}
+            onCropChange={setCrop}
+            image={photos[0].file}
+            onZoomChange={setZoom}
+          />
           <div className={s.iconContainer}>
             <div style={{ display: 'flex', gap: '15px' }}>
               <div className={s.iconWrapper} onClick={onCropClickHandler}>
                 {isOpenCrop && (
                   <div className={s.cropContainer}>
                     <ul className={s.list}>
-                      <li>
+                      <li onClick={() => setAspect(0)}>
                         <span>Original</span> <ImageOutline />
                       </li>
-                      <li>
+                      <li onClick={() => setAspect(1)}>
                         <span>1:1</span>
                       </li>
-                      <li>
+                      <li onClick={() => setAspect(4 / 5)}>
                         <span>4:5</span>
                       </li>
-                      <li>
+                      <li onClick={() => setAspect(16 / 9)}>
                         <span>16:9</span>
                       </li>
                     </ul>
@@ -78,7 +72,14 @@ export const CropPhoto = () => {
               <div className={s.iconWrapper} onClick={onZoomClickHandler}>
                 {zoomActive && (
                   <div className={s.zoomContainer}>
-                    <input type={'range'} value={scale} onChange={e => handleScale(e)} />
+                    <input
+                      type={'range'}
+                      value={zoom}
+                      min={1}
+                      max={3}
+                      step={0.1}
+                      onChange={e => setZoom(Number(e.target.value))}
+                    />
                   </div>
                 )}
                 {zoomActive ? <MaximizeFill /> : <MaximizeOutline />}
