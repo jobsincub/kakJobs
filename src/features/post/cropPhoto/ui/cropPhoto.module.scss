@@ -1,5 +1,7 @@
 
 .iconWrapper {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,4 +21,15 @@
   display: flex;
   gap: 10px;
   justify-content: space-between;
+}
+
+.zoomContainer {
+  position: absolute;
+  top: -60px;
+  left: 0;
+
+  min-width: 125px;
+  padding:12px;
+
+  background-color: var(--color-dark-500);
 }
