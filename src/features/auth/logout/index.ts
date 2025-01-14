@@ -1,1 +1,1 @@
-export * from './ui'
+export { LogoutDialog } from './ui/LogoutDialog'

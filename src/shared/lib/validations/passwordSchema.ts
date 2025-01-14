@@ -1,7 +1,9 @@
-import { useTranslation } from '@/shared/config'
 import { z } from 'zod'
+import { useTranslation } from '@/shared/config'
 
 export const usePasswordSchema = () => {
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[ !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]).{6,30}$/
+
   const {
     t: {
       shared: {
@@ -9,9 +11,16 @@ export const usePasswordSchema = () => {
       },
     },
   } = useTranslation()
+
   const passwordSchema = z.object({
-    password: z.string().min(3, schema.minLength).default(''),
+    password: z
+      .string()
+      .min(6, schema.minLength)
+      .regex(passwordRegex, schema.regexText)
+      .default(''),
   })
 
-  return { passwordSchema }
+  return {
+    passwordSchema,
+  }
 }

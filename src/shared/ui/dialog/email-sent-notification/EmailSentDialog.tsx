@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/config'
 import {
   Button,
   Dialog,
@@ -10,11 +11,10 @@ import {
   DialogTitle,
 } from '@wandrehappen/ui-kit'
 import { ComponentPropsWithoutRef, useEffect, useState } from 'react'
-import { useTranslation } from '@/shared/config'
 import s from './EmailSentDialog.module.scss'
 
 type Props = Omit<ComponentPropsWithoutRef<typeof Dialog>, 'open' | 'onOpenChange'> & {
-  email: string
+  email: string | undefined
   isOpen: boolean
 }
 
@@ -43,7 +43,7 @@ export const EmailSentDialog = ({ email, isOpen, ...rest }: Props) => {
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <DialogDescription className={s.dialogDescription}>
-            {emailSent.notificationText(email)}
+            {emailSent.notificationText(email || '')}
           </DialogDescription>
           <DialogFooter>
             <DialogClose>

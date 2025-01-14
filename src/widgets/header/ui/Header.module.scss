@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
 
-  width: 100%;
+  width: calc(100% - var(--removed-body-scroll-bar-size, 0px));
   padding: 12px 0 11px;
 
   background-color: var(--color-dark-700);

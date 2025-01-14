@@ -1,5 +1,7 @@
 'use client'
-import { SignInForm } from '@/features/auth/signin'
+import { SignInForm } from '@/features/auth/signIn'
+import { ROUTES } from '@/shared/router/routes'
+import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
@@ -11,7 +13,7 @@ const SignInPage = () => {
   const { page, onSubmit, customError } = UseSignInPage()
 
   return (
-    <Page mt={36} className={s.pageContainer}>
+    <Page mt={36} as={AuthFormWrapper}>
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>{page.title}</h1>
       </Typography>
@@ -20,7 +22,7 @@ const SignInPage = () => {
         <p>{page.noAccountText}</p>
       </Typography>
       <Button asChild variant={'link'}>
-        <Link href={'/auth/signup'}>{page.signUpLinkText}</Link>
+        <Link href={ROUTES.AUTH.SIGN_UP}>{page.signUpLinkText}</Link>
       </Button>
     </Page>
   )

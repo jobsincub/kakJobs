@@ -1,3 +1,5 @@
+import { CreatePost } from '@/widgets/createPost'
+
 export default function Profile() {
-  return <div>Profile</div>
+  return <CreatePost />
 }
