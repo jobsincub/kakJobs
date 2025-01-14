@@ -12,7 +12,7 @@ interface PostState {
 }
 
 const initialState: PostState = {
-  currentStep: 1,
+  currentStep: 4, // TODO: изменить на 1, добавил только для просмотра
   photos: [],
   description: null,
 }
