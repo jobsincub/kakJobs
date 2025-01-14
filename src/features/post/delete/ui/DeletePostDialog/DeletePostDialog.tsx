@@ -2,22 +2,35 @@
 import {
   Button,
   Dialog,
+  DialogBody,
+  DialogClose,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Typography,
   TrashOutline,
-  DialogBody,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
+  Typography,
 } from '@wandrehappen/ui-kit'
 import s from './DeletePostDialog.module.scss'
 import { useDeletePostDialog } from '../../lib/useDeletePostDialog'
 
 export const DeletePostDialog = () => {
-  const { dialogs, deletePostDialog } = useDeletePostDialog()
+  const { dialogs, deletePostDialog, deletePost, postId } = useDeletePostDialog()
+
+  const deletePostHandler = async () => {
+    if (!postId) {
+      console.error('Post ID is undefined')
+      return
+    }
+
+    try {
+      await deletePost(postId).unwrap()
+    } catch (error) {
+      console.error('Failed to delete post:', error)
+    }
+  }
 
   return (
     <Dialog>
@@ -39,7 +52,9 @@ export const DeletePostDialog = () => {
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
-              <Button variant={'tertiary'}>{dialogs.yes}</Button>
+              <Button variant={'tertiary'} onClick={deletePostHandler}>
+                {dialogs.yes}
+              </Button>
             </DialogClose>
             <DialogClose>
               <Button>{dialogs.no}</Button>
