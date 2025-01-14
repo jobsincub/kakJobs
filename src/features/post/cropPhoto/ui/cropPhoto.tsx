@@ -1,4 +1,4 @@
-import { selectPhotos } from '@/entities/post'
+import { nextStep, selectPhotos } from '@/entities/post'
 import {
   ArrowIos,
   Button,
@@ -12,7 +12,7 @@ import {
   MaximizeOutline,
 } from '@wandrehappen/ui-kit'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
 import Cropper, { Point } from 'react-easy-crop'
 
@@ -24,6 +24,7 @@ export const CropPhoto = () => {
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [aspect, setAspect] = useState<number>()
+  const dispatch = useDispatch()
 
   const onZoomClickHandler = () => {
     setZoomActive(!zoomActive)
@@ -33,6 +34,10 @@ export const CropPhoto = () => {
     setIsOpenCrop(!isOpenCrop)
   }
 
+  const handleNextStep = () => {
+    dispatch(nextStep())
+  }
+
   return (
     <DialogContent>
       <DialogHeader isCloseIconVisible={false}>
@@ -40,7 +45,9 @@ export const CropPhoto = () => {
           <ArrowIos color={'white'} />
         </Button>
         <DialogTitle>Cropping</DialogTitle>
-        <Button variant={'link'}>Next</Button>
+        <Button variant={'link'} onClick={handleNextStep}>
+          Next
+        </Button>
       </DialogHeader>
       <DialogBody>
         <div style={{ width: '100%', position: 'relative' }}>
