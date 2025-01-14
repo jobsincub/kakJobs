@@ -14,12 +14,10 @@ export const postApi = createApi({
       }),
     }),
     deletePost: builder.mutation<void, string>({
-      query(id) {
-        return {
-          url: `posts/${id}`,
-          method: 'DELETE',
-        }
-      },
+      query: id => ({
+        url: `posts/${id}`,
+        method: 'DELETE',
+      }),
       invalidatesTags: (result, error, id) => [{ type: 'Posts', id }],
     }),
   }),
