@@ -49,10 +49,9 @@ export const PublishDialogContent = () => {
         <div className={s.imagesSlider}>IMAGES SLIDER</div> {/* TODO: добавить слайдер фоток */}
         <form id={PUBLISH_FORM_ID} className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={s.formTopWrapper}>
-            <div>
+            <div className={s.profile}>
               {/* <div></div> TODO: добавить аватар */}
-              <Typography variant={'regular16'} className={s.userName}>
-                {/* TODO: заменить класс на проп weight после обновления UI-Kit */}
+              <Typography variant={'regular16'} weight={'medium'}>
                 {userName}
               </Typography>
             </div>
@@ -62,8 +61,10 @@ export const PublishDialogContent = () => {
             {/*  placeholder={'Text-area'}*/}
             {/*/>*/}
             <textarea {...register('description')} maxLength={DESCRIPTION_MAX_LENGTH} />
-            <Typography>
-              {descriptionValue.length}/{DESCRIPTION_MAX_LENGTH}
+            <Typography asChild variant={'small'} color={'light-900'} align={'end'}>
+              <div>
+                {descriptionValue.length}/{DESCRIPTION_MAX_LENGTH}
+              </div>
             </Typography>
           </div>
         </form>
