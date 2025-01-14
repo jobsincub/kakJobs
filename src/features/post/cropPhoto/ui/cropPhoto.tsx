@@ -1,6 +1,9 @@
 import { selectPhotos } from '@/entities/post'
 import {
+  ArrowIos,
+  Button,
   DialogBody,
+  DialogContent,
   DialogHeader,
   DialogTitle,
   Expand,
@@ -18,7 +21,6 @@ export const CropPhoto = () => {
   const [zoomActive, setZoomActive] = useState(false)
   const [isOpenCrop, setIsOpenCrop] = useState(false)
 
-  console.log(photos)
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [aspect, setAspect] = useState<number>()
@@ -32,20 +34,26 @@ export const CropPhoto = () => {
   }
 
   return (
-    <>
-      <DialogHeader>
+    <DialogContent>
+      <DialogHeader isCloseIconVisible={false}>
+        <Button variant={'link'}>
+          <ArrowIos color={'white'} />
+        </Button>
         <DialogTitle>Cropping</DialogTitle>
+        <Button variant={'link'}>Next</Button>
       </DialogHeader>
       <DialogBody>
-        {/*<Image src={photos[0].file} alt={'1'} width={300} height={300}></Image>*/}
-        <div style={{ minWidth: '500px', minHeight: '500px', position: 'relative' }}>
-          <Cropper
-            crop={crop}
-            aspect={aspect}
-            onCropChange={setCrop}
-            image={photos[0].file}
-            onZoomChange={setZoom}
-          />
+        <div style={{ width: '100%', position: 'relative' }}>
+          <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+            <Cropper
+              crop={crop}
+              aspect={aspect}
+              onCropChange={setCrop}
+              image={photos[0].file}
+              zoom={zoom}
+              onZoomChange={setZoom}
+            />
+          </div>
           <div className={s.iconContainer}>
             <div style={{ display: 'flex', gap: '15px' }}>
               <div className={s.iconWrapper} onClick={onCropClickHandler}>
@@ -91,6 +99,6 @@ export const CropPhoto = () => {
           </div>
         </div>
       </DialogBody>
-    </>
+    </DialogContent>
   )
 }
