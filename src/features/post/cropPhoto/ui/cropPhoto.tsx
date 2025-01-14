@@ -1,4 +1,4 @@
-import { nextStep, selectPhotos } from '@/entities/post'
+import { nextStep, previousStep, selectPhotos } from '@/entities/post'
 import {
   ArrowIos,
   Button,
@@ -14,7 +14,7 @@ import {
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
-import Cropper, { Point } from 'react-easy-crop'
+import Cropper, { Area, Point } from 'react-easy-crop'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
@@ -24,7 +24,14 @@ export const CropPhoto = () => {
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [aspect, setAspect] = useState<number>()
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | string>()
   const dispatch = useDispatch()
+
+  const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }
+
+  console.log('cropped img', croppedAreaPixels)
 
   const onZoomClickHandler = () => {
     setZoomActive(!zoomActive)
@@ -36,12 +43,17 @@ export const CropPhoto = () => {
 
   const handleNextStep = () => {
     dispatch(nextStep())
+    // dispatch(setPhoto(croppedAreaPixels))
+  }
+
+  const handlePrevStep = () => {
+    dispatch(previousStep())
   }
 
   return (
     <DialogContent>
       <DialogHeader isCloseIconVisible={false}>
-        <Button variant={'link'}>
+        <Button variant={'link'} onClick={handlePrevStep}>
           <ArrowIos color={'white'} />
         </Button>
         <DialogTitle>Cropping</DialogTitle>
@@ -50,8 +62,8 @@ export const CropPhoto = () => {
         </Button>
       </DialogHeader>
       <DialogBody>
-        <div style={{ width: '100%', position: 'relative' }}>
-          <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+        <div style={{ width: '430px', position: 'relative' }}>
+          <div style={{ position: 'relative', width: '100%', height: '430px' }}>
             <Cropper
               crop={crop}
               aspect={aspect}
@@ -59,6 +71,7 @@ export const CropPhoto = () => {
               image={photos[0].file}
               zoom={zoom}
               onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
             />
           </div>
           <div className={s.iconContainer}>
