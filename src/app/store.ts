@@ -13,7 +13,8 @@ export const makeStore = () => {
       [postApi.reducerPath]: postApi.reducer,
       [postSlice.reducerPath]: postSlice.reducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware, postApi.middleware),
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(authApi.middleware, postApi.middleware),
   })
 }
 
