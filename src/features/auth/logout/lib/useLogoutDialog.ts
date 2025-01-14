@@ -3,9 +3,11 @@ import { useTranslation } from '@/shared/config'
 import { ROUTES } from '@/shared/router/routes'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { selectUserEmail } from '@/entities/user/model/authSlice'
 
 export const useLogoutDialog = () => {
-  const email = 'Epam@epam.com' // Todo: change to email from store
+  const userEmail = useSelector(selectUserEmail)
   const [logout, { isSuccess }] = useLogoutMutation()
   const router = useRouter()
 
@@ -25,7 +27,7 @@ export const useLogoutDialog = () => {
   }, [isSuccess, router])
 
   return {
-    email,
+    userEmail,
     logout,
     logOutDialog,
     dialogs,
