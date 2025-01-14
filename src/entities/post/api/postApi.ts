@@ -13,10 +13,19 @@ export const postApi = createApi({
         method: 'POST',
       }),
     }),
+    deletePost: builder.mutation<void, string>({
+      query(id) {
+        return {
+          url: `posts/${id}`,
+          method: 'DELETE',
+        }
+      },
+      invalidatesTags: (result, error, id) => [{ type: 'Posts', id }],
+    }),
   }),
 })
 
-export const { useCreatePostMutation } = postApi
+export const { useCreatePostMutation, useDeletePostMutation } = postApi
 
 type PostImage = {
   id: string

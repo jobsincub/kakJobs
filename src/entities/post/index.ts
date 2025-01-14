@@ -1,4 +1,4 @@
-export { useCreatePostMutation, postApi } from './api/postApi'
+export { useCreatePostMutation, useDeletePostMutation, postApi } from './api/postApi'
 export {
   postSlice,
   nextStep,
