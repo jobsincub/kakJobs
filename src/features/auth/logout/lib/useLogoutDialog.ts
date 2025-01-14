@@ -20,7 +20,7 @@ export const useLogoutDialog = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push(ROUTES.AUTH.SIGN_IN)
+      router.replace(ROUTES.AUTH.SIGN_IN)
     }
   }, [isSuccess, router])
 
