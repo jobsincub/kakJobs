@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  
+
   width: 100%;
   max-width: 473px;
 }
@@ -13,6 +13,11 @@
   text-align: center;
 }
 
-.img{
+.img {
   margin-top: 36px;
+}
+
+.button {
+  width: 240px;
+  padding: 6px 24px;
 }

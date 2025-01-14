@@ -1,1 +1,1 @@
-export { default } from './ui/resendVerificationPage'
+export { default as ResendVerificationEmailPage } from './ui/resendVerificationPage.async'
