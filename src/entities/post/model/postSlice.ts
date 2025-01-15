@@ -1,13 +1,13 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
-interface PostFile {
+interface Photo {
   id: string
-  file: string
+  imageUrl: string
 }
 
 interface PostState {
   currentStep: OrderStatus
-  photos: PostFile[]
+  photos: Photo[]
   description: string | null
 }
 
@@ -34,18 +34,24 @@ export const postSlice = createSlice({
     previousStep(state) {
       state.currentStep -= 1
     },
-    setPhoto(state, action: PayloadAction<string>) {
+    setPhoto(state, action: PayloadAction<Photo['imageUrl']>) {
       state.photos.unshift({
         id: nanoid(),
-        file: action.payload,
+        imageUrl: action.payload,
       })
       // TODO change to OrderStatus.Cropping
       state.currentStep = OrderStatus.Cropping
     },
-    removePhoto(state, action: PayloadAction<string>) {
+    updatePhoto(state, action: PayloadAction<Photo>) {
+      const photo = state.photos.find(photo => photo.id === action.payload.id)
+      if (photo) {
+        photo.imageUrl = action.payload.imageUrl
+      }
+    },
+    removePhoto(state, action: PayloadAction<Photo['id']>) {
       state.photos = state.photos.filter(photo => photo.id !== action.payload)
     },
-    setDescription(state, action: PayloadAction<string>) {
+    setDescription(state, action: PayloadAction<PostState['description']>) {
       state.description = action.payload
     },
     reset() {
@@ -58,7 +64,7 @@ export const postSlice = createSlice({
   },
 })
 
-export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto } =
+export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto, updatePhoto } =
   postSlice.actions
 
 export const { selectStep, selectPhotos } = postSlice.selectors
