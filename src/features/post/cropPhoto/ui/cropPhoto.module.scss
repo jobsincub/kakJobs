@@ -48,6 +48,24 @@
 
 }
 
+.galleryContainer {
+  position: absolute;
+  top: -110px;
+  left: 0;
+
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  min-width: 152px;
+  padding: 12px;
+
+  opacity: 0.8;
+  background-color: var(--color-dark-500);
+  border-radius: 2px;
+}
+
 .list {
   margin: 0;
   padding: 0;
@@ -61,4 +79,17 @@
 
 .list li:active {
   color: red;
+}
+
+.photoWrapper {
+  display: flex;
+  gap: 10px;
+  width: 80px;
+  height: 80px;
+
+
+}
+
+.photoInGallery {
+  object-fit: contain;
 }

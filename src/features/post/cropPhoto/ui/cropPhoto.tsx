@@ -1,4 +1,4 @@
-import { nextStep, previousStep, selectPhotos } from '@/entities/post'
+import { nextStep, previousStep, selectPhotos, setPhoto } from '@/entities/post'
 import {
   ArrowIos,
   Button,
@@ -7,19 +7,26 @@ import {
   DialogHeader,
   DialogTitle,
   Expand,
+  ImageFill,
   ImageOutline,
   MaximizeFill,
   MaximizeOutline,
+  PlusCircleOutline,
 } from '@wandrehappen/ui-kit'
+import Image from 'next/image'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
 import Cropper, { Area, Point } from 'react-easy-crop'
+import { useAddPhoto } from '@/features/post/addPhoto/lib/useAddPhoto'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
-  const [zoomActive, setZoomActive] = useState(false)
+  const [isZoomActive, setIsZoomActive] = useState(false)
   const [isOpenCrop, setIsOpenCrop] = useState(false)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const { ImageUploadHandler } = useAddPhoto()
+  const [selectedPhoto, setSelectedPhoto] = useState(photos[0].file)
 
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
@@ -34,11 +41,19 @@ export const CropPhoto = () => {
   console.log('cropped img', croppedAreaPixels)
 
   const onZoomClickHandler = () => {
-    setZoomActive(!zoomActive)
+    setIsZoomActive(!isZoomActive)
   }
 
   const onCropClickHandler = () => {
     setIsOpenCrop(!isOpenCrop)
+  }
+
+  const onGalleryClickHandler = () => {
+    setIsGalleryOpen(!isGalleryOpen)
+  }
+
+  const setPhotoToCrop = (file: string) => {
+    setSelectedPhoto(file)
   }
 
   const handleNextStep = () => {
@@ -49,6 +64,8 @@ export const CropPhoto = () => {
   const handlePrevStep = () => {
     dispatch(previousStep())
   }
+
+  console.log(photos)
 
   return (
     <DialogContent>
@@ -61,14 +78,14 @@ export const CropPhoto = () => {
           Next
         </Button>
       </DialogHeader>
-      <DialogBody>
-        <div style={{ width: '430px', position: 'relative' }}>
+      <DialogBody style={{ padding: 0 }}>
+        <div style={{ width: '430px' }}>
           <div style={{ position: 'relative', width: '100%', height: '430px' }}>
             <Cropper
               crop={crop}
               aspect={aspect}
               onCropChange={setCrop}
-              image={photos[0].file}
+              image={selectedPhoto}
               zoom={zoom}
               onZoomChange={setZoom}
               onCropComplete={onCropComplete}
@@ -98,7 +115,7 @@ export const CropPhoto = () => {
                 {isOpenCrop ? <Expand /> : <Expand fill={'#fffff'} />}
               </div>
               <div className={s.iconWrapper} onClick={onZoomClickHandler}>
-                {zoomActive && (
+                {isZoomActive && (
                   <div className={s.zoomContainer}>
                     <input
                       type={'range'}
@@ -110,11 +127,31 @@ export const CropPhoto = () => {
                     />
                   </div>
                 )}
-                {zoomActive ? <MaximizeFill /> : <MaximizeOutline />}
+                {isZoomActive ? <MaximizeFill /> : <MaximizeOutline />}
               </div>
             </div>
-            <div className={s.iconWrapper}>
-              <ImageOutline />
+            <div className={s.iconWrapper} onClick={onGalleryClickHandler}>
+              {isGalleryOpen ? <ImageFill /> : <ImageOutline />}
+              {isGalleryOpen && (
+                <div className={s.galleryContainer}>
+                  {photos.map(photo => {
+                    return (
+                      <div className={s.photoWrapper} key={photo.id}>
+                        <Image
+                          src={photo.file}
+                          key={photo.id}
+                          alt={'gallery'}
+                          width={80}
+                          height={80}
+                          className={s.photoInGallery}
+                          onClick={() => setPhotoToCrop(photo.file)}
+                        />
+                      </div>
+                    )
+                  })}
+                  <PlusCircleOutline onClick={() => alert('hello world')} />
+                </div>
+              )}
             </div>
           </div>
         </div>
