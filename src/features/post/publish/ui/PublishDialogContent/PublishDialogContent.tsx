@@ -12,14 +12,15 @@ import s from './PublishDialogContent.module.scss'
 import { PublishPostForm } from './PublishPostForm'
 import { PUBLISH_POST_FORM_ID } from '../../lib/usePublishPostForm'
 import { usePublishDialogContent } from '@/features/post/publish/lib/usePublishDialogContent'
+import { previousStep } from '@/entities/post'
 
 export const PublishDialogContent = () => {
-  const { onSubmit } = usePublishDialogContent()
+  const { dispatch, onSubmit } = usePublishDialogContent()
 
   return (
     <DialogContent className={s.dialogContent}>
       <DialogHeader isCloseIconVisible={false}>
-        <Button className={s.backIconBtn} variant={'link'}>
+        <Button className={s.backIconBtn} variant={'link'} onClick={() => dispatch(previousStep())}>
           <ArrowIos />
         </Button>
         <DialogTitle>Publication</DialogTitle>
