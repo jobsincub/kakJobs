@@ -5,6 +5,7 @@ import {
   Button,
   DialogBody,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@wandrehappen/ui-kit'
@@ -24,6 +25,9 @@ export const PublishDialogContent = () => {
           <ArrowIos />
         </Button>
         <DialogTitle>Publication</DialogTitle>
+        <DialogDescription className={'srOnly'}>
+          This dialog allows you to publish a new post with a description and images.
+        </DialogDescription>
         <Button
           type={'submit'}
           form={PUBLISH_POST_FORM_ID}
