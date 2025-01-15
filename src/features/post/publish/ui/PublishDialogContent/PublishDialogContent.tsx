@@ -55,6 +55,7 @@ export const PublishDialogContent = () => {
               labelText={'Add publication descriptions'}
               placeholder={'Text-area'}
               maxLength={DESCRIPTION_MAX_LENGTH}
+              className={s.description}
             />
             <DescriptionCount control={control} maxLength={DESCRIPTION_MAX_LENGTH} />
           </div>
