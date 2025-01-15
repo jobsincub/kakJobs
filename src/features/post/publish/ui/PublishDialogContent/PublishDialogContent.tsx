@@ -13,7 +13,8 @@ import {
 import s from './PublishDialogContent.module.scss'
 import { useSelector } from 'react-redux'
 import { selectUserName } from '@/entities/user/model/authSlice'
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { DescriptionCount } from './DescriptionCount'
 
 export type PublishDialogFormValues = {
   description: string
@@ -23,16 +24,9 @@ const PUBLISH_FORM_ID = 'publishForm'
 const DESCRIPTION_MAX_LENGTH = 500
 
 export const PublishDialogContent = () => {
-  console.log('PublishDialogContent')
   const userName = useSelector(selectUserName)
-
   const { register, handleSubmit, control } = useForm<PublishDialogFormValues>()
   const onSubmit: SubmitHandler<PublishDialogFormValues> = data => console.log(data)
-  const descriptionValue = useWatch({
-    control,
-    name: 'description',
-    defaultValue: '',
-  })
 
   return (
     <DialogContent className={s.dialogContent}>
@@ -46,7 +40,8 @@ export const PublishDialogContent = () => {
         </Button>
       </DialogHeader>
       <DialogBody className={s.dialogBody}>
-        <div className={s.imagesSlider}>IMAGES SLIDER</div> {/* TODO: добавить слайдер фоток */}
+        <div className={s.imagesSlider}>IMAGES SLIDER</div>
+        {/* TODO: добавить слайдер фоток */}
         <form id={PUBLISH_FORM_ID} className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={s.formTopWrapper}>
             <div className={s.profile}>
@@ -55,17 +50,13 @@ export const PublishDialogContent = () => {
                 {userName}
               </Typography>
             </div>
-            {/*<Textarea*/}
-            {/*  {...register('description')}*/}
-            {/*  labelText={'Add publication descriptions'}*/}
-            {/*  placeholder={'Text-area'}*/}
-            {/*/>*/}
-            <textarea {...register('description')} maxLength={DESCRIPTION_MAX_LENGTH} />
-            <Typography asChild variant={'small'} color={'light-900'} align={'end'}>
-              <div>
-                {descriptionValue.length}/{DESCRIPTION_MAX_LENGTH}
-              </div>
-            </Typography>
+            <Textarea
+              {...register('description')}
+              labelText={'Add publication descriptions'}
+              placeholder={'Text-area'}
+              maxLength={DESCRIPTION_MAX_LENGTH}
+            />
+            <DescriptionCount control={control} maxLength={DESCRIPTION_MAX_LENGTH} />
           </div>
         </form>
       </DialogBody>
