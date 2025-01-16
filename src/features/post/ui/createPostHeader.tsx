@@ -8,7 +8,7 @@ type Props = {
   nextButtonText: string
 } & HTMLAttributes<HTMLDivElement>
 
-export const CreatePostHeader = ({ title, nextButtonText }: Props) => {
+export const CreatePostHeader = ({ title, nextButtonText, ...props }: Props) => {
   const dispatch = useAppDispatch()
 
   const previousStepHandler = () => {
@@ -20,7 +20,7 @@ export const CreatePostHeader = ({ title, nextButtonText }: Props) => {
   }
 
   return (
-    <DialogHeader isCloseIconVisible={false}>
+    <DialogHeader isCloseIconVisible={false} {...props}>
       <Button variant={'link'} onClick={previousStepHandler}>
         <ArrowIos color={'white'} />
       </Button>
