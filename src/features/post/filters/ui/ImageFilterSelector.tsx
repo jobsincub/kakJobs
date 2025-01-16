@@ -32,7 +32,7 @@ export const ImageFilterSelector: React.FC<Props> = ({ image, onImageSelect, cus
 
   const applyFilterHandler = (filterStyle: string) => {
     const canvas = canvasRef.current
-    if (!canvas || !image) return
+    if (!canvas) return
 
     const context = canvas.getContext('2d')
     if (!context) return
