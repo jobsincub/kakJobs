@@ -6,6 +6,7 @@ import { HTMLAttributes } from 'react'
 type Props = {
   title: string
   nextButtonText: string
+  nextButtonHandler: () => void
 } & HTMLAttributes<HTMLDivElement>
 
 export const CreatePostHeader = ({ title, nextButtonText, nextButtonHandler, ...props }: Props) => {
