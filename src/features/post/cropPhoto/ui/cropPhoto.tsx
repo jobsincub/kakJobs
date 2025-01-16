@@ -1,4 +1,4 @@
-import { selectPhotos } from '@/widgets/createPost'
+import { selectPhotos } from '@/entities/post'
 import { DialogBody, DialogHeader, DialogTitle } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import React from 'react'
@@ -13,7 +13,7 @@ export const CropPhoto = () => {
         <DialogTitle>Cropping</DialogTitle>
       </DialogHeader>
       <DialogBody>
-        <Image src={URL.createObjectURL(photos[0].file)} alt={'1'} width={300} height={300}></Image>
+        <Image src={photos[0].imageUrl} alt={'1'} width={300} height={300}></Image>
       </DialogBody>
     </>
   )

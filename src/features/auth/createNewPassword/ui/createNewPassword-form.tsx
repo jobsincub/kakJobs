@@ -7,6 +7,7 @@ type Props = {
   onSubmit: (data: NewPasswordFields) => void
   error?: string
 }
+
 export const CreateNewPasswordForm = ({ onSubmit, error }: Props) => {
   const { handleSubmit, control, isValid, createNewPasswordForm } = useCreateNewPasswordForm()
 

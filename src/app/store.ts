@@ -1,7 +1,6 @@
 import { appSlice } from '@/entities/app'
-import { postApi } from '@/entities/post'
+import { postApi, postSlice } from '@/entities/post'
 import { authApi, authSlice } from '@/entities/user'
-import { postSlice } from '@/widgets/createPost'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
@@ -14,7 +13,8 @@ export const makeStore = () => {
       [postApi.reducerPath]: postApi.reducer,
       [postSlice.reducerPath]: postSlice.reducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware),
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(authApi.middleware, postApi.middleware),
   })
 }
 

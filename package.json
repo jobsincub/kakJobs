@@ -13,8 +13,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.1",
+    "@pqina/pintura": "8.91.4",
     "@reduxjs/toolkit": "2.3.0",
-    "@wandrehappen/ui-kit": "0.0.20",
+    "@wandrehappen/ui-kit": "0.0.22",
     "async-mutex": "0.5.0",
     "clsx": "2.1.1",
     "next": "14.2.17",

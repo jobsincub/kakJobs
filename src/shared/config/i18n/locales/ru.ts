@@ -9,10 +9,13 @@ export const ru: LocaleType = {
         errorMessages: {
           400: 'Электронная почта неверна. Пожалуйста, попробуйте снова.',
         },
+        alreadyActivated: 'Ваш аккаунт уже подтвержден',
+        singInLinkText: 'Войти',
       },
       verifyEmail: {
         title: 'Поздравляем!',
         confirmText: 'Ваш электронный адрес успешно подтвержден',
+        alreadyActivated: 'Ваш аккаунт уже подтвержден',
         singInLinkText: 'Войти',
       },
       signInPage: {

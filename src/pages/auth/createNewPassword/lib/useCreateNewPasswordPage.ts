@@ -34,9 +34,9 @@ export const useCreateNewPasswordPage = () => {
   const searchParams = useSearchParams()
   const recoveryCode = searchParams?.get('code')
 
-  const onSubmit = (data: NewPasswordFields) => {
+  const onSubmit = ({ newPassword }: NewPasswordFields) => {
     if (recoveryCode) {
-      createNewPassword({ newPassword: data.newPassword, recoveryCode })
+      createNewPassword({ newPassword, recoveryCode })
     }
   }
 
