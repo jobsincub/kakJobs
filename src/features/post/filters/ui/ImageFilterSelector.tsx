@@ -1,5 +1,6 @@
+import { Button } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import s from './ImageFilterSelector.module.scss'
 
 type Filter = {
@@ -9,7 +10,7 @@ type Filter = {
 
 type Props = {
   image: string
-  onImageSelect: (filteredImage: string) => void
+  selectFilterHandler: (filter: string) => void
   customFilters?: Filter[]
 }
 
@@ -25,42 +26,17 @@ const defaultFilters: Filter[] = [
   { name: 'Perpetua', style: 'brightness(120%) saturate(120%)' },
 ]
 
-export const ImageFilterSelector: React.FC<Props> = ({ image, onImageSelect, customFilters }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
+export const ImageFilterSelector = ({ image, selectFilterHandler, customFilters }: Props) => {
   const filters = useMemo(() => customFilters || defaultFilters, [customFilters])
-
-  const applyFilterHandler = (filterStyle: string) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const context = canvas.getContext('2d')
-    if (!context) return
-
-    const img = document.createElement('img')
-    img.src = image
-
-    img.onload = () => {
-      canvas.width = img.width
-      canvas.height = img.height
-
-      context.filter = filterStyle
-      context.drawImage(img, 0, 0)
-
-      const dataURL = canvas.toDataURL()
-      onImageSelect(dataURL)
-    }
-  }
 
   return (
     <div className={s.selector}>
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-
       {filters.map(filter => (
-        <div
+        <Button
+          variant={'link'}
           key={filter.name}
           className={s.imageWrapper}
-          onClick={() => applyFilterHandler(filter.style)}
+          onClick={() => selectFilterHandler(filter.style)}
         >
           <Image
             src={image}
@@ -71,7 +47,7 @@ export const ImageFilterSelector: React.FC<Props> = ({ image, onImageSelect, cus
             style={{ filter: filter.style }}
           />
           <span className={s.filterName}>{filter.name}</span>
-        </div>
+        </Button>
       ))}
     </div>
   )
