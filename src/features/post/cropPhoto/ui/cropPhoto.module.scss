@@ -16,12 +16,18 @@
 
 .iconContainer {
   position: absolute;
+  z-index: 1;
   bottom: 15px;
 
   display: flex;
   gap: 10px;
   justify-content: space-between;
+
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 10px;
 }
+
 
 .zoomContainer {
   position: absolute;
@@ -51,7 +57,7 @@
 .galleryContainer {
   position: absolute;
   top: -110px;
-  left: 0;
+  right: 0;
 
   display: flex;
   gap: 12px;
@@ -92,4 +98,31 @@
 
 .photoInGallery {
   object-fit: contain;
+}
+
+.swiper {
+  height: 430px;
+}
+
+.customNext {
+  position: absolute;
+  z-index: 1;
+  top: 45%;
+  right: 10px;
+}
+
+.customPrev {
+  position: absolute;
+  z-index: 1;
+  top: 45%;
+  left: 10px;
+}
+
+.customPrevDisabled {
+  display: none;
+}
+
+
+.customNext-disabled {
+  display: none;
 }

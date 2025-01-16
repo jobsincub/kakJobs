@@ -1,6 +1,8 @@
-import { nextStep, previousStep, selectPhotos, setPhoto } from '@/entities/post'
+import { nextStep, previousStep, selectPhotos } from '@/entities/post'
 import {
   ArrowIos,
+  ArrowLeft,
+  ArrowRight,
   Button,
   DialogBody,
   DialogContent,
@@ -19,6 +21,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
 import Cropper, { Area, Point } from 'react-easy-crop'
 import { useAddPhoto } from '@/features/post/addPhoto/lib/useAddPhoto'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Controller, Navigation, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/scss/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/controller'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
@@ -33,6 +41,13 @@ export const CropPhoto = () => {
   const [aspect, setAspect] = useState<number>()
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | string>()
   const dispatch = useDispatch()
+  const [isBeginning, setIsBeginning] = useState(true)
+  const [isEnd, setIsEnd] = useState(false)
+
+  const handleSwiper = swiper => {
+    setIsBeginning(swiper.isBeginning)
+    setIsEnd(swiper.isEnd)
+  }
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -81,15 +96,61 @@ export const CropPhoto = () => {
       <DialogBody style={{ padding: 0 }}>
         <div style={{ width: '430px' }}>
           <div style={{ position: 'relative', width: '100%', height: '430px' }}>
-            <Cropper
-              crop={crop}
-              aspect={aspect}
-              onCropChange={setCrop}
-              image={selectedPhoto}
-              zoom={zoom}
-              onZoomChange={setZoom}
-              onCropComplete={onCropComplete}
-            />
+            <Swiper
+              modules={[Navigation, Pagination, Controller]}
+              spaceBetween={50}
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              navigation={{
+                prevEl: `.${s.customPrev}`,
+                nextEl: `.${s.customNext}`,
+              }}
+              onSwiper={handleSwiper}
+              className={s.swiper}
+            >
+              <div className={s.iconWrapper + ' ' + s.customPrev}>
+                <ArrowLeft />
+              </div>
+              <div className={s.iconWrapper + ' ' + s.customNext}>
+                <ArrowRight />
+              </div>
+              <SwiperSlide>
+                <Cropper
+                  crop={crop}
+                  aspect={aspect}
+                  onCropChange={setCrop}
+                  image={photos[0].file}
+                  zoom={zoom}
+                  onZoomChange={setZoom}
+                  onCropComplete={onCropComplete}
+                  showGrid={false}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <Cropper
+                  crop={crop}
+                  aspect={aspect}
+                  onCropChange={setCrop}
+                  image={photos[0].file}
+                  zoom={zoom}
+                  onZoomChange={setZoom}
+                  onCropComplete={onCropComplete}
+                />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <Cropper
+                  crop={crop}
+                  aspect={aspect}
+                  onCropChange={setCrop}
+                  image={photos[0].file}
+                  zoom={zoom}
+                  onZoomChange={setZoom}
+                  onCropComplete={onCropComplete}
+                  showGrid={false}
+                />
+              </SwiperSlide>
+            </Swiper>
           </div>
           <div className={s.iconContainer}>
             <div style={{ display: 'flex', gap: '15px' }}>
