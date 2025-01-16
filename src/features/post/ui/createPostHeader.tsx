@@ -6,10 +6,9 @@ import { HTMLAttributes } from 'react'
 type Props = {
   title: string
   nextButtonText: string
-  nextButtonHandler?: () => void
 } & HTMLAttributes<HTMLDivElement>
 
-export const CreatePostHeader = ({ title, nextButtonText, nextButtonHandler }: Props) => {
+export const CreatePostHeader = ({ title, nextButtonText, nextButtonHandler, ...props }: Props) => {
   const dispatch = useAppDispatch()
 
   const previousStepHandler = () => {
@@ -21,7 +20,7 @@ export const CreatePostHeader = ({ title, nextButtonText, nextButtonHandler }: P
   }
 
   return (
-    <DialogHeader isCloseIconVisible={false}>
+    <DialogHeader isCloseIconVisible={false} {...props}>
       <Button variant={'link'} onClick={previousStepHandler}>
         <ArrowIos color={'white'} />
       </Button>
