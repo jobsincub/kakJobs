@@ -1,7 +1,12 @@
-export const fileUrlToFile = async (
-  fileUrl: string,
-  fileName: string = 'photo.jpg'
-): Promise<File> => {
+type ConvertUrlToFileArgs = {
+  fileUrl: string
+  fileName?: string
+}
+
+export const convertUrlToFile = async ({
+  fileUrl,
+  fileName = 'photo.jpg',
+}: ConvertUrlToFileArgs): Promise<File> => {
   const response = await fetch(fileUrl)
   if (!response.ok) {
     throw new Error(`Failed to fetch file: ${response.statusText}`)
