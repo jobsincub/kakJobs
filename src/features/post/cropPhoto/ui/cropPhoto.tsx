@@ -1,4 +1,4 @@
-import { nextStep, previousStep, selectPhotos } from '@/entities/post'
+import { nextStep, previousStep, selectPhotos, setPhoto } from '@/entities/post'
 import {
   ArrowIos,
   ArrowLeft,
@@ -33,7 +33,7 @@ export const CropPhoto = () => {
   const [isZoomActive, setIsZoomActive] = useState(false)
   const [isOpenCrop, setIsOpenCrop] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
-  const { ImageUploadHandler } = useAddPhoto()
+  // const { ImageUploadHandler } = useAddPhoto()
   const [selectedPhoto, setSelectedPhoto] = useState(photos[0].file)
 
   const [zoom, setZoom] = useState(1)
@@ -52,8 +52,6 @@ export const CropPhoto = () => {
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
-
-  console.log('cropped img', croppedAreaPixels)
 
   const onZoomClickHandler = () => {
     setIsZoomActive(!isZoomActive)
@@ -80,7 +78,9 @@ export const CropPhoto = () => {
     dispatch(previousStep())
   }
 
-  console.log(photos)
+  const addPhotoToGalleryHandler = () => {
+    dispatch(setPhoto(selectedPhoto))
+  }
 
   return (
     <DialogContent>
@@ -106,50 +106,37 @@ export const CropPhoto = () => {
                 nextEl: `.${s.customNext}`,
               }}
               onSwiper={handleSwiper}
+              onSlideChange={handleSwiper}
               className={s.swiper}
             >
-              <div className={s.iconWrapper + ' ' + s.customPrev}>
+              <div
+                className={s.iconWrapper + ' ' + s.customPrev}
+                style={isBeginning ? { display: 'none' } : { display: 'flex' }}
+              >
                 <ArrowLeft />
               </div>
-              <div className={s.iconWrapper + ' ' + s.customNext}>
+              <div
+                className={s.iconWrapper + ' ' + s.customNext}
+                style={isEnd ? { display: 'none' } : { display: 'flex' }}
+              >
                 <ArrowRight />
               </div>
-              <SwiperSlide>
-                <Cropper
-                  crop={crop}
-                  aspect={aspect}
-                  onCropChange={setCrop}
-                  image={photos[0].file}
-                  zoom={zoom}
-                  onZoomChange={setZoom}
-                  onCropComplete={onCropComplete}
-                  showGrid={false}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Cropper
-                  crop={crop}
-                  aspect={aspect}
-                  onCropChange={setCrop}
-                  image={photos[0].file}
-                  zoom={zoom}
-                  onZoomChange={setZoom}
-                  onCropComplete={onCropComplete}
-                />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <Cropper
-                  crop={crop}
-                  aspect={aspect}
-                  onCropChange={setCrop}
-                  image={photos[0].file}
-                  zoom={zoom}
-                  onZoomChange={setZoom}
-                  onCropComplete={onCropComplete}
-                  showGrid={false}
-                />
-              </SwiperSlide>
+              {photos.length > 0 &&
+                photos.map(photo => (
+                  <SwiperSlide key={photo.id}>
+                    <Cropper
+                      key={photo.id}
+                      crop={crop}
+                      aspect={aspect}
+                      onCropChange={setCrop}
+                      image={photo.file}
+                      zoom={zoom}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                      showGrid={false}
+                    />
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
           <div className={s.iconContainer}>
@@ -210,7 +197,7 @@ export const CropPhoto = () => {
                       </div>
                     )
                   })}
-                  <PlusCircleOutline onClick={() => alert('hello world')} />
+                  <PlusCircleOutline onClick={addPhotoToGalleryHandler} />
                 </div>
               )}
             </div>
