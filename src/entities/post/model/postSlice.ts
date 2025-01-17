@@ -1,18 +1,19 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
-interface PostFile {
+export interface PhotoFile {
   id: string
-  file: string
+  url: string
+  name?: string
 }
 
 interface PostState {
   currentStep: OrderStatus
-  photos: PostFile[]
+  photos: PhotoFile[]
   description: string | null
 }
 
 const initialState: PostState = {
-  currentStep: 4, // TODO: изменить на 1, добавил только для просмотра
+  currentStep: 1,
   photos: [],
   description: null,
 }
@@ -34,10 +35,10 @@ export const postSlice = createSlice({
     previousStep(state) {
       state.currentStep -= 1
     },
-    setPhoto(state, action: PayloadAction<string>) {
+    setPhoto(state, action: PayloadAction<{ url: string; name?: string }>) {
       state.photos.unshift({
         id: nanoid(),
-        file: action.payload,
+        ...action.payload,
       })
       // TODO change to OrderStatus.Cropping
       state.currentStep = OrderStatus.Cropping
