@@ -16,35 +16,45 @@ import {
   PlusCircleOutline,
 } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
 import Cropper, { Area, Point } from 'react-easy-crop'
-import { useAddPhoto } from '@/features/post/addPhoto/lib/useAddPhoto'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper as SwiperType } from 'swiper'
 import { Controller, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/scss/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/controller'
 
+const aspectRatios = [
+  { value: 4 / 3, text: '4/3' },
+  { value: 16 / 9, text: '16/9' },
+  { value: 1 / 2, text: '1/2' },
+]
+
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
-  const [isZoomActive, setIsZoomActive] = useState(false)
-  const [isOpenCrop, setIsOpenCrop] = useState(false)
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
-  // const { ImageUploadHandler } = useAddPhoto()
-  const [selectedPhoto, setSelectedPhoto] = useState(photos[0].file)
+  const dispatch = useDispatch()
+
+  const [activeIcon, setActiveIcon] = useState<'zoom' | 'crop' | 'gallery' | null>(null)
+
+  const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
+    setActiveIcon(prev => (prev === icon ? null : icon))
+  }
+
+  const [selectedPhoto, setSelectedPhoto] = useState(photos[0].imageUrl)
 
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [aspect, setAspect] = useState<number>()
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | string>()
-  const dispatch = useDispatch()
+
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
 
-  const handleSwiper = swiper => {
+  const handleSwiper = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning)
     setIsEnd(swiper.isEnd)
   }
@@ -52,26 +62,12 @@ export const CropPhoto = () => {
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
-
-  const onZoomClickHandler = () => {
-    setIsZoomActive(!isZoomActive)
-  }
-
-  const onCropClickHandler = () => {
-    setIsOpenCrop(!isOpenCrop)
-  }
-
-  const onGalleryClickHandler = () => {
-    setIsGalleryOpen(!isGalleryOpen)
-  }
-
   const setPhotoToCrop = (file: string) => {
     setSelectedPhoto(file)
   }
 
   const handleNextStep = () => {
     dispatch(nextStep())
-    // dispatch(setPhoto(croppedAreaPixels))
   }
 
   const handlePrevStep = () => {
@@ -129,7 +125,7 @@ export const CropPhoto = () => {
                       crop={crop}
                       aspect={aspect}
                       onCropChange={setCrop}
-                      image={photo.file}
+                      image={selectedPhoto}
                       zoom={zoom}
                       onZoomChange={setZoom}
                       onCropComplete={onCropComplete}
@@ -141,8 +137,8 @@ export const CropPhoto = () => {
           </div>
           <div className={s.iconContainer}>
             <div style={{ display: 'flex', gap: '15px' }}>
-              <div className={s.iconWrapper} onClick={onCropClickHandler}>
-                {isOpenCrop && (
+              <div className={s.iconWrapper} onClick={() => toggleIcon('crop')}>
+                {activeIcon === 'crop' && (
                   <div className={s.cropContainer}>
                     <ul className={s.list}>
                       <li onClick={() => setAspect(0)}>
@@ -160,10 +156,10 @@ export const CropPhoto = () => {
                     </ul>
                   </div>
                 )}
-                {isOpenCrop ? <Expand /> : <Expand fill={'#fffff'} />}
+                {activeIcon === 'crop' ? <Expand /> : <Expand fill={'#fffff'} />}
               </div>
-              <div className={s.iconWrapper} onClick={onZoomClickHandler}>
-                {isZoomActive && (
+              <div className={s.iconWrapper} onClick={() => toggleIcon('zoom')}>
+                {activeIcon === 'zoom' && (
                   <div className={s.zoomContainer}>
                     <input
                       type={'range'}
@@ -175,24 +171,24 @@ export const CropPhoto = () => {
                     />
                   </div>
                 )}
-                {isZoomActive ? <MaximizeFill /> : <MaximizeOutline />}
+                {activeIcon === 'zoom' ? <MaximizeFill /> : <MaximizeOutline />}
               </div>
             </div>
-            <div className={s.iconWrapper} onClick={onGalleryClickHandler}>
-              {isGalleryOpen ? <ImageFill /> : <ImageOutline />}
-              {isGalleryOpen && (
+            <div className={s.iconWrapper} onClick={() => toggleIcon('gallery')}>
+              {activeIcon === 'gallery' ? <ImageFill /> : <ImageOutline />}
+              {activeIcon === 'gallery' && (
                 <div className={s.galleryContainer}>
                   {photos.map(photo => {
                     return (
                       <div className={s.photoWrapper} key={photo.id}>
                         <Image
-                          src={photo.file}
+                          src={photo.imageUrl}
                           key={photo.id}
                           alt={'gallery'}
                           width={80}
                           height={80}
                           className={s.photoInGallery}
-                          onClick={() => setPhotoToCrop(photo.file)}
+                          onClick={() => setPhotoToCrop(photo.imageUrl)}
                         />
                       </div>
                     )
