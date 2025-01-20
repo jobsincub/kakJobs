@@ -49,7 +49,8 @@ export const authSlice = createSlice({
   selectors: {
     selectIsLoggedIn: state => state.isLoggedIn,
     selectUserName: state => state.userData?.userName,
+    selectUserEmail: state => state.userData?.email,
   },
 })
 
-export const { selectIsLoggedIn, selectUserName } = authSlice.selectors
+export const { selectIsLoggedIn, selectUserName, selectUserEmail } = authSlice.selectors
