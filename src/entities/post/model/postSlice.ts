@@ -44,12 +44,20 @@ export const postSlice = createSlice({
       state.currentStep = OrderStatus.Cropping
     },
     removePhoto(state, action: PayloadAction<string>) {
+      const photo = state.photos.find(photo => photo.id === action.payload)
+
+      if (photo) {
+        URL.revokeObjectURL(photo.url)
+      }
+
       state.photos = state.photos.filter(photo => photo.id !== action.payload)
     },
     setDescription(state, action: PayloadAction<string>) {
       state.description = action.payload
     },
-    reset() {
+    reset(state) {
+      state.photos.forEach(photo => URL.revokeObjectURL(photo.url))
+
       return initialState
     },
   },
