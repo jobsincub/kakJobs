@@ -1,8 +1,6 @@
-import { nextStep, previousStep, selectPhotos, setPhoto } from '@/entities/post'
+import { nextStep, previousStep, selectPhotos } from '@/entities/post'
 import {
   ArrowIos,
-  ArrowLeft,
-  ArrowRight,
   Button,
   DialogBody,
   DialogContent,
@@ -15,55 +13,46 @@ import {
   MaximizeOutline,
   PlusCircleOutline,
 } from '@wandrehappen/ui-kit'
-import Image from 'next/image'
-import React, { useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import s from './cropPhoto.module.scss'
-import Cropper, { Area, Point } from 'react-easy-crop'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Area, Point } from 'react-easy-crop'
 import { Swiper as SwiperType } from 'swiper'
-import { Controller, Navigation, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/scss/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/controller'
+import CustomSwiper from '@/features/post/cropPhoto/ui/customSwiper'
 
-const aspectRatios = [
-  { value: 4 / 3, text: '4/3' },
-  { value: 16 / 9, text: '16/9' },
-  { value: 1 / 2, text: '1/2' },
-]
+// const aspectRatios = [
+//   { value: 4 / 3, text: '4/3' },
+//   { value: 16 / 9, text: '16/9' },
+//   { value: 1 / 2, text: '1/2' },
+// ]
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
   const dispatch = useDispatch()
 
-  const [activeIcon, setActiveIcon] = useState<'zoom' | 'crop' | 'gallery' | null>(null)
-
-  const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
-    setActiveIcon(prev => (prev === icon ? null : icon))
-  }
-
-  const [selectedPhoto, setSelectedPhoto] = useState(photos[0].imageUrl)
-
+  // const [isAddPhotoVisible, setAddPhotoVisible] = useState(false)
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [aspect, setAspect] = useState<number>()
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | string>()
 
+  const [activeIcon, setActiveIcon] = useState<'zoom' | 'crop' | 'gallery' | null>(null)
+
+  // const [images, setImages] = useState(photos[0].imageUrl)
+  // const [selectedPhoto, setSelectedPhoto] = useState(null)
+  console.log(photos[0].imageUrl)
+
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
+
+  const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
+    setActiveIcon(prev => (prev === icon ? null : icon))
+  }
 
   const handleSwiper = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning)
     setIsEnd(swiper.isEnd)
-  }
-
-  const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-  }
-  const setPhotoToCrop = (file: string) => {
-    setSelectedPhoto(file)
   }
 
   const handleNextStep = () => {
@@ -74,9 +63,36 @@ export const CropPhoto = () => {
     dispatch(previousStep())
   }
 
-  const addPhotoToGalleryHandler = () => {
-    dispatch(setPhoto(selectedPhoto))
-  }
+  // const setPhotoToCrop = (file: string) => {
+  //   // setPhoto([...file])
+  // }
+
+  // const handleAspectChange = (newAspect: number) => {
+  //   setAspect(newAspect) // Обновляем соотношение сторон
+  //   if (images) {
+  //     // После установки нового аспекта сразу обрезаем фото
+  //     const cropArea = {
+  //       x: crop.x,
+  //       y: crop.y,
+  //       width: 300, // Здесь можно настроить ширину
+  //       height: 300 * (1 / newAspect), // Пример: расчет высоты с учетом аспекта
+  //     }
+  //     onCropComplete(null, cropArea) // Вызываем onCropComplete для немедленного обновления
+  //   }
+  // }
+
+  // const onCropComplete = async (croppedArea: any, croppedAreaPixels: any) => {
+  //   const croppedImage = await getCroppedImg(images, croppedAreaPixels)
+  //   setImages(croppedImage)
+  //   // Здесь можно обработать croppedImage, например, показать пользователю
+  // }
+
+  // const addPhotoToGalleryHandler = () => {
+  //   setAddPhotoVisible(true)
+  //   setTimeout(() => {
+  //     setAddPhotoVisible(false)
+  //   }, 5000)
+  // }
 
   return (
     <DialogContent>
@@ -92,48 +108,17 @@ export const CropPhoto = () => {
       <DialogBody style={{ padding: 0 }}>
         <div style={{ width: '430px' }}>
           <div style={{ position: 'relative', width: '100%', height: '430px' }}>
-            <Swiper
-              modules={[Navigation, Pagination, Controller]}
-              spaceBetween={50}
-              slidesPerView={1}
-              pagination={{ clickable: true }}
-              navigation={{
-                prevEl: `.${s.customPrev}`,
-                nextEl: `.${s.customNext}`,
-              }}
-              onSwiper={handleSwiper}
-              onSlideChange={handleSwiper}
-              className={s.swiper}
-            >
-              <div
-                className={s.iconWrapper + ' ' + s.customPrev}
-                style={isBeginning ? { display: 'none' } : { display: 'flex' }}
-              >
-                <ArrowLeft />
-              </div>
-              <div
-                className={s.iconWrapper + ' ' + s.customNext}
-                style={isEnd ? { display: 'none' } : { display: 'flex' }}
-              >
-                <ArrowRight />
-              </div>
-              {photos.length > 0 &&
-                photos.map(photo => (
-                  <SwiperSlide key={photo.id}>
-                    <Cropper
-                      key={photo.id}
-                      crop={crop}
-                      aspect={aspect}
-                      onCropChange={setCrop}
-                      image={selectedPhoto}
-                      zoom={zoom}
-                      onZoomChange={setZoom}
-                      onCropComplete={onCropComplete}
-                      showGrid={false}
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
+            <CustomSwiper
+              handleSwiper={handleSwiper}
+              isBeginning={isBeginning}
+              isEnd={isEnd}
+              setCroppedAreaPixels={setCroppedAreaPixels}
+              crop={crop}
+              aspect={aspect}
+              zoom={zoom}
+              setCrop={setCrop}
+              setZoom={setZoom}
+            />
           </div>
           <div className={s.iconContainer}>
             <div style={{ display: 'flex', gap: '15px' }}>
@@ -188,12 +173,12 @@ export const CropPhoto = () => {
                           width={80}
                           height={80}
                           className={s.photoInGallery}
-                          onClick={() => setPhotoToCrop(photo.imageUrl)}
+                          // onClick={() => setPhotoToCrop(photo.imageUrl)}
                         />
                       </div>
                     )
                   })}
-                  <PlusCircleOutline onClick={addPhotoToGalleryHandler} />
+                  <PlusCircleOutline />
                 </div>
               )}
             </div>

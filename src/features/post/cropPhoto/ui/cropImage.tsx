@@ -1,63 +1,36 @@
-// const createImage = url =>
-//   new Promise((resolve, reject) => {
-//     const image = new Image()
-//     image.addEventListener('load', () => resolve(image))
-//     image.addEventListener('error', error => reject(error))
-//     image.setAttribute('crossOrigin', 'anonymous') // needed to avoid cross-origin issues on CodeSandbox
-//     image.src = url
-//   })
-//
-// function getRadianAngle(degreeValue) {
-//   return (degreeValue * Math.PI) / 180
-// }
-//
-// /**
-//  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
-//  * @param {File} image - Image File url
-//  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
-//  * @param {number} rotation - optional rotation parameter
-//  */
-// export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
-//   const image = await createImage(imageSrc)
+// export const cropImage = (
+//   imageSrc: string, // ваш photos[0].imageUrl
+//   crop: any,
+//   zoom: number,
+//   aspect: number
+// ): string => {
 //   const canvas = document.createElement('canvas')
 //   const ctx = canvas.getContext('2d')
 //
-//   const maxSize = Math.max(image.width, image.height)
-//   const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2))
+//   // Создаем объект изображения
+//   const image = new Image()
+//   image.src = imageSrc
 //
-//   // set each dimensions to double largest dimension to allow for a safe area for the
-//   // image to rotate in without being clipped by canvas context
-//   canvas.width = safeArea
-//   canvas.height = safeArea
+//   const scaleX = image.width / image.naturalWidth
+//   const scaleY = image.height / image.naturalHeight
 //
-//   // translate canvas context to a central location on image to allow rotating around the center.
-//   ctx.translate(safeArea / 2, safeArea / 2)
-//   ctx.rotate(getRadianAngle(rotation))
-//   ctx.translate(-safeArea / 2, -safeArea / 2)
+//   // Рассчитываем размеры canvas
+//   canvas.width = crop.width * aspect
+//   canvas.height = crop.height * aspect
 //
-//   // draw rotated image and store data.
-//   ctx.drawImage(image, safeArea / 2 - image.width * 0.5, safeArea / 2 - image.height * 0.5)
-//   const data = ctx.getImageData(0, 0, safeArea, safeArea)
-//
-//   // set canvas width to final desired crop size - this will clear existing context
-//   canvas.width = pixelCrop.width
-//   canvas.height = pixelCrop.height
-//
-//   // paste generated rotate image with correct offsets for x,y crop values.
-//   ctx.putImageData(
-//     data,
-//     Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
-//     Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y)
+//   // Обрезаем изображение
+//   ctx?.drawImage(
+//     image,
+//     crop.x * scaleX,
+//     crop.y * scaleY,
+//     crop.width * scaleX,
+//     crop.height * scaleY,
+//     0,
+//     0,
+//     canvas.width,
+//     canvas.height
 //   )
 //
-//   // As Base64 string
-//   // return canvas.toDataURL('image/jpeg');
-//
-//   // As a blob
-//   return new Promise(resolve => {
-//     canvas.toBlob(file => {
-//       console.log(file)
-//       resolve(URL.createObjectURL(file))
-//     }, 'image/jpeg')
-//   })
+//   // Возвращаем результат как Base64
+//   return canvas.toDataURL('image/jpeg')
 // }
