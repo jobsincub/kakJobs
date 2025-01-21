@@ -39,6 +39,7 @@ export const postSlice = createSlice({
       state.photos.unshift({
         id: nanoid(),
         originalImageUrl: action.payload,
+        updatedImageUrl: null,
       })
       // TODO change to OrderStatus.Cropping
       state.currentStep = OrderStatus.Filters
