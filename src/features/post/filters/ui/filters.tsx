@@ -10,13 +10,12 @@ import { ImageFilterSelector } from './ImageFilterSelector'
 
 export const Filters = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-
   const dispatch = useAppDispatch()
-
   const photos = useSelector(selectPhotos)
-
   const currentImage = photos[0]
-  console.log(currentImage)
+
+  console.log(currentImage.originalImageUrl)
+  console.log(currentImage.updatedImageUrl)
 
   const [selectedFilter, setSelectedFilter] = useState<string>()
 
@@ -30,20 +29,31 @@ export const Filters = () => {
     if (!context) return
 
     const img = document.createElement('img')
-    img.src = currentImage.imageUrl
+    img.src = currentImage.originalImageUrl
 
     img.onload = () => {
       canvas.width = img.width
       canvas.height = img.height
 
+      context.clearRect(0, 0, canvas.width, canvas.height)
+
       context.filter = filterStyle
       context.drawImage(img, 0, 0)
 
       //TODO CHANGE FORMAT
-      const dataURL = canvas.toDataURL()
-      dispatch(updatePhoto({ id: currentImage.id, imageUrl: currentImage.imageUrl }))
+      canvas.toBlob(blob => {
+        // console.log(blob)
+        if (!blob) return
 
-      console.log(dataURL)
+        const imageUrl = URL.createObjectURL(blob)
+        dispatch(
+          updatePhoto({
+            id: currentImage.id,
+            updatedImageUrl: imageUrl,
+          })
+        )
+        console.log(imageUrl)
+      })
     }
   }
 
@@ -57,7 +67,7 @@ export const Filters = () => {
         </DialogDescription>
         <canvas ref={canvasRef} style={{ display: 'none' }} />
         <Image
-          src={currentImage.imageUrl}
+          src={currentImage.originalImageUrl}
           alt={'1'}
           width={490}
           height={504}
@@ -67,7 +77,7 @@ export const Filters = () => {
           className={s.test}
         />
         <ImageFilterSelector
-          image={currentImage.imageUrl}
+          image={currentImage.originalImageUrl}
           selectFilterHandler={applyFilterHandler}
         />
       </DialogBody>
