@@ -13,7 +13,7 @@ export const CropPhoto = () => {
         <DialogTitle>Cropping</DialogTitle>
       </DialogHeader>
       <DialogBody>
-        <Image src={photos[0].imageUrl} alt={'1'} width={300} height={300}></Image>
+        <Image src={photos[0].originalImageUrl} alt={'1'} width={300} height={300}></Image>
       </DialogBody>
     </>
   )
