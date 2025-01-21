@@ -1,5 +1,5 @@
 // CustomSwiper.tsx
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Controller, Navigation, Pagination } from 'swiper/modules'
 import s from './cropPhoto.module.scss'
@@ -10,7 +10,9 @@ import 'swiper/css'
 import 'swiper/scss/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/controller'
-import { selectPhotos } from '@/entities/post' // Импортируйте ваш CSS-модуль
+import { selectPhotos, updatePhoto } from '@/entities/post'
+import { cropImage } from '@/features/post/cropPhoto/ui/cropImage'
+import { useAppDispatch } from '@/shared/lib' // Импортируйте ваш CSS-модуль
 
 interface CustomSwiperProps {
   handleSwiper: (swiper: any) => void
@@ -33,14 +35,56 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({
   zoom,
   setZoom,
   aspect,
-  setCroppedAreaPixels,
 }) => {
   const photos = useSelector(selectPhotos)
+  const dispatch = useAppDispatch()
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   const [images, setImages] = useState(photos)
 
-  const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    setCroppedAreaPixels(croppedAreaPixels)
+  const [image, setImage] = useState(images[0].imageUrl)
+
+  // const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
+  //   setCroppedAreaPixels(croppedAreaPixels)
+  // }
+  const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
+    // const croppedImage = cropImage(image, croppedAreaPixels, zoom, aspect, photos[0].id)
+    // setImage(croppedImage)
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+
+    // Создаем объект изображения
+    const img = new Image()
+    img.src = images[0].imageUrl
+    img.onload = () => {
+      const scaleX = img.width / img.naturalWidth
+      const scaleY = img.height / img.naturalHeight
+
+      // Рассчитываем размеры canvas
+      if (aspect) {
+        canvas.width = crop.width * aspect
+        canvas.height = crop.height * aspect
+      }
+
+      // Обрезаем изображение
+      ctx?.drawImage(
+        img,
+        crop.x * scaleX,
+        crop.y * scaleY,
+        crop.width * scaleX,
+        crop.height * scaleY,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      )
+      console.log(canvas.toDataURL('image/jpeg'))
+      if (photos[0].id) {
+        dispatch(updatePhoto({ id: photos[0].id, imageUrl: canvas.toDataURL('image/jpeg') }))
+      }
+    }
+    // Здесь можно обработать croppedImage, например, показать пользователю
   }
 
   return (
@@ -57,6 +101,7 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({
       onSlideChange={handleSwiper}
       className={s.swiper}
     >
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
       <div
         className={`${s.iconWrapper} ${s.customPrev}`}
         style={isBeginning ? { display: 'none' } : { display: 'flex' }}
@@ -75,7 +120,7 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({
             <Cropper
               key={photo.id}
               crop={crop}
-              image={photo.imageUrl}
+              image={images[0].imageUrl}
               aspect={aspect}
               onCropChange={setCrop}
               zoom={zoom}
@@ -85,6 +130,7 @@ const CustomSwiper: React.FC<CustomSwiperProps> = ({
             />
           </SwiperSlide>
         ))}
+      {/*<button onClick={onCropComplete}>+</button>*/}
     </Swiper>
   )
 }

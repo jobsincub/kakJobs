@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Area, Point } from 'react-easy-crop'
 import { Swiper as SwiperType } from 'swiper'
 import CustomSwiper from '@/features/post/cropPhoto/ui/customSwiper'
+import { cropImage } from '@/features/post/cropPhoto/ui/cropImage'
 
 // const aspectRatios = [
 //   { value: 4 / 3, text: '4/3' },
@@ -34,14 +35,15 @@ export const CropPhoto = () => {
   // const [isAddPhotoVisible, setAddPhotoVisible] = useState(false)
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
-  const [aspect, setAspect] = useState<number>()
+  const [aspect, setAspect] = useState<number>(4 / 3)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | string>()
+  // console.log(croppedAreaPixels)
 
   const [activeIcon, setActiveIcon] = useState<'zoom' | 'crop' | 'gallery' | null>(null)
 
-  // const [images, setImages] = useState(photos[0].imageUrl)
+  const [images, setImages] = useState(photos[0].imageUrl)
   // const [selectedPhoto, setSelectedPhoto] = useState(null)
-  console.log(photos[0].imageUrl)
+  // console.log(photos[0].imageUrl)
 
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
@@ -82,7 +84,7 @@ export const CropPhoto = () => {
   // }
 
   // const onCropComplete = async (croppedArea: any, croppedAreaPixels: any) => {
-  //   const croppedImage = await getCroppedImg(images, croppedAreaPixels)
+  //   const croppedImage = cropImage(images, croppedAreaPixels, zoom, aspect, photos[0].id)
   //   setImages(croppedImage)
   //   // Здесь можно обработать croppedImage, например, показать пользователю
   // }
@@ -111,6 +113,7 @@ export const CropPhoto = () => {
             <CustomSwiper
               handleSwiper={handleSwiper}
               isBeginning={isBeginning}
+              // images={images}
               isEnd={isEnd}
               setCroppedAreaPixels={setCroppedAreaPixels}
               crop={crop}
