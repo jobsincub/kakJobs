@@ -42,7 +42,7 @@ export const postSlice = createSlice({
         updatedImageUrl: null,
       })
       // TODO change to OrderStatus.Cropping
-      state.currentStep = OrderStatus.Filters
+      state.currentStep = OrderStatus.Cropping
     },
     updatePhoto(state, action: PayloadAction<Omit<Photo, 'originalImageUrl'>>) {
       const photo = state.photos.find(photo => photo.id === action.payload.id)
