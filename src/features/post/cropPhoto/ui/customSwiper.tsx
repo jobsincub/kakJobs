@@ -20,9 +20,20 @@ type CustomSwiperProps = {
   aspect: any
   zoom: any
   setZoom: any
+  imageUrl: string
+  selectedImg: string
+  setSelectedImg: (img: string) => void
 }
 
-export const CustomSwiper = ({ crop, setCrop, aspect, zoom, setZoom }: CustomSwiperProps) => {
+export const CustomSwiper = ({
+  crop,
+  setCrop,
+  aspect,
+  zoom,
+  setZoom,
+  selectedImg,
+  setSelectedImg,
+}: CustomSwiperProps) => {
   const photos = useSelector(selectPhotos)
   const dispatch = useAppDispatch()
 
@@ -78,6 +89,7 @@ export const CustomSwiper = ({ crop, setCrop, aspect, zoom, setZoom }: CustomSwi
           })
         )
         console.log(imageUrl)
+        // setSelectedImg(imageUrl)
       })
     }
   }
@@ -100,14 +112,15 @@ export const CustomSwiper = ({ crop, setCrop, aspect, zoom, setZoom }: CustomSwi
       <SwiperSlide>
         <Cropper
           crop={crop}
-          image={images[0].updatedImageUrl}
+          image={selectedImg}
           aspect={aspect}
           onCropChange={setCrop}
           zoom={zoom}
           onZoomChange={setZoom}
           onCropComplete={onCropComplete}
           showGrid={false}
-          objectFit={'cover'}
+          objectFit={'contain'}
+          style={{ cropAreaStyle: { display: 'none' } }}
         />
       </SwiperSlide>
     </Swiper>

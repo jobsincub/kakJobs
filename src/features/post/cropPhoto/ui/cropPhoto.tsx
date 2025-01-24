@@ -19,27 +19,19 @@ import { CustomSwiper } from '@/features/post/cropPhoto/ui/customSwiper'
 import { AspectPanel } from '@/features/post/cropPhoto/ui/AspectPanel'
 import { ZoomPanel } from '@/features/post/cropPhoto/ui/ZoomPanel'
 
-// const aspectRatios = [
-//   { value: 4 / 3, text: '4/3' },
-//   { value: 16 / 9, text: '16/9' },
-//   { value: 1 / 2, text: '1/2' },
-// ]
-
-type PhotoType = {}
-
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
   const dispatch = useDispatch()
 
   console.log(photos)
   const [zoom, setZoom] = useState(1)
-  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
-  const [aspect, setAspect] = useState<number>(4 / 3)
+  const [crop, setCrop] = useState<Point>({ x: 10, y: 10 })
+  const [aspect, setAspect] = useState<number | null>()
 
   const [activeIcon, setActiveIcon] = useState<'zoom' | 'crop' | 'gallery' | null>(null)
 
   const [images, setImages] = useState(photos)
-  const [selectedImg, setSelectedImg] = useState<null | string>(null)
+  const [selectedImg, setSelectedImg] = useState(photos[0].originalImageUrl)
   // console.log(photos[0].imageUrl)
 
   const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
@@ -53,6 +45,18 @@ export const CropPhoto = () => {
   const handlePrevStep = () => {
     dispatch(previousStep())
   }
+
+  const addPhotoHandler = () => {
+    const newPhoto = {
+      id: images.length + 1 + '',
+      originalImageUrl: images[0].originalImageUrl,
+      updatedImageUrl: images[0].updatedImageUrl,
+    }
+    setImages(prevImages => [...prevImages, newPhoto])
+
+    // Простая заглушка для добавления
+  }
+
   return (
     <DialogContent>
       <DialogHeader isCloseIconVisible={false}>
@@ -69,11 +73,12 @@ export const CropPhoto = () => {
           <div style={{ position: 'relative', width: '100%', height: '430px' }}>
             {selectedImg && (
               <CustomSwiper
-                id={selectedImg.id}
-                imageUrl={selectedImg.originalImageUrl}
-                crop={selectedImg.crop}
-                aspect={selectedImg.aspect}
-                zoom={selectedImg.zoom}
+                setSelectedImg={setSelectedImg}
+                selectedImg={selectedImg}
+                imageUrl={photos[0].updatedImageUrl}
+                crop={crop}
+                aspect={aspect}
+                zoom={zoom}
                 setCrop={setCrop}
                 setZoom={setZoom}
               />
@@ -93,7 +98,7 @@ export const CropPhoto = () => {
               {activeIcon === 'gallery' ? <ImageFill /> : <ImageOutline />}
               {activeIcon === 'gallery' && (
                 <div className={s.galleryContainer}>
-                  {photos.map(photo => {
+                  {images.map(photo => {
                     return (
                       <div className={s.photoWrapper} key={photo.id}>
                         <Image
@@ -103,12 +108,12 @@ export const CropPhoto = () => {
                           width={80}
                           height={80}
                           className={s.photoInGallery}
-                          onClick={() => setSelectedImg(photo)}
+                          onClick={() => setSelectedImg(photo.originalImageUrl)}
                         />
                       </div>
                     )
                   })}
-                  <PlusCircleOutline />
+                  <PlusCircleOutline onClick={addPhotoHandler} />
                 </div>
               )}
             </div>
