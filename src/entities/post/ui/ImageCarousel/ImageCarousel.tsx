@@ -6,7 +6,9 @@ import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperType } from 'swiper'
 import s from './ImageCarousel.module.scss'
+import { useState } from 'react'
 
 type Image = {
   id: string
@@ -18,23 +20,28 @@ type ImagesSwiper = {
 }
 
 export const ImageCarousel = ({ images }: ImagesSwiper) => {
+  const [currentImageId, setCurrentImageId] = useState<string>(images[0]?.id)
+
+  const handleSlideChange = (swiper: SwiperType) => {
+    const currentIndex = swiper.activeIndex
+    setCurrentImageId(images[currentIndex]?.id)
+  }
   return (
     <div className={s.swiperWrapper}>
       <Swiper
         modules={[Navigation, Pagination]}
-        //navigation={{ nextEl: '.arrow_right', prevEl: '.arrow_left' }}
         navigation
         pagination={{ clickable: true }}
-        // navigation={{
-        //   nextEl: '.swiper-button-next',
-        //   prevEl: '.swiper-button-prev',
-
         slidesPerView={1}
         spaceBetween={5}
+        onSlideChange={handleSlideChange}
       >
         {images.map(image => (
-          <SwiperSlide key={image.id}>
-            <Image alt={`Post Image ${image.id}`} src={image.imageUrl} />
+          <SwiperSlide
+            key={image.id}
+            onClick={() => console.log('Active Image Id', currentImageId)}
+          >
+            <Image alt={`Post Image ${image.id}`} src={image.imageUrl} width={500} height={500} />
           </SwiperSlide>
         ))}
       </Swiper>

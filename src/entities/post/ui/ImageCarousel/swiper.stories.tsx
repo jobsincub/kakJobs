@@ -11,7 +11,8 @@ const meta: Meta<typeof ImageCarousel> = {
           margin: '0 auto',
           maxWidth: '600px',
           objectFit: 'cover',
-          width: '100%',
+          width: '500px',
+          height: '500px',
         }}
       >
         <Story />
@@ -46,6 +47,16 @@ export const Default: Story = {
       },
       {
         id: '4',
+        imageUrl:
+          'https://opis-cdn.tinkoffjournal.ru/mercury/thailand-best-beach-2.pq3rer..png?preset=image_570w_2x',
+      },
+      {
+        id: '5',
+        imageUrl:
+          'https://opis-cdn.tinkoffjournal.ru/mercury/thailand-best-beach-1.ta1luj..png?preset=image_570w_2x',
+      },
+      {
+        id: '6',
         imageUrl:
           'https://opis-cdn.tinkoffjournal.ru/mercury/thailand-best-beach-2.pq3rer..png?preset=image_570w_2x',
       },
