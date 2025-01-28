@@ -2,7 +2,6 @@ import { appSlice } from '@/entities/app'
 import { postApi, postSlice } from '@/entities/post'
 import { authApi, authSlice } from '@/entities/user'
 import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const makeStore = () => {
   return configureStore({
@@ -17,5 +16,3 @@ export const makeStore = () => {
       getDefaultMiddleware().concat(authApi.middleware, postApi.middleware),
   })
 }
-
-setupListeners(makeStore().dispatch)
