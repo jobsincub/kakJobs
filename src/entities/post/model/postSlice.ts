@@ -35,6 +35,9 @@ export const postSlice = createSlice({
     previousStep(state) {
       state.currentStep -= 1
     },
+    callCurrentStep(state, action) {
+      state.currentStep = action.payload
+    },
     setPhoto(state, action: PayloadAction<Photo['originalImageUrl']>) {
       state.photos.unshift({
         id: nanoid(),
@@ -66,7 +69,15 @@ export const postSlice = createSlice({
   },
 })
 
-export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto, updatePhoto } =
-  postSlice.actions
+export const {
+  nextStep,
+  previousStep,
+  setDescription,
+  reset,
+  setPhoto,
+  removePhoto,
+  updatePhoto,
+  callCurrentStep,
+} = postSlice.actions
 
 export const { selectStep, selectPhotos } = postSlice.selectors

@@ -18,6 +18,7 @@ import { Point } from 'react-easy-crop'
 import { CustomSwiper } from '@/features/post/cropPhoto/ui/customSwiper'
 import { AspectPanel } from '@/features/post/cropPhoto/ui/AspectPanel'
 import { ZoomPanel } from '@/features/post/cropPhoto/ui/ZoomPanel'
+import { callCurrentStep } from '@/entities/post/model/postSlice'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
@@ -32,7 +33,6 @@ export const CropPhoto = () => {
 
   const [images, setImages] = useState(photos)
   const [selectedImg, setSelectedImg] = useState(photos[0].originalImageUrl)
-  // console.log(photos[0].imageUrl)
 
   const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
     setActiveIcon(prev => (prev === icon ? null : icon))
@@ -47,14 +47,7 @@ export const CropPhoto = () => {
   }
 
   const addPhotoHandler = () => {
-    const newPhoto = {
-      id: images.length + 1 + '',
-      originalImageUrl: images[0].originalImageUrl,
-      updatedImageUrl: images[0].updatedImageUrl,
-    }
-    setImages(prevImages => [...prevImages, newPhoto])
-
-    // Простая заглушка для добавления
+    dispatch(callCurrentStep(1))
   }
 
   return (
@@ -114,6 +107,7 @@ export const CropPhoto = () => {
                     )
                   })}
                   <PlusCircleOutline onClick={addPhotoHandler} />
+                  {/*{addPhoto && <AddPhoto />}*/}
                 </div>
               )}
             </div>
