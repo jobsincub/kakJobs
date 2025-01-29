@@ -2,7 +2,8 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
 interface Photo {
   id: string
-  imageUrl: string
+  originalImageUrl: string
+  updatedImageUrl: string
 }
 
 interface PostState {
@@ -34,18 +35,19 @@ export const postSlice = createSlice({
     previousStep(state) {
       state.currentStep -= 1
     },
-    setPhoto(state, action: PayloadAction<Photo['imageUrl']>) {
+    setPhoto(state, action: PayloadAction<Photo['originalImageUrl']>) {
       state.photos.unshift({
         id: nanoid(),
-        imageUrl: action.payload,
+        originalImageUrl: action.payload,
+        updatedImageUrl: action.payload,
       })
       // TODO change to OrderStatus.Cropping
       state.currentStep = OrderStatus.Cropping
     },
-    updatePhoto(state, action: PayloadAction<Photo>) {
+    updatePhoto(state, action: PayloadAction<Omit<Photo, 'originalImageUrl'>>) {
       const photo = state.photos.find(photo => photo.id === action.payload.id)
       if (photo) {
-        photo.imageUrl = action.payload.imageUrl
+        photo.updatedImageUrl = action.payload.updatedImageUrl
       }
     },
     removePhoto(state, action: PayloadAction<Photo['id']>) {
