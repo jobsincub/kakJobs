@@ -1,14 +1,21 @@
 'use client'
+import { type Locale, setInitialLocale } from '@/entities/app'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { type ReactNode, useEffect, useRef } from 'react'
 import { Provider } from 'react-redux'
 import { makeStore } from '../store'
 
-export const StoreProvider = ({ children }: { children: ReactNode }) => {
+type Props = {
+  children: ReactNode
+  locale: Locale
+}
+
+export const StoreProvider = ({ children, locale }: Props) => {
   const storeRef = useRef<AppStore | null>(null)
 
   if (!storeRef.current) {
     storeRef.current = makeStore()
+    storeRef.current.dispatch(setInitialLocale({ locale: locale }))
   }
 
   useEffect(() => {

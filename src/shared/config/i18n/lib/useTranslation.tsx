@@ -12,8 +12,8 @@ import { useCurrentLocal } from './useCurrentLocal'
  */
 
 export const useTranslation = () => {
-  const { currentLocal } = useCurrentLocal()
-  const t = currentLocal === 'en' ? en : ru
+  const { currentLocale } = useCurrentLocal()
+  const t = currentLocale === 'en' ? en : ru
 
   return { t }
 }
