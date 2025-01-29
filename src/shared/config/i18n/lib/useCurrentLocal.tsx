@@ -1,7 +1,7 @@
-import { selectLocal } from '@/entities/app'
+import { selectLocale } from '@/entities/app'
 import { useSelector } from 'react-redux'
 
 export const useCurrentLocal = () => {
-  const currentLocal = useSelector(selectLocal)
-  return { currentLocal }
+  const currentLocale = useSelector(selectLocale)
+  return { currentLocale }
 }
