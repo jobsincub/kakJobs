@@ -1,10 +1,9 @@
 'use client'
-import { changeLocal, initializeLocal, type Local } from '@/entities/app'
+import { changeLocaleThunk, type Locale } from '@/entities/app'
 import { useCurrentLocal } from '@/shared/config'
 import { useAppDispatch } from '@/shared/lib'
 
 import { RuFlag, Select, UkFlag } from '@wandrehappen/ui-kit'
-import { useEffect } from 'react'
 import s from './languageSwitcher.module.scss'
 
 const options = [
@@ -13,23 +12,21 @@ const options = [
 ]
 
 export const LanguageSwitcher = () => {
-  const { currentLocal } = useCurrentLocal()
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(initializeLocal())
-  }, [dispatch])
+  const { currentLocale } = useCurrentLocal()
 
-  const onValueChange = (local: Local) => {
-    dispatch(changeLocal({ local }))
+  const onValueChange = (locale: Locale) => {
+    dispatch(changeLocaleThunk({ locale }))
   }
 
   return (
     <Select
-      value={currentLocal}
+      value={currentLocale}
+      defaultValue={currentLocale}
       className={s.select}
       onValueChange={onValueChange}
       options={options}
-    ></Select>
+    />
   )
 }
