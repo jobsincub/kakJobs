@@ -80,7 +80,6 @@ const MyProfilePage = () => {
           posts.data.length > 0 &&
           posts.data.map(post => (
             <div key={post.id}>
-              {/*<Image src={post.postImages[0]} alt={`Image ${post.postImages[0].id}`} width={234} height={228} />*/}
               <img
                 key={post.postImages[0].id}
                 src={post.postImages[0].imageUrl}
@@ -90,6 +89,7 @@ const MyProfilePage = () => {
               />
             </div>
           ))}
+        <div ref={observerRef} />
       </div>
     </Page>
   )
