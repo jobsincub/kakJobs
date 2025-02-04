@@ -12,10 +12,16 @@ export const postApi = createApi({
         method: 'POST',
       }),
     }),
+    getUsersPosts: builder.query<Data, { userId: string | undefined; page: number }>({
+      query: ({ userId, page }) => ({
+        url: `posts/${userId}`,
+        params: { page, limit: 8 },
+      }),
+    }),
   }),
 })
 
-export const { useCreatePostMutation } = postApi
+export const { useCreatePostMutation, useGetUsersPostsQuery } = postApi
 
 type PostImage = {
   id: string
@@ -30,4 +36,8 @@ type PostData = {
   createdAt: string
   updatedAt: string
   postImages: PostImage[]
+}
+
+type Data = {
+  data: PostData[]
 }

@@ -1,11 +1,42 @@
+.icon {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  border-radius: 50%;
+}
+
 .headerContainer {
   display: flex;
+  flex-direction: row;
+  gap: 38px;
+}
+
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  width: 730px;
+  gap: 20px;
+}
+
+.profileCNameContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .profileCountersContainer {
   display: flex;
-  flex-direction: column;
+  gap: 100px;
 }
 
 .profileCounter {
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.imageWrapper {
 }
