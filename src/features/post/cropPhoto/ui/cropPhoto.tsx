@@ -18,7 +18,6 @@ import { Point } from 'react-easy-crop'
 import { CustomSwiper } from '@/features/post/cropPhoto/ui/customSwiper'
 import { AspectPanel } from '@/features/post/cropPhoto/ui/AspectPanel'
 import { ZoomPanel } from '@/features/post/cropPhoto/ui/ZoomPanel'
-import { callCurrentStep } from '@/entities/post/model/postSlice'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
@@ -47,7 +46,7 @@ export const CropPhoto = () => {
   }
 
   const addPhotoHandler = () => {
-    dispatch(callCurrentStep(1))
+    dispatch(previousStep())
   }
 
   return (
