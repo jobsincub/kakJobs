@@ -8,6 +8,7 @@ import {
   DialogTitle,
   ImageFill,
   ImageOutline,
+  Input,
   PlusCircleOutline,
 } from '@wandrehappen/ui-kit'
 import s from './cropPhoto.module.scss'
@@ -18,19 +19,20 @@ import { Point } from 'react-easy-crop'
 import { CustomSwiper } from '@/features/post/cropPhoto/ui/customSwiper'
 import { AspectPanel } from '@/features/post/cropPhoto/ui/AspectPanel'
 import { ZoomPanel } from '@/features/post/cropPhoto/ui/ZoomPanel'
+import { useAddPhoto } from '@/features/post/addPhoto/lib/useAddPhoto'
 
 export const CropPhoto = () => {
   const photos = useSelector(selectPhotos)
   const dispatch = useDispatch()
 
-  console.log(photos)
+  console.log('ФОТОС', photos)
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState<Point>({ x: 10, y: 10 })
   const [aspect, setAspect] = useState<number | null>()
 
   const [activeIcon, setActiveIcon] = useState<'zoom' | 'crop' | 'gallery' | null>(null)
 
-  const [images, setImages] = useState(photos)
+  const { ImageUploadHandler, updateImageHandler, fileInputRef } = useAddPhoto()
   const [selectedImg, setSelectedImg] = useState(photos[0].originalImageUrl)
 
   const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
@@ -42,10 +44,6 @@ export const CropPhoto = () => {
   }
 
   const handlePrevStep = () => {
-    dispatch(previousStep())
-  }
-
-  const addPhotoHandler = () => {
     dispatch(previousStep())
   }
 
@@ -90,7 +88,7 @@ export const CropPhoto = () => {
               {activeIcon === 'gallery' ? <ImageFill /> : <ImageOutline />}
               {activeIcon === 'gallery' && (
                 <div className={s.galleryContainer}>
-                  {images.map(photo => {
+                  {photos.map(photo => {
                     return (
                       <div className={s.photoWrapper} key={photo.id}>
                         <Image
@@ -105,7 +103,14 @@ export const CropPhoto = () => {
                       </div>
                     )
                   })}
-                  <PlusCircleOutline onClick={addPhotoHandler} />
+                  <PlusCircleOutline onClick={ImageUploadHandler} />
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={updateImageHandler}
+                    style={{ display: 'none' }}
+                  />
+
                   {/*{addPhoto && <AddPhoto />}*/}
                 </div>
               )}
