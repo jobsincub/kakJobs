@@ -1,27 +1,26 @@
 import { SubmitHandler } from 'react-hook-form'
 import { PublishPostFormValues } from '@/features/post/publish'
 import { useAppDispatch } from '@/shared/lib'
-import { reset, selectPhotos, useCreatePostMutation } from '@/entities/post'
+import { reset, selectPhotos } from '@/entities/post'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/shared/router/routes'
+import { createPost } from '@/entities/post/model/postSlice'
 
 export const usePublishDialogContent = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const photos = useSelector(selectPhotos)
-  const [createPost, { isSuccess }] = useCreatePostMutation()
 
-  useEffect(() => {
-    if (isSuccess) {
+  const onSubmit: SubmitHandler<PublishPostFormValues> = async data => {
+    try {
+      await dispatch(createPost({ ...data, photos })).unwrap()
+
       dispatch(reset())
       router.push(ROUTES.HOME)
+    } catch (error) {
+      console.error('Ошибка при создании поста: ', error)
     }
-  }, [isSuccess, dispatch, router])
-
-  const onSubmit: SubmitHandler<PublishPostFormValues> = data => {
-    createPost({ ...data, photos })
   }
 
   return { dispatch, onSubmit }

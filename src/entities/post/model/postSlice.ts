@@ -1,4 +1,7 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
+import { createAppAsyncThunk } from '@/shared/lib'
+import { Post, postApi } from '@/entities/post/api/postApi'
+import { convertUrlToFile } from '@/shared/lib/hooks'
 
 export interface PhotoFile {
   id: string
@@ -66,6 +69,41 @@ export const postSlice = createSlice({
     selectPhotos: state => state.photos,
   },
 })
+
+export const createPost = createAppAsyncThunk<
+  { post: Post },
+  { description?: string; photos: PhotoFile[] }
+>(
+  `${postSlice.name}/createPost`,
+  async ({ description, photos }, { dispatch, rejectWithValue }) => {
+    const formData = new FormData()
+
+    if (description) {
+      formData.append('description', description)
+    }
+
+    const photoFiles = await Promise.all(
+      photos.map(photo =>
+        convertUrlToFile({
+          fileUrl: photo.url,
+          fileName: photo.name,
+        })
+      )
+    )
+
+    photoFiles.forEach(photoFile => {
+      formData.append('photos', photoFile)
+    })
+
+    const res = await dispatch(postApi.endpoints.createPost.initiate(formData))
+
+    if (res.data) {
+      return { post: res.data.data }
+    } else {
+      return rejectWithValue(null)
+    }
+  }
+)
 
 export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto } =
   postSlice.actions
