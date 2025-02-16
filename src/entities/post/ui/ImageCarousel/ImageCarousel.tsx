@@ -8,7 +8,6 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper'
 import s from './ImageCarousel.module.scss'
-import { useState } from 'react'
 
 type Image = {
   id: string
@@ -17,14 +16,15 @@ type Image = {
 
 type ImagesSwiper = {
   images: Image[]
+  currentImageId: (image: Image) => void
 }
 
-export const ImageCarousel = ({ images }: ImagesSwiper) => {
-  const [currentImageId, setCurrentImageId] = useState<string>(images[0]?.id)
-
+export const ImageCarousel = ({ images, currentImageId }: ImagesSwiper) => {
   const handleSlideChange = (swiper: SwiperType) => {
     const currentIndex = swiper.activeIndex
-    setCurrentImageId(images[currentIndex]?.id)
+
+    currentImageId(images[currentIndex])
+    console.log(images[currentIndex])
   }
   return (
     <div className={s.swiperWrapper}>
@@ -37,10 +37,7 @@ export const ImageCarousel = ({ images }: ImagesSwiper) => {
         onSlideChange={handleSlideChange}
       >
         {images.map(image => (
-          <SwiperSlide
-            key={image.id}
-            onClick={() => console.log('Active Image Id', currentImageId)}
-          >
+          <SwiperSlide key={image.id}>
             <Image alt={`Post Image ${image.id}`} src={image.imageUrl} width={500} height={500} />
           </SwiperSlide>
         ))}
