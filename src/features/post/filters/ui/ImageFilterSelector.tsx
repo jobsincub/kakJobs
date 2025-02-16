@@ -1,6 +1,6 @@
 import { Button } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import s from './ImageFilterSelector.module.scss'
 
 type Filter = {
@@ -29,14 +29,23 @@ const defaultFilters: Filter[] = [
 export const ImageFilterSelector = ({ image, selectFilterHandler, customFilters }: Props) => {
   const filters = useMemo(() => customFilters || defaultFilters, [customFilters])
 
+  const [selectedFilter, setSelectedFilter] = useState<string>('none')
+
+  const handleFilterClick = (filter: Filter) => {
+    if (filter.style === selectedFilter) return
+
+    setSelectedFilter(filter.style)
+    selectFilterHandler(filter.style)
+  }
+
   return (
     <div className={s.selector}>
       {filters.map(filter => (
         <Button
-          variant={'link'}
+          variant="link"
           key={filter.name}
           className={s.imageWrapper}
-          onClick={() => selectFilterHandler(filter.style)}
+          onClick={() => handleFilterClick(filter)}
         >
           <Image
             src={image}

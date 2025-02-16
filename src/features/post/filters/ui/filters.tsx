@@ -1,34 +1,36 @@
-import { selectPhotos, updatePhoto } from '@/entities/post'
+import { ImageCarousel, selectPhotos, updatePhoto } from '@/entities/post'
 import { useAppDispatch } from '@/shared/lib'
 import { DialogBody, DialogContent, DialogDescription } from '@wandrehappen/ui-kit'
-import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CreatePostHeader } from '../../ui/createPostHeader'
 import s from './filters.module.scss'
 import { ImageFilterSelector } from './ImageFilterSelector'
 
 export const Filters = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
   const dispatch = useAppDispatch()
+
   const photos = useSelector(selectPhotos)
-  const currentImage = photos[0]
 
-  console.log(currentImage.originalImageUrl)
-  console.log(currentImage.updatedImageUrl)
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-  const [selectedFilter, setSelectedFilter] = useState<string>()
+  const currentImage = photos[currentIndex]
+
+  const photosForRender = useMemo(() => {
+    return photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl }))
+  }, [photos])
+
+  console.log(photosForRender)
 
   const applyFilterHandler = (filterStyle: string) => {
-    setSelectedFilter(filterStyle)
-
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = document.createElement('canvas')
 
     const context = canvas.getContext('2d')
-    if (!context) return
+    if (!context) {
+      return
+    }
 
-    const img = document.createElement('img')
+    const img = new Image()
     img.src = currentImage.originalImageUrl
 
     img.onload = () => {
@@ -52,7 +54,6 @@ export const Filters = () => {
             updatedImageUrl: imageUrl,
           })
         )
-        console.log(imageUrl)
       })
     }
   }
@@ -65,15 +66,9 @@ export const Filters = () => {
           This dialog allows you to enhance your photo by applying various filters. Experiment with
           different styles to achieve the desired look before.
         </DialogDescription>
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
-        <Image
-          src={currentImage.originalImageUrl}
-          alt={'1'}
-          width={490}
-          height={504}
-          style={{
-            filter: selectedFilter,
-          }}
+        <ImageCarousel
+          images={photosForRender}
+          currentIndexCb={setCurrentIndex}
           className={s.test}
         />
         <ImageFilterSelector

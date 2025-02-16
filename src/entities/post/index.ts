@@ -12,3 +12,4 @@ export {
   updatePhoto,
   OrderStatus,
 } from './model/postSlice'
+export { ImageCarousel } from './ui/ImageCarousel/ImageCarousel'
