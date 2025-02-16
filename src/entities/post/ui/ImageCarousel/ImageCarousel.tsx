@@ -16,15 +16,13 @@ type Image = {
 
 type ImagesSwiper = {
   images: Image[]
-  currentImageId: (image: Image) => void
+  currentImageIdCb: (image: Image) => void
 }
 
-export const ImageCarousel = ({ images, currentImageId }: ImagesSwiper) => {
+export const ImageCarousel = ({ images, currentImageIdCb }: ImagesSwiper) => {
   const handleSlideChange = (swiper: SwiperType) => {
     const currentIndex = swiper.activeIndex
-
-    currentImageId(images[currentIndex])
-    console.log(images[currentIndex])
+    currentImageIdCb(images[currentIndex])
   }
   return (
     <div className={s.swiperWrapper}>
