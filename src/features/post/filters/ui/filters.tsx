@@ -42,9 +42,7 @@ export const Filters = () => {
       context.filter = filterStyle
       context.drawImage(img, 0, 0)
 
-      //TODO CHANGE FORMAT
       canvas.toBlob(blob => {
-        // console.log(blob)
         if (!blob) return
 
         const imageUrl = URL.createObjectURL(blob)
@@ -66,11 +64,7 @@ export const Filters = () => {
           This dialog allows you to enhance your photo by applying various filters. Experiment with
           different styles to achieve the desired look before.
         </DialogDescription>
-        <ImageCarousel
-          images={photosForRender}
-          currentIndexCb={setCurrentIndex}
-          className={s.test}
-        />
+        <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
         <ImageFilterSelector
           image={currentImage.originalImageUrl}
           selectFilterHandler={applyFilterHandler}
