@@ -1,9 +1,9 @@
 import { Typography } from '@wandrehappen/ui-kit'
 import { Control, useWatch } from 'react-hook-form'
-import { PublishDialogFormValues } from '../../PublishDialogContent'
+import { PublishPostFormValues } from '../../../../lib/usePublishPostForm'
 
 type Props = {
-  control: Control<PublishDialogFormValues>
+  control: Control<PublishPostFormValues>
   maxLength: number
 }
 
