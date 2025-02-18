@@ -20,8 +20,6 @@ export const Filters = () => {
     return photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl }))
   }, [photos])
 
-  console.log(photosForRender)
-
   const applyFilterHandler = (filterStyle: string) => {
     const canvas = document.createElement('canvas')
 
