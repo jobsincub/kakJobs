@@ -16,7 +16,7 @@ import { usePublishDialogContent } from '@/features/post/publish/lib/usePublishD
 import { previousStep } from '@/entities/post'
 
 export const PublishDialogContent = () => {
-  const { dispatch, onSubmit } = usePublishDialogContent()
+  const { dispatch, publishPostHandler } = usePublishDialogContent()
 
   return (
     <DialogContent className={s.dialogContent}>
@@ -40,7 +40,7 @@ export const PublishDialogContent = () => {
       <DialogBody className={s.dialogBody}>
         <div className={s.imagesSlider}>IMAGES SLIDER</div>
         {/* TODO: добавить слайдер фоток */}
-        <PublishPostForm onSubmit={onSubmit} />
+        <PublishPostForm onSubmit={publishPostHandler} />
       </DialogBody>
     </DialogContent>
   )

@@ -12,7 +12,7 @@ export const usePublishDialogContent = () => {
   const dispatch = useAppDispatch()
   const photos = useSelector(selectPhotos)
 
-  const onSubmit: SubmitHandler<PublishPostFormValues> = async data => {
+  const publishPostHandler: SubmitHandler<PublishPostFormValues> = async data => {
     try {
       await dispatch(createPost({ ...data, photos })).unwrap()
 
@@ -23,5 +23,5 @@ export const usePublishDialogContent = () => {
     }
   }
 
-  return { dispatch, onSubmit }
+  return { dispatch, publishPostHandler }
 }
