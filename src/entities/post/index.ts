@@ -9,5 +9,7 @@ export {
   removePhoto,
   selectStep,
   selectPhotos,
+  updatePhoto,
   OrderStatus,
 } from './model/postSlice'
+export { ImageCarousel } from './ui/ImageCarousel/ImageCarousel'

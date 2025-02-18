@@ -1,0 +1,22 @@
+.selector {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+
+  width: 372px;
+  padding-top: 24px;
+}
+
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+
+  color: white;
+}
+
+.image {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}

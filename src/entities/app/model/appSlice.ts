@@ -1,61 +1,47 @@
 import { createAppAsyncThunk } from '@/shared/lib/store/redux'
 import { createSlice, isFulfilled, type PayloadAction } from '@reduxjs/toolkit'
 
-export type Local = 'en' | 'ru'
+export type Locale = 'en' | 'ru'
 
 type AppState = {
-  local: Local
+  locale: Locale
 }
 
 const initialState: AppState = {
-  local: 'en',
+  locale: 'en',
 }
 export const appSlice = createSlice({
   name: 'app',
   initialState,
-  reducers: {},
+  reducers: {
+    setInitialLocale: (state, action: PayloadAction<{ locale: Locale }>) => {
+      state.locale = action.payload.locale
+    },
+  },
   extraReducers: builder => {
     builder.addMatcher(
-      isFulfilled(initializeLocal, changeLocal),
-      (state, action: PayloadAction<{ local: Local }>) => {
-        state.local = action.payload.local
+      isFulfilled(changeLocaleThunk),
+      (state, action: PayloadAction<{ locale: Locale }>) => {
+        state.locale = action.payload.locale
       }
     )
   },
   selectors: {
-    selectLocal: state => state.local,
+    selectLocale: state => state.locale,
   },
 })
 
-export const { selectLocal } = appSlice.selectors
+export const { selectLocale } = appSlice.selectors
+export const { setInitialLocale } = appSlice.actions
 
-export const initializeLocal = createAppAsyncThunk<{ local: Local }>(
-  `${appSlice.name}/initializeLocal`,
-  async (_, { rejectWithValue }) => {
-    const localFromStorage = localStorage.getItem('locale')
-
-    if (localFromStorage) {
-      if (localFromStorage === 'en' || localFromStorage === 'ru') {
-        return { local: localFromStorage }
-      }
-    } else {
-      const localFromNavigator = navigator.language.split('-')[0]
-      if (localFromNavigator === 'en' || localFromNavigator === 'ru') {
-        localStorage.setItem('locale', localFromNavigator)
-
-        return { local: localFromNavigator }
-      }
-    }
-
-    return rejectWithValue(null)
-  }
-)
-
-export const changeLocal = createAppAsyncThunk<{ local: Local }, { local: Local }>(
+export const changeLocaleThunk = createAppAsyncThunk<{ locale: Locale }, { locale: Locale }>(
   `${appSlice.name}/changeLocal`,
   async arg => {
-    localStorage.setItem('locale', arg.local)
+    await fetch('/api/locale', {
+      method: 'POST',
+      body: JSON.stringify({ locale: arg.locale }),
+    })
 
-    return arg
+    return { locale: arg.locale }
   }
 )

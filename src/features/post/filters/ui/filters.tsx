@@ -1,40 +1,73 @@
-import { selectPhotos } from '@/entities/post'
-import {
-  ArrowIos,
-  Button,
-  DialogBody,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@wandrehappen/ui-kit'
-import Image from 'next/image'
-import React from 'react'
+import { ImageCarousel, selectPhotos, updatePhoto } from '@/entities/post'
+import { useAppDispatch } from '@/shared/lib'
+import { DialogBody, DialogContent, DialogDescription } from '@wandrehappen/ui-kit'
+import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { CreatePostHeader } from '../../ui/createPostHeader'
+import s from './filters.module.scss'
+import { ImageFilterSelector } from './ImageFilterSelector'
 
 export const Filters = () => {
+  const dispatch = useAppDispatch()
+
   const photos = useSelector(selectPhotos)
-  const currentImage = photos[0].file
-  console.log(currentImage)
+
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
+
+  const currentImage = photos[currentIndex]
+
+  const photosForRender = useMemo(() => {
+    return photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl }))
+  }, [photos])
+
+  console.log(photosForRender)
+
+  const applyFilterHandler = (filterStyle: string) => {
+    const canvas = document.createElement('canvas')
+
+    const context = canvas.getContext('2d')
+    if (!context) {
+      return
+    }
+
+    const img = new Image()
+    img.src = currentImage.originalImageUrl
+
+    img.onload = () => {
+      canvas.width = img.width
+      canvas.height = img.height
+
+      context.clearRect(0, 0, canvas.width, canvas.height)
+
+      context.filter = filterStyle
+      context.drawImage(img, 0, 0)
+
+      canvas.toBlob(blob => {
+        if (!blob) return
+
+        const imageUrl = URL.createObjectURL(blob)
+        dispatch(
+          updatePhoto({
+            id: currentImage.id,
+            updatedImageUrl: imageUrl,
+          })
+        )
+      })
+    }
+  }
+
   return (
-    <DialogContent>
-      <DialogHeader isCloseIconVisible={false}>
-        <Button variant={'link'}>
-          <ArrowIos color={'white'} />
-        </Button>
-        <DialogTitle>Filters</DialogTitle>
-        <Button variant={'link'}>Next</Button>
-      </DialogHeader>
-      <DialogBody>
+    <DialogContent className={s.content}>
+      <CreatePostHeader title={'Filters'} nextButtonText={'Next'} />
+      <DialogBody className={s.body}>
         <DialogDescription style={{ display: 'none' }}>
           This dialog allows you to enhance your photo by applying various filters. Experiment with
           different styles to achieve the desired look before.
         </DialogDescription>
-        <Image
-          src={currentImage}
-          alt={'1'}
-          width={500} // Задаём ширину
-          height={300} // Задаём высоту
+        <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
+        <ImageFilterSelector
+          image={currentImage.originalImageUrl}
+          selectFilterHandler={applyFilterHandler}
         />
       </DialogBody>
     </DialogContent>
