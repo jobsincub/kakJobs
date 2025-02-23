@@ -12,26 +12,35 @@ import { selectUserId } from '@/entities/user/model/authSlice'
 import { useGetUsersPostsQuery } from '@/entities/post'
 
 const MyProfilePage = () => {
-  //const { postsArray } = useMyProfilePage()
   const userId = useSelector(selectUserId)
   const [page, setPage] = useState(1)
-  const { data: posts, error, isLoading, isFetching } = useGetUsersPostsQuery({ userId, page })
+  const { data, error, isLoading, isFetching } = useGetUsersPostsQuery(
+    { userId, page },
+    { skip: !userId }
+  )
+  const posts = data?.data.items || []
+  const totalPages = data?.data.meta.totalPages || 1
 
   const observerRef = useRef<HTMLDivElement | null>(null)
 
+  console.log(posts)
+
   useEffect(() => {
     if (!observerRef.current) return
+
     const observer = new IntersectionObserver(
       entries => {
-        if (entries[0].isIntersecting && !isFetching) {
+        if (entries[0].isIntersecting && page < totalPages && !isFetching) {
           setPage(prev => prev + 1)
         }
       },
       { threshold: 1.0 }
     )
+
     observer.observe(observerRef.current)
     return () => observer.disconnect()
-  }, [isFetching])
+  }, [page, totalPages, isFetching])
+
   const imageUrl = 'https://placeholder.apptor.studio/200/200/product1.png'
 
   return (
@@ -76,19 +85,21 @@ const MyProfilePage = () => {
         </div>
       </div>
       <div className={s.gridContainer}>
-        {posts &&
-          posts.data.length > 0 &&
-          posts.data.map(post => (
-            <div key={post.id}>
-              <img
-                key={post.postImages[0].id}
-                src={post.postImages[0].imageUrl}
-                alt="Post Image"
-                width={234}
-                height={228}
-              />
-            </div>
-          ))}
+        {posts.length > 0 &&
+          posts.map(
+            post =>
+              post.postImages.length > 0 && (
+                <div key={post.id}>
+                  <img
+                    key={post.postImages[0].id}
+                    src={post.postImages[0].imageUrl}
+                    alt="Post Image"
+                    width={234}
+                    height={228}
+                  />
+                </div>
+              )
+          )}
         <div ref={observerRef} />
       </div>
     </Page>
