@@ -10,10 +10,10 @@ import {
   DialogTitle,
 } from '@wandrehappen/ui-kit'
 import s from './PublishDialogContent.module.scss'
-import { PublishPostForm } from './PublishPostForm'
-import { PUBLISH_POST_FORM_ID } from '../../lib/usePublishPostForm'
 import { usePublishDialogContent } from '@/features/post/publish/lib/usePublishDialogContent'
 import { previousStep } from '@/entities/post'
+import { PostForm } from '@/shared/ui/PostForm/PostForm'
+import { POST_FORM_ID } from '@/shared/model'
 
 export const PublishDialogContent = () => {
   const { dispatch, publishPostHandler } = usePublishDialogContent()
@@ -28,19 +28,14 @@ export const PublishDialogContent = () => {
         <DialogDescription className={'srOnly'}>
           This dialog allows you to publish a new post with a description and images.
         </DialogDescription>
-        <Button
-          type={'submit'}
-          form={PUBLISH_POST_FORM_ID}
-          className={s.publishBtn}
-          variant={'link'}
-        >
+        <Button type={'submit'} form={POST_FORM_ID} className={s.publishBtn} variant={'link'}>
           Publish
         </Button>
       </DialogHeader>
       <DialogBody className={s.dialogBody}>
         <div className={s.imagesSlider}>IMAGES SLIDER</div>
         {/* TODO: добавить слайдер фоток */}
-        <PublishPostForm onSubmit={publishPostHandler} />
+        <PostForm onSubmit={publishPostHandler} />
       </DialogBody>
     </DialogContent>
   )

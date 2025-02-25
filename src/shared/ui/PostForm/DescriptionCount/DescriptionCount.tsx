@@ -1,23 +1,22 @@
 import { Typography } from '@wandrehappen/ui-kit'
 import { Control, useWatch } from 'react-hook-form'
-import { PublishPostFormValues } from '../../../../lib/usePublishPostForm'
+import { PostFormValues } from '../PostForm'
 
 type Props = {
-  control: Control<PublishPostFormValues>
+  control: Control<PostFormValues>
   maxLength: number
 }
 
 export const DescriptionCount = ({ control, maxLength }: Props) => {
-  const descriptionValue = useWatch({
+  const description = useWatch({
     control,
     name: 'description',
-    defaultValue: '',
   })
 
   return (
     <Typography asChild variant={'small'} color={'light-900'} align={'end'}>
       <div>
-        {descriptionValue.length}/{maxLength}
+        {description.length}/{maxLength}
       </div>
     </Typography>
   )
