@@ -14,7 +14,7 @@ export const useFilters = () => {
 
   const photosForRender = useMemo(() => {
     return photos.map(photo => ({ id: photo.id, imageUrl: updatedImageUrl }))
-  }, [photos])
+  }, [photos, updatedImageUrl])
 
   const applyFilterHandler = (filterStyle: string) => {
     const canvas = document.createElement('canvas')
