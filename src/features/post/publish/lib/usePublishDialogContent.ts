@@ -11,6 +11,10 @@ export const usePublishDialogContent = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const photos = useSelector(selectPhotos)
+  const imagesForCarousel = photos.map(photo => ({
+    id: photo.id,
+    imageUrl: photo.url,
+  }))
 
   const publishPostHandler: SubmitHandler<PublishPostFormValues> = async data => {
     try {
@@ -23,5 +27,5 @@ export const usePublishDialogContent = () => {
     }
   }
 
-  return { dispatch, publishPostHandler }
+  return { dispatch, publishPostHandler, imagesForCarousel }
 }
