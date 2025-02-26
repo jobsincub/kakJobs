@@ -1,11 +1,11 @@
 import { SubmitHandler } from 'react-hook-form'
-import { PublishPostFormValues } from '@/features/post/publish'
 import { useAppDispatch } from '@/shared/lib'
 import { reset, selectPhotos } from '@/entities/post'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/shared/router/routes'
 import { createPost } from '@/entities/post/model/postSlice'
+import { PostFormValues } from '../../ui/PostForm'
 
 export const usePublishDialogContent = () => {
   const router = useRouter()
@@ -16,7 +16,7 @@ export const usePublishDialogContent = () => {
     imageUrl: photo.url,
   }))
 
-  const publishPostHandler: SubmitHandler<PublishPostFormValues> = async data => {
+  const publishPostHandler: SubmitHandler<PostFormValues> = async data => {
     try {
       await dispatch(createPost({ ...data, photos })).unwrap()
 
