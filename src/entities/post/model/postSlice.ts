@@ -16,7 +16,7 @@ interface PostState {
 }
 
 const initialState: PostState = {
-  currentStep: 4,
+  currentStep: 1,
   photos: [],
   description: null,
 }
