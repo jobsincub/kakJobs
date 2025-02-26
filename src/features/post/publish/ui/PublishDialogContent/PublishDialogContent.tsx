@@ -10,10 +10,10 @@ import {
   DialogTitle,
 } from '@wandrehappen/ui-kit'
 import s from './PublishDialogContent.module.scss'
-import { usePublishDialogContent } from '@/features/post/publish/lib/usePublishDialogContent'
+import { usePublishDialogContent } from '../../lib/usePublishDialogContent'
 import { previousStep } from '@/entities/post'
-import { PostForm } from '@/shared/ui/PostForm/PostForm'
-import { POST_FORM_ID } from '@/shared/model'
+import { PostForm } from '../../../ui/PostForm'
+import { POST_FORM_ID } from '../../../model'
 
 export const PublishDialogContent = () => {
   const { dispatch, publishPostHandler } = usePublishDialogContent()
