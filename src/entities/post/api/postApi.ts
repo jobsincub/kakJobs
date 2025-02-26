@@ -4,6 +4,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['Posts'],
   endpoints: builder => ({
     createPost: builder.mutation<ApiResponse<Post>, FormData>({
       query: formData => ({
@@ -11,6 +12,7 @@ export const postApi = createApi({
         url: 'posts',
         method: 'POST',
       }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
   }),
 })
