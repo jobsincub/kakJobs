@@ -3,7 +3,7 @@ import { createAppAsyncThunk } from '@/shared/lib'
 import { Post, postApi } from '@/entities/post/api/postApi'
 import { convertUrlToFile } from '@/shared/lib/hooks'
 
-export interface PhotoFile {
+export interface ImagePreview {
   id: string
   url: string
   name?: string
@@ -11,7 +11,7 @@ export interface PhotoFile {
 
 interface PostState {
   currentStep: OrderStatus
-  photos: PhotoFile[]
+  photos: ImagePreview[]
   description: string | null
 }
 
@@ -72,7 +72,7 @@ export const postSlice = createSlice({
 
 export const createPost = createAppAsyncThunk<
   { post: Post },
-  { description?: string; photos: PhotoFile[] }
+  { description?: string; photos: ImagePreview[] }
 >(
   `${postSlice.name}/createPost`,
   async ({ description, photos }, { dispatch, rejectWithValue }) => {
