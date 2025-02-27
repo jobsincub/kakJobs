@@ -21,7 +21,7 @@ export const Sidebar = () => {
     },
   } = useTranslation()
   return (
-    <div className={s.sidebar}>
+    <nav className={s.sidebar}>
       <div className={s.wrapper}>
         <div className={s.group}>
           <Item icon={<HomeOutline />} text={sidebar.home} href={ROUTES.HOME} />
@@ -36,6 +36,6 @@ export const Sidebar = () => {
         </div>
         <LogoutDialog />
       </div>
-    </div>
+    </nav>
   )
 }
