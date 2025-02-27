@@ -12,7 +12,8 @@
   display: flex;
   justify-content: center;
 
+  width: 100%;
   max-width: vars.$container-max-width;
   margin: 0 auto;
-  padding: 0 vars.$container-padding-x;
+  padding-inline: vars.$container-padding-x;
 }
