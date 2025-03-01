@@ -1,0 +1,17 @@
+.img {
+  width: 100%;
+}
+
+
+.iconContainer {
+  position: absolute;
+  z-index: 1;
+  bottom: 15px;
+
+  display: flex;
+  gap: 10px;
+
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 10px;
+}
