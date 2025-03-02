@@ -30,9 +30,7 @@ export const CropPhoto = () => {
       <CreatePostHeader title={'Cropping'} nextButtonText={'Next'} />
       <DialogBody className={s.body}>
         <div className={s.frameContainer}>
-          <div>
-            <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
-          </div>
+          <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
           <div className={s.iconContainer}>
             <AspectPanel
               activeIcon={activeIcon}
