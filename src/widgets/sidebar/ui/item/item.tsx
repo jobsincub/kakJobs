@@ -12,11 +12,13 @@ type Props = {
 
 export const Item = ({ icon, text, href }: Props) => {
   return (
-    <Button variant={'link'} color={'white'} className={s.link} asChild>
-      <Link href={href}>
-        {icon}
-        {text}
-      </Link>
-    </Button>
+    <li>
+      <Button variant={'link'} color={'white'} className={s.link} asChild>
+        <Link href={href}>
+          {icon}
+          {text}
+        </Link>
+      </Button>
+    </li>
   )
 }
