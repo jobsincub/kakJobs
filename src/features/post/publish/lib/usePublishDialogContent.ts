@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/shared/router/routes'
 import { createPost } from '@/entities/post/model/postSlice'
 import { PostFormValues } from '../../ui/PostForm'
+import { useState } from 'react'
 
 export const usePublishDialogContent = () => {
   const router = useRouter()
@@ -15,17 +16,21 @@ export const usePublishDialogContent = () => {
     id: photo.id,
     imageUrl: photo.url,
   }))
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const publishPostHandler: SubmitHandler<PostFormValues> = async data => {
     try {
+      setIsSubmitting(true)
       await dispatch(createPost({ ...data, photos })).unwrap()
 
       dispatch(reset())
       router.push(ROUTES.HOME)
     } catch (error) {
       console.error('Ошибка при создании поста: ', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
-  return { dispatch, publishPostHandler, imagesForCarousel }
+  return { dispatch, publishPostHandler, imagesForCarousel, isSubmitting }
 }
