@@ -1,19 +1,20 @@
 // @flow
-import * as React from 'react'
-import { useState } from 'react'
 import s from '@/features/post/cropPhoto/ui/zoomPanel/zoomPanel.module.scss'
 import { MaximizeFill, MaximizeOutline } from '@wandrehappen/ui-kit'
+import * as React from 'react'
+import { useState } from 'react'
 
 type ZoomPanelProps = {
   activeIcon: string | null
   toggleIcon: (icon: 'zoom' | 'crop' | 'gallery') => void
   onZoomChange: (scale: number) => void
-  currentScale: number
 }
 
-export const ZoomPanel = ({ activeIcon, toggleIcon, onZoomChange, currentScale }: ZoomPanelProps) => {
+export const ZoomPanel = ({ activeIcon, toggleIcon, onZoomChange }: ZoomPanelProps) => {
+  const [scale, setScale] = useState(1)
   const handleZoomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newScale = Number(e.target.value)
+    setScale(newScale)
     onZoomChange(newScale)
   }
 
@@ -21,15 +22,15 @@ export const ZoomPanel = ({ activeIcon, toggleIcon, onZoomChange, currentScale }
     <div className={s.iconWrapper} onClick={() => toggleIcon('zoom')}>
       {activeIcon === 'zoom' && (
         <div className={s.zoomContainer}>
-          <input 
-            type={'range'} 
-            min={1} 
-            max={3} 
+          <input
+            type={'range'}
+            min={1}
+            max={3}
             step={0.1}
-            value={currentScale}
+            value={scale}
             onChange={handleZoomChange}
           />
-          <span className={s.zoomValue}>{Math.round(currentScale * 100)}%</span>
+          <span className={s.zoomValue}>{Math.round(scale * 100)}%</span>
         </div>
       )}
       {activeIcon === 'zoom' ? <MaximizeFill /> : <MaximizeOutline />}

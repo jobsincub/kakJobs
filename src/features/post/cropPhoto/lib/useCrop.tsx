@@ -11,6 +11,20 @@ type CropConfig = {
   }
 }
 
+function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+  return (...args: Parameters<T>) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+    timeoutId = setTimeout(() => func(...args), delay)
+  }
+}
+
 export const useCrop = () => {
   const dispatch = useAppDispatch()
 
@@ -22,66 +36,128 @@ export const useCrop = () => {
 
   const photosForRender = useMemo(() => {
     return photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl }))
-  }, [photos, updatedImageUrl])
+  }, [photos])
 
-  const applyCropHandler = ({ scale, aspectRatio }: CropConfig) => {
+  const applyZoomCallback1 = (zoom: number) => {
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d')
-
     if (!context) return
 
     const img = new Image()
     img.src = originalImageUrl
 
     img.onload = () => {
-      // Базовые размеры для всех форматов
-      const baseSize = 500
+      // Задаём размер canvas равным оригинальному размеру картинки,
+      // чтобы итоговое изображение не «сжималось».
+      canvas.width = img.width
+      canvas.height = img.height
 
-      // Вычисляем размеры на основе paddingBottom
-      const ratio =
-        aspectRatio.paddingBottom === 'auto'
-          ? img.naturalWidth / img.naturalHeight
-          : parseFloat(aspectRatio.paddingBottom) / 100
+      // Рассчитываем ширину и высоту «видимой» области (с учётом zoom)
+      // Например, если zoom=2, берём половину изображения по ширине и высоте.
+      const sWidth = img.width / zoom
+      const sHeight = img.height / zoom
 
-      // Устанавливаем размеры canvas
-      canvas.width = baseSize
-      canvas.height = baseSize / ratio
+      // Если хотим «зум» по центру, рассчитываем смещения
+      const sx = (img.width - sWidth) / 2
+      const sy = (img.height - sHeight) / 2
 
-      // Очищаем canvas
+      // Очищаем canvas перед рисованием
       context.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Вычисляем размеры и позицию для отрисовки
-      let drawWidth, drawHeight, x, y
+      // Рисуем «фрагмент» (sx, sy, sWidth, sHeight) в полный размер canvas
+      context.drawImage(
+        img,
+        sx, // Начальная точка вырезаемого фрагмента по X
+        sy, // Начальная точка вырезаемого фрагмента по Y
+        sWidth, // Ширина вырезаемого фрагмента
+        sHeight, // Высота вырезаемого фрагмента
+        0, // Координата X, куда рисуем на canvas
+        0, // Координата Y, куда рисуем на canvas
+        canvas.width, // Ширина в canvas
+        canvas.height // Высота в canvas
+      )
 
-      if (aspectRatio.objectFit === 'cover') {
-        // Для cover - заполняем всю область
-        const scaleToFit = Math.max(canvas.width / img.width, canvas.height / img.height)
-        drawWidth = img.width * scaleToFit
-        drawHeight = img.height * scaleToFit
-      } else {
-        // Для contain - сохраняем пропорции
-        const scaleToFit = Math.min(canvas.width / img.width, canvas.height / img.height)
-        drawWidth = img.width * scaleToFit
-        drawHeight = img.height * scaleToFit
-      }
-
-      // Центрируем изображение
-      x = (canvas.width - drawWidth) / 2
-      y = (canvas.height - drawHeight) / 2
-
-      // Применяем масштаб
-      const scaledWidth = drawWidth * scale
-      const scaledHeight = drawHeight * scale
-      const scaledX = x - (scaledWidth - drawWidth) / 2
-      const scaledY = y - (scaledHeight - drawHeight) / 2
-
-      // Рисуем изображение с применением всех трансформаций
-      context.drawImage(img, scaledX, scaledY, scaledWidth, scaledHeight)
-
-      // Сохраняем результат
+      // Преобразуем результат в Blob и создаём URL
       canvas.toBlob(blob => {
         if (!blob) return
         const updatedImageUrl = URL.createObjectURL(blob)
+
+        dispatch(
+          updatePhoto({
+            id,
+            updatedImageUrl,
+          })
+        )
+      })
+    }
+  }
+
+  const applyZoomDebounce = debounce(applyZoomCallback1, 500)
+
+  const applyAspectRatio = (aspectRatio: string) => {
+    console.log('Применение пропорций:', aspectRatio)
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    if (!context) return
+
+    const img = new Image()
+    img.src = originalImageUrl
+
+    img.onload = () => {
+      // Определяем нужные размеры для canvas, исходя из пропорций
+      let aspectWidth = img.width
+      let aspectHeight = img.height
+
+      // Вычисляем пропорции для разных форматов
+      switch (aspectRatio) {
+        case '1:1': {
+          aspectWidth = aspectHeight = Math.min(img.width, img.height)
+          break
+        }
+        case '4:5': {
+          aspectWidth = img.width
+          aspectHeight = img.width * (5 / 4)
+          break
+        }
+        case '16:9': {
+          aspectWidth = img.width
+          aspectHeight = img.width * (9 / 16)
+          break
+        }
+        default:
+          break
+      }
+
+      // Устанавливаем размеры canvas
+      canvas.width = aspectWidth
+      canvas.height = aspectHeight
+
+      // Вычисляем смещения для центрирования фрагмента изображения
+      const sx = (img.width - aspectWidth) / 2
+      const sy = (img.height - aspectHeight) / 2
+
+      // Очищаем canvas перед рисованием
+      context.clearRect(0, 0, canvas.width, canvas.height)
+
+      // Рисуем изображение с нужными размерами и смещением на canvas
+      context.drawImage(
+        img,
+        sx, // Начальная точка вырезаемого фрагмента по X
+        sy, // Начальная точка вырезаемого фрагмента по Y
+        aspectWidth, // Ширина вырезаемого фрагмента
+        aspectHeight, // Высота вырезаемого фрагмента
+        0, // Координата X, куда рисуем на canvas
+        0, // Координата Y, куда рисуем на canvas
+        canvas.width, // Ширина на canvas
+        canvas.height // Высота на canvas
+      )
+
+      // Преобразуем результат в Blob и создаём URL
+      canvas.toBlob(blob => {
+        if (!blob) return
+        const updatedImageUrl = URL.createObjectURL(blob)
+
+        // Обновляем изображение (если нужно)
         dispatch(
           updatePhoto({
             id,
@@ -96,6 +172,8 @@ export const useCrop = () => {
     photosForRender,
     setCurrentIndex,
     originalImageUrl,
-    applyCropHandler,
+    applyZoomDebounce,
+    updatedImageUrl,
+    applyAspectRatio,
   }
 }

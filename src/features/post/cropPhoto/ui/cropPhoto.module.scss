@@ -5,78 +5,81 @@
 .content {
   display: flex;
   flex-direction: column;
-  max-height:500px;
-  max-width:500px;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .body {
-  flex: 1;
   display: flex;
-  justify-content: center;
+  flex: 1;
   align-items: center;
+  justify-content: center;
+
   padding: 0;
+
   background: #1c1c1c;
 }
 
 .frameContainer {
+  position: relative;
   width: 500px;
   height: 500px;
-  position: relative;
   background: #000;
 }
 
 .imageWrapper {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  position: relative;
 
-  :global {
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
-
-    .swiper-slide {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.2s ease-in-out;
-      }
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: white;
-    }
-
-    .swiper-pagination-bullet {
-      background: white;
-    }
-  }
+  //  :global {
+  //    .swiper {
+  //      width: 100%;
+  //      height: 100%;
+  //    }
+  //
+  //    .swiper-slide {
+  //      width: 100%;
+  //      height: 100%;
+  //      display: flex;
+  //      align-items: center;
+  //      justify-content: center;
+  //      overflow: hidden;
+  //
+  //      img {
+  //        width: 100%;
+  //        height: 100%;
+  //        object-fit: cover;
+  //        transition: transform 0.2s ease-in-out;
+  //      }
+  //    }
+  //
+  //    .swiper-button-next,
+  //    .swiper-button-prev {
+  //      color: white;
+  //    }
+  //
+  //    .swiper-pagination-bullet {
+  //      background: white;
+  //    }
+  //  }
 }
 
 .iconContainer {
   position: absolute;
+  z-index: 1;
   bottom: 15px;
   left: 0;
+
   display: flex;
-  justify-content: center;
   gap: 10px;
+  justify-content: center;
+
   padding: 0 15px;
-  z-index: 1;
 }
 
 .carousel {
   width: 100%;
   height: 100%;
 }
-
