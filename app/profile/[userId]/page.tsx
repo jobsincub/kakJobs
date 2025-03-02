@@ -1,5 +1,5 @@
 import { EditDialogContent } from '@/features/post/edit/ui/editDialogContent'
 
-export default function Profile() {
+export default function ProfileId() {
   return <EditDialogContent />
 }

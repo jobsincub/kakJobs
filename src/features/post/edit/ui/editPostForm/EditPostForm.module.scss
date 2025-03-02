@@ -1,0 +1,29 @@
+.form {
+  flex: 0 0 50%;
+}
+
+.formWrapper {
+  padding: 24px;
+}
+
+.user {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.description {
+  width: 100%;
+  min-height: 144px;
+  
+}
+
+.button {
+  padding: 6px 12px;
+}
+
+.buttonWrapper {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}

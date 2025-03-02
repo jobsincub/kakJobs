@@ -109,6 +109,19 @@ export const ru: LocaleType = {
         sendLinkButtonText: 'Отправить ссылку',
       },
     },
+    posts: {
+      updatePostContent: {
+        buttonText: 'Редактировать публикацию',
+        titleText: 'Редактировать публикацию',
+        formButtonText: 'Сохранить',
+        labelText: 'Добавьте описание публикации',
+      },
+      updatePostDialog: {
+        closePost: 'Закрыть Окно',
+        description:
+          'Вы действительно хотите закрыть редактирование публикации? Если вы закроете, изменения не будут сохранены.',
+      },
+    },
   },
   shared: {
     validations: {

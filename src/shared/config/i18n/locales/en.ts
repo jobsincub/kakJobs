@@ -106,6 +106,19 @@ export const en = {
         createNewPasswordButtonText: 'Create new password',
       },
     },
+    posts: {
+      updatePostContent: {
+        buttonText: 'Edit Post',
+        titleText: 'Edit Post',
+        formButtonText: 'Save Changes',
+        labelText: 'Add publication descriptions',
+      },
+      updatePostDialog: {
+        closePost: 'Close Post',
+        description:
+          'Do you really want to close the edition of the publication? If you close changes won’t be saved',
+      },
+    },
   },
   shared: {
     validations: {
