@@ -20,6 +20,9 @@
   align-items: flex-start;
 
   margin-bottom: 60px;
+  padding: 0;
+
+  list-style: none;
 }
 
 .wrapper {
@@ -32,5 +35,9 @@
 
   .group:last-of-type {
     margin-bottom: 180px;
+  }
+
+  li {
+    list-style: none;
   }
 }
