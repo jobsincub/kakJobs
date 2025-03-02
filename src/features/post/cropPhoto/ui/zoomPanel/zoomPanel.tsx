@@ -7,21 +7,14 @@ import { MaximizeFill, MaximizeOutline } from '@wandrehappen/ui-kit'
 type ZoomPanelProps = {
   activeIcon: string | null
   toggleIcon: (icon: 'zoom' | 'crop' | 'gallery') => void
+  onZoomChange: (scale: number) => void
+  currentScale: number
 }
 
-export const ZoomPanel = ({ activeIcon, toggleIcon }: ZoomPanelProps) => {
-  const [scale, setScale] = useState(1)
-
+export const ZoomPanel = ({ activeIcon, toggleIcon, onZoomChange, currentScale }: ZoomPanelProps) => {
   const handleZoomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newScale = Number(e.target.value)
-    setScale(newScale)
-    
-    // Находим изображение и применяем масштаб
-    const image = document.querySelector('img') as HTMLImageElement
-    if (image) {
-      image.style.transform = `scale(${newScale})`
-      image.style.transition = 'transform 0.2s ease-in-out'
-    }
+    onZoomChange(newScale)
   }
 
   return (
@@ -33,10 +26,10 @@ export const ZoomPanel = ({ activeIcon, toggleIcon }: ZoomPanelProps) => {
             min={1} 
             max={3} 
             step={0.1}
-            value={scale}
+            value={currentScale}
             onChange={handleZoomChange}
           />
-          <span className={s.zoomValue}>{Math.round(scale * 100)}%</span>
+          <span className={s.zoomValue}>{Math.round(currentScale * 100)}%</span>
         </div>
       )}
       {activeIcon === 'zoom' ? <MaximizeFill /> : <MaximizeOutline />}
