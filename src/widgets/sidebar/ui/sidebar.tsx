@@ -21,21 +21,23 @@ export const Sidebar = () => {
     },
   } = useTranslation()
   return (
-    <div className={s.sidebar}>
+    <nav className={s.sidebar}>
       <div className={s.wrapper}>
-        <div className={s.group}>
+        <ul className={s.group}>
           <Item icon={<HomeOutline />} text={sidebar.home} href={ROUTES.HOME} />
           <Item icon={<PlusSquareOutline />} text={sidebar.create} href={ROUTES.CREATE_POST} />
           <Item icon={<PersonOutline />} text={sidebar.myProfile} href="./" />
           <Item icon={<MessageCircleOutline />} text={sidebar.messenger} href="./" />
           <Item icon={<Search />} text={sidebar.messenger} href="./" />
-        </div>
-        <div className={s.group}>
+        </ul>
+        <ul className={s.group}>
           <Item icon={<Trending />} text={sidebar.statistics} href="./" />
           <Item icon={<BookmarkOutline />} text={sidebar.favorites} href="./" />
-        </div>
-        <LogoutDialog />
+        </ul>
+        <li>
+          <LogoutDialog />
+        </li>
       </div>
-    </div>
+    </nav>
   )
 }
