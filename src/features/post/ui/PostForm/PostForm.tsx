@@ -3,9 +3,8 @@ import { Button, Textarea, Typography } from '@wandrehappen/ui-kit'
 import { DescriptionCount } from './DescriptionCount'
 import { Post } from '@/entities/post/api/postApi'
 import { DESCRIPTION_MAX_LENGTH, POST_FORM_ID } from '../../model'
-import { useSelector } from 'react-redux'
-import { selectUserName } from '@/entities/user/model/authSlice'
 import s from './PostForm.module.scss'
+import { usePostForm } from '../../lib/usePostForm'
 
 export type PostFormValues = {
   description: string
@@ -17,7 +16,7 @@ type Props = {
 }
 
 export const PostForm = ({ defaultValues, onSubmit }: Props) => {
-  const userName = useSelector(selectUserName)
+  const { userName, postForm } = usePostForm()
   const { handleSubmit, register, control } = useForm<PostFormValues>({
     defaultValues: defaultValues || {
       description: '',
@@ -35,8 +34,8 @@ export const PostForm = ({ defaultValues, onSubmit }: Props) => {
         </div>
         <Textarea
           {...register('description')}
-          labelText={'Add publication description'}
-          placeholder="Post description..."
+          labelText={postForm.labelText}
+          placeholder={postForm.placeholderText}
           maxLength={DESCRIPTION_MAX_LENGTH}
           className={s.description}
         />

@@ -16,7 +16,7 @@ import { PostForm } from '../../../ui/PostForm'
 import { POST_FORM_ID } from '../../../model'
 
 export const PublishDialogContent = () => {
-  const { dispatch, publishPostHandler, imagesForCarousel, isSubmitting } =
+  const { dispatch, publishPostHandler, imagesForCarousel, isSubmitting, publishPostDialog } =
     usePublishDialogContent()
 
   return (
@@ -25,7 +25,7 @@ export const PublishDialogContent = () => {
         <Button className={s.backIconBtn} variant={'link'} onClick={() => dispatch(previousStep())}>
           <ArrowIos />
         </Button>
-        <DialogTitle>Publication</DialogTitle>
+        <DialogTitle>{publishPostDialog.titleText}</DialogTitle>
         <DialogDescription className={'srOnly'}>
           This dialog allows you to publish a new post with a description and images.
         </DialogDescription>
@@ -36,7 +36,7 @@ export const PublishDialogContent = () => {
           className={s.publishBtn}
           variant={'link'}
         >
-          Publish
+          {publishPostDialog.buttonText}
         </Button>
       </DialogHeader>
       <DialogBody className={s.dialogBody}>

@@ -7,6 +7,7 @@ import { ROUTES } from '@/shared/router/routes'
 import { createPost } from '@/entities/post/model/postSlice'
 import { PostFormValues } from '../../ui/PostForm'
 import { useState } from 'react'
+import { useTranslation } from '@/shared/config'
 
 export const usePublishDialogContent = () => {
   const router = useRouter()
@@ -32,5 +33,13 @@ export const usePublishDialogContent = () => {
     }
   }
 
-  return { dispatch, publishPostHandler, imagesForCarousel, isSubmitting }
+  const {
+    t: {
+      features: {
+        post: { publishPostDialog },
+      },
+    },
+  } = useTranslation()
+
+  return { dispatch, publishPostHandler, imagesForCarousel, isSubmitting, publishPostDialog }
 }
