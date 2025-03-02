@@ -2,28 +2,7 @@ import { selectPhotos, updatePhoto } from '@/entities/post'
 import { useAppDispatch } from '@/shared/lib'
 import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-
-type CropConfig = {
-  scale: number
-  aspectRatio: {
-    objectFit: 'contain' | 'cover'
-    paddingBottom: string
-  }
-}
-
-function debounce<T extends (...args: any[]) => void>(
-  func: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let timeoutId: ReturnType<typeof setTimeout> | null = null
-
-  return (...args: Parameters<T>) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
-    timeoutId = setTimeout(() => func(...args), delay)
-  }
-}
+import { debounce } from '@/shared/lib/hooks/debounce'
 
 export const useCrop = () => {
   const dispatch = useAppDispatch()
