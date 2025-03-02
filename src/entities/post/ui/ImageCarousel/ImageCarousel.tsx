@@ -42,7 +42,13 @@ export const ImageCarousel = ({ images, currentIndexCb, className }: Props) => {
         {images.map(image => (
           <SwiperSlide key={image.id} className={clsx(s.wrapper, className)}>
             <div className={s.imageContainer}>
-              <Image alt={`Post Image ${image.id}`} src={image.imageUrl} fill className={s.image} />
+              <Image
+                alt={`Post Image ${image.id}`}
+                src={image.imageUrl}
+                fill
+                objectFit="contain"
+                objectPosition="center"
+              />
             </div>
           </SwiperSlide>
         ))}
