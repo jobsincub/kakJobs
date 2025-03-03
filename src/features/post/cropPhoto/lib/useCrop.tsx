@@ -11,13 +11,20 @@ export const useCrop = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const { id, updatedImageUrl, originalImageUrl } = photos[currentIndex]
+  // Добавляем проверку на пустой массив
+  const currentPhoto = photos.length > 0 ? photos[currentIndex] : null
+
+  // Деструктурируем значения с дефолтными значениями для случая пустого массива
+  const { id = '', updatedImageUrl = '', originalImageUrl = '' } = currentPhoto || {}
 
   const photosForRender = useMemo(() => {
     return photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl }))
   }, [photos])
 
   const applyZoomCallback1 = (zoom: number) => {
+    // Добавляем проверку на наличие фото
+    if (!originalImageUrl) return
+
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d')
     if (!context) return
@@ -74,6 +81,9 @@ export const useCrop = () => {
   const applyZoomDebounce = debounce(applyZoomCallback1, 500)
 
   const applyAspectRatio = (aspectRatio: string) => {
+    // Добавляем проверку на наличие фото
+    if (!originalImageUrl) return
+
     console.log('Применение пропорций:', aspectRatio)
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d')

@@ -6,6 +6,7 @@ import { CreatePostHeader } from '@/features/post/ui/createPostHeader'
 import { DialogBody, DialogContent } from '@wandrehappen/ui-kit'
 import React, { useState } from 'react'
 import s from './cropPhoto.module.scss'
+import { GalleryPanel } from '@/features/post/cropPhoto/ui/galleryPanel/galleryPanel'
 
 export const CropPhoto = () => {
   const { photosForRender, applyZoomDebounce, applyAspectRatio, setCurrentIndex } = useCrop()
@@ -32,16 +33,21 @@ export const CropPhoto = () => {
         <div className={s.frameContainer}>
           <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
           <div className={s.iconContainer}>
-            <AspectPanel
-              activeIcon={activeIcon}
-              toggleIcon={toggleIcon}
-              onAspectChange={handleAspectChange}
-            />
-            <ZoomPanel
-              activeIcon={activeIcon}
-              toggleIcon={toggleIcon}
-              onZoomChange={handleZoomChange}
-            />
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <AspectPanel
+                activeIcon={activeIcon}
+                toggleIcon={toggleIcon}
+                onAspectChange={handleAspectChange}
+              />
+              <ZoomPanel
+                activeIcon={activeIcon}
+                toggleIcon={toggleIcon}
+                onZoomChange={handleZoomChange}
+              />
+            </div>
+            <div style={{ position: 'absolute', left: '440px' }}>
+              <GalleryPanel activeIcon={activeIcon} toggleIcon={toggleIcon} />
+            </div>
           </div>
         </div>
       </DialogBody>
