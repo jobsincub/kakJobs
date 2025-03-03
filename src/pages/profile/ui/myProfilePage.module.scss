@@ -38,5 +38,17 @@
   margin-top: 48px;
 }
 
-.imageWrapper {
+.imageСontainer {
+  width: 234px;
+  height: 234px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

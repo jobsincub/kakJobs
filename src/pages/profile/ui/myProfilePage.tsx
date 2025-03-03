@@ -4,42 +4,13 @@ import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
 
 import { Button, Typography } from '@wandrehappen/ui-kit'
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import s from './myProfilePage.module.scss'
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
-import { selectUserId } from '@/entities/user/model/authSlice'
-import { useGetUsersPostsQuery } from '@/entities/post'
+import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
 
 const MyProfilePage = () => {
-  const userId = useSelector(selectUserId)
-  const [page, setPage] = useState(1)
-  const { data, error, isLoading, isFetching } = useGetUsersPostsQuery(
-    { userId, page },
-    { skip: !userId }
-  )
-  const posts = data?.data.items || []
-  const totalPages = data?.data.meta.totalPages || 1
-
-  const observerRef = useRef<HTMLDivElement | null>(null)
-
-  console.log(posts)
-
-  useEffect(() => {
-    if (!observerRef.current) return
-
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting && page < totalPages && !isFetching) {
-          setPage(prev => prev + 1)
-        }
-      },
-      { threshold: 1.0 }
-    )
-
-    observer.observe(observerRef.current)
-    return () => observer.disconnect()
-  }, [page, totalPages, isFetching])
+  const { posts, observerRef } = useMyProfilePage()
 
   const imageUrl = 'https://placeholder.apptor.studio/200/200/product1.png'
 
@@ -89,13 +60,12 @@ const MyProfilePage = () => {
           posts.map(
             post =>
               post.postImages.length > 0 && (
-                <div key={post.id}>
+                <div key={post.id} className={s.imageСontainer}>
                   <img
+                    className={s.postImage}
                     key={post.postImages[0].id}
                     src={post.postImages[0].imageUrl}
                     alt="Post Image"
-                    width={234}
-                    height={228}
                   />
                 </div>
               )

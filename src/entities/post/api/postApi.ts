@@ -1,11 +1,10 @@
 import { baseQueryWithReauth } from '@/shared/api'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 
 export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 60, // Держим кэш 60 секунд
+  keepUnusedDataFor: 60,
   tagTypes: ['Post'],
   endpoints: builder => ({
     createPost: builder.mutation<ApiResponse<Data>, { description: string; photos: string[] }>({
@@ -15,20 +14,34 @@ export const postApi = createApi({
         method: 'POST',
       }),
     }),
-    getUsersPosts: builder.query<ApiResponse<Data>, { userId: string | undefined; page: number }>({
+    getUsersPosts: builder.query<
+      { items: PostItems[]; meta: PostMeta },
+      { userId: string | undefined; page: number }
+    >({
       query: ({ userId, page }) => ({
         url: `posts/${userId}`,
-        params: { page, limit: 4 },
+        params: { page },
       }),
-      serializeQueryArgs: ({ endpointName }) => endpointName, // Все запросы getUsersPosts хранятся в одном ключе
+      transformResponse: (response: ApiResponse<Data>) => ({
+        items: response.data.items.map(item => ({
+          ...item,
+          isNew: true,
+        })),
+        meta: response.data.meta,
+      }),
+      serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (currentCache, newData) => {
-        currentCache.data.items.push(...newData.data.items) // Добавляем новые посты в кеш без перезаписи
-        currentCache.data.meta = newData.data.meta
+        if (!currentCache.items) {
+          currentCache.items = newData.items
+        } else {
+          currentCache.items.push(...newData.items)
+        }
+        currentCache.meta = newData.meta
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page // Форсим рефетч, если номер страницы изменился
+        return currentArg?.page !== previousArg?.page
       },
-      providesTags: ['Post'], // Используем кеширование
+      providesTags: ['Post'],
     }),
   }),
 })
