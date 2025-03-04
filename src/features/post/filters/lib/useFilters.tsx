@@ -10,27 +10,23 @@ export const useFilters = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const { id, updatedImageUrl, originalImageUrl } = photos[currentIndex]
+  const { id: currentId, originalImageUrl: currentOriginalImageUrl } = photos[currentIndex]
 
   const photosForRender = useMemo(() => {
-    return photos.map(photo => ({ id: photo.id, imageUrl: updatedImageUrl }))
-  }, [photos, updatedImageUrl])
+    return photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl }))
+  }, [photos])
 
   const applyFilterHandler = (filterStyle: string) => {
-    const canvas = document.createElement('canvas')
-
-    const context = canvas.getContext('2d')
-    if (!context) {
-      return
-    }
-
     const img = new Image()
-    img.src = originalImageUrl
+    img.src = currentOriginalImageUrl
 
     img.onload = () => {
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+      if (!context) return
+
       canvas.width = img.width
       canvas.height = img.height
-
       context.clearRect(0, 0, canvas.width, canvas.height)
 
       context.filter = filterStyle
@@ -38,14 +34,8 @@ export const useFilters = () => {
 
       canvas.toBlob(blob => {
         if (!blob) return
-
         const updatedImageUrl = URL.createObjectURL(blob)
-        dispatch(
-          updatePhoto({
-            id,
-            updatedImageUrl,
-          })
-        )
+        dispatch(updatePhoto({ id: currentId, updatedImageUrl }))
       })
     }
   }
@@ -53,7 +43,7 @@ export const useFilters = () => {
   return {
     photosForRender,
     setCurrentIndex,
-    originalImageUrl,
+    currentOriginalImageUrl,
     applyFilterHandler,
   }
 }
