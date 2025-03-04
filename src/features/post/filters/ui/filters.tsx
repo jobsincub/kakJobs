@@ -6,7 +6,8 @@ import s from './filters.module.scss'
 import { ImageFilterSelector } from './imageFilterSelector'
 
 export const Filters = () => {
-  const { photosForRender, setCurrentIndex, originalImageUrl, applyFilterHandler } = useFilters()
+  const { photosForRender, setCurrentIndex, currentOriginalImageUrl, applyFilterHandler } =
+    useFilters()
   return (
     <DialogContent className={s.content}>
       <CreatePostHeader title={'Filters'} nextButtonText={'Next'} />
@@ -16,7 +17,10 @@ export const Filters = () => {
           different styles to achieve the desired look before.
         </DialogDescription>
         <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
-        <ImageFilterSelector image={originalImageUrl} selectFilterHandler={applyFilterHandler} />
+        <ImageFilterSelector
+          image={currentOriginalImageUrl}
+          selectFilterHandler={applyFilterHandler}
+        />
       </DialogBody>
     </DialogContent>
   )
