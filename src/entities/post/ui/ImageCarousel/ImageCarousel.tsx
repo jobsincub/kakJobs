@@ -57,7 +57,7 @@ export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
           onSlideChange={handleSlideChange}
           onSwiper={swiper => (swiperRef.current = swiper)}
         >
-          {images.map(image => (
+          {images.map((image, index) => (
             <SwiperSlide key={image.id} className={clsx(s.wrapper, className)}>
               <div className={s.imageContainer}>
                 <Image

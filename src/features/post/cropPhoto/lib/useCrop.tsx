@@ -158,6 +158,7 @@ export const useCrop = () => {
   }
 
   return {
+    currentIndex,
     photosForRender,
     setCurrentIndex,
     originalImageUrl,

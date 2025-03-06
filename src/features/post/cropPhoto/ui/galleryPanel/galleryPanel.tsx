@@ -6,8 +6,10 @@ import { removePhoto, selectPhotos } from '@/entities/post'
 import Image from 'next/image'
 
 import { useSelector } from 'react-redux'
-import { useAddPhoto } from '@/features/post/addPhoto/lib/useAddPhoto'
 import { useAppDispatch } from '@/shared/lib'
+import { FileUploadTrigger } from '@/features/post/addPhoto'
+import { useRef } from 'react'
+import type { ImageCarouselHandle } from '@/entities/post/ui/ImageCarousel/ImageCarousel'
 
 type GalleryPanelProps = {
   activeIcon: string | null
@@ -17,12 +19,12 @@ type GalleryPanelProps = {
 export const GalleryPanel = ({ activeIcon, toggleIcon }: GalleryPanelProps) => {
   const photos = useSelector(selectPhotos)
   const dispatch = useAppDispatch()
-  const { updateImageHandler, fileInputRef } = useAddPhoto()
 
-  const handleAddPhotoClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (fileInputRef.current) {
-      fileInputRef.current.click()
+  const carouselRef = useRef<ImageCarouselHandle>(null)
+
+  const goToSlide = (index: number) => {
+    if (carouselRef.current) {
+      carouselRef.current.goToSlide(index)
     }
   }
 
@@ -41,7 +43,7 @@ export const GalleryPanel = ({ activeIcon, toggleIcon }: GalleryPanelProps) => {
           {photos.length === 0 ? (
             <div className={s.noPhotos}>НЕТ ФОТО</div>
           ) : (
-            photos.map(photo => {
+            photos.map((photo, index) => {
               return (
                 <div className={s.photoWrapper} key={photo.id}>
                   <button className={s.removeButton} onClick={() => removePhotoHandler(photo.id)}>
@@ -54,23 +56,18 @@ export const GalleryPanel = ({ activeIcon, toggleIcon }: GalleryPanelProps) => {
                     width={80}
                     height={80}
                     className={s.photoInGallery}
+                    onClick={() => goToSlide(index)}
                   />
                 </div>
               )
             })
           )}
 
-          <div onClick={handleAddPhotoClick}>
-            <PlusCircleOutline />
-          </div>
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={updateImageHandler}
-            style={{ display: 'none' }}
-            accept="image/jpeg,image/png"
-            multiple
-          />
+          <FileUploadTrigger multiple={true}>
+            <button style={{ all: 'unset', cursor: 'pointer' }}>
+              <PlusCircleOutline />
+            </button>
+          </FileUploadTrigger>
         </div>
       )}
       {activeIcon === 'gallery' ? <ImageFill /> : <ImageOutline />}

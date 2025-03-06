@@ -9,7 +9,8 @@ import s from './cropPhoto.module.scss'
 import { GalleryPanel } from '@/features/post/cropPhoto/ui/galleryPanel/galleryPanel'
 
 export const CropPhoto = () => {
-  const { photosForRender, applyZoomDebounce, applyAspectRatio, setCurrentIndex } = useCrop()
+  const { photosForRender, applyZoomDebounce, applyAspectRatio, setCurrentIndex, currentIndex } =
+    useCrop()
 
   const [activeIcon, setActiveIcon] = useState<string | null>(null)
 
@@ -25,6 +26,8 @@ export const CropPhoto = () => {
   const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
     setActiveIcon(activeIcon === icon ? null : icon)
   }
+
+  console.log(currentIndex)
 
   return (
     <DialogContent className={s.content}>
