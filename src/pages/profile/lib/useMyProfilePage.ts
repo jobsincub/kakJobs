@@ -21,6 +21,10 @@ export const useMyProfilePage = () => {
   const posts = data?.items || []
   const totalPages = data?.meta.totalPages || 1
 
+  const redirectToPost = (postId: string) => {
+    router.push(`/profile/${userId}/${postId}`)
+  }
+
   const observerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -42,5 +46,6 @@ export const useMyProfilePage = () => {
   return {
     posts,
     observerRef,
+    redirectToPost,
   }
 }

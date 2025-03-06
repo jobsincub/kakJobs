@@ -23,10 +23,7 @@ export const postApi = createApi({
         params: { page },
       }),
       transformResponse: (response: ApiResponse<Data>) => ({
-        items: response.data.items.map(item => ({
-          ...item,
-          isNew: true,
-        })),
+        items: response.data.items,
         meta: response.data.meta,
       }),
       serializeQueryArgs: ({ endpointName }) => endpointName,

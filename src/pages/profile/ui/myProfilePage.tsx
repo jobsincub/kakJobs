@@ -8,9 +8,10 @@ import React from 'react'
 import s from './myProfilePage.module.scss'
 import Link from 'next/link'
 import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
+import Image from 'next/image'
 
 const MyProfilePage = () => {
-  const { posts, observerRef } = useMyProfilePage()
+  const { posts, observerRef, redirectToPost } = useMyProfilePage()
 
   const imageUrl = 'https://placeholder.apptor.studio/200/200/product1.png'
 
@@ -32,17 +33,20 @@ const MyProfilePage = () => {
           <div className={s.profileCountersContainer}>
             <Button asChild variant={'link'}>
               <Link href={''} color={'light-100'} className={s.profileCounter}>
-                {0} <br /> {'Following'}
+                <span>{0}</span>
+                <span>{'Following'}</span>
               </Link>
             </Button>
             <Button asChild variant={'link'}>
               <Link href={''} color={'light-100'} className={s.profileCounter}>
-                {0} <br /> {'Followers'}
+                <span>{0}</span>
+                <span>{'Followers'}</span>
               </Link>
             </Button>
             <Button asChild variant={'link'}>
               <Link href={''} color={'light-100'} className={s.profileCounter}>
-                {0} <br /> {'Publications'}
+                <span>{0}</span>
+                <span>{'Publications'}</span>
               </Link>
             </Button>
           </div>
@@ -61,12 +65,23 @@ const MyProfilePage = () => {
             post =>
               post.postImages.length > 0 && (
                 <div key={post.id} className={s.imageСontainer}>
-                  <img
-                    className={s.postImage}
-                    key={post.postImages[0].id}
-                    src={post.postImages[0].imageUrl}
-                    alt="Post Image"
-                  />
+                  <Button
+                    asChild
+                    variant={'link'}
+                    onClick={() => redirectToPost(post.postImages[0].id)}
+                  >
+                    <Image
+                      className={s.postImage}
+                      key={post.postImages[0].id}
+                      src={post.postImages[0].imageUrl}
+                      alt={post.postImages[0].id}
+                      objectFit="contain"
+                      objectPosition="center"
+                      width="234"
+                      height="234"
+                      //style={{ objectFit: 'cover' }}
+                    />
+                  </Button>
                 </div>
               )
           )}
