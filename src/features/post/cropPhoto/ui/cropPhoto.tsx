@@ -4,14 +4,16 @@ import { AspectPanel } from '@/features/post/cropPhoto/ui/aspectPanel/aspectPane
 import { ZoomPanel } from '@/features/post/cropPhoto/ui/zoomPanel/zoomPanel'
 import { CreatePostHeader } from '@/features/post/ui/createPostHeader'
 import { DialogBody, DialogContent } from '@wandrehappen/ui-kit'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import s from './cropPhoto.module.scss'
 import { GalleryPanel } from '@/features/post/cropPhoto/ui/galleryPanel/galleryPanel'
+import { ImageCarouselHandle } from '@/entities/post/ui/ImageCarousel/ImageCarousel'
 
 export const CropPhoto = () => {
   const { photosForRender, applyZoomDebounce, applyAspectRatio, setCurrentIndex, currentIndex } =
     useCrop()
 
+  const carouselRef = useRef<ImageCarouselHandle>(null)
   const [activeIcon, setActiveIcon] = useState<string | null>(null)
 
   const handleZoomChange = (newScale: number) => {
@@ -34,7 +36,11 @@ export const CropPhoto = () => {
       <CreatePostHeader title={'Cropping'} nextButtonText={'Next'} />
       <DialogBody className={s.body}>
         <div className={s.frameContainer}>
-          <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
+          <ImageCarousel
+            images={photosForRender}
+            currentIndexCb={setCurrentIndex}
+            ref={carouselRef}
+          />
           <div className={s.iconContainer}>
             <div style={{ display: 'flex', gap: '20px' }}>
               <AspectPanel
@@ -49,7 +55,11 @@ export const CropPhoto = () => {
               />
             </div>
             <div style={{ position: 'absolute', left: '440px' }}>
-              <GalleryPanel activeIcon={activeIcon} toggleIcon={toggleIcon} />
+              <GalleryPanel 
+                activeIcon={activeIcon} 
+                toggleIcon={toggleIcon} 
+                carouselRef={carouselRef}
+              />
             </div>
           </div>
         </div>

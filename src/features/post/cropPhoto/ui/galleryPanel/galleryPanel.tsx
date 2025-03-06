@@ -8,25 +8,17 @@ import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/shared/lib'
 import { FileUploadTrigger } from '@/features/post/addPhoto'
-import { useRef } from 'react'
 import type { ImageCarouselHandle } from '@/entities/post/ui/ImageCarousel/ImageCarousel'
 
 type GalleryPanelProps = {
   activeIcon: string | null
   toggleIcon: (icon: 'zoom' | 'crop' | 'gallery') => void
+  carouselRef: React.RefObject<ImageCarouselHandle>
 }
 
-export const GalleryPanel = ({ activeIcon, toggleIcon }: GalleryPanelProps) => {
+export const GalleryPanel = ({ activeIcon, toggleIcon, carouselRef }: GalleryPanelProps) => {
   const photos = useSelector(selectPhotos)
   const dispatch = useAppDispatch()
-
-  const carouselRef = useRef<ImageCarouselHandle>(null)
-
-  const goToSlide = (index: number) => {
-    if (carouselRef.current) {
-      carouselRef.current.goToSlide(index)
-    }
-  }
 
   const handleContainerClick = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -56,7 +48,7 @@ export const GalleryPanel = ({ activeIcon, toggleIcon }: GalleryPanelProps) => {
                     width={80}
                     height={80}
                     className={s.photoInGallery}
-                    onClick={() => goToSlide(index)}
+                    onClick={() => carouselRef.current?.goToSlide(index)}
                   />
                 </div>
               )
