@@ -1,6 +1,5 @@
 'use client'
 
-import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
 
 import { Button, Typography } from '@wandrehappen/ui-kit'
