@@ -4,13 +4,11 @@ import { AddPhoto } from '@/features/post/addPhoto'
 import { CropPhoto } from '@/features/post/cropPhoto'
 import { Filters } from '@/features/post/filters'
 
-import { Button, Dialog, DialogTrigger } from '@wandrehappen/ui-kit'
+import { Dialog } from '@wandrehappen/ui-kit'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
 export const CreatePost = () => {
-  // const [crop, setCrop] = useState<Crop>()
-
   const step = useSelector(selectStep)
 
   const renderContentByStep = () => {
@@ -26,12 +24,5 @@ export const CreatePost = () => {
     }
   }
 
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Add post</Button>
-      </DialogTrigger>
-      {renderContentByStep()}
-    </Dialog>
-  )
+  return <Dialog open>{renderContentByStep()}</Dialog>
 }

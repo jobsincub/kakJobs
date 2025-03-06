@@ -1,8 +1,11 @@
 'use client'
-import { selectIsLoggedIn, selectUserName } from '@/entities/user/model/authSlice'
-import { LogoutDialog } from '@/features/auth/logout'
+import { selectIsLoggedIn } from '@/entities/user/model/authSlice'
 import { LanguageSwitcher } from '@/features/languageSwitcher'
+import { useTranslation } from '@/shared/config'
+import { ROUTES } from '@/shared/router/routes'
+import { Button } from '@wandrehappen/ui-kit'
 import { clsx } from 'clsx'
+import Link from 'next/link'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { useSelector } from 'react-redux'
 import s from './Header.module.scss'
@@ -11,16 +14,32 @@ import { Logo } from './logo'
 type Props = ComponentPropsWithoutRef<'header'>
 
 export const Header = forwardRef<ElementRef<'header'>, Props>(({ className, ...rest }, ref) => {
-  const userName = useSelector(selectUserName)
+  const {
+    t: {
+      widgets: {
+        header: { signUp, logIn },
+      },
+    },
+  } = useTranslation()
   const isLoggedIn = useSelector(selectIsLoggedIn)
 
   return (
     <header className={clsx(s.header, className)} ref={ref} {...rest}>
       <div className={s.headerContainer}>
-        <Logo />
-        <span>{userName ? `Welcome, ${userName}` : 'Welcome, Guest'}</span>
-        {isLoggedIn && <LogoutDialog />}
-        <LanguageSwitcher />
+        <div className={s.wrapper}>
+          <Logo />
+          <LanguageSwitcher />
+        </div>
+        {!isLoggedIn && (
+          <div className={s.buttonWrapper}>
+            <Button asChild variant={'tertiary'} className={s.button}>
+              <Link href={ROUTES.AUTH.SIGN_IN}>{logIn}</Link>
+            </Button>
+            <Button asChild className={s.button}>
+              <Link href={ROUTES.AUTH.SIGN_UP}>{signUp}</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   )
