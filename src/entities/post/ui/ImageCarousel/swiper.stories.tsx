@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
+import { useRef } from 'react'
 
-import { ImageCarousel } from './ImageCarousel'
+import { ImageCarousel, type ImageCarouselHandle } from './ImageCarousel'
 
 const meta: Meta<typeof ImageCarousel> = {
   component: ImageCarousel,
@@ -28,6 +29,29 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  render: args => {
+    const carouselRef = useRef<ImageCarouselHandle>(null)
+
+    const goToSlide = (index: number) => {
+      if (carouselRef.current) {
+        carouselRef.current.goToSlide(index)
+      }
+    }
+
+    const currentIndexCb = (index: number) => {
+      console.log(index)
+    }
+
+    return (
+      <div>
+        <ImageCarousel ref={carouselRef} {...args} currentIndexCb={currentIndexCb} />
+        <button onClick={() => goToSlide(4)} style={{ marginTop: '20px' }}>
+          Перейти к 5 слайду
+        </button>
+        {/* Можно добавить дополнительную логику ниже */}
+      </div>
+    )
+  },
   args: {
     images: [
       {
