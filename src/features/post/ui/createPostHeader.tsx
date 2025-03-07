@@ -5,11 +5,17 @@ import { HTMLAttributes } from 'react'
 
 type Props = {
   title: string
-  nextButtonText: string
+  nextButtonText?: string
   nextButtonHandler?: () => void
 } & HTMLAttributes<HTMLDivElement>
 
-export const CreatePostHeader = ({ title, nextButtonText, nextButtonHandler, ...props }: Props) => {
+export const CreatePostHeader = ({
+  title,
+  nextButtonText = 'Next',
+  nextButtonHandler,
+  children,
+  ...props
+}: Props) => {
   const dispatch = useAppDispatch()
 
   const previousStepHandler = () => {
@@ -26,9 +32,11 @@ export const CreatePostHeader = ({ title, nextButtonText, nextButtonHandler, ...
         <ArrowIos color={'white'} />
       </Button>
       <DialogTitle>{title}</DialogTitle>
-      <Button onClick={nextButtonHandler ?? nextStepHandler} variant={'link'}>
-        {nextButtonText}
-      </Button>
+      {children || (
+        <Button onClick={nextButtonHandler ?? nextStepHandler} variant={'link'}>
+          {nextButtonText}
+        </Button>
+      )}
     </DialogHeader>
   )
 }
