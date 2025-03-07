@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+  CREATE_POST: './createPost',
   LEGAL: {
     TERMS_OF_SERVICE: '/terms-of-service',
     PRIVACY_POLICY: '/privacy-policy',

@@ -61,6 +61,21 @@ export const en = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Home',
+      create: 'Create',
+      myProfile: 'My Profile',
+      messenger: 'Messenger',
+      search: 'Search',
+      statistics: 'Statistics',
+      favorites: 'Favorites',
+    },
+    header: {
+      logIn: 'Log In',
+      signUp: 'Sign Up',
+    },
+  },
   features: {
     auth: {
       signInForm: {

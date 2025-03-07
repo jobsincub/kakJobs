@@ -63,6 +63,21 @@ export const ru: LocaleType = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Главная',
+      create: 'Создать',
+      myProfile: 'Мой профиль',
+      messenger: 'Мессенджер',
+      search: 'Поиск',
+      statistics: 'Статистика',
+      favorites: 'Избранное',
+    },
+    header: {
+      logIn: 'Войти',
+      signUp: 'Регистрация',
+    },
+  },
   features: {
     auth: {
       signInForm: {
