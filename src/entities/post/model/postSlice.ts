@@ -1,14 +1,17 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
+import { createAppAsyncThunk } from '@/shared/lib'
+import { Post, postApi } from '@/entities/post/api/postApi'
+import { convertUrlToFile } from '@/shared/lib/hooks'
 
-interface Photo {
+export interface ImagePreview {
   id: string
-  originalImageUrl: string
-  updatedImageUrl: string
+  url: string
+  name?: string
 }
 
 interface PostState {
   currentStep: OrderStatus
-  photos: Photo[]
+  photos: ImagePreview[]
   description: string | null
 }
 
@@ -35,27 +38,28 @@ export const postSlice = createSlice({
     previousStep(state) {
       state.currentStep -= 1
     },
-    setPhoto(state, action: PayloadAction<Photo['originalImageUrl']>) {
+    setPhoto(state, action: PayloadAction<{ url: string; name?: string }>) {
       state.photos.unshift({
         id: nanoid(),
-        originalImageUrl: action.payload,
-        updatedImageUrl: action.payload,
+        ...action.payload,
       })
       state.currentStep = OrderStatus.Cropping
     },
-    updatePhoto(state, action: PayloadAction<Omit<Photo, 'originalImageUrl'>>) {
-      const photo = state.photos.find(photo => photo.id === action.payload.id)
+    removePhoto(state, action: PayloadAction<string>) {
+      const photo = state.photos.find(photo => photo.id === action.payload)
+
       if (photo) {
-        photo.updatedImageUrl = action.payload.updatedImageUrl
+        URL.revokeObjectURL(photo.url)
       }
-    },
-    removePhoto(state, action: PayloadAction<Photo['id']>) {
+
       state.photos = state.photos.filter(photo => photo.id !== action.payload)
     },
-    setDescription(state, action: PayloadAction<PostState['description']>) {
+    setDescription(state, action: PayloadAction<string>) {
       state.description = action.payload
     },
-    reset() {
+    reset(state) {
+      state.photos.forEach(photo => URL.revokeObjectURL(photo.url))
+
       return initialState
     },
   },
@@ -65,7 +69,42 @@ export const postSlice = createSlice({
   },
 })
 
-export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto, updatePhoto } =
+export const createPost = createAppAsyncThunk<
+  { post: Post },
+  { description?: string; photos: ImagePreview[] }
+>(
+  `${postSlice.name}/createPost`,
+  async ({ description, photos }, { dispatch, rejectWithValue }) => {
+    const formData = new FormData()
+
+    if (description) {
+      formData.append('description', description)
+    }
+
+    const photoFiles = await Promise.all(
+      photos.map(photo =>
+        convertUrlToFile({
+          fileUrl: photo.url,
+          fileName: photo.name,
+        })
+      )
+    )
+
+    photoFiles.forEach(photoFile => {
+      formData.append('photos', photoFile)
+    })
+
+    const res = await dispatch(postApi.endpoints.createPost.initiate(formData))
+
+    if (res.data) {
+      return { post: res.data.data }
+    } else {
+      return rejectWithValue(null)
+    }
+  }
+)
+
+export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto } =
   postSlice.actions
 
 export const { selectStep, selectPhotos } = postSlice.selectors

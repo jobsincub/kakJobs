@@ -27,7 +27,12 @@ export const useFileUpload = () => {
       setError(result.error.errors[0].message)
       return
     }
-    dispatch(setPhoto(URL.createObjectURL(file)))
+    dispatch(
+      setPhoto({
+        url: URL.createObjectURL(file),
+        name: file.name,
+      })
+    )
     setError(null)
   }
 
