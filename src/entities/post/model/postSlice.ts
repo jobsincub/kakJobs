@@ -1,9 +1,24 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 
+export enum AspectRatio {
+  Original = 0,
+  Square = 1,
+  Portrait = 4 / 5,
+  Widescreen = 16 / 9,
+}
+
+export type Filter = {
+  name: string
+  filterStyle: string
+}
+
 interface Photo {
   id: string
   originalImageUrl: string
   updatedImageUrl: string
+  zoom: number
+  aspectRatio: AspectRatio
+  filter: Filter
 }
 
 interface PostState {
@@ -36,18 +51,38 @@ export const postSlice = createSlice({
       state.currentStep -= 1
     },
     setPhoto(state, action: PayloadAction<Photo['originalImageUrl']>) {
-      state.photos.unshift({
+      state.photos.push({
         id: nanoid(),
         originalImageUrl: action.payload,
         updatedImageUrl: action.payload,
+        zoom: 1,
+        aspectRatio: AspectRatio.Original,
+        filter: { name: 'Default', filterStyle: '' },
       })
-      // TODO change to OrderStatus.Cropping
       state.currentStep = OrderStatus.Cropping
     },
-    updatePhoto(state, action: PayloadAction<Omit<Photo, 'originalImageUrl'>>) {
+    updateUrlPhoto(state, action: PayloadAction<Pick<Photo, 'updatedImageUrl' | 'id'>>) {
       const photo = state.photos.find(photo => photo.id === action.payload.id)
       if (photo) {
         photo.updatedImageUrl = action.payload.updatedImageUrl
+      }
+    },
+    updateZoomPhoto(state, action: PayloadAction<Pick<Photo, 'zoom' | 'id'>>) {
+      const photo = state.photos.find(photo => photo.id === action.payload.id)
+      if (photo) {
+        photo.zoom = action.payload.zoom
+      }
+    },
+    updateAspectRatioPhoto(state, action: PayloadAction<Pick<Photo, 'aspectRatio' | 'id'>>) {
+      const photo = state.photos.find(photo => photo.id === action.payload.id)
+      if (photo) {
+        photo.aspectRatio = action.payload.aspectRatio
+      }
+    },
+    updateFilterPhoto(state, action: PayloadAction<Pick<Photo, 'filter' | 'id'>>) {
+      const photo = state.photos.find(photo => photo.id === action.payload.id)
+      if (photo) {
+        photo.filter = action.payload.filter
       }
     },
     removePhoto(state, action: PayloadAction<Photo['id']>) {
@@ -63,10 +98,33 @@ export const postSlice = createSlice({
   selectors: {
     selectStep: state => state.currentStep,
     selectPhotos: state => state.photos,
+    selectZoomById: (state, photoId: string) => {
+      const photo = state.photos.find(photo => photo.id === photoId)
+      return photo ? photo.zoom : null
+    },
+    selectAspectRatioById: (state, photoId: string) => {
+      const photo = state.photos.find(photo => photo.id === photoId)
+      return photo ? photo.aspectRatio : null
+    },
+    selectFilterById: (state, photoId: string) => {
+      const photo = state.photos.find(photo => photo.id === photoId)
+      return photo ? photo.filter : null
+    },
   },
 })
 
-export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto, updatePhoto } =
-  postSlice.actions
+export const {
+  nextStep,
+  previousStep,
+  setDescription,
+  reset,
+  setPhoto,
+  removePhoto,
+  updateUrlPhoto,
+  updateFilterPhoto,
+  updateZoomPhoto,
+  updateAspectRatioPhoto,
+} = postSlice.actions
 
-export const { selectStep, selectPhotos } = postSlice.selectors
+export const { selectStep, selectPhotos, selectFilterById, selectZoomById, selectAspectRatioById } =
+  postSlice.selectors

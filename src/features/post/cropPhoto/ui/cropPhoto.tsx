@@ -1,35 +1,23 @@
 import { ImageCarousel } from '@/entities/post'
+import { ImageCarouselHandle } from '@/entities/post/ui/ImageCarousel/ImageCarousel'
 import { useCrop } from '@/features/post/cropPhoto/lib/useCrop'
 import { AspectPanel } from '@/features/post/cropPhoto/ui/aspectPanel/aspectPanel'
+import { GalleryPanel } from '@/features/post/cropPhoto/ui/galleryPanel/galleryPanel'
 import { ZoomPanel } from '@/features/post/cropPhoto/ui/zoomPanel/zoomPanel'
 import { CreatePostHeader } from '@/features/post/ui/createPostHeader'
 import { DialogBody, DialogContent } from '@wandrehappen/ui-kit'
 import React, { useRef, useState } from 'react'
 import s from './cropPhoto.module.scss'
-import { GalleryPanel } from '@/features/post/cropPhoto/ui/galleryPanel/galleryPanel'
-import { ImageCarouselHandle } from '@/entities/post/ui/ImageCarousel/ImageCarousel'
 
 export const CropPhoto = () => {
-  const { photosForRender, applyZoomDebounce, applyAspectRatio, setCurrentIndex, currentIndex } =
-    useCrop()
+  const { photosForRender, setCurrentIndex, setAspectRatioHandler, setZoomHandler } = useCrop()
 
   const carouselRef = useRef<ImageCarouselHandle>(null)
   const [activeIcon, setActiveIcon] = useState<string | null>(null)
 
-  const handleZoomChange = (newScale: number) => {
-    applyZoomDebounce(newScale)
-  }
-
-  const handleAspectChange = (ratio: string) => {
-    console.log(ratio)
-    applyAspectRatio(ratio)
-  }
-
   const toggleIcon = (icon: 'zoom' | 'crop' | 'gallery') => {
     setActiveIcon(activeIcon === icon ? null : icon)
   }
-
-  console.log(currentIndex)
 
   return (
     <DialogContent className={s.content}>
@@ -46,18 +34,18 @@ export const CropPhoto = () => {
               <AspectPanel
                 activeIcon={activeIcon}
                 toggleIcon={toggleIcon}
-                onAspectChange={handleAspectChange}
+                onAspectChange={setAspectRatioHandler}
               />
               <ZoomPanel
                 activeIcon={activeIcon}
                 toggleIcon={toggleIcon}
-                onZoomChange={handleZoomChange}
+                onZoomChange={setZoomHandler}
               />
             </div>
             <div style={{ position: 'absolute', left: '440px' }}>
-              <GalleryPanel 
-                activeIcon={activeIcon} 
-                toggleIcon={toggleIcon} 
+              <GalleryPanel
+                activeIcon={activeIcon}
+                toggleIcon={toggleIcon}
                 carouselRef={carouselRef}
               />
             </div>

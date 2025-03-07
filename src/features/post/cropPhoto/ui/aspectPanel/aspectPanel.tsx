@@ -1,17 +1,22 @@
 import s from '@/features/post/cropPhoto/ui/aspectPanel/aspectPanel.module.scss'
-import { Expand, ImageOutline } from '@wandrehappen/ui-kit'
+import { Expand } from '@wandrehappen/ui-kit'
 import React, { useState } from 'react'
 
-type AspectRatio = '1:1' | '4:5' | '16:9' | 'original'
+export enum AspectRatio {
+  Original = 0,
+  Square = 1,
+  Portrait = 4 / 5,
+  Widescreen = 16 / 9,
+}
 
 type AspectPanelProps = {
   activeIcon: string | null
   toggleIcon: (icon: 'zoom' | 'crop' | 'gallery') => void
-  onAspectChange: (ratio: AspectRatio) => void
+  onAspectChange: (ratio: number) => void
 }
 
 export const AspectPanel = ({ activeIcon, toggleIcon, onAspectChange }: AspectPanelProps) => {
-  const [selectedRatio, setSelectedRatio] = useState<AspectRatio>('1:1')
+  const [selectedRatio, setSelectedRatio] = useState<AspectRatio>(AspectRatio.Square)
 
   const handleAspectChange = (ratio: AspectRatio) => {
     setSelectedRatio(ratio)
@@ -24,26 +29,26 @@ export const AspectPanel = ({ activeIcon, toggleIcon, onAspectChange }: AspectPa
         <div className={s.cropContainer}>
           <ul className={s.list}>
             <li
-              onClick={() => handleAspectChange('original')}
-              className={selectedRatio === 'original' ? s.active : ''}
+              onClick={() => handleAspectChange(AspectRatio.Original)}
+              className={selectedRatio === AspectRatio.Original ? s.active : ''}
             >
-              <span>Original</span> <ImageOutline />
+              <span>Original</span>
             </li>
             <li
-              onClick={() => handleAspectChange('1:1')}
-              className={selectedRatio === '1:1' ? s.active : ''}
+              onClick={() => handleAspectChange(AspectRatio.Square)}
+              className={selectedRatio === AspectRatio.Square ? s.active : ''}
             >
               <span>1:1</span>
             </li>
             <li
-              onClick={() => handleAspectChange('4:5')}
-              className={selectedRatio === '4:5' ? s.active : ''}
+              onClick={() => handleAspectChange(AspectRatio.Portrait)}
+              className={selectedRatio === AspectRatio.Portrait ? s.active : ''}
             >
               <span>4:5</span>
             </li>
             <li
-              onClick={() => handleAspectChange('16:9')}
-              className={selectedRatio === '16:9' ? s.active : ''}
+              onClick={() => handleAspectChange(AspectRatio.Widescreen)}
+              className={selectedRatio === AspectRatio.Widescreen ? s.active : ''}
             >
               <span>16:9</span>
             </li>

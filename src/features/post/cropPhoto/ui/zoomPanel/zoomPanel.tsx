@@ -1,8 +1,7 @@
-// @flow
-import s from '@/features/post/cropPhoto/ui/zoomPanel/zoomPanel.module.scss'
 import { MaximizeFill, MaximizeOutline } from '@wandrehappen/ui-kit'
 import * as React from 'react'
 import { useState } from 'react'
+import s from './zoomPanel.module.scss'
 
 type ZoomPanelProps = {
   activeIcon: string | null

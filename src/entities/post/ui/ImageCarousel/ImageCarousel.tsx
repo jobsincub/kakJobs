@@ -26,7 +26,6 @@ export type ImageCarouselHandle = {
   goToSlide: (index: number) => void
 }
 
-// eslint-disable-next-line react/display-name
 export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
   ({ images, currentIndexCb, className }, ref) => {
     const swiperRef = useRef<SwiperType | null>(null)
@@ -57,7 +56,7 @@ export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
           onSlideChange={handleSlideChange}
           onSwiper={swiper => (swiperRef.current = swiper)}
         >
-          {images.map((image, index) => (
+          {images.map(image => (
             <SwiperSlide key={image.id} className={clsx(s.wrapper, className)}>
               <div className={s.imageContainer}>
                 <Image
@@ -75,3 +74,5 @@ export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
     )
   }
 )
+
+ImageCarousel.displayName = 'ImageCarousel'

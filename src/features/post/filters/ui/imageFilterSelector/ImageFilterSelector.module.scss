@@ -14,9 +14,19 @@
   align-items: center;
 
   color: white;
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .image {
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.activeFilter {
+  outline: 3px solid var(--color-primary-700);
 }
