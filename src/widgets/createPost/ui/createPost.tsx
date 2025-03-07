@@ -7,6 +7,7 @@ import { Filters } from '@/features/post/filters'
 import { Dialog } from '@wandrehappen/ui-kit'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { PublishDialogContent } from '@/features/post/publish'
 
 export const CreatePost = () => {
   const step = useSelector(selectStep)
@@ -19,6 +20,8 @@ export const CreatePost = () => {
         return <CropPhoto />
       case OrderStatus.Filters:
         return <Filters />
+      case OrderStatus.Publications:
+        return <PublishDialogContent />
       default:
         return null
     }

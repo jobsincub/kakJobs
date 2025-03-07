@@ -4,13 +4,15 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['Posts'],
   endpoints: builder => ({
-    createPost: builder.mutation<ApiResponse<PostData>, { description: string; photos: string[] }>({
-      query: body => ({
-        body,
+    createPost: builder.mutation<ApiResponse<Post>, FormData>({
+      query: formData => ({
+        body: formData,
         url: 'posts',
         method: 'POST',
       }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
   }),
 })
@@ -23,7 +25,7 @@ type PostImage = {
   createdAt: string
 }
 
-type PostData = {
+export type Post = {
   id: string
   userId: string
   description: string
