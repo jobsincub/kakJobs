@@ -4,19 +4,19 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 60,
-  tagTypes: ['Post'],
+  tagTypes: ['Posts'],
   endpoints: builder => ({
-    createPost: builder.mutation<ApiResponse<Data>, { description: string; photos: string[] }>({
-      query: body => ({
-        body,
+    createPost: builder.mutation<ApiResponse<PostItems>, FormData>({
+      query: formData => ({
+        body: formData,
         url: 'posts',
         method: 'POST',
       }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
     getUsersPosts: builder.query<
       { items: PostItems[]; meta: PostMeta },
-      { userId: string | undefined; page: number }
+      { userId: string; page: number }
     >({
       query: ({ userId, page }) => ({
         url: `posts/${userId}`,
@@ -38,7 +38,7 @@ export const postApi = createApi({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg?.page !== previousArg?.page
       },
-      providesTags: ['Post'],
+      providesTags: ['Posts'],
     }),
   }),
 })

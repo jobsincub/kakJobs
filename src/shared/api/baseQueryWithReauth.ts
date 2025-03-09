@@ -13,7 +13,6 @@ const baseQuery = fetchBaseQuery({
   baseUrl: BACKEND_BASE_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    headers.set('Content-Type', 'application/json')
     headers.set('Accept', 'application/json')
 
     const token = (getState() as RootState).auth.accessToken

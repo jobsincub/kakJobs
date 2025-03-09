@@ -1,6 +1,9 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
+import { Post, postApi } from '../api/postApi'
+import { createAppAsyncThunk } from '@/shared/lib'
+import { convertUrlToFile } from '@/shared/lib/hooks'
 
-interface Photo {
+export interface Photo {
   id: string
   originalImageUrl: string
   updatedImageUrl: string
@@ -41,8 +44,7 @@ export const postSlice = createSlice({
         originalImageUrl: action.payload,
         updatedImageUrl: action.payload,
       })
-      // TODO change to OrderStatus.Cropping
-      state.currentStep = OrderStatus.Filters
+      state.currentStep = OrderStatus.Cropping
     },
     updatePhoto(state, action: PayloadAction<Omit<Photo, 'originalImageUrl'>>) {
       const photo = state.photos.find(photo => photo.id === action.payload.id)
@@ -65,6 +67,40 @@ export const postSlice = createSlice({
     selectPhotos: state => state.photos,
   },
 })
+
+export const createPost = createAppAsyncThunk<
+  { post: Post },
+  { description?: string; photos: Photo[] }
+>(
+  `${postSlice.name}/createPost`,
+  async ({ description, photos }, { dispatch, rejectWithValue }) => {
+    const formData = new FormData()
+
+    if (description) {
+      formData.append('description', description)
+    }
+
+    const photoFiles = await Promise.all(
+      photos.map(photo =>
+        convertUrlToFile({
+          fileUrl: photo.updatedImageUrl,
+        })
+      )
+    )
+
+    photoFiles.forEach(photoFile => {
+      formData.append('photos', photoFile)
+    })
+
+    const res = await dispatch(postApi.endpoints.createPost.initiate(formData))
+
+    if (res.data) {
+      return { post: res.data.data }
+    } else {
+      return rejectWithValue(null)
+    }
+  }
+)
 
 export const { nextStep, previousStep, setDescription, reset, setPhoto, removePhoto, updatePhoto } =
   postSlice.actions
