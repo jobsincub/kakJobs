@@ -1,13 +1,13 @@
 'use client'
 
+import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
 import Page from '@/widgets/page'
 
 import { Button, Typography } from '@wandrehappen/ui-kit'
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import s from './myProfilePage.module.scss'
-import Link from 'next/link'
-import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
-import Image from 'next/image'
 
 const MyProfilePage = () => {
   const { posts, observerRef, redirectToPost } = useMyProfilePage()
@@ -63,25 +63,24 @@ const MyProfilePage = () => {
           posts.map(
             post =>
               post.postImages.length > 0 && (
-                <div key={post.id} className={s.imageСontainer}>
-                  <Button
-                    asChild
-                    variant={'link'}
-                    onClick={() => redirectToPost(post.postImages[0].id)}
-                  >
-                    <Image
-                      className={s.postImage}
-                      key={post.postImages[0].id}
-                      src={post.postImages[0].imageUrl}
-                      alt={post.postImages[0].id}
-                      objectFit="contain"
-                      objectPosition="center"
-                      width="234"
-                      height="234"
-                      //style={{ objectFit: 'cover' }}
-                    />
-                  </Button>
-                </div>
+                <Button
+                  key={post.id}
+                  // asChild
+                  variant={'link'}
+                  onClick={() => redirectToPost(post.postImages[0].id)}
+                  className={s.imageContainer}
+                >
+                  <Image
+                    className={s.postImage}
+                    key={post.postImages[0].id}
+                    src={post.postImages[0].imageUrl}
+                    alt={post.postImages[0].id}
+                    objectFit="contain"
+                    objectPosition="center"
+                    width="234"
+                    height="234"
+                  />
+                </Button>
               )
           )}
         <div ref={observerRef} />

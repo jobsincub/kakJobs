@@ -14,8 +14,8 @@
 .profileHeader {
   display: flex;
   flex-direction: column;
-  width: 730px;
   gap: 20px;
+  width: 730px;
 }
 
 .profileCNameContainer {
@@ -41,13 +41,14 @@
   margin-top: 48px;
 }
 
-.imageСontainer {
-  width: 234px;
-  height: 234px;
+.imageContainer {
   overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  width: 234px;
+  height: 234px;
 }
 
 .postImage {
