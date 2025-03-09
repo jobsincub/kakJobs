@@ -39,11 +39,31 @@ export const postApi = createApi({
         return currentArg?.page !== previousArg?.page
       },
       providesTags: ['Posts'],
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+        try {
+          const {
+            data: { items },
+          } = await queryFulfilled
+
+          items.forEach(post => {
+            dispatch(postApi.util.upsertQueryData('getPostById', post.id, post))
+          })
+        } catch (error) {
+          console.error('Failed to fetch posts:', error)
+        }
+      },
+    }),
+    getPostById: builder.query<PostItems, string>({
+      query: postId => ({
+        url: `posts/post/${postId}`,
+      }),
+      transformResponse: (response: ApiResponse<PostItems>) => response.data,
+      providesTags: ['Posts'],
     }),
   }),
 })
 
-export const { useCreatePostMutation, useGetUsersPostsQuery } = postApi
+export const { useCreatePostMutation, useGetUsersPostsQuery, useGetPostByIdQuery } = postApi
 
 type PostImage = {
   id: string

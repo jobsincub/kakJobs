@@ -1,18 +1,32 @@
 'use client'
 
+import { Post } from '@/entities/post/ui/post'
 import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
 import Page from '@/widgets/page'
 
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import s from './myProfilePage.module.scss'
 
-const MyProfilePage = () => {
-  const { posts, observerRef, redirectToPost } = useMyProfilePage()
+type Props = {
+  userId: string
+}
 
+const MyProfilePage = ({ userId }: Props) => {
+  const router = useRouter()
+
+  if (!userId) {
+    router.push('/')
+  }
+
+  const { posts, observerRef } = useMyProfilePage()
   const imageUrl = 'https://placeholder.apptor.studio/200/200/product1.png'
+
+  const searchParams = useSearchParams()
+  const postId = searchParams?.get('postId')
 
   return (
     <Page mt={36}>
@@ -63,28 +77,26 @@ const MyProfilePage = () => {
           posts.map(
             post =>
               post.postImages.length > 0 && (
-                <Button
+                <Link
                   key={post.id}
-                  // asChild
-                  variant={'link'}
-                  onClick={() => redirectToPost(post.postImages[0].id)}
+                  href={`/profile/${userId}?postId=${post.id}`}
+                  scroll={false}
                   className={s.imageContainer}
                 >
                   <Image
-                    className={s.postImage}
-                    key={post.postImages[0].id}
                     src={post.postImages[0].imageUrl}
-                    alt={post.postImages[0].id}
+                    alt={post.description}
+                    width={234}
+                    height={234}
                     objectFit="contain"
                     objectPosition="center"
-                    width="234"
-                    height="234"
                   />
-                </Button>
+                </Link>
               )
           )}
         <div ref={observerRef} />
       </div>
+      <Post postId={postId} userId={userId} />
     </Page>
   )
 }

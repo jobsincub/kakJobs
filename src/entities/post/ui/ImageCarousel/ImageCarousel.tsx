@@ -45,7 +45,7 @@ export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
     }
 
     return (
-      <div className={clsx(s.wrapper, className)}>
+      <div className={clsx(className, s.wrapper)}>
         <Swiper
           className={s.swiper}
           modules={[Navigation, Pagination]}
@@ -57,9 +57,10 @@ export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
           onSwiper={swiper => (swiperRef.current = swiper)}
         >
           {images.map(image => (
-            <SwiperSlide key={image.id} className={clsx(s.wrapper, className)}>
+            <SwiperSlide key={image.id} className={clsx(className, s.wrapper)}>
               <div className={s.imageContainer}>
                 <Image
+                  className={s.image}
                   alt={`Post Image ${image.id}`}
                   src={image.imageUrl}
                   fill
