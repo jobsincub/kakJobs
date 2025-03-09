@@ -1,22 +1,21 @@
+import { useGetUsersPostsQuery } from '@/entities/post'
+import { selectUserId } from '@/entities/user/model/authSlice'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 import { useSelector } from 'react-redux'
-import { selectUserId } from '@/entities/user/model/authSlice'
-import { useGetUsersPostsQuery } from '@/entities/post'
-import { useRouter } from 'next/navigation'
 
 export const useMyProfilePage = () => {
   const userId = useSelector(selectUserId)
+
   const router = useRouter()
+
   if (!userId) {
     router.push('/')
   }
   const [page, setPage] = useState(1)
-  const { data, error, isLoading, isFetching } = useGetUsersPostsQuery(
-    { userId, page },
-    { skip: !userId }
-  )
-  console.log(data)
+
+  const { data, isFetching } = useGetUsersPostsQuery({ userId, page }, { skip: !userId })
 
   const posts = data?.items || []
   const totalPages = data?.meta.totalPages || 1
