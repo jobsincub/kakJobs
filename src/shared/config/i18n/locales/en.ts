@@ -121,6 +121,16 @@ export const en = {
         createNewPasswordButtonText: 'Create new password',
       },
     },
+    post: {
+      publishPostDialog: {
+        buttonText: 'Publish',
+        titleText: 'Publication',
+      },
+      postForm: {
+        labelText: 'Add publication description',
+        placeholderText: 'Post description...',
+      },
+    },
   },
   shared: {
     validations: {

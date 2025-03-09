@@ -1,4 +1,4 @@
-export { useCreatePostMutation, postApi } from './api/postApi'
+export { useCreatePostMutation, postApi, useGetUsersPostsQuery } from './api/postApi'
 export {
   postSlice,
   nextStep,

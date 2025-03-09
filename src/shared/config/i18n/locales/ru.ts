@@ -124,6 +124,16 @@ export const ru: LocaleType = {
         sendLinkButtonText: 'Отправить ссылку',
       },
     },
+    post: {
+      publishPostDialog: {
+        buttonText: 'Опубликовать',
+        titleText: 'Публикация',
+      },
+      postForm: {
+        labelText: 'Добавить описание публикации',
+        placeholderText: 'Описание публикации...',
+      },
+    },
   },
   shared: {
     validations: {

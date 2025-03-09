@@ -1,4 +1,7 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
+import { Post, postApi } from '../api/postApi'
+import { createAppAsyncThunk } from '@/shared/lib'
+import { convertUrlToFile } from '@/shared/lib/hooks'
 
 export enum AspectRatio {
   Original = 0,
@@ -112,6 +115,41 @@ export const postSlice = createSlice({
     },
   },
 })
+
+export const createPost = createAppAsyncThunk<
+  { post: Post },
+  { description?: string; photos: Photo[] }
+>(
+  `${postSlice.name}/createPost`,
+  async ({ description, photos }, { dispatch, rejectWithValue }) => {
+    const formData = new FormData()
+
+    if (description) {
+      formData.append('description', description)
+    }
+
+    const photoFiles = await Promise.all(
+      photos.map(photo =>
+        convertUrlToFile({
+          fileUrl: photo.updatedImageUrl,
+        })
+      )
+    )
+
+    photoFiles.forEach(photoFile => {
+      formData.append('photos', photoFile)
+    })
+
+    const res = await dispatch(postApi.endpoints.createPost.initiate(formData))
+
+    if (res.data) {
+      return { post: res.data.data }
+    } else {
+      return rejectWithValue(null)
+    }
+  }
+)
+
 
 export const {
   nextStep,
