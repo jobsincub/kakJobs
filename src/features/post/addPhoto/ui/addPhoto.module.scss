@@ -1,24 +1,44 @@
-.dialog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .content {
   width: 100%;
-  max-width: 972px;
-
-  //  height: 564px;
+  max-width: 492px;
+  height: 564px;
 }
 
 .body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 0;
+
+  width: 100%;
+  max-width: 492px;
+  padding-top: 72px;
+  padding-inline: 15px;
 }
 
-.body .carousel {
-  width: 490px;
-  height: 564px;
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  width: 222px;
+  height: 228px;
+  margin-bottom: 5px;
+
+  border: 2px dashed var(--color-light-500);
+  border-radius: 2px;
+
+  transition: border-color 0.2s;
+}
+
+.dragOver {
+  border-color: var(--color-success-300);
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 55px;
 }
