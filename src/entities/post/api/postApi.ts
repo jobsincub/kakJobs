@@ -71,7 +71,7 @@ type PostImage = {
   createdAt: string
 }
 
-type PostItems = {
+export type PostItems = {
   id: string
   userId: string
   description: string

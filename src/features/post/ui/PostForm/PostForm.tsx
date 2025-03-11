@@ -1,17 +1,17 @@
-import { useForm } from 'react-hook-form'
+import { type PostItems } from '@/entities/post/api/postApi'
 import { Button, Textarea, Typography } from '@wandrehappen/ui-kit'
-import { DescriptionCount } from './DescriptionCount'
-import { Post } from '@/entities/post/api/postApi'
-import { DESCRIPTION_MAX_LENGTH, POST_FORM_ID } from '../../model'
-import s from './PostForm.module.scss'
+import { useForm } from 'react-hook-form'
 import { usePostForm } from '../../lib/usePostForm'
+import { DESCRIPTION_MAX_LENGTH, POST_FORM_ID } from '../../model'
+import { DescriptionCount } from './DescriptionCount'
+import s from './PostForm.module.scss'
 
 export type PostFormValues = {
   description: string
 }
 
 type Props = {
-  defaultValues?: Partial<Post>
+  defaultValues?: Partial<PostItems>
   onSubmit: (data: PostFormValues) => void
 }
 

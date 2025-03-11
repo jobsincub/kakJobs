@@ -1,7 +1,7 @@
-import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
-import { Post, postApi } from '../api/postApi'
 import { createAppAsyncThunk } from '@/shared/lib'
 import { convertUrlToFile } from '@/shared/lib/hooks'
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
+import { postApi, type PostItems } from '../api/postApi'
 
 export enum AspectRatio {
   Original = 0,
@@ -117,7 +117,7 @@ export const postSlice = createSlice({
 })
 
 export const createPost = createAppAsyncThunk<
-  { post: Post },
+  { post: PostItems },
   { description?: string; photos: Photo[] }
 >(
   `${postSlice.name}/createPost`,
@@ -149,7 +149,6 @@ export const createPost = createAppAsyncThunk<
     }
   }
 )
-
 
 export const {
   nextStep,
