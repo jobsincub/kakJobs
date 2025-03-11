@@ -1,9 +1,11 @@
-import s from '@/features/post/addPhoto/ui/addPhoto.module.scss'
+import { selectUserName } from '@/entities/user/model/authSlice'
 import { skipToken } from '@reduxjs/toolkit/query'
-import { Dialog, DialogBody, DialogContent, DialogDescription } from '@wandrehappen/ui-kit'
+import { Dialog, DialogBody, DialogContent, DialogDescription, Menu } from '@wandrehappen/ui-kit'
 import { useRouter } from 'next/navigation'
+import { useSelector } from 'react-redux'
 import { useGetPostByIdQuery } from '../api/postApi'
 import { ImageCarousel } from './ImageCarousel/ImageCarousel'
+import s from './post.module.scss'
 
 type Props = {
   postId: string | null | undefined
@@ -12,10 +14,11 @@ type Props = {
 
 export const Post = ({ postId, userId }: Props) => {
   const { data } = useGetPostByIdQuery(postId ?? skipToken)
+  const userName = useSelector(selectUserName)
   const router = useRouter()
 
   const onOpenChange = () => {
-    router.replace(`/profile/${userId}`, { scroll: false })
+    router.push(`/profile/${userId}`, { scroll: false })
   }
 
   const posts = data?.postImages ?? []
@@ -29,7 +32,15 @@ export const Post = ({ postId, userId }: Props) => {
             from your computer.
           </DialogDescription>
           <ImageCarousel images={posts} className={s.carousel} />
-          <div>1</div>
+          <div className={s.wrapper}>
+            <div className={s.header}>
+              <span>{userName}</span>
+              <Menu />
+            </div>
+            <div className={s.comments}>1</div>
+            <div>2</div>
+            <div>3</div>
+          </div>
         </DialogBody>
       </DialogContent>
     </Dialog>
