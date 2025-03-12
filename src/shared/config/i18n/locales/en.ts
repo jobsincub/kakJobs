@@ -61,6 +61,21 @@ export const en = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Home',
+      create: 'Create',
+      myProfile: 'My Profile',
+      messenger: 'Messenger',
+      search: 'Search',
+      statistics: 'Statistics',
+      favorites: 'Favorites',
+    },
+    header: {
+      logIn: 'Log In',
+      signUp: 'Sign Up',
+    },
+  },
   features: {
     auth: {
       signInForm: {
@@ -106,11 +121,19 @@ export const en = {
         createNewPasswordButtonText: 'Create new password',
       },
     },
-    posts: {
+    post: {
       deletePostDialog: {
         buttonText: 'Delete Post',
         titleText: 'Delete Post',
         confirmationText: 'Are you sure you want to delete this post?',
+      },
+      publishPostDialog: {
+        buttonText: 'Publish',
+        titleText: 'Publication',
+      },
+      postForm: {
+        labelText: 'Add publication description',
+        placeholderText: 'Post description...',
       },
     },
   },

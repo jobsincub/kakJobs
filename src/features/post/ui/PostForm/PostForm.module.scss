@@ -1,0 +1,24 @@
+.form {
+  display: flex;
+  flex: 0 1 50%;
+  flex-direction: column;
+}
+
+.formTopWrapper {
+  flex: 1 1 auto;
+  padding: 24px;
+}
+
+.profile {
+  margin-bottom: 24px;
+}
+
+.description {
+  width: 100%;
+}
+
+.formBottomWrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px;
+}

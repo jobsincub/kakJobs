@@ -1,0 +1,25 @@
+.iconWrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  opacity: 0.8;
+  background-color: var(--color-dark-500);
+  border-radius: 2px;
+}
+
+.zoomContainer {
+  position: absolute;
+  top: -60px;
+  left: 0;
+
+  min-width: 125px;
+  padding: 12px;
+
+  background-color: var(--color-dark-500);
+}

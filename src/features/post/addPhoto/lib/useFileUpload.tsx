@@ -1,6 +1,6 @@
 import { setPhoto } from '@/entities/post'
 import { useAppDispatch } from '@/shared/lib'
-import { ChangeEvent, DragEvent, useRef, useState } from 'react'
+import { DragEvent, useState } from 'react'
 import { z } from 'zod'
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024 // 20 MB
@@ -14,14 +14,12 @@ const fileSchema = z.object({
   size: z.number().max(MAX_FILE_SIZE, { message: 'The photo must be less than 20 MB' }),
 })
 
-export const useAddPhoto = () => {
+export const useFileUpload = () => {
   const dispatch = useAppDispatch()
 
   const [dragOver, setDragOver] = useState(false)
 
   const [error, setError] = useState<string | null>(null)
-
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const fileUploadCallback = (file: File) => {
     const result = fileSchema.safeParse(file)
@@ -31,16 +29,6 @@ export const useAddPhoto = () => {
     }
     dispatch(setPhoto(URL.createObjectURL(file)))
     setError(null)
-  }
-
-  const updateImageHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      fileUploadCallback(event.target.files[0])
-    }
-  }
-
-  const ImageUploadHandler = () => {
-    fileInputRef.current?.click()
   }
 
   const dragOverHandler = (event: DragEvent<HTMLDivElement>) => {
@@ -66,8 +54,7 @@ export const useAddPhoto = () => {
     dragOver,
     fileDropHandler,
     error,
-    ImageUploadHandler,
-    fileInputRef,
-    updateImageHandler,
+    fileUploadCallback,
+    ACCEPTED_FORMATS,
   }
 }

@@ -1,11 +1,17 @@
-import { ReCaptchaProvider } from '@/app/providers/ReCaptchaProvider'
-import { StoreProvider } from '@/app/providers/StoreProvider'
-import { UserProvider } from '@/app/providers/UserProvider'
+import type { Locale } from '@/entities/app'
 import { type ReactNode } from 'react'
+import { ReCaptchaProvider } from './ReCaptchaProvider'
+import { StoreProvider } from './StoreProvider'
+import { UserProvider } from './UserProvider'
 
-export const Providers = ({ children }: { children: ReactNode }) => {
+type Props = {
+  children: ReactNode
+  locale: Locale
+}
+
+export const Providers = ({ children, locale }: Props) => {
   return (
-    <StoreProvider>
+    <StoreProvider locale={locale}>
       <ReCaptchaProvider>
         <UserProvider>{children}</UserProvider>
       </ReCaptchaProvider>

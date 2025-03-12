@@ -6,12 +6,59 @@ export const postApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Posts'],
   endpoints: builder => ({
-    createPost: builder.mutation<ApiResponse<PostData>, { description: string; photos: string[] }>({
-      query: body => ({
-        body,
+    createPost: builder.mutation<ApiResponse<PostItems>, FormData>({
+      query: formData => ({
+        body: formData,
         url: 'posts',
         method: 'POST',
       }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+    }),
+    getUsersPosts: builder.query<
+      { items: PostItems[]; meta: PostMeta },
+      { userId: string; page: number }
+    >({
+      query: ({ userId, page }) => ({
+        url: `posts/${userId}`,
+        params: { page },
+      }),
+      transformResponse: (response: ApiResponse<Data>) => ({
+        items: response.data.items,
+        meta: response.data.meta,
+      }),
+      serializeQueryArgs: ({ endpointName }) => endpointName,
+      merge: (currentCache, newData) => {
+        if (!currentCache.items) {
+          currentCache.items = newData.items
+        } else {
+          currentCache.items.push(...newData.items)
+        }
+        currentCache.meta = newData.meta
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg?.page !== previousArg?.page
+      },
+      providesTags: ['Posts'],
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+        try {
+          const {
+            data: { items },
+          } = await queryFulfilled
+
+          items.forEach(post => {
+            dispatch(postApi.util.upsertQueryData('getPostById', post.id, post))
+          })
+        } catch (error) {
+          console.error('Failed to fetch posts:', error)
+        }
+      },
+    }),
+    getPostById: builder.query<PostItems, string>({
+      query: postId => ({
+        url: `posts/post/${postId}`,
+      }),
+      transformResponse: (response: ApiResponse<PostItems>) => response.data,
+      providesTags: ['Posts'],
     }),
     deletePost: builder.mutation<void, string>({
       query: id => ({
@@ -23,7 +70,7 @@ export const postApi = createApi({
   }),
 })
 
-export const { useCreatePostMutation, useDeletePostMutation } = postApi
+export const { useCreatePostMutation, useDeletePostMutation, useGetUsersPostsQuery, useGetPostByIdQuery } = postApi
 
 type PostImage = {
   id: string
@@ -31,11 +78,23 @@ type PostImage = {
   createdAt: string
 }
 
-type PostData = {
+export type PostItems = {
   id: string
   userId: string
   description: string
   createdAt: string
   updatedAt: string
   postImages: PostImage[]
+}
+
+type PostMeta = {
+  total: number
+  page: number
+  limit: number
+  totalPages: number
+}
+
+type Data = {
+  items: PostItems[]
+  meta: PostMeta
 }

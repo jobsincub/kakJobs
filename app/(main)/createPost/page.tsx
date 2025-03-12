@@ -1,5 +1,5 @@
 import { CreatePost } from '@/widgets/createPost'
 
-export default function Profile() {
+export default function CreatePostPage() {
   return <CreatePost />
 }

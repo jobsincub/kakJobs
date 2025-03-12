@@ -1,0 +1,32 @@
+.selector {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+
+  width: 372px;
+  padding-top: 24px;
+}
+
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+
+  color: white;
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.image {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.activeFilter {
+  outline: 3px solid var(--color-primary-700);
+}

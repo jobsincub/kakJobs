@@ -1,40 +1,31 @@
-import { selectPhotos } from '@/entities/post'
-import {
-  ArrowIos,
-  Button,
-  DialogBody,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@wandrehappen/ui-kit'
-import Image from 'next/image'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { ImageCarousel } from '@/entities/post'
+import { CreatePostHeader } from '@/features/post/ui/createPostHeader'
+import { DialogBody, DialogContent, DialogDescription } from '@wandrehappen/ui-kit'
+import { useFilters } from '../lib/useFilters'
+import s from './filters.module.scss'
+import { ImageFilterSelector } from './imageFilterSelector'
 
 export const Filters = () => {
-  const photos = useSelector(selectPhotos)
-  const currentImage = photos[0].file
-  console.log(currentImage)
+  const {
+    photosForRender,
+    setCurrentIndex,
+    currentOriginalImageUrl,
+    applyFilterHandler,
+    currentId,
+  } = useFilters()
   return (
-    <DialogContent>
-      <DialogHeader isCloseIconVisible={false}>
-        <Button variant={'link'}>
-          <ArrowIos color={'white'} />
-        </Button>
-        <DialogTitle>Filters</DialogTitle>
-        <Button variant={'link'}>Next</Button>
-      </DialogHeader>
-      <DialogBody>
+    <DialogContent className={s.content}>
+      <CreatePostHeader title={'Filters'} nextButtonText={'Next'} />
+      <DialogBody className={s.body}>
         <DialogDescription style={{ display: 'none' }}>
           This dialog allows you to enhance your photo by applying various filters. Experiment with
           different styles to achieve the desired look before.
         </DialogDescription>
-        <Image
-          src={currentImage}
-          alt={'1'}
-          width={500} // Задаём ширину
-          height={300} // Задаём высоту
+        <ImageCarousel images={photosForRender} currentIndexCb={setCurrentIndex} />
+        <ImageFilterSelector
+          image={currentOriginalImageUrl}
+          selectFilterHandler={applyFilterHandler}
+          currentId={currentId}
         />
       </DialogBody>
     </DialogContent>

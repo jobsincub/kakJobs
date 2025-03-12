@@ -12,7 +12,7 @@ export const useDeletePostDialog = () => {
   const {
     t: {
       features: {
-        posts: { deletePostDialog },
+        post: { deletePostDialog },
       },
       shared: { dialogs },
     },

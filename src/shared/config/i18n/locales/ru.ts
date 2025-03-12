@@ -63,6 +63,21 @@ export const ru: LocaleType = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Главная',
+      create: 'Создать',
+      myProfile: 'Мой профиль',
+      messenger: 'Мессенджер',
+      search: 'Поиск',
+      statistics: 'Статистика',
+      favorites: 'Избранное',
+    },
+    header: {
+      logIn: 'Войти',
+      signUp: 'Регистрация',
+    },
+  },
   features: {
     auth: {
       signInForm: {
@@ -109,11 +124,19 @@ export const ru: LocaleType = {
         sendLinkButtonText: 'Отправить ссылку',
       },
     },
-    posts: {
+    post: {
       deletePostDialog: {
         buttonText: 'Удалить пост',
         titleText: 'Удаление поста',
         confirmationText: 'Вы уверены, что хотите удалить этот пост?',
+      },
+      publishPostDialog: {
+        buttonText: 'Опубликовать',
+        titleText: 'Публикация',
+      },
+      postForm: {
+        labelText: 'Добавить описание публикации',
+        placeholderText: 'Описание публикации...',
       },
     },
   },

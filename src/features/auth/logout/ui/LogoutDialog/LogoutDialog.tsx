@@ -19,7 +19,7 @@ import { useLogoutDialog } from '../../lib/useLogoutDialog'
 import s from './LogoutDialog.module.scss'
 
 export const LogoutDialog = () => {
-  const { logout, logOutDialog, email, dialogs } = useLogoutDialog()
+  const { logout, logOutDialog, userEmail, dialogs } = useLogoutDialog()
 
   const logoutHandler = () => {
     logout()
@@ -28,12 +28,10 @@ export const LogoutDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Typography asChild variant={'bold14'}>
-          <Button variant={'link'}>
-            <Logout />
-            {logOutDialog.buttonText}
-          </Button>
-        </Typography>
+        <Button variant={'link'}>
+          <Logout />
+          {logOutDialog.buttonText}
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -46,7 +44,7 @@ export const LogoutDialog = () => {
               tags={{
                 1: () => (
                   <Typography asChild variant={'bold16'}>
-                    <span>{`“${email}”`}</span>
+                    <span>{`“${userEmail}”`}</span>
                   </Typography>
                 ),
               }}
