@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { makeStore } from '@/app/store'
 import { Dialog } from '@wandrehappen/ui-kit'
 import { useForm, FormProvider } from 'react-hook-form'
-import { EditDialogContent } from '../editDialogContent'
+import { EditDialogContent } from '.'
 
 export default {
   title: 'Components/EditPost',

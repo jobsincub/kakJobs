@@ -71,7 +71,12 @@ export const postApi = createApi({
   }),
 })
 
-export const { useCreatePostMutation, useGetUsersPostsQuery, useGetPostByIdQuery } = postApi
+export const {
+  useCreatePostMutation,
+  useGetUsersPostsQuery,
+  useGetPostByIdQuery,
+  useUpdatePostMutation,
+} = postApi
 
 type PostImage = {
   id: string

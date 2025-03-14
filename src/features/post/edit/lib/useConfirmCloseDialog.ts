@@ -4,11 +4,14 @@ export const useConfirmCloseDialog = () => {
   const {
     t: {
       features: {
-        posts: { updatePostDialog },
+        post: { updatePostDialog },
       },
       shared: { dialogs },
     },
   } = useTranslation()
 
-  return { updatePostDialog, dialogs }
+  return {
+    updatePostDialog,
+    dialogs,
+  }
 }

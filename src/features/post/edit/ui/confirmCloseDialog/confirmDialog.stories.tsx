@@ -11,7 +11,11 @@ export default {
 const Template: StoryObj = {
   render: () => (
     <Provider store={makeStore()}>
-      <ConfirmCloseDialog onClose={() => console.log('Dialog closed!')} />
+      <ConfirmCloseDialog
+        open={true}
+        onOpenChange={isOpen => console.log(`Dialog ${isOpen ? 'opened' : 'closed'}`)}
+        onConfirm={() => console.log('Dialog closed!')}
+      />
     </Provider>
   ),
 }

@@ -15,20 +15,22 @@ import {
 
 import s from './EditDialogContent.module.scss'
 import { useEditDialogContent } from '../../lib/useEditDialogContent'
-import { ConfirmCloseDialog } from '../../ui/confirmCloseDialog/ConfirmCloseDialog'
 import { EditPostForm } from '../editPostForm'
+import { ConfirmCloseDialog } from '../confirmCloseDialog'
 
 export const EditDialogContent = () => {
   const {
     updatePostHandler,
-    isUpdateDialogOpen,
-    handleOpenUpdateDialog,
-    handleCloseUpdateDialog,
     updatePostContent,
+    isDialogOpen,
+    isConfirmOpen,
+    openConfirmHandler,
+    confirmCloseHandler,
+    setIsConfirmOpen,
   } = useEditDialogContent()
 
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={openConfirmHandler}>
       <DialogTrigger asChild>
         <Typography asChild variant={'regular14'}>
           <Button variant={'link'}>
@@ -40,13 +42,17 @@ export const EditDialogContent = () => {
       <DialogContent className={s.dialogContent}>
         <DialogHeader isCloseIconVisible={false}>
           <DialogTitle>{updatePostContent.titleText}</DialogTitle>
-          <DialogCloseIcon onClick={handleOpenUpdateDialog} />
+          <DialogCloseIcon />
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <div className={s.imagesBox}>Здесь красивая картинка</div>
           <EditPostForm onSubmit={updatePostHandler} />
         </DialogBody>
-        {isUpdateDialogOpen && <ConfirmCloseDialog onClose={handleCloseUpdateDialog} />}
+        <ConfirmCloseDialog
+          open={isConfirmOpen}
+          onOpenChange={setIsConfirmOpen}
+          onConfirm={confirmCloseHandler}
+        />
       </DialogContent>
     </Dialog>
   )

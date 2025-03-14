@@ -145,28 +145,28 @@ export const ru: LocaleType = {
           'Вы действительно хотите закрыть редактирование публикации? Если вы закроете, изменения не будут сохранены.',
       },
     },
-    shared: {
-      validations: {
-        emailValidateSchema: {
-          emailValidation: 'Электронный адрес должен соответствовать\n example@example.com',
-        },
-        comparePassError: {
-          passError: 'Пароли должны совпадать',
-        },
-        emailSchema: {
-          email: 'Вы ввели не почту',
-        },
-        passwordSchema: {
-          minLength: 'Пароль должен содержать не менее 3 символов.',
-          regexText:
-            'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-        },
+  },
+  shared: {
+    validations: {
+      emailValidateSchema: {
+        emailValidation: 'Электронный адрес должен соответствовать\n example@example.com',
       },
-      dialogs: {
-        ok: 'ОК',
-        yes: 'Да',
-        no: 'Нет',
+      comparePassError: {
+        passError: 'Пароли должны совпадать',
       },
+      emailSchema: {
+        email: 'Вы ввели не почту',
+      },
+      passwordSchema: {
+        minLength: 'Пароль должен содержать не менее 3 символов.',
+        regexText:
+          'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      },
+    },
+    dialogs: {
+      ok: 'ОК',
+      yes: 'Да',
+      no: 'Нет',
     },
   },
 }

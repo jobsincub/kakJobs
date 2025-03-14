@@ -13,12 +13,14 @@ import {
 import s from './ConfirmCloseDialog.module.scss'
 import { useConfirmCloseDialog } from '../../lib/useConfirmCloseDialog'
 type Props = {
-  onClose: () => void
+  open: boolean
+  onOpenChange: (isOpen: boolean) => void
+  onConfirm: () => void
 }
-export const ConfirmCloseDialog = ({ onClose }: Props) => {
+export const ConfirmCloseDialog = ({ open, onOpenChange, onConfirm }: Props) => {
   const { updatePostDialog, dialogs } = useConfirmCloseDialog()
   return (
-    <Dialog open onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className={s.rectangleDialog}>
         <DialogHeader>
           <DialogTitle>{updatePostDialog.closePost}</DialogTitle>
@@ -28,10 +30,10 @@ export const ConfirmCloseDialog = ({ onClose }: Props) => {
             {updatePostDialog.description}
           </DialogDescription>
           <DialogFooter>
-            <DialogClose onClick={onClose}>
+            <DialogClose onClick={onConfirm}>
               <Button variant={'tertiary'}>{dialogs.yes}</Button>
             </DialogClose>
-            <DialogClose onClick={onClose}>
+            <DialogClose onClick={() => onOpenChange(false)}>
               <Button>{dialogs.no}</Button>
             </DialogClose>
           </DialogFooter>

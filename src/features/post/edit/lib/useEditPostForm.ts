@@ -16,7 +16,7 @@ export const useEditPostForm = () => {
   const {
     t: {
       features: {
-        posts: { updatePostContent },
+        post: { updatePostContent },
       },
     },
   } = useTranslation()

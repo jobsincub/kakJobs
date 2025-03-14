@@ -142,29 +142,30 @@ export const en = {
           'Do you really want to close the edition of the publication? If you close changes won’t be saved',
       },
     },
-    shared: {
-      validations: {
-        emailSchema: {
-          email: 'You entered an invalid email.',
-        },
-        emailValidateSchema: {
-          emailValidation: 'The email must match the format\n example@example.com',
-        },
-        passwordSchema: {
-          minLength: 'Password must be at least 6 characters',
-          regexText:
-            'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-        },
-        comparePassError: {
-          passError: 'The passwords must match',
-        },
+  },
+  shared: {
+    validations: {
+      emailSchema: {
+        email: 'You entered an invalid email.',
       },
-      dialogs: {
-        ok: 'OK',
-        yes: 'Yes',
-        no: 'No',
+      emailValidateSchema: {
+        emailValidation: 'The email must match the format\n example@example.com',
       },
+      passwordSchema: {
+        minLength: 'Password must be at least 6 characters',
+        regexText:
+          'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      },
+      comparePassError: {
+        passError: 'The passwords must match',
+      },
+    },
+    dialogs: {
+      ok: 'OK',
+      yes: 'Yes',
+      no: 'No',
     },
   },
 }
+
 export type LocaleType = typeof en
