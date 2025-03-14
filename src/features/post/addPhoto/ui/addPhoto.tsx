@@ -7,25 +7,15 @@ import {
   DialogHeader,
   DialogTitle,
   ImageOutline,
-  Input,
   Typography,
 } from '@wandrehappen/ui-kit'
 import React from 'react'
-import { useAddPhoto } from '../lib/useAddPhoto'
+import { useFileUpload } from '../lib/useFileUpload'
 import s from './addPhoto.module.scss'
+import { FileUploadTrigger } from './FileUploadTrigger/fileUploadTrigger'
 
 export const AddPhoto = () => {
-  const {
-    dragOverHandler,
-    dragLeaveHandler,
-    dragOver,
-    fileDropHandler,
-    ImageUploadHandler,
-    updateImageHandler,
-    fileInputRef,
-    error,
-  } = useAddPhoto()
-
+  const { fileDropHandler, dragLeaveHandler, dragOver, dragOverHandler, error } = useFileUpload()
   return (
     <DialogContent className={s.content}>
       <DialogHeader>
@@ -47,15 +37,10 @@ export const AddPhoto = () => {
         </div>
         <Typography color={'danger-500'}>{error}</Typography>
         <div className={s.buttonsWrapper}>
-          <Button onClick={ImageUploadHandler}>Select from Computer</Button>
+          <FileUploadTrigger multiple={false}>
+            <Button>Select from Computer</Button>
+          </FileUploadTrigger>
           <Button variant={'tertiary'}>Open Draft</Button>
-          <Input
-            ref={fileInputRef}
-            type={'file'}
-            accept={'image/png, image/jpeg'}
-            onChange={updateImageHandler}
-            className={s.hiddenInput}
-          />
         </div>
       </DialogBody>
     </DialogContent>

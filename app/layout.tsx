@@ -5,6 +5,7 @@ import { clsx } from 'clsx'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
 import '@wandrehappen/ui-kit/dist/style.css'
+import { headers } from 'next/headers'
 import type { ReactNode } from 'react'
 import s from './layout.module.scss'
 
@@ -18,14 +19,13 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
+  const locale = headers().get('x-locale') as 'en' | 'ru'
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={clsx(inter.className, s.body)}>
-        <Providers>
+        <Providers locale={locale}>
           <Header />
-          <main className={s.rootLayout}>
-            <div className={s.container}>{children}</div>
-          </main>
+          <div className={s.rootLayout}>{children}</div>
         </Providers>
       </body>
     </html>

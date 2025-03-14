@@ -1,5 +1,0 @@
-import { EditDialogContent } from '@/features/post/edit/ui/editDialogContent'
-
-export default function Profile() {
-  return <EditDialogContent />
-}

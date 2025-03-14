@@ -28,12 +28,10 @@ export const LogoutDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Typography asChild variant={'bold14'}>
-          <Button variant={'link'}>
-            <Logout />
-            {logOutDialog.buttonText}
-          </Button>
-        </Typography>
+        <Button variant={'link'}>
+          <Logout />
+          {logOutDialog.buttonText}
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

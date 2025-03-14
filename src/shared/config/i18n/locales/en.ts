@@ -61,6 +61,21 @@ export const en = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Home',
+      create: 'Create',
+      myProfile: 'My Profile',
+      messenger: 'Messenger',
+      search: 'Search',
+      statistics: 'Statistics',
+      favorites: 'Favorites',
+    },
+    header: {
+      logIn: 'Log In',
+      signUp: 'Sign Up',
+    },
+  },
   features: {
     auth: {
       signInForm: {
@@ -106,7 +121,15 @@ export const en = {
         createNewPasswordButtonText: 'Create new password',
       },
     },
-    posts: {
+    post: {
+      publishPostDialog: {
+        buttonText: 'Publish',
+        titleText: 'Publication',
+      },
+      postForm: {
+        labelText: 'Add publication description',
+        placeholderText: 'Post description...',
+      },
       updatePostContent: {
         buttonText: 'Edit Post',
         titleText: 'Edit Post',
@@ -119,28 +142,28 @@ export const en = {
           'Do you really want to close the edition of the publication? If you close changes won’t be saved',
       },
     },
-  },
-  shared: {
-    validations: {
-      emailSchema: {
-        email: 'You entered an invalid email.',
+    shared: {
+      validations: {
+        emailSchema: {
+          email: 'You entered an invalid email.',
+        },
+        emailValidateSchema: {
+          emailValidation: 'The email must match the format\n example@example.com',
+        },
+        passwordSchema: {
+          minLength: 'Password must be at least 6 characters',
+          regexText:
+            'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+        },
+        comparePassError: {
+          passError: 'The passwords must match',
+        },
       },
-      emailValidateSchema: {
-        emailValidation: 'The email must match the format\n example@example.com',
+      dialogs: {
+        ok: 'OK',
+        yes: 'Yes',
+        no: 'No',
       },
-      passwordSchema: {
-        minLength: 'Password must be at least 6 characters',
-        regexText:
-          'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      },
-      comparePassError: {
-        passError: 'The passwords must match',
-      },
-    },
-    dialogs: {
-      ok: 'OK',
-      yes: 'Yes',
-      no: 'No',
     },
   },
 }

@@ -1,0 +1,57 @@
+.icon {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 38px;
+}
+
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 730px;
+}
+
+.profileCNameContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profileCountersContainer {
+  display: flex;
+  gap: 100px;
+}
+
+.profileCounter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.imageContainer {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 234px;
+  height: 234px;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+}
