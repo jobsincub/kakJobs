@@ -1,13 +1,12 @@
 'use client'
 
-import { Post } from '@/entities/post/ui/post'
 import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
 import Page from '@/widgets/page'
 
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import s from './myProfilePage.module.scss'
 
@@ -24,9 +23,6 @@ const MyProfilePage = ({ userId }: Props) => {
 
   const { posts, observerRef } = useMyProfilePage()
   const imageUrl = 'https://placeholder.apptor.studio/200/200/product1.png'
-
-  const searchParams = useSearchParams()
-  const postId = searchParams?.get('postId')
 
   return (
     <Page mt={36}>
@@ -96,7 +92,6 @@ const MyProfilePage = ({ userId }: Props) => {
           )}
         <div ref={observerRef} />
       </div>
-      <Post postId={postId} userId={userId} />
     </Page>
   )
 }
