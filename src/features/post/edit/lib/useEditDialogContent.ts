@@ -15,6 +15,7 @@ export const useEditDialogContent = () => {
 
   // const { formState } = useFormContext()
   // const isDirty = formState.isDirty
+  // console.log(formState.isDirty)
 
   const {
     t: {
@@ -24,22 +25,16 @@ export const useEditDialogContent = () => {
     },
   } = useTranslation()
 
-  const updatePostHandler = async (data: EditPostFormValues) => {
-    if (!postId) {
-      console.error('Post ID is undefined')
-      return
-    }
-    try {
-      await updatePost({ ...data, id: postId }).unwrap()
-    } catch (error) {
-      console.error('Failed to delete post:', error)
+  const updatePostHandler = (data: EditPostFormValues) => {
+    if (postId) {
+      updatePost({ ...data, id: postId })
     }
   }
 
   // const openConfirmHandler = (isOpen: boolean) => {
   //   if (!isOpen) {
   //     if (isDirty) {
-  //       setIsConfirmOpen(false) // Если есть изменения — показать ConfirmCloseDialog
+  //       setIsConfirmOpen(true) // Если есть изменения — показать ConfirmCloseDialog
   //     } else {
   //       setIsDialogOpen(false) // Если нет изменений — просто закрываем
   //     }

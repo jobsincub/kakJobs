@@ -5,8 +5,8 @@ import {
   EditPostFormValues,
   useEditPostForm,
 } from '../../lib/useEditPostForm'
-import { DescriptionSignCount } from './DescriptionSignCount'
 import s from './EditPostForm.module.scss'
+import { DescriptionCount } from '@/features/post/ui/PostForm/DescriptionCount'
 
 type Props = {
   onSubmit: (data: EditPostFormValues) => void
@@ -30,7 +30,7 @@ export const EditPostForm = ({ onSubmit }: Props) => {
           maxLength={DESCRIPTION_MAX_LENGTH}
           className={s.description}
         />
-        <DescriptionSignCount control={control} maxLength={DESCRIPTION_MAX_LENGTH} />
+        <DescriptionCount control={control} maxLength={DESCRIPTION_MAX_LENGTH} />
       </div>
       <div className={s.buttonWrapper}>
         <Button className={s.button}>{updatePostContent.formButtonText}</Button>

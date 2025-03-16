@@ -15,8 +15,8 @@ import {
 
 import s from './EditDialogContent.module.scss'
 import { useEditDialogContent } from '../../lib/useEditDialogContent'
-import { EditPostForm } from '../editPostForm'
 import { ConfirmCloseDialog } from '../confirmCloseDialog'
+import { PostForm } from '@/features/post/ui/PostForm'
 
 export const EditDialogContent = () => {
   const {
@@ -46,7 +46,10 @@ export const EditDialogContent = () => {
         </DialogHeader>
         <DialogBody className={s.dialogBody}>
           <div className={s.imagesBox}>Здесь красивая картинка</div>
-          <EditPostForm onSubmit={updatePostHandler} />
+          <PostForm
+            onSubmit={updatePostHandler}
+            defaultValues={{ description: 'Текущее описание поста' }}
+          />
         </DialogBody>
         <ConfirmCloseDialog
           open={isConfirmOpen}

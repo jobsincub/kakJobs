@@ -4,6 +4,7 @@ import { ConfirmCloseDialog } from './ConfirmCloseDialog'
 import { makeStore } from '@/app/store'
 
 export default {
+  tags: ['autodocs'],
   title: 'Components/ConfirmCloseDialog',
   component: ConfirmCloseDialog,
 } as Meta
