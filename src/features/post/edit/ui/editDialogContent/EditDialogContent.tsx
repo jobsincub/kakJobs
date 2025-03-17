@@ -27,6 +27,7 @@ export const EditDialogContent = () => {
     openConfirmHandler,
     confirmCloseHandler,
     setIsConfirmOpen,
+    post,
   } = useEditDialogContent()
 
   return (
@@ -48,7 +49,7 @@ export const EditDialogContent = () => {
           <div className={s.imagesBox}>Здесь красивая картинка</div>
           <PostForm
             onSubmit={updatePostHandler}
-            defaultValues={{ description: 'Текущее описание поста' }}
+            defaultValues={{ description: post?.description || '' }}
           />
         </DialogBody>
         <ConfirmCloseDialog

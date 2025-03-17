@@ -1,21 +1,21 @@
-import { useUpdatePostMutation } from '@/entities/post/api/postApi'
+import { useGetPostByIdQuery, useUpdatePostMutation } from '@/entities/post/api/postApi'
 import { useParams } from 'next/navigation'
 import { useTranslation } from '@/shared/config'
-import { EditPostFormValues } from './useEditPostForm'
-import { useState } from 'react'
-// import { useFormContext } from 'react-hook-form'
 
+import { useState } from 'react'
+
+export type EditPostFormValues = {
+  description: string
+}
 export const useEditDialogContent = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false) // Состояние EditDialogContent
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false) // Состояние ConfirmCloseDialog
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
   const [updatePost] = useUpdatePostMutation()
   const params = useParams<{ postId: string }>()
   const postId = params?.postId
 
-  // const { formState } = useFormContext()
-  // const isDirty = formState.isDirty
-  // console.log(formState.isDirty)
+  const { data: post } = useGetPostByIdQuery(postId ?? '')
 
   const {
     t: {
@@ -28,32 +28,20 @@ export const useEditDialogContent = () => {
   const updatePostHandler = (data: EditPostFormValues) => {
     if (postId) {
       updatePost({ ...data, id: postId })
+      setIsDialogOpen(false)
     }
   }
 
-  // const openConfirmHandler = (isOpen: boolean) => {
-  //   if (!isOpen) {
-  //     if (isDirty) {
-  //       setIsConfirmOpen(true) // Если есть изменения — показать ConfirmCloseDialog
-  //     } else {
-  //       setIsDialogOpen(false) // Если нет изменений — просто закрываем
-  //     }
-  //   } else {
-  //     setIsDialogOpen(true)
-  //   }
-  // }
-
   const openConfirmHandler = (isOpen: boolean) => {
     if (!isOpen) {
-      setIsConfirmOpen(true) // Вместо закрытия сразу открываем ConfirmCloseDialog
+      setIsConfirmOpen(true)
     } else {
       setIsDialogOpen(true)
     }
   }
 
   const confirmCloseHandler = () => {
-    setIsDialogOpen(false) // Закрываем основное окно
-    setIsConfirmOpen(false) // Закрываем ConfirmCloseDialog
+    setIsDialogOpen(false)
   }
 
   return {
@@ -64,5 +52,6 @@ export const useEditDialogContent = () => {
     openConfirmHandler,
     confirmCloseHandler,
     setIsConfirmOpen,
+    post,
   }
 }

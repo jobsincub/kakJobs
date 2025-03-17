@@ -14,7 +14,6 @@ type Props = {
   defaultValues?: Partial<PostItems>
   onSubmit: (data: PostFormValues) => void
 }
-
 export const PostForm = ({ defaultValues, onSubmit }: Props) => {
   const { userName, postForm } = usePostForm()
   const { handleSubmit, register, control } = useForm<PostFormValues>({
