@@ -19,19 +19,6 @@ import { useDeletePostDialog } from '../../lib/useDeletePostDialog'
 export const DeletePostDialog = () => {
   const { dialogs, deletePostDialog, deletePost, postId } = useDeletePostDialog()
 
-  const deletePostHandler = async () => {
-    if (!postId) {
-      console.error('Post ID is undefined')
-      return
-    }
-
-    try {
-      await deletePost(postId).unwrap()
-    } catch (error) {
-      console.error('Failed to delete post:', error)
-    }
-  }
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -52,7 +39,7 @@ export const DeletePostDialog = () => {
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
-              <Button variant={'tertiary'} onClick={deletePostHandler}>
+              <Button variant={'tertiary'} onClick={() => deletePost(postId)}>
                 {dialogs.yes}
               </Button>
             </DialogClose>
