@@ -1,12 +1,13 @@
 import { useTranslation } from '@/shared/config'
 import { useDeletePostMutation } from '@/entities/post'
 import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 export const useDeletePostDialog = () => {
-  const params = useParams<{ userId: string; postId: string }>()
-  const userId = params?.userId
-  const postId = params?.postId
+  const params = useParams<{ userId: string }>()
+  const searchParams = useSearchParams()
+  const userId = params!.userId
+  const postId = searchParams!.get('postId')!
   const [deletePost, { isSuccess }] = useDeletePostMutation()
   const router = useRouter()
   const {
@@ -19,7 +20,7 @@ export const useDeletePostDialog = () => {
   } = useTranslation()
 
   useEffect(() => {
-    if (isSuccess && userId) {
+    if (isSuccess) {
       router.replace(`/profile/${userId}`)
     }
   }, [isSuccess, router, userId])
