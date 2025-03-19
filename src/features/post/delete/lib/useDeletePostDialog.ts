@@ -8,7 +8,7 @@ export const useDeletePostDialog = () => {
   const searchParams = useSearchParams()
   const userId = params!.userId
   const postId = searchParams!.get('postId')!
-  const [deletePost, { isSuccess }] = useDeletePostMutation()
+  const [deletePost, { isSuccess, isLoading }] = useDeletePostMutation()
   const router = useRouter()
   const {
     t: {
@@ -25,5 +25,5 @@ export const useDeletePostDialog = () => {
     }
   }, [isSuccess, router, userId])
 
-  return { deletePost, deletePostDialog, dialogs, postId }
+  return { deletePost, deletePostDialog, dialogs, postId, isLoading }
 }

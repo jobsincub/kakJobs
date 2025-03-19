@@ -17,7 +17,7 @@ import s from './DeletePostDialog.module.scss'
 import { useDeletePostDialog } from '../../lib/useDeletePostDialog'
 
 export const DeletePostDialog = () => {
-  const { dialogs, deletePostDialog, deletePost, postId } = useDeletePostDialog()
+  const { dialogs, deletePostDialog, deletePost, postId, isLoading } = useDeletePostDialog()
 
   return (
     <Dialog>
@@ -39,7 +39,7 @@ export const DeletePostDialog = () => {
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
-              <Button variant={'tertiary'} onClick={() => deletePost(postId)}>
+              <Button variant={'tertiary'} disabled={isLoading} onClick={() => deletePost(postId)}>
                 {dialogs.yes}
               </Button>
             </DialogClose>
