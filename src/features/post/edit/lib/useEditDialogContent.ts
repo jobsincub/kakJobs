@@ -1,5 +1,5 @@
 import { useGetPostByIdQuery, useUpdatePostMutation } from '@/entities/post/api/postApi'
-import { useParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { useTranslation } from '@/shared/config'
 
 import { useState } from 'react'
@@ -12,10 +12,10 @@ export const useEditDialogContent = () => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
   const [updatePost] = useUpdatePostMutation()
-  const params = useParams<{ postId: string }>()
-  const postId = params?.postId
+  const searchParams = useSearchParams()
+  const postId = searchParams!.get('postId')!
 
-  const { data: post } = useGetPostByIdQuery(postId ?? '')
+  const { data: post } = useGetPostByIdQuery(postId)
 
   const {
     t: {
