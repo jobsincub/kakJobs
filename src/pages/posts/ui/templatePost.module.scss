@@ -1,0 +1,21 @@
+.mainContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1000px;
+  height: 570px;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding:11px 24px;
+  border-bottom: 1px solid #4C4C4C;
+}
+
+.profileHeaderWrapper {
+  display: flex;
+  gap:12px;
+}
