@@ -122,6 +122,11 @@ export const en = {
       },
     },
     post: {
+      deletePostDialog: {
+        buttonText: 'Delete Post',
+        titleText: 'Delete Post',
+        confirmationText: 'Are you sure you want to delete this post?',
+      },
       publishPostDialog: {
         buttonText: 'Publish',
         titleText: 'Publication',

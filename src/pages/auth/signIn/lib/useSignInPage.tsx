@@ -5,17 +5,20 @@ import { getErrorMessage } from '@/shared/lib/hooks'
 import { ROUTES } from '@/shared/router/routes'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useAppSelector } from '@/shared/lib/store/redux'
+import { selectUserId } from '@/entities/user/model/authSlice'
 
 export const UseSignInPage = () => {
+  const userId = useAppSelector(selectUserId)
   const router = useRouter()
 
   const [signIn, { isSuccess, error }] = useSignInMutation()
 
   useEffect(() => {
-    if (isSuccess) {
-      router.push(ROUTES.PROFILE)
+    if (isSuccess && userId) {
+      router.push(ROUTES.PROFILE(userId))
     }
-  }, [isSuccess, router])
+  }, [isSuccess, router, userId])
 
   const {
     t: {

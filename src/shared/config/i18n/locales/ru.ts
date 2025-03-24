@@ -125,6 +125,11 @@ export const ru: LocaleType = {
       },
     },
     post: {
+      deletePostDialog: {
+        buttonText: 'Удалить пост',
+        titleText: 'Удаление поста',
+        confirmationText: 'Вы уверены, что хотите удалить этот пост?',
+      },
       publishPostDialog: {
         buttonText: 'Опубликовать',
         titleText: 'Публикация',
