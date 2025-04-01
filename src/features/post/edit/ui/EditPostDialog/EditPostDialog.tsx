@@ -49,7 +49,7 @@ export const EditPostDialog = () => {
           <div className={s.imagesBox}>Здесь красивая картинка</div>
           <PostForm
             onSubmit={updatePostHandler}
-            defaultValues={{ description: post!.description || '' }}
+            defaultValues={{ description: post!.description }}
             onDirtyChange={setIsPostFormDirty}
           />
         </DialogBody>
