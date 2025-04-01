@@ -1,15 +1,16 @@
 import { useGetPostByIdQuery, useUpdatePostMutation } from '@/entities/post/api/postApi'
 import { useSearchParams } from 'next/navigation'
 import { useTranslation } from '@/shared/config'
-
 import { useState } from 'react'
 
 export type EditPostFormValues = {
   description: string
 }
+
 export const useEditDialogContent = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const [isEditPostDialogOpen, setIsEditPostDialogOpen] = useState(false)
+  const [isPostFormDirty, setIsPostFormDirty] = useState(false)
+  const [isConfirmCloseDialogOpen, setIsConfirmCloseDialogOpen] = useState(false)
 
   const [updatePost] = useUpdatePostMutation()
   const searchParams = useSearchParams()
@@ -27,29 +28,32 @@ export const useEditDialogContent = () => {
 
   const updatePostHandler = (data: EditPostFormValues) => {
     updatePost({ ...data, id: postId })
-    setIsDialogOpen(false)
+      .unwrap()
+      .then(() => setIsEditPostDialogOpen(false))
   }
 
-  const openConfirmHandler = (isOpen: boolean) => {
-    if (!isOpen) {
-      setIsConfirmOpen(true)
+  const toggleEditPostDialog = (isOpen: boolean) => {
+    if (!isOpen && isPostFormDirty) {
+      setIsConfirmCloseDialogOpen(true)
     } else {
-      setIsDialogOpen(true)
+      setIsEditPostDialogOpen(isOpen)
     }
   }
 
   const confirmCloseHandler = () => {
-    setIsDialogOpen(false)
+    setIsEditPostDialogOpen(false)
   }
 
   return {
     updatePostHandler,
     updatePostContent,
-    isDialogOpen,
-    isConfirmOpen,
-    openConfirmHandler,
+    isEditPostDialogOpen,
+    isConfirmCloseDialogOpen,
+    toggleEditPostDialog,
     confirmCloseHandler,
-    setIsConfirmOpen,
+    setIsConfirmCloseDialogOpen,
     post,
+    isPostFormDirty,
+    setIsPostFormDirty,
   }
 }

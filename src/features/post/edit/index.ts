@@ -1,3 +1,2 @@
-export { ConfirmCloseDialog } from './ui/confirmCloseDialog'
-export { EditDialogContent } from './ui/editDialogContent'
-export { EditPostForm } from './ui/editPostForm'
+export { ConfirmCloseDialog } from './ui/EditPostDialog/СonfirmCloseDialog'
+export { EditPostDialog } from './ui/EditPostDialog'

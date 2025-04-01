@@ -9,16 +9,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@wandrehappen/ui-kit'
-
 import s from './ConfirmCloseDialog.module.scss'
-import { useConfirmCloseDialog } from '../../lib/useConfirmCloseDialog'
+import { useConfirmCloseDialog } from '../../../lib/useConfirmCloseDialog'
+
 type Props = {
   open: boolean
   onOpenChange: (isOpen: boolean) => void
   onConfirm: () => void
 }
+
 export const ConfirmCloseDialog = ({ open, onOpenChange, onConfirm }: Props) => {
   const { updatePostDialog, dialogs } = useConfirmCloseDialog()
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className={s.rectangleDialog}>
@@ -33,7 +35,7 @@ export const ConfirmCloseDialog = ({ open, onOpenChange, onConfirm }: Props) => 
             <DialogClose onClick={onConfirm}>
               <Button variant={'tertiary'}>{dialogs.yes}</Button>
             </DialogClose>
-            <DialogClose onClick={() => onOpenChange(false)}>
+            <DialogClose>
               <Button>{dialogs.no}</Button>
             </DialogClose>
           </DialogFooter>

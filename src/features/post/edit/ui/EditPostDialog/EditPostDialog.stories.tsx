@@ -3,12 +3,12 @@ import { Provider } from 'react-redux'
 import { makeStore } from '@/app/store'
 import { Dialog } from '@wandrehappen/ui-kit'
 import { useForm, FormProvider } from 'react-hook-form'
-import { EditDialogContent } from '../editDialogContent'
+import { EditPostDialog } from './'
 
 export default {
   tags: ['autodocs'],
   title: 'Components/EditPost',
-  component: EditDialogContent,
+  component: EditPostDialog,
 } as Meta
 
 const Template: StoryObj = {
@@ -19,7 +19,7 @@ const Template: StoryObj = {
       <Provider store={makeStore()}>
         <FormProvider {...methods}>
           <Dialog open>
-            <EditDialogContent />
+            <EditPostDialog />
           </Dialog>
         </FormProvider>
       </Provider>

@@ -12,26 +12,26 @@ import {
   EditOutline,
   Typography,
 } from '@wandrehappen/ui-kit'
-
-import s from './EditDialogContent.module.scss'
+import s from './EditPostDialog.module.scss'
 import { useEditDialogContent } from '../../lib/useEditDialogContent'
-import { ConfirmCloseDialog } from '../confirmCloseDialog'
+import { ConfirmCloseDialog } from './СonfirmCloseDialog'
 import { PostForm } from '@/features/post/ui/PostForm'
 
-export const EditDialogContent = () => {
+export const EditPostDialog = () => {
   const {
     updatePostHandler,
     updatePostContent,
-    isDialogOpen,
-    isConfirmOpen,
-    openConfirmHandler,
+    isEditPostDialogOpen,
+    isConfirmCloseDialogOpen,
+    toggleEditPostDialog,
     confirmCloseHandler,
-    setIsConfirmOpen,
+    setIsConfirmCloseDialogOpen,
     post,
+    setIsPostFormDirty,
   } = useEditDialogContent()
 
   return (
-    <Dialog open={isDialogOpen} onOpenChange={openConfirmHandler}>
+    <Dialog open={isEditPostDialogOpen} onOpenChange={toggleEditPostDialog}>
       <DialogTrigger asChild>
         <Typography asChild variant={'regular14'}>
           <Button variant={'link'}>
@@ -49,12 +49,13 @@ export const EditDialogContent = () => {
           <div className={s.imagesBox}>Здесь красивая картинка</div>
           <PostForm
             onSubmit={updatePostHandler}
-            defaultValues={{ description: post?.description || '' }}
+            defaultValues={{ description: post!.description || '' }}
+            formDirtyChange={setIsPostFormDirty}
           />
         </DialogBody>
         <ConfirmCloseDialog
-          open={isConfirmOpen}
-          onOpenChange={setIsConfirmOpen}
+          open={isConfirmCloseDialogOpen}
+          onOpenChange={setIsConfirmCloseDialogOpen}
           onConfirm={confirmCloseHandler}
         />
       </DialogContent>
