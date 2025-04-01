@@ -5,6 +5,7 @@ import { usePostForm } from '../../lib/usePostForm'
 import { DESCRIPTION_MAX_LENGTH, POST_FORM_ID } from '../../model'
 import { DescriptionCount } from './DescriptionCount'
 import s from './PostForm.module.scss'
+import { useEffect } from 'react'
 
 export type PostFormValues = {
   description: string
@@ -13,15 +14,24 @@ export type PostFormValues = {
 type Props = {
   defaultValues?: Partial<PostItems>
   onSubmit: (data: PostFormValues) => void
+  onDirtyChange?: (isDirty: boolean) => void
 }
-
-export const PostForm = ({ defaultValues, onSubmit }: Props) => {
+export const PostForm = ({ defaultValues, onSubmit, onDirtyChange }: Props) => {
   const { userName, postForm } = usePostForm()
-  const { handleSubmit, register, control } = useForm<PostFormValues>({
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { isDirty },
+  } = useForm<PostFormValues>({
     defaultValues: defaultValues || {
       description: '',
     },
   })
+
+  useEffect(() => {
+    onDirtyChange?.(isDirty)
+  }, [isDirty, onDirtyChange])
 
   return (
     <form id={POST_FORM_ID} className={s.form} onSubmit={handleSubmit(onSubmit)}>

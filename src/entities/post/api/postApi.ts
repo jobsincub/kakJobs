@@ -60,6 +60,14 @@ export const postApi = createApi({
       transformResponse: (response: ApiResponse<PostItems>) => response.data,
       providesTags: ['Posts'],
     }),
+    updatePost: builder.mutation<void, { description: string; id: string }>({
+      query: ({ id, ...body }) => ({
+        body,
+        url: `posts/${id}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'Posts', id }],
+    }),
     deletePost: builder.mutation<void, string>({
       query: id => ({
         url: `posts/${id}`,
@@ -72,9 +80,10 @@ export const postApi = createApi({
 
 export const {
   useCreatePostMutation,
-  useDeletePostMutation,
   useGetUsersPostsQuery,
   useGetPostByIdQuery,
+  useUpdatePostMutation,
+  useDeletePostMutation,
 } = postApi
 
 type PostImage = {
