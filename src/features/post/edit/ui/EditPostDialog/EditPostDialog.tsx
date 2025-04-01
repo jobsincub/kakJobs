@@ -50,7 +50,7 @@ export const EditPostDialog = () => {
           <PostForm
             onSubmit={updatePostHandler}
             defaultValues={{ description: post!.description || '' }}
-            formDirtyChange={setIsPostFormDirty}
+            onDirtyChange={setIsPostFormDirty}
           />
         </DialogBody>
         <ConfirmCloseDialog

@@ -14,9 +14,9 @@ export type PostFormValues = {
 type Props = {
   defaultValues?: Partial<PostItems>
   onSubmit: (data: PostFormValues) => void
-  formDirtyChange?: (isDirty: boolean) => void
+  onDirtyChange?: (isDirty: boolean) => void
 }
-export const PostForm = ({ defaultValues, onSubmit, formDirtyChange }: Props) => {
+export const PostForm = ({ defaultValues, onSubmit, onDirtyChange }: Props) => {
   const { userName, postForm } = usePostForm()
   const {
     handleSubmit,
@@ -30,8 +30,8 @@ export const PostForm = ({ defaultValues, onSubmit, formDirtyChange }: Props) =>
   })
 
   useEffect(() => {
-    formDirtyChange?.(isDirty)
-  }, [isDirty, formDirtyChange])
+    onDirtyChange?.(isDirty)
+  }, [isDirty, onDirtyChange])
 
   return (
     <form id={POST_FORM_ID} className={s.form} onSubmit={handleSubmit(onSubmit)}>
