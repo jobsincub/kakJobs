@@ -5,7 +5,7 @@ import React from 'react'
 
 type Props = {
   params: { userId: string }
-  searchParams: { postId: string }
+  searchParams: { postId: string | undefined }
 }
 
 export default async function Profile({ params, searchParams }: Props) {
