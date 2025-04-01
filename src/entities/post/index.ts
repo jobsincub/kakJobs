@@ -1,5 +1,6 @@
 export {
   useCreatePostMutation,
+  useDeletePostMutation,
   postApi,
   useGetUsersPostsQuery,
   useGetPostByIdQuery,

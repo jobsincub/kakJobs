@@ -1,3 +1,4 @@
+'use client'
 import { selectUserName } from '@/entities/user/model/authSlice'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { Dialog, DialogBody, DialogContent, DialogDescription, Menu } from '@wandrehappen/ui-kit'

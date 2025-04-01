@@ -68,6 +68,13 @@ export const postApi = createApi({
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'Posts', id }],
     }),
+    deletePost: builder.mutation<void, string>({
+      query: id => ({
+        url: `posts/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'Posts', id }],
+    }),
   }),
 })
 
@@ -76,6 +83,7 @@ export const {
   useGetUsersPostsQuery,
   useGetPostByIdQuery,
   useUpdatePostMutation,
+  useDeletePostMutation,
 } = postApi
 
 type PostImage = {
