@@ -4,16 +4,17 @@ import { skipToken } from '@reduxjs/toolkit/query'
 import { Dialog, DialogBody, DialogContent, DialogDescription, Menu } from '@wandrehappen/ui-kit'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import { useGetPostByIdQuery } from '../api/postApi'
+import { PostData, useGetPostByIdQuery } from '../api/postApi'
 import { ImageCarousel } from './ImageCarousel/ImageCarousel'
 import s from './post.module.scss'
 
 type Props = {
-  postId: string | null | undefined
+  post: PostData | null
   userId: string
+  postId: string | undefined
 }
 
-export const Post = ({ postId, userId }: Props) => {
+export const Post = ({ post, userId, postId }: Props) => {
   const { data } = useGetPostByIdQuery(postId ?? skipToken)
   const userName = useSelector(selectUserName)
   const router = useRouter()
@@ -25,7 +26,7 @@ export const Post = ({ postId, userId }: Props) => {
   const posts = data?.postImages ?? []
 
   return (
-    <Dialog open={!!postId} onOpenChange={onOpenChange}>
+    <Dialog open={!!post} onOpenChange={onOpenChange}>
       <DialogContent className={s.content}>
         <DialogBody className={s.body}>
           <DialogDescription style={{ display: 'none' }}>
