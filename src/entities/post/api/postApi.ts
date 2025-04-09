@@ -6,7 +6,7 @@ export const postApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Posts'],
   endpoints: builder => ({
-    createPost: builder.mutation<ApiResponse<PostItems>, FormData>({
+    createPost: builder.mutation<ApiResponse<PostData>, FormData>({
       query: formData => ({
         body: formData,
         url: 'posts',
@@ -15,7 +15,7 @@ export const postApi = createApi({
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
     getUsersPosts: builder.query<
-      { items: PostItems[]; meta: PostMeta },
+      { items: PostData[]; meta: PostMeta },
       { userId: string; page: number }
     >({
       query: ({ userId, page }) => ({
@@ -53,11 +53,11 @@ export const postApi = createApi({
         }
       },
     }),
-    getPostById: builder.query<PostItems, string>({
+    getPostById: builder.query<PostData, string>({
       query: postId => ({
         url: `posts/post/${postId}`,
       }),
-      transformResponse: (response: ApiResponse<PostItems>) => response.data,
+      transformResponse: (response: ApiResponse<PostData>) => response.data,
       providesTags: ['Posts'],
     }),
     updatePost: builder.mutation<void, { description: string; id: string }>({
@@ -92,7 +92,7 @@ type PostImage = {
   createdAt: string
 }
 
-export type PostItems = {
+export type PostData = {
   id: string
   userId: string
   description: string
@@ -109,6 +109,6 @@ type PostMeta = {
 }
 
 type Data = {
-  items: PostItems[]
+  items: PostData[]
   meta: PostMeta
 }
