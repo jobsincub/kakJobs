@@ -1,4 +1,4 @@
-import { type PostItems } from '@/entities/post/api/postApi'
+import { type PostData } from '@/entities/post/api/postApi'
 import { Button, Textarea, Typography } from '@wandrehappen/ui-kit'
 import { useForm } from 'react-hook-form'
 import { usePostForm } from '../../lib/usePostForm'
@@ -12,7 +12,7 @@ export type PostFormValues = {
 }
 
 type Props = {
-  defaultValues?: Partial<PostItems>
+  defaultValues?: Partial<PostData>
   onSubmit: (data: PostFormValues) => void
   onDirtyChange?: (isDirty: boolean) => void
 }
