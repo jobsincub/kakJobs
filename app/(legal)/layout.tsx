@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   } = useTranslation()
 
   return (
-    <div className={s.layout}>
+    <main className={s.layout}>
       <Button variant={'link'} gap={12} className={s.button} asChild>
         <Link href={ROUTES.AUTH.SIGN_UP}>
           <Arrow />
@@ -22,6 +22,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         </Link>
       </Button>
       <div className={s.container}>{children}</div>
-    </div>
+    </main>
   )
 }

@@ -1,0 +1,44 @@
+.wrapper {
+  width: 500px;
+  height: 500px;
+}
+
+.swiper {
+  :global(.swiper-pagination) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 104px;
+    height: 24px;
+
+    background-color: rgb(51 51 51 / 50%);
+  }
+
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    width: 48px;
+    height: 48px;
+    color: white;
+    background-color: rgb(51 51 51 / 50%);
+
+    &::after {
+      font-size: 28px;
+    }
+
+    &:hover {
+      background-color: rgb(51 51 51 / 70%);
+    }
+  }
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

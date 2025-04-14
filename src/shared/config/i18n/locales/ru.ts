@@ -63,6 +63,21 @@ export const ru: LocaleType = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Главная',
+      create: 'Создать',
+      myProfile: 'Мой профиль',
+      messenger: 'Мессенджер',
+      search: 'Поиск',
+      statistics: 'Статистика',
+      favorites: 'Избранное',
+    },
+    header: {
+      logIn: 'Войти',
+      signUp: 'Регистрация',
+    },
+  },
   features: {
     auth: {
       signInForm: {
@@ -107,6 +122,32 @@ export const ru: LocaleType = {
         sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,
         sendLinkAgainButtonText: 'Отправить ссылку повторно',
         sendLinkButtonText: 'Отправить ссылку',
+      },
+    },
+    post: {
+      deletePostDialog: {
+        buttonText: 'Удалить пост',
+        titleText: 'Удаление поста',
+        confirmationText: 'Вы уверены, что хотите удалить этот пост?',
+      },
+      publishPostDialog: {
+        buttonText: 'Опубликовать',
+        titleText: 'Публикация',
+      },
+      postForm: {
+        labelText: 'Добавить описание публикации',
+        placeholderText: 'Описание публикации...',
+      },
+      updatePostContent: {
+        buttonText: 'Редактировать публикацию',
+        titleText: 'Редактировать публикацию',
+        formButtonText: 'Сохранить',
+        labelText: 'Добавьте описание публикации',
+      },
+      updatePostDialog: {
+        closePost: 'Закрыть Окно',
+        description:
+          'Вы действительно хотите закрыть редактирование публикации? Если вы закроете, изменения не будут сохранены.',
       },
     },
   },

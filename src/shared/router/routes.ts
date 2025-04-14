@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+  CREATE_POST: '/createPost',
   LEGAL: {
     TERMS_OF_SERVICE: '/terms-of-service',
     PRIVACY_POLICY: '/privacy-policy',
@@ -12,5 +13,5 @@ export const ROUTES = {
     FORGOT_PASSWORD: '/auth/forgot-password',
     RESEND_VERIFICATION: '/auth/resend-verification',
   },
-  PROFILE: '/profile',
+  PROFILE: (id: string) => `/profile/${id}` as const,
 }

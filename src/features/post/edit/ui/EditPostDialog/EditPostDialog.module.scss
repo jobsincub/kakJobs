@@ -1,0 +1,14 @@
+.dialogContent {
+  max-width: 972px;
+  background-color: var(--color-dark-300);
+}
+
+.dialogBody {
+  display: flex;
+  padding: 0;
+}
+
+.imagesBox {
+  flex: 0 0 50%;
+  height: 503px;;
+}

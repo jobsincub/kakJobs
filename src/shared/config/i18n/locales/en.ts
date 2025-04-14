@@ -61,6 +61,21 @@ export const en = {
       },
     },
   },
+  widgets: {
+    sidebar: {
+      home: 'Home',
+      create: 'Create',
+      myProfile: 'My Profile',
+      messenger: 'Messenger',
+      search: 'Search',
+      statistics: 'Statistics',
+      favorites: 'Favorites',
+    },
+    header: {
+      logIn: 'Log In',
+      signUp: 'Sign Up',
+    },
+  },
   features: {
     auth: {
       signInForm: {
@@ -106,6 +121,32 @@ export const en = {
         createNewPasswordButtonText: 'Create new password',
       },
     },
+    post: {
+      deletePostDialog: {
+        buttonText: 'Delete Post',
+        titleText: 'Delete Post',
+        confirmationText: 'Are you sure you want to delete this post?',
+      },
+      publishPostDialog: {
+        buttonText: 'Publish',
+        titleText: 'Publication',
+      },
+      postForm: {
+        labelText: 'Add publication description',
+        placeholderText: 'Post description...',
+      },
+      updatePostContent: {
+        buttonText: 'Edit Post',
+        titleText: 'Edit Post',
+        formButtonText: 'Save Changes',
+        labelText: 'Add publication descriptions',
+      },
+      updatePostDialog: {
+        closePost: 'Close Post',
+        description:
+          'Do you really want to close the edition of the publication? If you close changes won’t be saved',
+      },
+    },
   },
   shared: {
     validations: {
@@ -131,4 +172,5 @@ export const en = {
     },
   },
 }
+
 export type LocaleType = typeof en

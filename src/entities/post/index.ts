@@ -1,4 +1,10 @@
-export { useCreatePostMutation, postApi } from './api/postApi'
+export {
+  useCreatePostMutation,
+  useDeletePostMutation,
+  postApi,
+  useGetUsersPostsQuery,
+  useGetPostByIdQuery,
+} from './api/postApi'
 export {
   postSlice,
   nextStep,
@@ -9,6 +15,7 @@ export {
   removePhoto,
   selectStep,
   selectPhotos,
-  updatePhoto,
+  updateUrlPhoto,
   OrderStatus,
 } from './model/postSlice'
+export { ImageCarousel } from './ui/ImageCarousel/ImageCarousel'
