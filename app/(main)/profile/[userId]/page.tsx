@@ -18,7 +18,7 @@ export default async function Profile({ params, searchParams: { postId } }: Prop
   return (
     <>
       <MyProfilePage userId={params.userId} />
-      <Post userId={params.userId} postId={postId} post={post} />
+      <Post userId={params.userId} post={post} />
     </>
   )
 }
