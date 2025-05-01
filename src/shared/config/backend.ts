@@ -1,1 +1,1 @@
-export const BACKEND_BASE_URL = 'https://picassonova.online/api/v1/'
+export const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL
