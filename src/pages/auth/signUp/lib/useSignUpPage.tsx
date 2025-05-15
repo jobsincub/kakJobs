@@ -18,7 +18,11 @@ export const UseSignUpPage = () => {
   } = useTranslation()
 
   const onSubmit = (data: OutputSchema) => {
-    signUp(data)
+    // signUp(data)
+    signUp({
+      ...data,
+      baseUrl: 'http://localhost:3000/auth/email-confirm',
+    })
   }
 
   const customError = getErrorMessage({ errorMessages, error })

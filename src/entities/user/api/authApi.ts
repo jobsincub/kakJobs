@@ -37,11 +37,14 @@ export const authApi = createApi({
         url: 'auth/resend-verification-email',
       }),
     }),
-    signUp: builder.mutation<void, { userName: string; email: string; password: string }>({
+    signUp: builder.mutation<
+      void,
+      { userName: string; email: string; password: string; baseUrl: string }
+    >({
       query: params => ({
         body: params,
         method: 'POST',
-        url: 'auth/sign-up',
+        url: 'auth/registration',
       }),
     }),
     createNewPassword: builder.mutation<
