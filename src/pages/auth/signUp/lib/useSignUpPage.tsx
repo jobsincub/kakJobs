@@ -1,6 +1,6 @@
 import { useSignUpMutation } from '@/entities/user'
 import { OutputSchema } from '@/features/auth/signUp'
-import { useTranslation } from '@/shared/config'
+import { ENV, useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 
 export const UseSignUpPage = () => {
@@ -21,7 +21,7 @@ export const UseSignUpPage = () => {
     // signUp(data)
     signUp({
       ...data,
-      baseUrl: 'http://localhost:3000/auth/email-confirm',
+      baseUrl: `${ENV.NEXT_PUBLIC_APP_URL}/auth/email-confirm`,
     })
   }
 
