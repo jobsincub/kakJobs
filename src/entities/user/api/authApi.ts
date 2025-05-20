@@ -30,11 +30,11 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
-    resendVerificationEmail: builder.mutation<void, { email: string }>({
+    resendVerificationEmail: builder.mutation<void, { email: string; baseUrl: string }>({
       query: params => ({
         body: params,
         method: 'POST',
-        url: 'auth/resend-verification-email',
+        url: 'auth/registration-email-resending',
       }),
     }),
     signUp: builder.mutation<

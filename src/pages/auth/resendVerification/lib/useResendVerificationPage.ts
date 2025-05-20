@@ -1,6 +1,6 @@
 import { useResendVerificationEmailMutation } from '@/entities/user'
 import { ResendVerificationEmailField } from '@/features/auth/resendVerification'
-import { useTranslation } from '@/shared/config'
+import { ENV, useTranslation } from '@/shared/config'
 import { getErrorMessage, getStatusCode } from '@/shared/lib/hooks'
 import { ROUTES } from '@/shared/router/routes'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -33,14 +33,18 @@ export const useResendVerificationPage = () => {
   } = useTranslation()
 
   const customError = getErrorMessage({ errorMessages, error })
+  const baseUrl = `${ENV.NEXT_PUBLIC_APP_URL}/auth/email-confirm`
 
   const onResendForm = (data: ResendVerificationEmailField) => {
-    resendVerificationEmail(data)
+    resendVerificationEmail({ ...data, baseUrl })
   }
 
   const onResendQuery = () => {
     if (queryEmail) {
-      resendVerificationEmail({ email: queryEmail })
+      resendVerificationEmail({
+        email: queryEmail,
+        baseUrl,
+      })
     }
   }
 
