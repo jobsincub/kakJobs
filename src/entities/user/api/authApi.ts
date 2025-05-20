@@ -13,12 +13,9 @@ export const authApi = createApi({
       }),
       providesTags: ['user'],
     }),
-    signIn: builder.mutation<
-      ApiResponse<{ accessToken: string }>,
-      { email: string; password: string }
-    >({
+    signIn: builder.mutation<{ accessToken: string }, { email: string; password: string }>({
       query: body => ({
-        url: 'auth/sign-in',
+        url: 'auth/login',
         method: 'POST',
         body,
       }),
