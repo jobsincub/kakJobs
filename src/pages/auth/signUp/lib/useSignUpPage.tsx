@@ -18,7 +18,6 @@ export const UseSignUpPage = () => {
   } = useTranslation()
 
   const onSubmit = (data: OutputSchema) => {
-    // signUp(data)
     signUp({
       ...data,
       baseUrl: `${ENV.NEXT_PUBLIC_APP_URL}/auth/email-confirm`,
