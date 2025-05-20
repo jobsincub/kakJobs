@@ -60,7 +60,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 }
 
 interface RefreshTokenResponse {
-  data: { accessToken: string }
+  accessToken: string
 }
 
 interface RefreshTokenArgs {
@@ -81,10 +81,9 @@ export const refreshToken = createAsyncThunk<RefreshTokenResponse, RefreshTokenA
     )
 
     if (refreshResult.data) {
-      const accessToken = (refreshResult.data as ApiResponse<{ accessToken: string }>).data
-        .accessToken
+      const accessToken = (refreshResult.data as { accessToken: string }).accessToken
 
-      return { data: { accessToken } }
+      return { accessToken }
     } else {
       return rejectWithValue('11222')
     }
