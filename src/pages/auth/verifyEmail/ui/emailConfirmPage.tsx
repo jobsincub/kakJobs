@@ -11,9 +11,9 @@ import verificationImg from './bro.png'
 import s from './verify-email.module.scss'
 
 export const EmailConfirmPage = () => {
-  const { page, code, isSuccess, isAlreadyActivated } = UseEmailConfirmPage()
+  const { page, confirmationCode, isSuccess, isAlreadyActivated } = UseEmailConfirmPage()
 
-  if (!code) {
+  if (!confirmationCode) {
     notFound()
   }
 

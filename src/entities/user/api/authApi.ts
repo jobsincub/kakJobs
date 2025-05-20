@@ -67,9 +67,9 @@ export const authApi = createApi({
         body,
       }),
     }),
-    verifyEmail: builder.mutation<ApiResponse<void>, { code: string }>({
+    verifyEmail: builder.mutation<void, { confirmationCode: string }>({
       query: verificationData => ({
-        url: `auth/verify-email`,
+        url: 'auth/registration-confirmation',
         method: 'POST',
         body: verificationData,
       }),
