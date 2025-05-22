@@ -73,7 +73,7 @@ export const refreshToken = createAsyncThunk<RefreshTokenResponse, RefreshTokenA
   async ({ api, extraOptions }, { rejectWithValue }) => {
     const refreshResult = await baseQuery(
       {
-        url: 'auth/refresh-token',
+        url: 'auth/update-tokens',
         method: 'POST',
       },
       api,
