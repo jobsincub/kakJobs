@@ -40,12 +40,16 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
           </Typography>
         )}
       </div>
-      <Button fullWidth disabled={!isValid}>
+      <Button fullWidth disabled={!isValid} className={s.sendLinkButton}>
         {isSuccess
           ? forgotPasswordForm.sendLinkAgainButtonText
           : forgotPasswordForm.sendLinkButtonText}
       </Button>
-      <ControlledReCaptcha control={control} name={'recaptchaToken'} />
+      <Button asChild variant={'link'}>
+        <Link href={ROUTES.AUTH.SIGN_IN} color={'light-100'} className={s.signInLink}>
+          {forgotPasswordForm.signInLinkText}
+        </Link>
+      </Button>
       <div className={s.recaptchaWrapper}>
         <ReCAPTCHA
           sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
