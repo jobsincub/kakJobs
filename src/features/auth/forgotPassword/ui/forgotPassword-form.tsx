@@ -1,7 +1,7 @@
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import React from 'react'
-import { ForgotPasswordFormSchema, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
+import { ForgotPasswordFormValues, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
 import ReCAPTCHA from 'react-google-recaptcha'
 import s from './forgotPassword-form.module.scss'
 import { ENV } from '@/shared/config'
@@ -9,16 +9,38 @@ import Link from 'next/link'
 import { ROUTES } from '@/shared/router/routes'
 
 type Props = {
-  onSubmit: (data: ForgotPasswordFormSchema) => void
+  onSubmit: (data: ForgotPasswordFormValues) => void
   error?: string
   isSuccess: boolean
 }
 
 export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
-  const { forgotPasswordForm, handleSubmit, control, isValid } = useForgotPasswordForm()
+  const {
+    forgotPasswordForm,
+    handleSubmit,
+    control,
+    isValid,
+    reset,
+    register,
+    setValue,
+    recaptchaRef,
+    onChangeReCAPTCHA,
+  } = useForgotPasswordForm()
+
+  const submitHandler = (data: ForgotPasswordFormValues) => {
+    onSubmit(data)
+
+    if (isSuccess) {
+      reset()
+      recaptchaRef.current?.reset()
+    } else if (error) {
+      recaptchaRef.current?.reset()
+      setValue('recaptcha', '', { shouldValidate: true })
+    }
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(submitHandler)} className={s.form}>
       <ControlledTextField
         placeholder={'Epam@epam.com'}
         control={control}
@@ -53,9 +75,10 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
       <div className={s.recaptchaWrapper}>
         <ReCAPTCHA
           sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          onChange={onChange}
+          onChange={onChangeReCAPTCHA}
           theme={'dark'}
         />
+        <input type="hidden" {...register('recaptcha')} />
       </div>
     </form>
   )
