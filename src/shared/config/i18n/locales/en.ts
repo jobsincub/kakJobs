@@ -35,7 +35,6 @@ export const en = {
       },
       forgotPasswordPage: {
         title: 'Forgot Password',
-        signInLinkText: 'Back to Sign In',
         errorMessages: {
           400: "User with this email doesn't exist",
           403: 'Failed to validate reCAPTCHA. Please try again later',
@@ -115,6 +114,7 @@ export const en = {
         sendLinkAgainText: 'If you don’t receive an email send link again',
         sendLinkAgainButtonText: 'Send Link Again',
         sendLinkButtonText: 'Send Link',
+        signInLinkText: 'Back to Sign In',
       },
       createNewPasswordForm: {
         passwordLengthText: 'Your password must be between 6 and 20 characters',

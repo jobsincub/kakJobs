@@ -37,7 +37,6 @@ export const ru: LocaleType = {
       },
       forgotPasswordPage: {
         title: 'Забыл пароль',
-        signInLinkText: 'Войти',
         errorMessages: {
           400: 'Пользователь с такой почтой не зарегистрирован',
           403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
@@ -122,6 +121,7 @@ export const ru: LocaleType = {
         sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,
         sendLinkAgainButtonText: 'Отправить ссылку повторно',
         sendLinkButtonText: 'Отправить ссылку',
+        signInLinkText: 'Вернуться к Входу',
       },
     },
     post: {
