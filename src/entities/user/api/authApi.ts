@@ -54,16 +54,15 @@ export const authApi = createApi({
         url: 'auth/new-password',
       }),
     }),
-    passwordRecovery: builder.mutation<
-      ApiResponse<{ accessToken: string }>,
-      { email: string; recaptchaToken: string }
-    >({
-      query: body => ({
-        url: 'auth/password-recovery',
-        method: 'POST',
-        body,
-      }),
-    }),
+    passwordRecovery: builder.mutation<void, { email: string; recaptcha: string; baseUrl: string }>(
+      {
+        query: body => ({
+          url: 'auth/password-recovery',
+          method: 'POST',
+          body,
+        }),
+      }
+    ),
     verifyEmail: builder.mutation<void, { confirmationCode: string }>({
       query: verificationData => ({
         url: 'auth/registration-confirmation',
