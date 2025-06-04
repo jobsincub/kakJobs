@@ -167,6 +167,9 @@ export const ru: LocaleType = {
         regexText:
           'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
       },
+      recaptchaSchema: {
+        recaptchaValidation: 'Подтвердите, что вы не робот',
+      },
     },
     dialogs: {
       ok: 'ОК',

@@ -164,6 +164,9 @@ export const en = {
       comparePassError: {
         passError: 'The passwords must match',
       },
+      recaptchaSchema: {
+        recaptchaValidation: 'Confirm that you are not a robot',
+      },
     },
     dialogs: {
       ok: 'OK',
