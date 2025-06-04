@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-export type ForgotPasswordFormSchema = {
+export type ForgotPasswordFormValues = {
   email: string
   recaptcha: string
 }
