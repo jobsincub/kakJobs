@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 export type ForgotPasswordFormSchema = {
   email: string
-  recaptchaToken: string
+  recaptcha: string
 }
 
 export const useForgotPasswordForm = () => {
