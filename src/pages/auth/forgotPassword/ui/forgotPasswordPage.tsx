@@ -4,7 +4,6 @@ import { EmailSentDialog } from '@/shared/ui'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
 import Page from '@/widgets/page'
 import { Typography } from '@wandrehappen/ui-kit'
-import React from 'react'
 import { UseForgotPasswordPage } from '../lib/useForgotPasswordPage'
 
 const ForgotPasswordPage = () => {
