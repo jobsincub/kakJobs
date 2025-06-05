@@ -1,7 +1,7 @@
 'use client'
 import { useTranslation } from '@/shared/config'
 import { useEmailSchema, useRecaptchaSchema } from '@/shared/lib'
-import { ReCAPTCHA as ReCAPTCHAInstance } from 'react-google-recaptcha'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -15,7 +15,7 @@ export type ForgotPasswordFormValues = {
 export const useForgotPasswordForm = () => {
   const { emailSchema } = useEmailSchema()
   const { recaptchaSchema } = useRecaptchaSchema()
-  const recaptchaRef = useRef<ReCAPTCHAInstance>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const forgotPasswordFormSchema = z.object({}).merge(emailSchema).merge(recaptchaSchema)
 
