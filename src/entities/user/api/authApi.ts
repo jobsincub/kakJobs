@@ -7,7 +7,10 @@ export const authApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['user'],
   endpoints: builder => ({
-    me: builder.query<{ email: string; userName: string; userId: number }, void>({
+    me: builder.query<
+      { userId: number; userName: string; email: string; isBlocked: boolean },
+      void
+    >({
       query: () => ({
         url: 'auth/me',
       }),
