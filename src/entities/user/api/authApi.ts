@@ -44,10 +44,7 @@ export const authApi = createApi({
         url: 'auth/registration',
       }),
     }),
-    createNewPassword: builder.mutation<
-      ApiResponse<void>,
-      { newPassword: string; recoveryCode: string }
-    >({
+    createNewPassword: builder.mutation<void, { newPassword: string; recoveryCode: string }>({
       query: params => ({
         body: params,
         method: 'POST',
