@@ -6,6 +6,7 @@ type UserData = {
   email: string
   userName: string
   userId: string
+  isBlocked: boolean
 }
 
 type AuthState = {
