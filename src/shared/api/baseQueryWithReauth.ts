@@ -1,4 +1,4 @@
-import { BACKEND_BASE_URL } from '@/shared/config'
+import { ENV } from '@/shared/config'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type {
   BaseQueryApi,
@@ -10,7 +10,7 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: BACKEND_BASE_URL,
+  baseUrl: ENV.NEXT_PUBLIC_BASE_API_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     headers.set('Accept', 'application/json')
