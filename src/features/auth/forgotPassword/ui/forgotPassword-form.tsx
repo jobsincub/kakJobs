@@ -1,8 +1,7 @@
 import { ControlledTextField } from '@/shared/ui'
-import { Button, Typography } from '@wandrehappen/ui-kit'
+import { Button, Recaptcha, Typography } from '@wandrehappen/ui-kit'
 import React from 'react'
 import { ForgotPasswordFormValues, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
-import ReCAPTCHA from 'react-google-recaptcha'
 import s from './forgotPassword-form.module.scss'
 import { ENV } from '@/shared/config'
 import Link from 'next/link'
@@ -72,14 +71,12 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
           {forgotPasswordForm.signInLinkText}
         </Link>
       </Button>
-      <div className={s.recaptchaWrapper}>
-        <ReCAPTCHA
-          sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          onChange={onChangeReCAPTCHA}
-          theme={'dark'}
-        />
-        <input type="hidden" {...register('recaptcha')} />
-      </div>
+      <Recaptcha
+        sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        onChange={onChangeReCAPTCHA}
+        className={s.recaptcha}
+      />
+      <input type="hidden" {...register('recaptcha')} />
     </form>
   )
 }
