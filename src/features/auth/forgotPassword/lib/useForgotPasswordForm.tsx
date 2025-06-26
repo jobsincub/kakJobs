@@ -1,11 +1,11 @@
 'use client'
 import { useTranslation } from '@/shared/config'
 import { useEmailSchema, useRecaptchaSchema } from '@/shared/lib'
-import ReCAPTCHA from 'react-google-recaptcha'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useRef } from 'react'
+import { ReCAPTCHA } from '@wandrehappen/ui-kit'
 
 export type ForgotPasswordFormValues = {
   email: string
@@ -13,9 +13,9 @@ export type ForgotPasswordFormValues = {
 }
 
 export const useForgotPasswordForm = () => {
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const { emailSchema } = useEmailSchema()
   const { recaptchaSchema } = useRecaptchaSchema()
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const forgotPasswordFormSchema = z.object({}).merge(emailSchema).merge(recaptchaSchema)
 
@@ -31,8 +31,6 @@ export const useForgotPasswordForm = () => {
     handleSubmit,
     control,
     reset,
-    register,
-    setValue,
     formState: { isValid },
   } = useForm<ForgotPasswordFormValues>({
     resolver: zodResolver(forgotPasswordFormSchema),
@@ -40,19 +38,12 @@ export const useForgotPasswordForm = () => {
     mode: 'onBlur',
   })
 
-  const onChangeReCAPTCHA = (token: string | null) => {
-    setValue('recaptcha', token || '', { shouldValidate: true })
-  }
-
   return {
     forgotPasswordForm,
     control,
     handleSubmit,
     isValid,
     reset,
-    register,
-    setValue,
     recaptchaRef,
-    onChangeReCAPTCHA,
   }
 }

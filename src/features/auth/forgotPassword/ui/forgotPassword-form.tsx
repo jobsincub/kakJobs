@@ -1,11 +1,12 @@
 import { ControlledTextField } from '@/shared/ui'
 import { Button, Recaptcha, Typography } from '@wandrehappen/ui-kit'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ForgotPasswordFormValues, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
 import s from './forgotPassword-form.module.scss'
 import { ENV } from '@/shared/config'
 import Link from 'next/link'
 import { ROUTES } from '@/shared/router/routes'
+import { Controller } from 'react-hook-form'
 
 type Props = {
   onSubmit: (data: ForgotPasswordFormValues) => void
@@ -14,28 +15,18 @@ type Props = {
 }
 
 export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
-  const {
-    forgotPasswordForm,
-    handleSubmit,
-    control,
-    isValid,
-    reset,
-    register,
-    setValue,
-    recaptchaRef,
-    onChangeReCAPTCHA,
-  } = useForgotPasswordForm()
+  const { forgotPasswordForm, handleSubmit, control, isValid, reset, recaptchaRef } =
+    useForgotPasswordForm()
+
+  useEffect(() => {
+    if (isSuccess) {
+      reset()
+    }
+  }, [isSuccess, reset])
 
   const submitHandler = (data: ForgotPasswordFormValues) => {
     onSubmit(data)
-
-    if (isSuccess) {
-      reset()
-      recaptchaRef.current?.reset()
-    } else if (error) {
-      recaptchaRef.current?.reset()
-      setValue('recaptcha', '', { shouldValidate: true })
-    }
+    recaptchaRef.current?.reset()
   }
 
   return (
@@ -71,12 +62,20 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
           {forgotPasswordForm.signInLinkText}
         </Link>
       </Button>
-      <Recaptcha
-        sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-        onChange={onChangeReCAPTCHA}
-        className={s.recaptcha}
+      <Controller
+        control={control}
+        name="recaptcha"
+        render={({ field: { onChange, onBlur }, fieldState: { error } }) => (
+          <Recaptcha
+            sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            onChange={token => onChange(token || '')}
+            onBlur={onBlur}
+            ref={recaptchaRef}
+            error={error?.message}
+            className={s.recaptcha}
+          />
+        )}
       />
-      <input type="hidden" {...register('recaptcha')} />
     </form>
   )
 }
