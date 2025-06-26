@@ -68,7 +68,7 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
         render={({ field: { onChange, onBlur }, fieldState: { error } }) => (
           <Recaptcha
             sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            onChange={token => onChange(token || '')}
+            onChange={(token: string | null) => onChange(token || '')}
             onBlur={onBlur}
             ref={recaptchaRef}
             error={error?.message}
