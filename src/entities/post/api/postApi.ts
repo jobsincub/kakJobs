@@ -6,7 +6,7 @@ export const postApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Posts'],
   endpoints: builder => ({
-    uploadPostImages: builder.mutation<ApiResponse<PostData>, FormData>({
+    uploadPostImages: builder.mutation<{ images: PostImage[] }, FormData>({
       query: formData => ({
         body: formData,
         url: 'posts/image',
