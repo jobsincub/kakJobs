@@ -5,7 +5,7 @@ import { authApi } from '../api/authApi'
 type UserData = {
   email: string
   userName: string
-  userId: string
+  userId: number
   isBlocked: boolean
 }
 
