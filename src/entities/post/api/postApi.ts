@@ -53,7 +53,7 @@ export const postApi = createApi({
           } = await queryFulfilled
 
           items.forEach(post => {
-            dispatch(postApi.util.upsertQueryData('getPostById', post.id, post))
+            dispatch(postApi.util.upsertQueryData('getPostById', String(post.id), post))
           })
         } catch (error) {
           console.error('Failed to fetch posts:', error)
@@ -102,13 +102,25 @@ type PostImage = {
   uploadId: string
 }
 
+type Owner = {
+  firstName: string
+  lastName: string
+}
+
 export type PostData = {
-  id: string
-  userId: string
+  id: number
+  userName: string
   description: string
+  location: string
+  images: PostImage[]
   createdAt: string
   updatedAt: string
-  postImages: PostImage[]
+  ownerId: number
+  avatarOwner: string
+  owner: Owner
+  likesCount: number
+  isLiked: boolean
+  avatarWhoLikes: string[]
 }
 
 type PostMeta = {
