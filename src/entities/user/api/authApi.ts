@@ -7,13 +7,17 @@ export const authApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['user'],
   endpoints: builder => ({
-    me: builder.query<MeResponse<string>, void>({
+    me: builder.query<
+      {
+        userId: number
+        userName: string
+        email: string
+        isBlocked: boolean
+      },
+      void
+    >({
       query: () => ({
         url: 'auth/me',
-      }),
-      transformResponse: (response: MeResponse) => ({
-        ...response,
-        userId: String(response.userId),
       }),
       providesTags: ['user'],
     }),
@@ -73,13 +77,6 @@ export const authApi = createApi({
     }),
   }),
 })
-
-type MeResponse<T extends string | number = number> = {
-  userId: T
-  userName: string
-  email: string
-  isBlocked: boolean
-}
 
 export const {
   useSignInMutation,
