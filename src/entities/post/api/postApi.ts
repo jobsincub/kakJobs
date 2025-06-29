@@ -13,9 +13,15 @@ export const postApi = createApi({
         method: 'POST',
       }),
     }),
-    createPost: builder.mutation<ApiResponse<PostData>, FormData>({
-      query: formData => ({
-        body: formData,
+    createPost: builder.mutation<
+      PostData,
+      {
+        description: string
+        childrenMetadata: Pick<PostImage, 'uploadId'>[]
+      }
+    >({
+      query: body => ({
+        body,
         url: 'posts',
         method: 'POST',
       }),
