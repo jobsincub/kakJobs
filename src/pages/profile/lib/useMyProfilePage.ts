@@ -16,7 +16,8 @@ export const useMyProfilePage = () => {
   const { data, isFetching } = useGetUserPostsQuery(params)
 
   const posts = data?.items || []
-  const totalPages = data?.meta.totalPages || 1
+  const totalPages =
+    data?.totalCount && data?.pageSize ? Math.ceil(data.totalCount / data.pageSize) : 1
 
   const redirectToPost = (postId: string) => {
     router.push(`/profile/${userId}/${postId}`)
