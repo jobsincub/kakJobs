@@ -2,7 +2,7 @@ export {
   useCreatePostMutation,
   useDeletePostMutation,
   postApi,
-  useGetUsersPostsQuery,
+  useGetUserPostsQuery,
   useGetPostByIdQuery,
 } from './api/postApi'
 export {

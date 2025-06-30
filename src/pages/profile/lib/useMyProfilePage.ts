@@ -1,4 +1,4 @@
-import { useGetUsersPostsQuery } from '@/entities/post'
+import { useGetUserPostsQuery } from '@/entities/post'
 import { selectUserId } from '@/entities/user/model/authSlice'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useRouter } from 'next/navigation'
@@ -17,7 +17,7 @@ export const useMyProfilePage = () => {
 
   const params = userId ? { userId, page } : skipToken
 
-  const { data, isFetching } = useGetUsersPostsQuery(params)
+  const { data, isFetching } = useGetUserPostsQuery(params)
 
   const posts = data?.items || []
   const totalPages = data?.meta.totalPages || 1
