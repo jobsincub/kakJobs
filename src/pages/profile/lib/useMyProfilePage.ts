@@ -9,10 +9,6 @@ import { useSelector } from 'react-redux'
 export const useMyProfilePage = () => {
   const userId = useSelector(selectUserId)
   const router = useRouter()
-
-  // if (!userId) {
-  //   router.push('/')
-  // }
   const [page, setPage] = useState(1)
 
   const params = userId ? { userId, page } : skipToken
