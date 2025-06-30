@@ -22,7 +22,7 @@ export const useDeletePostDialog = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.replace(ROUTES.PROFILE(userId))
+      router.replace(ROUTES.PROFILE(Number(userId)))
     }
   }, [isSuccess, router, userId])
 
