@@ -27,10 +27,7 @@ export const postApi = createApi({
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
-    getUsersPosts: builder.query<
-      { items: PostData[]; meta: PostMeta },
-      { userId: number; page: number }
-    >({
+    getUsersPosts: builder.query<{ items: PostData[] }, { userId: number; page: number }>({
       query: ({ userId, page }) => ({
         url: `posts/${userId}`,
         params: { page },
@@ -127,13 +124,6 @@ export type PostData = {
   likesCount: number
   isLiked: boolean
   avatarWhoLikes: string[]
-}
-
-type PostMeta = {
-  total: number
-  page: number
-  limit: number
-  totalPages: number
 }
 
 type Data = {
