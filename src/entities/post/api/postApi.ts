@@ -31,19 +31,15 @@ export const postApi = createApi({
       GetUserPostsResponse,
       {
         userId: number
-        endCursorPostId: number
-        pageSize: number
-        sortBy: string
-        sortDirection: SortDirection
+        endCursorPostId?: number
+        pageSize?: number
+        sortBy?: string
+        sortDirection?: SortDirection
       }
     >({
-      query: ({ userId, page }) => ({
-        url: `posts/${userId}`,
-        params: { page },
-      }),
-      transformResponse: (response: GetUserPostsResponse) => ({
-        items: response.data.items,
-        meta: response.data.meta,
+      query: ({ userId, endCursorPostId, ...params }) => ({
+        url: `posts/user/${userId}/${endCursorPostId}`,
+        params,
       }),
       serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (currentCache, newData) => {
