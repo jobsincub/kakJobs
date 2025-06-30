@@ -16,7 +16,7 @@ export const postApi = createApi({
     createPost: builder.mutation<
       PostData,
       {
-        description?: string
+        description: string
         childrenMetadata: Pick<PostImage, 'uploadId'>[]
       }
     >({

@@ -116,7 +116,7 @@ export const postSlice = createSlice({
   },
 })
 
-export const createPost = createAppAsyncThunk<PostData, { description?: string; photos: Photo[] }>(
+export const createPost = createAppAsyncThunk<PostData, { description: string; photos: Photo[] }>(
   `${postSlice.name}/createPost`,
   async ({ description, photos }, { dispatch, rejectWithValue }) => {
     try {
