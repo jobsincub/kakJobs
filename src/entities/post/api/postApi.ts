@@ -29,7 +29,7 @@ export const postApi = createApi({
     }),
     getUsersPosts: builder.query<
       { items: PostData[]; meta: PostMeta },
-      { userId: string; page: number }
+      { userId: number; page: number }
     >({
       query: ({ userId, page }) => ({
         url: `posts/${userId}`,
