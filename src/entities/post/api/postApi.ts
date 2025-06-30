@@ -129,13 +129,6 @@ export type PostData = {
   avatarWhoLikes: string[]
 }
 
-type PostMeta = {
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-}
-
 type Data = {
   items: PostData[]
   meta: PostMeta
