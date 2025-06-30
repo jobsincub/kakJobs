@@ -27,12 +27,21 @@ export const postApi = createApi({
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
-    getUserPosts: builder.query<{ items: PostData[] }, { userId: number; page: number }>({
+    getUserPosts: builder.query<
+      GetUserPostsResponse,
+      {
+        userId: number
+        endCursorPostId: number
+        pageSize: number
+        sortBy: string
+        sortDirection: string
+      }
+    >({
       query: ({ userId, page }) => ({
         url: `posts/${userId}`,
         params: { page },
       }),
-      transformResponse: (response: ApiResponse<any>) => ({
+      transformResponse: (response: GetUserPostsResponse) => ({
         items: response.data.items,
         meta: response.data.meta,
       }),
@@ -124,4 +133,11 @@ export type PostData = {
   likesCount: number
   isLiked: boolean
   avatarWhoLikes: string[]
+}
+
+type GetUserPostsResponse = {
+  totalCount: number
+  pageSize: number
+  totalUsers: number
+  items: PostData[]
 }
