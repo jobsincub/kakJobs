@@ -51,7 +51,7 @@ export const postApi = createApi({
         currentCache.meta = newData.meta
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page
+        return currentArg?.endCursorPostId !== previousArg?.endCursorPostId
       },
       providesTags: ['Posts'],
       onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
