@@ -15,7 +15,7 @@ export type Filter = {
   filterStyle: string
 }
 
-interface Photo {
+export interface Photo {
   id: string
   originalImageUrl: string
   updatedImageUrl: string
