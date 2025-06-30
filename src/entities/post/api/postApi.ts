@@ -34,7 +34,7 @@ export const postApi = createApi({
         endCursorPostId: number
         pageSize: number
         sortBy: string
-        sortDirection: string
+        sortDirection: SortDirection
       }
     >({
       query: ({ userId, page }) => ({
@@ -141,3 +141,5 @@ type GetUserPostsResponse = {
   totalUsers: number
   items: PostData[]
 }
+
+type SortDirection = 'asc' | 'desc'
