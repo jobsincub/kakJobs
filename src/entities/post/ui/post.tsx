@@ -22,7 +22,7 @@ export const Post = ({ postId, userId }: Props) => {
     router.push(`/profile/${userId}`, { scroll: false })
   }
 
-  const posts = data?.postImages ?? []
+  const posts = data?.images ?? []
 
   return (
     <Dialog open={!!postId} onOpenChange={onOpenChange}>

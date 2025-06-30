@@ -72,7 +72,7 @@ const MyProfilePage = ({ userId }: Props) => {
         {posts.length > 0 &&
           posts.map(
             post =>
-              post.postImages.length > 0 && (
+              post.images.length > 0 && (
                 <Link
                   key={post.id}
                   href={`/profile/${userId}?postId=${post.id}`}
@@ -80,7 +80,7 @@ const MyProfilePage = ({ userId }: Props) => {
                   className={s.imageContainer}
                 >
                   <Image
-                    src={post.postImages[0].imageUrl}
+                    src={post.images[0].url}
                     alt={post.description}
                     width={234}
                     height={234}
