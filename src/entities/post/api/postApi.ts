@@ -32,7 +32,7 @@ export const postApi = createApi({
         url: `posts/${userId}`,
         params: { page },
       }),
-      transformResponse: (response: ApiResponse<Data>) => ({
+      transformResponse: (response: ApiResponse<any>) => ({
         items: response.data.items,
         meta: response.data.meta,
       }),
@@ -124,9 +124,4 @@ export type PostData = {
   likesCount: number
   isLiked: boolean
   avatarWhoLikes: string[]
-}
-
-type Data = {
-  items: PostData[]
-  meta: PostMeta
 }
