@@ -66,14 +66,14 @@ export const postApi = createApi({
           } = await queryFulfilled
 
           items.forEach(post => {
-            dispatch(postApi.util.upsertQueryData('getPostById', String(post.id), post))
+            dispatch(postApi.util.upsertQueryData('getPostById', post.id, post))
           })
         } catch (error) {
           console.error('Failed to fetch posts:', error)
         }
       },
     }),
-    getPostById: builder.query<PostData, string>({
+    getPostById: builder.query<PostData, number>({
       query: postId => ({
         url: `posts/id/${postId}`,
       }),

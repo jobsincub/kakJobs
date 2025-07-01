@@ -9,7 +9,7 @@ import { ImageCarousel } from './ImageCarousel/ImageCarousel'
 import s from './post.module.scss'
 
 type Props = {
-  postId: string | null | undefined
+  postId: number | null | undefined
   userId: string
 }
 

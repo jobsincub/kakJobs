@@ -16,7 +16,7 @@ export const useEditDialogContent = () => {
   const searchParams = useSearchParams()
   const postId = searchParams!.get('postId')!
 
-  const { data: post } = useGetPostByIdQuery(postId)
+  const { data: post } = useGetPostByIdQuery(Number(postId))
 
   const {
     t: {
