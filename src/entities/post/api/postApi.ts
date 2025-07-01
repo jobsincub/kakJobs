@@ -53,7 +53,6 @@ export const postApi = createApi({
         } else {
           currentCache.items.push(...newData.items)
         }
-        currentCache = { ...newData, items: currentCache.items }
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg?.endCursorPostId !== previousArg?.endCursorPostId
