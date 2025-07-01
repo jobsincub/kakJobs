@@ -9,12 +9,12 @@ import { ImageCarousel } from './ImageCarousel/ImageCarousel'
 import s from './post.module.scss'
 
 type Props = {
-  postId: number | null | undefined
+  postId: string | null | undefined
   userId: string
 }
 
 export const Post = ({ postId, userId }: Props) => {
-  const { data } = useGetPostByIdQuery(postId ?? skipToken)
+  const { data } = useGetPostByIdQuery(postId ? Number(postId) : skipToken)
   const userName = useSelector(selectUserName)
   const router = useRouter()
 
