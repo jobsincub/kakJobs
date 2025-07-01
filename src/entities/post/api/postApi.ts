@@ -75,7 +75,7 @@ export const postApi = createApi({
     }),
     getPostById: builder.query<PostData, string>({
       query: postId => ({
-        url: `posts/post/${postId}`,
+        url: `posts/id/${postId}`,
       }),
       transformResponse: (response: ApiResponse<PostData>) => response.data,
       providesTags: ['Posts'],
