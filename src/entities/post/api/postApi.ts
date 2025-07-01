@@ -79,13 +79,13 @@ export const postApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    updatePostById: builder.mutation<void, { description: string; id: string }>({
-      query: ({ id, ...body }) => ({
+    updatePostById: builder.mutation<void, { description: string; postId: string }>({
+      query: ({ postId, ...body }) => ({
         body,
-        url: `posts/${id}`,
+        url: `posts/${postId}`,
         method: 'PUT',
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Posts', id }],
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Posts', postId }],
     }),
     deletePost: builder.mutation<void, string>({
       query: id => ({

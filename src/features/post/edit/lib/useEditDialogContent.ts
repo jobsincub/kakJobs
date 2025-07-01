@@ -27,7 +27,7 @@ export const useEditDialogContent = () => {
   } = useTranslation()
 
   const updatePostHandler = (data: EditPostFormValues) => {
-    updatePost({ ...data, id: postId })
+    updatePost({ ...data, postId })
       .unwrap()
       .then(() => setIsEditPostDialogOpen(false))
   }
