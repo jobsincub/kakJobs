@@ -28,7 +28,12 @@ export const postApi = createApi({
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
     getUserPosts: builder.query<
-      GetUserPostsResponse,
+      {
+        totalCount: number
+        pageSize: number
+        totalUsers: number
+        items: PostData[]
+      },
       {
         userId: number
         endCursorPostId?: number
@@ -129,13 +134,6 @@ export type PostData = {
   likesCount: number
   isLiked: boolean
   avatarWhoLikes: string[]
-}
-
-type GetUserPostsResponse = {
-  totalCount: number
-  pageSize: number
-  totalUsers: number
-  items: PostData[]
 }
 
 type SortDirection = 'asc' | 'desc'
