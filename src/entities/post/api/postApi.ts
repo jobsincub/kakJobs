@@ -42,8 +42,8 @@ export const postApi = createApi({
         sortDirection?: SortDirection
       }
     >({
-      query: ({ userId, endCursorPostId, ...params }) => ({
-        url: `posts/user/${userId}/${endCursorPostId}`,
+      query: ({ userId, endCursorPostId = '', ...params }) => ({
+        url: endCursorPostId ? `posts/user/${userId}/${endCursorPostId}` : `posts/user/${userId}`,
         params,
       }),
       serializeQueryArgs: ({ endpointName }) => endpointName,
