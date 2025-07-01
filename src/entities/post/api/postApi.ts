@@ -77,7 +77,6 @@ export const postApi = createApi({
       query: postId => ({
         url: `posts/id/${postId}`,
       }),
-      transformResponse: (response: ApiResponse<PostData>) => response.data,
       providesTags: ['Posts'],
     }),
     updatePost: builder.mutation<void, { description: string; id: string }>({
