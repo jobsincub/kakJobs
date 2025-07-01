@@ -79,7 +79,7 @@ export const postApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    updatePostById: builder.mutation<void, { description: string; postId: string }>({
+    updatePostById: builder.mutation<void, { description: string; postId: number }>({
       query: ({ postId, ...body }) => ({
         body,
         url: `posts/${postId}`,
