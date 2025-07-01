@@ -79,7 +79,7 @@ export const postApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    updatePost: builder.mutation<void, { description: string; id: string }>({
+    updatePostById: builder.mutation<void, { description: string; id: string }>({
       query: ({ id, ...body }) => ({
         body,
         url: `posts/${id}`,
@@ -101,7 +101,7 @@ export const {
   useCreatePostMutation,
   useGetUserPostsQuery,
   useGetPostByIdQuery,
-  useUpdatePostMutation,
+  useUpdatePostByIdMutation,
   useDeletePostMutation,
 } = postApi
 
