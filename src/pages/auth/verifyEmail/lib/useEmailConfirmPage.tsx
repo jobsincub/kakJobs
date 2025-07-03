@@ -9,7 +9,7 @@ export const UseEmailConfirmPage = () => {
   const router = useRouter()
 
   const searchParams = useSearchParams()
-  const code = searchParams?.get('code')
+  const confirmationCode = searchParams?.get('code')
   const email = searchParams?.get('email')
 
   const {
@@ -25,10 +25,10 @@ export const UseEmailConfirmPage = () => {
   const isAlreadyActivated = getStatusCode(error) === 409
 
   useEffect(() => {
-    if (code) {
-      verifyEmail({ code })
+    if (confirmationCode) {
+      verifyEmail({ confirmationCode })
     }
-  }, [code, verifyEmail])
+  }, [confirmationCode, verifyEmail])
 
   useEffect(() => {
     if (isError && !isAlreadyActivated) {
@@ -36,5 +36,5 @@ export const UseEmailConfirmPage = () => {
     }
   }, [isError, router, isAlreadyActivated, email])
 
-  return { page, code, isSuccess, isAlreadyActivated }
+  return { page, confirmationCode, isSuccess, isAlreadyActivated }
 }

@@ -1,7 +1,7 @@
 'use client'
 import { usePasswordRecoveryMutation } from '@/entities/user'
-import type { ForgotPasswordFormSchema } from '@/features/auth/forgotPassword'
-import { useTranslation } from '@/shared/config'
+import type { ForgotPasswordFormValues } from '@/features/auth/forgotPassword'
+import { ENV, useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 
 export const UseForgotPasswordPage = () => {
@@ -20,10 +20,8 @@ export const UseForgotPasswordPage = () => {
 
   const customError = getErrorMessage({ errorMessages, error })
 
-  const onSubmit = (data: ForgotPasswordFormSchema) => {
-    if (data.recaptchaToken) {
-      passwordRecovery(data)
-    }
+  const onSubmit = (data: ForgotPasswordFormValues) => {
+    passwordRecovery({ ...data, baseUrl: `${ENV.NEXT_PUBLIC_APP_URL}/auth/create-new-password` })
   }
 
   return { page, customError, email, isSuccess, onSubmit }

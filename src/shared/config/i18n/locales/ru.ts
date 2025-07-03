@@ -37,7 +37,6 @@ export const ru: LocaleType = {
       },
       forgotPasswordPage: {
         title: 'Забыл пароль',
-        signInLinkText: 'Войти',
         errorMessages: {
           400: 'Пользователь с такой почтой не зарегистрирован',
           403: 'Не прошла проверка reCAPTCHA. Попробуйте позже',
@@ -122,6 +121,7 @@ export const ru: LocaleType = {
         sendLinkAgainText: `Если не получили на почту отправьте ссылку повторно`,
         sendLinkAgainButtonText: 'Отправить ссылку повторно',
         sendLinkButtonText: 'Отправить ссылку',
+        signInLinkText: 'Вернуться к Входу',
       },
     },
     post: {
@@ -166,6 +166,9 @@ export const ru: LocaleType = {
         minLength: 'Пароль должен содержать не менее 3 символов.',
         regexText:
           'Пароль должен содержать a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      },
+      recaptchaSchema: {
+        recaptchaValidation: 'Пожалуйста, подтвердите, что вы не робот',
       },
     },
     dialogs: {

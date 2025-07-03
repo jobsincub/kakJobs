@@ -1,7 +1,7 @@
 import { createAppAsyncThunk } from '@/shared/lib'
-import { convertUrlToFile } from '@/shared/lib/hooks'
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 import { postApi, type PostData } from '../api/postApi'
+import { buildImagesUploadFormData } from '../lib/buildImagesUploadFormData'
 
 export enum AspectRatio {
   Original = 0,
@@ -15,7 +15,7 @@ export type Filter = {
   filterStyle: string
 }
 
-interface Photo {
+export interface Photo {
   id: string
   originalImageUrl: string
   updatedImageUrl: string
@@ -116,35 +116,25 @@ export const postSlice = createSlice({
   },
 })
 
-export const createPost = createAppAsyncThunk<
-  { post: PostData },
-  { description?: string; photos: Photo[] }
->(
+export const createPost = createAppAsyncThunk<PostData, { description: string; photos: Photo[] }>(
   `${postSlice.name}/createPost`,
   async ({ description, photos }, { dispatch, rejectWithValue }) => {
-    const formData = new FormData()
+    try {
+      const imagesFormData = await buildImagesUploadFormData(photos)
 
-    if (description) {
-      formData.append('description', description)
-    }
+      const { images } = await dispatch(
+        postApi.endpoints.uploadPostImages.initiate(imagesFormData)
+      ).unwrap()
 
-    const photoFiles = await Promise.all(
-      photos.map(photo =>
-        convertUrlToFile({
-          fileUrl: photo.updatedImageUrl,
+      const post = await dispatch(
+        postApi.endpoints.createPost.initiate({
+          description,
+          childrenMetadata: images.map(image => ({ uploadId: image.uploadId })),
         })
-      )
-    )
+      ).unwrap()
 
-    photoFiles.forEach(photoFile => {
-      formData.append('photos', photoFile)
-    })
-
-    const res = await dispatch(postApi.endpoints.createPost.initiate(formData))
-
-    if (res.data) {
-      return { post: res.data.data }
-    } else {
+      return post
+    } catch {
       return rejectWithValue(null)
     }
   }

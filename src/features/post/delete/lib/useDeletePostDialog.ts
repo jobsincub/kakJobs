@@ -1,5 +1,5 @@
 import { useTranslation } from '@/shared/config'
-import { useDeletePostMutation } from '@/entities/post'
+import { useDeletePostByIdMutation } from '@/entities/post'
 import { useEffect } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { ROUTES } from '@/shared/router/routes'
@@ -9,7 +9,7 @@ export const useDeletePostDialog = () => {
   const searchParams = useSearchParams()
   const userId = params!.userId
   const postId = searchParams!.get('postId')!
-  const [deletePost, { isSuccess, isLoading }] = useDeletePostMutation()
+  const [deletePost, { isSuccess, isLoading }] = useDeletePostByIdMutation()
   const router = useRouter()
   const {
     t: {
@@ -22,7 +22,7 @@ export const useDeletePostDialog = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.replace(ROUTES.PROFILE(userId))
+      router.replace(ROUTES.PROFILE(Number(userId)))
     }
   }, [isSuccess, router, userId])
 

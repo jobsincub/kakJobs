@@ -7,18 +7,23 @@ export const authApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['user'],
   endpoints: builder => ({
-    me: builder.query<{ email: string; userName: string; userId: string }, void>({
+    me: builder.query<
+      {
+        userId: number
+        userName: string
+        email: string
+        isBlocked: boolean
+      },
+      void
+    >({
       query: () => ({
         url: 'auth/me',
       }),
       providesTags: ['user'],
     }),
-    signIn: builder.mutation<
-      ApiResponse<{ accessToken: string }>,
-      { email: string; password: string }
-    >({
+    signIn: builder.mutation<{ accessToken: string }, { email: string; password: string }>({
       query: body => ({
-        url: 'auth/sign-in',
+        url: 'auth/login',
         method: 'POST',
         body,
       }),
@@ -30,43 +35,42 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
-    resendVerificationEmail: builder.mutation<void, { email: string }>({
+    resendVerificationEmail: builder.mutation<void, { email: string; baseUrl: string }>({
       query: params => ({
         body: params,
         method: 'POST',
-        url: 'auth/resend-verification-email',
+        url: 'auth/registration-email-resending',
       }),
     }),
-    signUp: builder.mutation<void, { userName: string; email: string; password: string }>({
-      query: params => ({
-        body: params,
-        method: 'POST',
-        url: 'auth/sign-up',
-      }),
-    }),
-    createNewPassword: builder.mutation<
-      ApiResponse<void>,
-      { newPassword: string; recoveryCode: string }
+    signUp: builder.mutation<
+      void,
+      { userName: string; email: string; password: string; baseUrl: string }
     >({
+      query: params => ({
+        body: params,
+        method: 'POST',
+        url: 'auth/registration',
+      }),
+    }),
+    createNewPassword: builder.mutation<void, { newPassword: string; recoveryCode: string }>({
       query: params => ({
         body: params,
         method: 'POST',
         url: 'auth/new-password',
       }),
     }),
-    passwordRecovery: builder.mutation<
-      ApiResponse<{ accessToken: string }>,
-      { email: string; recaptchaToken: string }
-    >({
-      query: body => ({
-        url: 'auth/password-recovery',
-        method: 'POST',
-        body,
-      }),
-    }),
-    verifyEmail: builder.mutation<ApiResponse<void>, { code: string }>({
+    passwordRecovery: builder.mutation<void, { email: string; recaptcha: string; baseUrl: string }>(
+      {
+        query: body => ({
+          url: 'auth/password-recovery',
+          method: 'POST',
+          body,
+        }),
+      }
+    ),
+    verifyEmail: builder.mutation<void, { confirmationCode: string }>({
       query: verificationData => ({
-        url: `auth/verify-email`,
+        url: 'auth/registration-confirmation',
         method: 'POST',
         body: verificationData,
       }),

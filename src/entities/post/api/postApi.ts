@@ -6,25 +6,45 @@ export const postApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Posts'],
   endpoints: builder => ({
-    createPost: builder.mutation<ApiResponse<PostData>, FormData>({
+    uploadPostImages: builder.mutation<{ images: PostImage[] }, FormData>({
       query: formData => ({
         body: formData,
+        url: 'posts/image',
+        method: 'POST',
+      }),
+    }),
+    createPost: builder.mutation<
+      PostData,
+      {
+        description: string
+        childrenMetadata: Pick<PostImage, 'uploadId'>[]
+      }
+    >({
+      query: body => ({
+        body,
         url: 'posts',
         method: 'POST',
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
-    getUsersPosts: builder.query<
-      { items: PostData[]; meta: PostMeta },
-      { userId: string; page: number }
+    getUserPosts: builder.query<
+      {
+        totalCount: number
+        pageSize: number
+        totalUsers: number
+        items: PostData[]
+      },
+      {
+        userId: number
+        endCursorPostId?: number
+        pageSize?: number
+        sortBy?: string
+        sortDirection?: SortDirection
+      }
     >({
-      query: ({ userId, page }) => ({
-        url: `posts/${userId}`,
-        params: { page },
-      }),
-      transformResponse: (response: ApiResponse<Data>) => ({
-        items: response.data.items,
-        meta: response.data.meta,
+      query: ({ userId, endCursorPostId = '', ...params }) => ({
+        url: endCursorPostId ? `posts/user/${userId}/${endCursorPostId}` : `posts/user/${userId}`,
+        params,
       }),
       serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (currentCache, newData) => {
@@ -33,10 +53,9 @@ export const postApi = createApi({
         } else {
           currentCache.items.push(...newData.items)
         }
-        currentCache.meta = newData.meta
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page
+        return currentArg?.endCursorPostId !== previousArg?.endCursorPostId
       },
       providesTags: ['Posts'],
       onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
@@ -53,62 +72,66 @@ export const postApi = createApi({
         }
       },
     }),
-    getPostById: builder.query<PostData, string>({
+    getPostById: builder.query<PostData, number>({
       query: postId => ({
-        url: `posts/post/${postId}`,
+        url: `posts/id/${postId}`,
       }),
-      transformResponse: (response: ApiResponse<PostData>) => response.data,
       providesTags: ['Posts'],
     }),
-    updatePost: builder.mutation<void, { description: string; id: string }>({
-      query: ({ id, ...body }) => ({
+    updatePostById: builder.mutation<void, { description: string; postId: number }>({
+      query: ({ postId, ...body }) => ({
         body,
-        url: `posts/${id}`,
-        method: 'PATCH',
+        url: `posts/${postId}`,
+        method: 'PUT',
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Posts', id }],
+      invalidatesTags: (result, error, { postId }) => [{ type: 'Posts', postId }],
     }),
-    deletePost: builder.mutation<void, string>({
-      query: id => ({
-        url: `posts/${id}`,
+    deletePostById: builder.mutation<void, number>({
+      query: postId => ({
+        url: `posts/${postId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Posts', id }],
+      invalidatesTags: (result, error, postId) => [{ type: 'Posts', postId }],
     }),
   }),
 })
 
 export const {
   useCreatePostMutation,
-  useGetUsersPostsQuery,
+  useGetUserPostsQuery,
   useGetPostByIdQuery,
-  useUpdatePostMutation,
-  useDeletePostMutation,
+  useUpdatePostByIdMutation,
+  useDeletePostByIdMutation,
 } = postApi
 
 type PostImage = {
-  id: string
-  imageUrl: string
+  url: string
+  width: number
+  height: number
+  fileSize: number
   createdAt: string
+  uploadId: string
+}
+
+type Owner = {
+  firstName: string
+  lastName: string
 }
 
 export type PostData = {
-  id: string
-  userId: string
+  id: number
+  userName: string
   description: string
+  location: string
+  images: PostImage[]
   createdAt: string
   updatedAt: string
-  postImages: PostImage[]
+  ownerId: number
+  avatarOwner: string
+  owner: Owner
+  likesCount: number
+  isLiked: boolean
+  avatarWhoLikes: string[]
 }
 
-type PostMeta = {
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-}
-
-type Data = {
-  items: PostData[]
-  meta: PostMeta
-}
+type SortDirection = 'asc' | 'desc'

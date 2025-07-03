@@ -9,7 +9,7 @@ export const useCurrentPhoto = () => {
   const currentPhoto = photos[currentIndex]
 
   const photosForRender = useMemo(
-    () => photos.map(photo => ({ id: photo.id, imageUrl: photo.updatedImageUrl })),
+    () => photos.map(photo => ({ uploadId: photo.id, url: photo.updatedImageUrl })),
     [photos]
   )
 
