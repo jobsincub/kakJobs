@@ -2,6 +2,7 @@ import type { Locale } from '@/entities/app'
 import { type ReactNode } from 'react'
 import { StoreProvider } from './StoreProvider'
 import { UserProvider } from './UserProvider'
+import GoogleProvider from './GoogleProvider'
 
 type Props = {
   children: ReactNode
@@ -10,9 +11,11 @@ type Props = {
 
 export const Providers = ({ children, locale }: Props) => {
   return (
-    <StoreProvider locale={locale}>
-      <UserProvider>{children}</UserProvider>
-    </StoreProvider>
+    <GoogleProvider>
+      <StoreProvider locale={locale}>
+        <UserProvider>{children}</UserProvider>
+      </StoreProvider>
+    </GoogleProvider>
   )
 }
 
