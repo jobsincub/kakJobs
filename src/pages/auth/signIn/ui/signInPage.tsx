@@ -2,14 +2,14 @@
 import { SignInForm } from '@/features/auth/signIn'
 import { ROUTES } from '@/shared/router/routes'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import React from 'react'
 import { UseSignInPage } from '../lib/useSignInPage'
 import s from './signInPage.module.scss'
 
-const SignInPage = () => {
+export const SignInPage = () => {
   const { page, onSubmit, customError } = UseSignInPage()
 
   return (
@@ -27,5 +27,3 @@ const SignInPage = () => {
     </Page>
   )
 }
-
-export default SignInPage

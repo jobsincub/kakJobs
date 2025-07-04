@@ -1,7 +1,7 @@
 'use client'
 
 import { ROUTES } from '@/shared/router/routes'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import Link from 'next/link'

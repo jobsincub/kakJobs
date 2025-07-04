@@ -1,5 +1,5 @@
-import { EmailConfirmPage } from '@/pages/auth/verifyEmail'
+import { EmailConfirmPageAsync } from '@/pages/auth/verifyEmail'
 
 export default function EmailConfirm() {
-  return <EmailConfirmPage />
+  return <EmailConfirmPageAsync />
 }

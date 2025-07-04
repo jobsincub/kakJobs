@@ -1,5 +1,5 @@
-import { ResendVerificationEmailPage } from '@/pages/auth/resendVerification'
+import { ResendVerificationEmailPageAsync } from '@/pages/auth/resendVerification'
 
 export default function ResendVerification() {
-  return <ResendVerificationEmailPage />
+  return <ResendVerificationEmailPageAsync />
 }

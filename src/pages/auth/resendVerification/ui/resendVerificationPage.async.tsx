@@ -1,10 +1,8 @@
 import { Suspense } from 'react'
-import ResendVerificationEmailPage from './resendVerificationPage'
+import { ResendVerificationEmailPage } from './resendVerificationPage'
 
-const ResendVerificationEmailPageAsync = () => (
+export const ResendVerificationEmailPageAsync = () => (
   <Suspense>
     <ResendVerificationEmailPage />
   </Suspense>
 )
-
-export default ResendVerificationEmailPageAsync

@@ -4,14 +4,14 @@ import { SignUpForm } from '@/features/auth/signUp'
 import { ROUTES } from '@/shared/router/routes'
 import { EmailSentDialog } from '@/shared/ui'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Link from 'next/link'
 import React from 'react'
 import { UseSignUpPage } from '../lib/useSignUpPage'
 import s from './signUpPage.module.scss'
 
-const SignUpPage = () => {
+export const SignUpPage = () => {
   const { page, customError, isSuccess, email, onSubmit } = UseSignUpPage()
 
   return (
@@ -32,5 +32,3 @@ const SignUpPage = () => {
     </Page>
   )
 }
-
-export default SignUpPage

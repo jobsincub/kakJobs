@@ -2,11 +2,11 @@
 import { ForgotPasswordForm } from '@/features/auth/forgotPassword'
 import { EmailSentDialog } from '@/shared/ui'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Typography } from '@wandrehappen/ui-kit'
 import { UseForgotPasswordPage } from '../lib/useForgotPasswordPage'
 
-const ForgotPasswordPage = () => {
+export const ForgotPasswordPage = () => {
   const { page, onSubmit, customError, email, isSuccess } = UseForgotPasswordPage()
 
   return (
@@ -19,5 +19,3 @@ const ForgotPasswordPage = () => {
     </Page>
   )
 }
-
-export default ForgotPasswordPage

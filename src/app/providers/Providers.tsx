@@ -2,7 +2,7 @@ import type { Locale } from '@/entities/app'
 import { type ReactNode } from 'react'
 import { StoreProvider } from './StoreProvider'
 import { UserProvider } from './UserProvider'
-import GoogleProvider from './GoogleProvider'
+import { GoogleProvider } from './GoogleProvider'
 
 type Props = {
   children: ReactNode
@@ -18,5 +18,3 @@ export const Providers = ({ children, locale }: Props) => {
     </GoogleProvider>
   )
 }
-
-export default Providers
