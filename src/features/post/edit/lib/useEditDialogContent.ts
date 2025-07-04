@@ -1,4 +1,4 @@
-import { useGetPostByIdQuery, useUpdatePostMutation } from '@/entities/post/api/postApi'
+import { useGetPostByIdQuery, useUpdatePostByIdMutation } from '@/entities/post/api/postApi'
 import { useSearchParams } from 'next/navigation'
 import { useTranslation } from '@/shared/config'
 import { useState } from 'react'
@@ -12,11 +12,11 @@ export const useEditDialogContent = () => {
   const [isPostFormDirty, setIsPostFormDirty] = useState(false)
   const [isConfirmCloseDialogOpen, setIsConfirmCloseDialogOpen] = useState(false)
 
-  const [updatePost] = useUpdatePostMutation()
+  const [updatePost] = useUpdatePostByIdMutation()
   const searchParams = useSearchParams()
   const postId = searchParams!.get('postId')!
 
-  const { data: post } = useGetPostByIdQuery(postId)
+  const { data: post } = useGetPostByIdQuery(Number(postId))
 
   const {
     t: {
@@ -27,7 +27,7 @@ export const useEditDialogContent = () => {
   } = useTranslation()
 
   const updatePostHandler = (data: EditPostFormValues) => {
-    updatePost({ ...data, id: postId })
+    updatePost({ ...data, postId: Number(postId) })
       .unwrap()
       .then(() => setIsEditPostDialogOpen(false))
   }

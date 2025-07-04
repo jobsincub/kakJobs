@@ -13,5 +13,5 @@ export const ROUTES = {
     FORGOT_PASSWORD: '/auth/forgot-password',
     RESEND_VERIFICATION: '/auth/resend-verification',
   },
-  PROFILE: (id: string) => `/profile/${id}` as const,
+  PROFILE: (id: number) => `/profile/${id}` as const,
 }

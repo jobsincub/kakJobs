@@ -12,8 +12,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import s from './ImageCarousel.module.scss'
 
 type Image = {
-  id: string
-  imageUrl: string
+  uploadId: string
+  url: string
 }
 
 type Props = {
@@ -57,12 +57,12 @@ export const ImageCarousel = forwardRef<ImageCarouselHandle, Props>(
           onSwiper={swiper => (swiperRef.current = swiper)}
         >
           {images.map(image => (
-            <SwiperSlide key={image.id} className={clsx(className, s.wrapper)}>
+            <SwiperSlide key={image.uploadId} className={clsx(className, s.wrapper)}>
               <div className={s.imageContainer}>
                 <Image
                   className={s.image}
-                  alt={`Post Image ${image.id}`}
-                  src={image.imageUrl}
+                  alt={`Post Image ${image.uploadId}`}
+                  src={image.url}
                   fill
                   objectFit="contain"
                   objectPosition="center"

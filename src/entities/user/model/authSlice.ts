@@ -5,7 +5,8 @@ import { authApi } from '../api/authApi'
 type UserData = {
   email: string
   userName: string
-  userId: string
+  userId: number
+  isBlocked: boolean
 }
 
 type AuthState = {
@@ -29,7 +30,7 @@ export const authSlice = createSlice({
       .addMatcher(
         isAnyOf(authApi.endpoints.signIn.matchFulfilled, refreshToken.fulfilled),
         (state, { payload }) => {
-          state.accessToken = payload.data.accessToken
+          state.accessToken = payload.accessToken
         }
       )
       .addMatcher(

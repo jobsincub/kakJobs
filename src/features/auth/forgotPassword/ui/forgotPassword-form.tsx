@@ -1,20 +1,36 @@
-import { ControlledReCaptcha, ControlledTextField } from '@/shared/ui'
-import { Button, Typography } from '@wandrehappen/ui-kit'
-import React from 'react'
-import { ForgotPasswordFormSchema, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
+import { ControlledTextField } from '@/shared/ui'
+import { Button, Recaptcha, Typography } from '@wandrehappen/ui-kit'
+import React, { useEffect } from 'react'
+import { ForgotPasswordFormValues, useForgotPasswordForm } from '../lib/useForgotPasswordForm'
 import s from './forgotPassword-form.module.scss'
+import { ENV } from '@/shared/config'
+import Link from 'next/link'
+import { ROUTES } from '@/shared/router/routes'
+import { Controller } from 'react-hook-form'
 
 type Props = {
-  onSubmit: (data: ForgotPasswordFormSchema) => void
+  onSubmit: (data: ForgotPasswordFormValues) => void
   error?: string
   isSuccess: boolean
 }
 
 export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
-  const { forgotPasswordForm, handleSubmit, control, isValid } = useForgotPasswordForm()
+  const { forgotPasswordForm, handleSubmit, control, isValid, reset, recaptchaRef } =
+    useForgotPasswordForm()
+
+  useEffect(() => {
+    if (isSuccess) {
+      reset()
+    }
+  }, [isSuccess, reset])
+
+  const submitHandler = (data: ForgotPasswordFormValues) => {
+    onSubmit(data)
+    recaptchaRef.current?.reset()
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(submitHandler)} className={s.form}>
       <ControlledTextField
         placeholder={'Epam@epam.com'}
         control={control}
@@ -36,12 +52,30 @@ export const ForgotPasswordForm = ({ onSubmit, error, isSuccess }: Props) => {
           </Typography>
         )}
       </div>
-      <Button fullWidth disabled={!isValid}>
+      <Button fullWidth disabled={!isValid} className={s.sendLinkButton}>
         {isSuccess
           ? forgotPasswordForm.sendLinkAgainButtonText
           : forgotPasswordForm.sendLinkButtonText}
       </Button>
-      <ControlledReCaptcha control={control} name={'recaptchaToken'} />
+      <Button asChild variant={'link'}>
+        <Link href={ROUTES.AUTH.SIGN_IN} color={'light-100'} className={s.signInLink}>
+          {forgotPasswordForm.signInLinkText}
+        </Link>
+      </Button>
+      <Controller
+        control={control}
+        name="recaptcha"
+        render={({ field: { onChange, onBlur }, fieldState: { error } }) => (
+          <Recaptcha
+            sitekey={ENV.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            onChange={(token: string | null) => onChange(token || '')}
+            onBlur={onBlur}
+            ref={recaptchaRef}
+            error={error?.message}
+            className={s.recaptcha}
+          />
+        )}
+      />
     </form>
   )
 }

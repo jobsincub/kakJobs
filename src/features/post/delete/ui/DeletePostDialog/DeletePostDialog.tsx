@@ -39,7 +39,11 @@ export const DeletePostDialog = () => {
           </DialogDescription>
           <DialogFooter>
             <DialogClose>
-              <Button variant={'tertiary'} disabled={isLoading} onClick={() => deletePost(postId)}>
+              <Button
+                variant={'tertiary'}
+                disabled={isLoading}
+                onClick={() => deletePost(Number(postId))}
+              >
                 {dialogs.yes}
               </Button>
             </DialogClose>

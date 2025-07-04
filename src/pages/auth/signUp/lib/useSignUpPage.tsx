@@ -1,6 +1,6 @@
 import { useSignUpMutation } from '@/entities/user'
 import { OutputSchema } from '@/features/auth/signUp'
-import { useTranslation } from '@/shared/config'
+import { ENV, useTranslation } from '@/shared/config'
 import { getErrorMessage } from '@/shared/lib/hooks'
 
 export const UseSignUpPage = () => {
@@ -18,7 +18,10 @@ export const UseSignUpPage = () => {
   } = useTranslation()
 
   const onSubmit = (data: OutputSchema) => {
-    signUp(data)
+    signUp({
+      ...data,
+      baseUrl: `${ENV.NEXT_PUBLIC_APP_URL}/auth/email-confirm`,
+    })
   }
 
   const customError = getErrorMessage({ errorMessages, error })

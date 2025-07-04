@@ -14,8 +14,8 @@ export const usePublishDialogContent = () => {
   const dispatch = useAppDispatch()
   const photos = useSelector(selectPhotos)
   const imagesForCarousel = photos.map(photo => ({
-    id: photo.id,
-    imageUrl: photo.updatedImageUrl,
+    uploadId: photo.id,
+    url: photo.updatedImageUrl,
   }))
   const [isSubmitting, setIsSubmitting] = useState(false)
 
