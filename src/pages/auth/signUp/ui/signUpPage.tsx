@@ -10,6 +10,7 @@ import Link from 'next/link'
 import React from 'react'
 import { UseSignUpPage } from '../lib/useSignUpPage'
 import s from './signUpPage.module.scss'
+import { OAuthButtons } from '@/features/oauth'
 
 export const SignUpPage = () => {
   const { page, customError, isSuccess, email, onSubmit } = UseSignUpPage()
@@ -20,6 +21,7 @@ export const SignUpPage = () => {
       <Typography asChild color={'light-100'} variant={'h1'}>
         <h1>{page.title}</h1>
       </Typography>
+      <OAuthButtons />
       <SignUpForm error={customError} onSubmit={onSubmit} />
       <div className={s.textWrapper}>
         <Typography asChild color={'light-100'} variant={'regular16'} className={s.text}>
