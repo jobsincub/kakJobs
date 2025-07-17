@@ -1,3 +1,18 @@
+.title {
+  &:not(:last-child) {
+    margin-bottom: 13px;
+  }
+}
+
+.oAuthButtons {
+  display: flex;
+  gap: 60px;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
 .textWrapper {
   display: flex;
   flex-direction: column;
