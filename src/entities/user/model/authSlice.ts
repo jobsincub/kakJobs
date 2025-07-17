@@ -1,6 +1,7 @@
 import { refreshToken } from '@/shared/api'
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { authApi } from '../api/authApi'
+import { oAuthApi } from '../api/oAuthApi'
 
 type UserData = {
   email: string
@@ -28,7 +29,11 @@ export const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addMatcher(
-        isAnyOf(authApi.endpoints.signIn.matchFulfilled, refreshToken.fulfilled),
+        isAnyOf(
+          authApi.endpoints.signIn.matchFulfilled,
+          refreshToken.fulfilled,
+          oAuthApi.endpoints.googleLogin.matchFulfilled
+        ),
         (state, { payload }) => {
           state.accessToken = payload.accessToken
         }
@@ -38,7 +43,11 @@ export const authSlice = createSlice({
         () => initialState
       )
       .addMatcher(
-        isAnyOf(authApi.endpoints.signIn.matchFulfilled, authApi.endpoints.me.matchFulfilled),
+        isAnyOf(
+          authApi.endpoints.signIn.matchFulfilled,
+          authApi.endpoints.me.matchFulfilled,
+          oAuthApi.endpoints.googleLogin.matchFulfilled
+        ),
         state => {
           state.isLoggedIn = true
         }
