@@ -1,1 +1,1 @@
-export { GoogleOAuthButton } from './ui/GoogleOAuthButton'
+export { OAuthButtons } from './ui/OAuthButtons'
