@@ -1,7 +1,7 @@
 'use client'
 import { CreateNewPasswordForm } from '@/features/auth/createNewPassword'
 import { AuthFormWrapper } from '@/shared/ui/authFormWrapper'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Typography } from '@wandrehappen/ui-kit'
 import { notFound } from 'next/navigation'
 import { useCreateNewPasswordPage } from '../lib/useCreateNewPasswordPage'

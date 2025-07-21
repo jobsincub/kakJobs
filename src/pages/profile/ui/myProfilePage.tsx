@@ -1,7 +1,7 @@
 'use client'
 
 import { useMyProfilePage } from '@/pages/profile/lib/useMyProfilePage'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
@@ -14,7 +14,7 @@ type Props = {
   userId: string
 }
 
-const MyProfilePage = ({ userId }: Props) => {
+export const MyProfilePage = ({ userId }: Props) => {
   const router = useRouter()
 
   if (!userId) {
@@ -95,5 +95,3 @@ const MyProfilePage = ({ userId }: Props) => {
     </Page>
   )
 }
-
-export default MyProfilePage

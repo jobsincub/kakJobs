@@ -1,3 +1,9 @@
+.title {
+  &:not(:last-child) {
+    margin-bottom: 13px;
+  }
+}
+
 .textWrapper {
   display: flex;
   flex-direction: column;

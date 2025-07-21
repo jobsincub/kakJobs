@@ -1,4 +1,4 @@
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Typography } from '@wandrehappen/ui-kit'
 import React, { ComponentPropsWithoutRef } from 'react'
 import s from './content.module.scss'

@@ -19,6 +19,15 @@
         "printWidth": 100,
         "arrowParens": "avoid"
       }
-    ]
-  }
+    ],
+    "import/no-default-export": "error"
+  },
+  "overrides": [
+    {
+      "files": ["app/**/*.tsx", "**/*.stories.tsx"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
 }

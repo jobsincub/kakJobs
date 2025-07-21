@@ -1,6 +1,6 @@
 'use server'
 import { Post } from '@/entities/post/ui/post'
-import MyProfilePage from '@/pages/profile'
+import { MyProfilePage } from '@/pages/profile'
 import React from 'react'
 
 type Props = {
