@@ -45,6 +45,7 @@
     "eslint-config-next": "15.0.2",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react-hooks-extra": "^1.52.3",
     "eslint-plugin-storybook": "0.11.1",
     "prettier": "3.3.3",
     "sass": "1.80.6",

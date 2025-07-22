@@ -6,7 +6,8 @@
     "plugin:storybook/recommended"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "react-hooks-extra"
   ],
   "rules": {
     "prettier/prettier": [
@@ -20,7 +21,8 @@
         "arrowParens": "avoid"
       }
     ],
-    "import/no-default-export": "error"
+    "import/no-default-export": "error",
+    "react-hooks-extra/no-direct-set-state-in-use-effect": "error"
   },
   "overrides": [
     {
