@@ -5,6 +5,7 @@ const VAR_KEYS = {
   BASE_API_URL: 'NEXT_PUBLIC_BASE_API_URL',
   RECAPTCHA_SITE_KEY: 'NEXT_PUBLIC_RECAPTCHA_SITE_KEY',
   GOOGLE_CLIENT_ID: 'NEXT_PUBLIC_GOOGLE_CLIENT_ID',
+  GITHUB_API_URL: 'NEXT_PUBLIC_GITHUB_API_URL',
 } as const
 
 const schema = z
@@ -19,6 +20,9 @@ const schema = z
     [VAR_KEYS.GOOGLE_CLIENT_ID]: z
       .string()
       .min(1, `Env variable ${VAR_KEYS.GOOGLE_CLIENT_ID} is required`),
+    [VAR_KEYS.GITHUB_API_URL]: z
+      .string()
+      .url(`Env variable ${VAR_KEYS.GITHUB_API_URL} must be a valid URL`),
   })
   .strict()
 
@@ -27,6 +31,7 @@ const parsed = schema.safeParse({
   [VAR_KEYS.BASE_API_URL]: process.env.NEXT_PUBLIC_BASE_API_URL,
   [VAR_KEYS.RECAPTCHA_SITE_KEY]: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   [VAR_KEYS.GOOGLE_CLIENT_ID]: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+  [VAR_KEYS.GITHUB_API_URL]: process.env.NEXT_PUBLIC_GITHUB_API_URL,
 })
 
 if (!parsed.success) {
