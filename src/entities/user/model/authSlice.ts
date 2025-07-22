@@ -65,6 +65,7 @@ export const authSlice = createSlice({
     selectUserName: state => state.userData?.userName,
     selectUserEmail: state => state.userData?.email,
     selectUserId: state => state.userData?.userId,
+    selectAccessToken: state => state.accessToken,
   },
 })
 
