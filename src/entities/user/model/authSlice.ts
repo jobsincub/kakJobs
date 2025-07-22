@@ -1,5 +1,5 @@
 import { refreshToken } from '@/shared/api'
-import { createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit'
 import { authApi } from '../api/authApi'
 import { oAuthApi } from '../api/oAuthApi'
 
