@@ -12,4 +12,4 @@ export {
 
 export { useGoogleLoginMutation, oAuthApi } from './api/oAuthApi'
 
-export { authSlice, selectIsLoggedIn } from './model/authSlice'
+export { authSlice, selectIsLoggedIn, selectAccessToken, tokenReceived } from './model/authSlice'
