@@ -17,7 +17,18 @@ type PageProps<T extends ElementType = 'div'> = {
   mt?: CSSProperties['marginTop']
 } & ComponentPropsWithoutRef<T>
 
-const Page = forwardRef(
+/** Accepts all props of the native div element. */
+interface PageComponentType {
+  <T extends ElementType = 'div'>(
+    props: PageProps<T> & {
+      ref?: ForwardedRef<ElementRef<T>>
+    }
+  ): ReactElement
+
+  displayName?: string
+}
+
+export const Page: PageComponentType = forwardRef(
   <T extends ElementType = 'div'>(props: PageProps<T>, ref: ForwardedRef<InferType<T>>) => {
     const { as: Component = 'div', mt = 24, className, style, ...rest } = props
 
@@ -26,13 +37,6 @@ const Page = forwardRef(
 
     return <Component className={classes} style={styles} ref={ref} {...rest} />
   }
-)
+) as PageComponentType
 
 Page.displayName = 'Page'
-
-/** Accepts all props of the native div element. */
-export default Page as <T extends ElementType = 'div'>(
-  props: PageProps<T> & {
-    ref?: ForwardedRef<ElementRef<T>>
-  }
-) => ReactElement

@@ -1,0 +1,10 @@
+.oAuthButtons {
+  display: flex;
+  gap: 60px;
+}
+
+.withMarginBottom {
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}

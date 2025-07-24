@@ -6,7 +6,8 @@
     "plugin:storybook/recommended"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "react-hooks-extra"
   ],
   "rules": {
     "prettier/prettier": [
@@ -19,6 +20,16 @@
         "printWidth": 100,
         "arrowParens": "avoid"
       }
-    ]
-  }
+    ],
+    "import/no-default-export": "error",
+    "react-hooks-extra/no-direct-set-state-in-use-effect": "error"
+  },
+  "overrides": [
+    {
+      "files": ["app/**/*.tsx", "**/*.stories.tsx"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
 }

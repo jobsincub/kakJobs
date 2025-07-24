@@ -1,5 +1,5 @@
-import { CreateNewPasswordPage } from '@/pages/auth/createNewPassword'
+import { CreateNewPasswordPageAsync } from '@/pages/auth/createNewPassword'
 
 export default function ForgotPasswordPage() {
-  return <CreateNewPasswordPage />
+  return <CreateNewPasswordPageAsync />
 }

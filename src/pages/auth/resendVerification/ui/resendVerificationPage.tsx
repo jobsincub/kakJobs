@@ -2,7 +2,7 @@
 import { ResendButton, ResendVerificationForm } from '@/features/auth/resendVerification'
 import { ROUTES } from '@/shared/router/routes'
 import { EmailSentDialog } from '@/shared/ui'
-import Page from '@/widgets/page'
+import { Page } from '@/widgets/page'
 import { Button, Typography } from '@wandrehappen/ui-kit'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { useResendVerificationPage } from '../lib/useResendVerificationPage'
 import rafiki from './assets/rafiki.png'
 import s from './resendVerificationPage.module.scss'
 
-const ResendVerificationEmailPage = () => {
+export const ResendVerificationEmailPage = () => {
   const {
     isSuccess,
     onResendForm,
@@ -58,5 +58,3 @@ const ResendVerificationEmailPage = () => {
     </Page>
   )
 }
-
-export default ResendVerificationEmailPage

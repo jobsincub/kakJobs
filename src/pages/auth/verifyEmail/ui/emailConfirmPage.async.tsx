@@ -1,10 +1,8 @@
 import { Suspense } from 'react'
 import { EmailConfirmPage } from './emailConfirmPage'
 
-const EmailConfirmPageAsync = () => (
+export const EmailConfirmPageAsync = () => (
   <Suspense>
     <EmailConfirmPage />
   </Suspense>
 )
-
-export default EmailConfirmPageAsync
