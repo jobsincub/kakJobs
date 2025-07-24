@@ -10,6 +10,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { useSelector } from 'react-redux'
 import s from './Header.module.scss'
 import { Logo } from './logo'
+import { usePathname } from 'next/navigation'
 
 type Props = ComponentPropsWithoutRef<'header'>
 
@@ -22,6 +23,8 @@ export const Header = forwardRef<ElementRef<'header'>, Props>(({ className, ...r
     },
   } = useTranslation()
   const isLoggedIn = useSelector(selectIsLoggedIn)
+  const pathname = usePathname()
+  const isAuthPage = pathname!.startsWith('/auth')
 
   return (
     <header className={clsx(s.header, className)} ref={ref} {...rest}>
@@ -30,7 +33,7 @@ export const Header = forwardRef<ElementRef<'header'>, Props>(({ className, ...r
           <Logo />
           <LanguageSwitcher />
         </div>
-        {!isLoggedIn && (
+        {!isLoggedIn && !isAuthPage && (
           <div className={s.buttonWrapper}>
             <Button asChild variant={'tertiary'} className={s.button}>
               <Link href={ROUTES.AUTH.SIGN_IN}>{logIn}</Link>

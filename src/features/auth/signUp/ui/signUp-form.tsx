@@ -60,12 +60,12 @@ export const SignUpForm = ({ onSubmit, error }: Props) => {
                 tags={{
                   1: () => (
                     <Typography variant={'small-link'} asChild>
-                      <Link href={ROUTES.LEGAL.TERMS_OF_SERVICE}>{signUpForm.terms}</Link>
+                      <Link href={ROUTES.AUTH.LEGAL.TERMS_OF_SERVICE}>{signUpForm.terms}</Link>
                     </Typography>
                   ),
                   2: () => (
                     <Typography variant={'small-link'} asChild>
-                      <Link href={ROUTES.LEGAL.PRIVACY_POLICY}>{signUpForm.privacy}</Link>
+                      <Link href={ROUTES.AUTH.LEGAL.PRIVACY_POLICY}>{signUpForm.privacy}</Link>
                     </Typography>
                   ),
                 }}
