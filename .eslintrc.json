@@ -26,19 +26,19 @@
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.mjs"],
+      "files": [
+        "*.stories.tsx",
+        "*.stories.ts",
+        "app/**/*.tsx",
+        "next.config.mjs"
+      ],
       "rules": {
         "import/no-default-export": "off"
       }
     },
     {
-      "files": ["app/**/*.tsx", "**/*.stories.tsx"],
-      "rules": {
-        "import/no-default-export": "off"
-      }
-    },
-    {
-      "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "files": ["src/**/*.{ts,tsx}"],
+      "excludedFiles": ["**/*.stories.tsx"],
       "rules": {
         "import/no-default-export": "error"
       }
