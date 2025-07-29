@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { useSelector } from 'react-redux'
 import s from './Header.module.scss'
-import { Logo } from './logo'
+import { Logo } from './Logo'
 import { usePathname } from 'next/navigation'
 
 type Props = ComponentPropsWithoutRef<'header'>

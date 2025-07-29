@@ -1,6 +1,6 @@
 import { inter } from '@/app/fonts'
 import { Providers } from '@/app/providers'
-import { Header } from '@/widgets/header'
+import { Header } from '@/widgets/Header'
 import { clsx } from 'clsx'
 import type { Metadata } from 'next'
 import '../src/app/styles/globals.scss'
