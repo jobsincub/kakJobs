@@ -1,26 +1,20 @@
-import { useGoogleLogin } from '@react-oauth/google'
-import { useEffect } from 'react'
-import { ROUTES } from '@/shared/router/routes'
-import { useGoogleLoginMutation } from '@/entities/user'
+import { ENV } from '@/shared/config'
 import { useRouter } from 'next/navigation'
 
 export const useGoogleOAuthButton = () => {
-  const [googleLogin, { isSuccess }] = useGoogleLoginMutation()
   const router = useRouter()
 
-  const login = useGoogleLogin({
-    flow: 'auth-code',
-    onSuccess: codeResponse => googleLogin({ code: codeResponse.code }),
-    onError: error => {
-      console.error('Google oAuth failed:', error)
-    },
-  })
+  const login = () => {
+    const baseUrl = ENV.NEXT_PUBLIC_GOOGLE_OAUTH_BASE_URL
+    const params = new URLSearchParams({
+      client_id: ENV.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      scope: ['openid', 'profile', 'email'].join(' '),
+      redirect_uri: `${ENV.NEXT_PUBLIC_APP_URL}/oAuth/google`,
+      response_type: 'code',
+    })
 
-  useEffect(() => {
-    if (isSuccess) {
-      router.replace(ROUTES.HOME)
-    }
-  }, [isSuccess, router])
+    router.push(`${baseUrl}?${params.toString()}`)
+  }
 
   return { login }
 }

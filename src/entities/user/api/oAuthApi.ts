@@ -9,7 +9,7 @@ export const oAuthApi = createApi({
   endpoints: builder => ({
     googleLogin: builder.mutation<
       { accessToken: string; email: string },
-      { redirectUrl?: string; code: string }
+      { redirectUrl: string; code: string }
     >({
       query: body => ({
         url: 'auth/google/login',
