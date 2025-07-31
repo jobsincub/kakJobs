@@ -1,8 +1,5 @@
 'use client'
-import { selectUserId } from '@/entities/user/model/authSlice'
 import { LogoutDialog } from '@/features/auth/logout'
-import { useTranslation } from '@/shared/config'
-import { useAppSelector } from '@/shared/lib/store/redux'
 import { ROUTES } from '@/shared/router/routes'
 import {
   BookmarkOutline,
@@ -15,15 +12,10 @@ import {
 } from '@wandrehappen/ui-kit'
 import { Item } from './item/item'
 import s from './sidebar.module.scss'
+import { useSidebar } from '../lib/useSidebar'
 
 export const Sidebar = () => {
-  const {
-    t: {
-      widgets: { sidebar },
-    },
-  } = useTranslation()
-
-  const myId = useAppSelector(selectUserId)
+  const { sidebar, myId } = useSidebar()
 
   return (
     <aside className={s.sidebar}>
