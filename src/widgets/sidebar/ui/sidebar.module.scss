@@ -2,6 +2,8 @@
 
 .sidebar {
   position: fixed;
+  top: #{vars.$header-height};
+  left: 0;
 
   display: flex;
   justify-content: center;
