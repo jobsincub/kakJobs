@@ -2,7 +2,7 @@
 
 .sidebar {
   position: fixed;
-  top: #{vars.$header-height};
+  top: vars.$header-height;
   left: 0;
 
   display: flex;
