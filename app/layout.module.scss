@@ -3,6 +3,7 @@
 .body {
   min-width: 360px;
   padding-top: vars.$header-height;
+  padding-left: vars.$sidebar-height;
 }
 
 .rootLayout {
