@@ -26,23 +26,25 @@ export const Sidebar = () => {
   const myId = useAppSelector(selectUserId)
 
   return (
-    <nav className={s.sidebar}>
-      <div className={s.wrapper}>
-        <ul className={s.group}>
-          <Item icon={<HomeOutline />} text={sidebar.home} href={ROUTES.HOME} />
-          <Item icon={<PlusSquareOutline />} text={sidebar.create} href={ROUTES.CREATE_POST} />
-          <Item icon={<PersonOutline />} text={sidebar.myProfile} href={`/profile/${myId}`} />
-          <Item icon={<MessageCircleOutline />} text={sidebar.messenger} href="./" />
-          <Item icon={<Search />} text={sidebar.search} href="./" />
-        </ul>
-        <ul className={s.group}>
-          <Item icon={<Trending />} text={sidebar.statistics} href="./" />
-          <Item icon={<BookmarkOutline />} text={sidebar.favorites} href="./" />
-        </ul>
-        <li>
-          <LogoutDialog />
-        </li>
-      </div>
-    </nav>
+    <aside>
+      <nav className={s.sidebar}>
+        <div className={s.wrapper}>
+          <ul className={s.group}>
+            <Item icon={<HomeOutline />} text={sidebar.home} href={ROUTES.HOME} />
+            <Item icon={<PlusSquareOutline />} text={sidebar.create} href={ROUTES.CREATE_POST} />
+            <Item icon={<PersonOutline />} text={sidebar.myProfile} href={`/profile/${myId}`} />
+            <Item icon={<MessageCircleOutline />} text={sidebar.messenger} href="./" />
+            <Item icon={<Search />} text={sidebar.search} href="./" />
+          </ul>
+          <ul className={s.group}>
+            <Item icon={<Trending />} text={sidebar.statistics} href="./" />
+            <Item icon={<BookmarkOutline />} text={sidebar.favorites} href="./" />
+          </ul>
+          <li>
+            <LogoutDialog />
+          </li>
+        </div>
+      </nav>
+    </aside>
   )
 }
