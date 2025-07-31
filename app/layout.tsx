@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={clsx(inter.className, s.body)}>
         <Providers locale={locale}>
           <Header />
-          <div className={s.rootLayout}>{children}</div>
+          <main className={s.rootLayout}>{children}</main>
         </Providers>
       </body>
     </html>
