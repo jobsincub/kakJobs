@@ -8,6 +8,7 @@ import '@wandrehappen/ui-kit/dist/style.css'
 import { headers } from 'next/headers'
 import type { ReactNode } from 'react'
 import s from './layout.module.scss'
+import { Sidebar } from '@/widgets/sidebar'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,7 +26,8 @@ export default function RootLayout({
       <body className={clsx(inter.className, s.body)}>
         <Providers locale={locale}>
           <Header />
-          <div className={s.rootLayout}>{children}</div>
+          <Sidebar />
+          <main className={s.rootLayout}>{children}</main>
         </Providers>
       </body>
     </html>
