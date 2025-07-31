@@ -15,7 +15,11 @@ import s from './sidebar.module.scss'
 import { useSidebar } from '../lib/useSidebar'
 
 export const Sidebar = () => {
-  const { sidebar, myId } = useSidebar()
+  const { sidebar, myId, isLoggedIn } = useSidebar()
+
+  if (!isLoggedIn) {
+    return null
+  }
 
   return (
     <aside className={s.sidebar}>
