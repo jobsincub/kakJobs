@@ -26,8 +26,8 @@ export const Sidebar = () => {
   const myId = useAppSelector(selectUserId)
 
   return (
-    <aside>
-      <nav className={s.sidebar}>
+    <aside className={s.sidebar}>
+      <nav>
         <div className={s.wrapper}>
           <ul className={s.group}>
             <Item icon={<HomeOutline />} text={sidebar.home} href={ROUTES.HOME} />
