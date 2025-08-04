@@ -1,5 +1,5 @@
 import { refreshToken } from '@/shared/api'
-import { createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit'
 import { authApi } from '../api/authApi'
 import { oAuthApi } from '../api/oAuthApi'
 
@@ -25,14 +25,19 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    tokenReceived: (state, action: PayloadAction<{ accessToken: string }>) => {
+      state.accessToken = action.payload.accessToken
+    },
+  },
   extraReducers: builder => {
     builder
       .addMatcher(
         isAnyOf(
           authApi.endpoints.signIn.matchFulfilled,
           refreshToken.fulfilled,
-          oAuthApi.endpoints.googleLogin.matchFulfilled
+          oAuthApi.endpoints.googleLogin.matchFulfilled,
+          oAuthApi.endpoints.githubUpdateTokens.matchFulfilled
         ),
         (state, { payload }) => {
           state.accessToken = payload.accessToken
@@ -46,7 +51,8 @@ export const authSlice = createSlice({
         isAnyOf(
           authApi.endpoints.signIn.matchFulfilled,
           authApi.endpoints.me.matchFulfilled,
-          oAuthApi.endpoints.googleLogin.matchFulfilled
+          oAuthApi.endpoints.googleLogin.matchFulfilled,
+          oAuthApi.endpoints.githubUpdateTokens.matchFulfilled
         ),
         state => {
           state.isLoggedIn = true
@@ -61,8 +67,16 @@ export const authSlice = createSlice({
     selectUserName: state => state.userData?.userName,
     selectUserEmail: state => state.userData?.email,
     selectUserId: state => state.userData?.userId,
+    selectAccessToken: state => state.accessToken,
   },
 })
 
-export const { selectIsLoggedIn, selectUserName, selectUserEmail, selectUserId } =
-  authSlice.selectors
+export const { tokenReceived } = authSlice.actions
+
+export const {
+  selectIsLoggedIn,
+  selectUserName,
+  selectUserEmail,
+  selectUserId,
+  selectAccessToken,
+} = authSlice.selectors
