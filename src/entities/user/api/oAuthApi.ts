@@ -18,7 +18,14 @@ export const oAuthApi = createApi({
       }),
       invalidatesTags: ['user'],
     }),
+    githubUpdateTokens: builder.mutation<{ accessToken: string }, void>({
+      query: () => ({
+        url: 'auth/github/update-tokens',
+        method: 'POST',
+      }),
+      invalidatesTags: ['user'],
+    }),
   }),
 })
 
-export const { useGoogleLoginMutation } = oAuthApi
+export const { useGoogleLoginMutation, useGithubUpdateTokensMutation } = oAuthApi

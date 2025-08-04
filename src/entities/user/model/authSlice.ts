@@ -36,7 +36,8 @@ export const authSlice = createSlice({
         isAnyOf(
           authApi.endpoints.signIn.matchFulfilled,
           refreshToken.fulfilled,
-          oAuthApi.endpoints.googleLogin.matchFulfilled
+          oAuthApi.endpoints.googleLogin.matchFulfilled,
+          oAuthApi.endpoints.githubUpdateTokens.matchFulfilled
         ),
         (state, { payload }) => {
           state.accessToken = payload.accessToken
@@ -50,7 +51,8 @@ export const authSlice = createSlice({
         isAnyOf(
           authApi.endpoints.signIn.matchFulfilled,
           authApi.endpoints.me.matchFulfilled,
-          oAuthApi.endpoints.googleLogin.matchFulfilled
+          oAuthApi.endpoints.googleLogin.matchFulfilled,
+          oAuthApi.endpoints.githubUpdateTokens.matchFulfilled
         ),
         state => {
           state.isLoggedIn = true

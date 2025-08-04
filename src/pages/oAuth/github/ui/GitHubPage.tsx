@@ -1,10 +1,10 @@
 'use client'
 
-import { notFound, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import { ROUTES } from '@/shared/router/routes'
 import { useEffect } from 'react'
-import { tokenReceived } from '@/entities/user'
+import { tokenReceived, useGithubUpdateTokensMutation } from '@/entities/user'
 
 export function GithubPage() {
   const router = useRouter()
@@ -12,15 +12,24 @@ export function GithubPage() {
   const dispatch = useDispatch()
   const accessToken = searchParams!.get('accessToken')
   const email = searchParams!.get('email')
+  const [githubUpdateTokens, { isSuccess }] = useGithubUpdateTokensMutation()
 
   useEffect(() => {
     if (accessToken && email) {
       dispatch(tokenReceived({ accessToken }))
-      router.replace(ROUTES.HOME)
-    } else {
-      notFound()
+      githubUpdateTokens()
     }
-  }, [accessToken, dispatch, email, router])
+  }, [accessToken, dispatch, email, githubUpdateTokens])
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace(ROUTES.HOME)
+    }
+  }, [isSuccess, router])
+
+  if (!accessToken && !email) {
+    return null
+  }
 
   return <div>Processing GitHub authentication...</div>
 }
