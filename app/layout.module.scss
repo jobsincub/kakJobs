@@ -2,6 +2,7 @@
 
 .body {
   min-width: 360px;
+  padding-top: vars.$header-height;
 }
 
 .rootLayout {
@@ -11,7 +12,6 @@
   width: 100%;
   max-width: vars.$container-max-width;
   margin: 0 auto;
-  padding-top: vars.$header-height;
   padding-inline: vars.$container-padding-x;
 }
 

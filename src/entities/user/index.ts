@@ -10,6 +10,6 @@ export {
   authApi,
 } from './api/authApi'
 
-export { useGoogleLoginMutation, oAuthApi } from './api/oAuthApi'
+export { useGoogleLoginMutation, useGithubUpdateTokensMutation, oAuthApi } from './api/oAuthApi'
 
-export { authSlice, selectIsLoggedIn } from './model/authSlice'
+export { authSlice, selectIsLoggedIn, selectAccessToken, tokenReceived } from './model/authSlice'
