@@ -13,7 +13,7 @@ export const useHeader = () => {
   } = useTranslation()
   const isLoggedIn = useSelector(selectIsLoggedIn)
   const pathname = usePathname()
-  const isAuthPage = pathname!.startsWith('/auth')
+  const isAuthPage = pathname!.startsWith('/auth') || pathname!.startsWith('/oAuth')
 
   return { isLoggedIn, isAuthPage, logIn, signUp }
 }
